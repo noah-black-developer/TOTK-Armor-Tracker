@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ArmorData>
+    <Armor name="template">
+        <Description>template</Description>
+        <SetName>template</SetName>
+        <BaseDefense>template</BaseDefense>
+        <PassiveBonus>template</PassiveBonus>
+        <SetBonus>template</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>template</Defense>
+                <Cost>template</Cost>
+                <Material name="material name" quantity="0">
+            </Tier>
+            <Tier level=2>
+                <Defense>template</Defense>
+                <Cost>template</Cost>
+                <Material name="material name" quantity="0">
+            </Tier>
+            <Tier level=3>
+                <Defense>template</Defense>
+                <Cost>template</Cost>
+                <Material name="material name" quantity="0">
+            </Tier>
+            <Tier level=4>
+                <Defense>template</Defense>
+                <Cost>template</Cost>
+                <Material name="material name" quantity="0">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ancient Hero's Aspect">
+        <Description>This item is said to contain the spirit of a hero who once saved Hyrule. That hero's aura will envelop the wearer.</Description>
+        <SetName>Ancient Hero Set</SetName>
+        <BaseDefense>12</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Master Beam Sword Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>21/Defense>
+                <Cost>30</Cost>
+                <Material name="Hinox Guts" quantity="9">
+                <Material name="Silver Bokoblin Horn" quantity="9">
+                <Material name="Zoanite" quantity="9">
+            </Tier>
+            <Tier level=2>
+                <Defense>36</Defense>
+                <Cost>150</Cost>
+                <Material name="Frox Guts" quantity="9">
+                <Material name="Large Zoanite" quantity="10">
+                <Material name="Silver Moblin Horn" quantity="9">
+            </Tier>
+            <Tier level=3>
+                <Defense>54</Defense>
+                <Cost>600</Cost>
+                <Material name="Large Zoanite" quantity="15">
+                <Material name="Molduga Guts" quantity="9">
+                <Material name="Silver Lizalfos Horn" quantity="9">
+            </Tier>
+            <Tier level=4>
+                <Defense>84</Defense>
+                <Cost>1500</Cost>
+                <Material name="Gleeok Guts" quantity="9">
+                <Material name="Silver Lynel Mace Horn" quantity="9">
+                <Material name="Silver Lynel Saber Horn" quantity="9">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Archaic Tunic">
+        <Description>Old-fashioned upper-body wear. It's got some holes, but the soft cloth feels good to the touch. It's hard to keep it wrinkle-free.</Description>
+        <SetName>Archaic Set</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Archaic Legwear">
+        <Description>Simple, classic legwear. They're well-worn and showing their age, but they've still got a few good years left in them. It can be a bit cumbersome to have to tie the straps.</Description>
+        <SetName>Archaic Set</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Archaic Warm Greaves">
+        <Description>Warm greaves believed to be from a very long time ago. Despite the old look, the heat-retaining material makes it pleasantly resistant to cold temperatures.</Description>
+        <SetName>Archaic Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Mask of Awakening">
+        <Description>Legend says this mask resembles a hero who explored a mysterious place that one could visit but not leave.</Description>
+        <SetName>Awakening Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Material name="Luminous Stone" quantity="10">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=2>
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Material name="Luminous Stone" quantity="15">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=3>
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Material name="Luminous Stone" quantity="20">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=4>
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Material name="Luminous Stone" quantity="30">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of Awakening">
+        <Description>Legend says this armor was worn by a hero who explored a mysterious area that one could visit but not leave.</Description>
+        <SetName>Awakening Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Material name="Luminous Stone" quantity="10">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=2>
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Material name="Luminous Stone" quantity="15">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=3>
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Material name="Luminous Stone" quantity="20">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=4>
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Material name="Luminous Stone" quantity="30">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of Awakening">
+        <Description>Legend says these trousers were worn by a hero who explored a mysterious island that one could visit but not leave.</Description>
+        <SetName>Awakening Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Material name="Luminous Stone" quantity="10">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=2>
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Material name="Luminous Stone" quantity="15">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=3>
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Material name="Luminous Stone" quantity="20">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+            <Tier level=4>
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Material name="Luminous Stone" quantity="30">
+                <Material name="Star Fragment" quantity="1">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Barbarian Helm">
+        <Description>A helmet once worn by the warriors of an ancient warlike tribe from the Faron region.</Description>
+        <SetName>Barbarian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Material name="Mighty Thistle" quantity="3">
+            </Tier>
+            <Tier level=2>
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Material name="Lynel Mace Horn" quantity="2">
+                <Material name="Lynel Saber Horn" quantity="2">
+                <Material name="Razorshroom" quantity="5">
+            </Tier>
+            <Tier level=3>
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Material name="Blue-maned Lynel Mace Horn" quantity="3">
+                <Material name="Blue-maned Lynel Saber Horn" quantity="3">
+                <Material name="Razorclaw Crab" quantity="3">
+            </Tier>
+            <Tier level=4>
+                <Defense>20</Defense>
+                <Cost>600</Cost>
+                <Material name="White-maned Lynel Mace Horn" quantity="3">
+                <Material name="White-maned Lynel Saber Horn" quantity="3">
+                <Material name="Bladed Rhino Beetle" quantity="3">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Barbarian Armor">
+        <Description>Armor once favored by an ancient warlike tribe from the Faron region. Equipping it boosts your attack power.</Description>
+        <SetName>Barbarian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Material name="Mighty Thistle" quantity="3">
+            </Tier>
+            <Tier level=2>
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Material name="Lynel Mace Horn" quantity="2">
+                <Material name="Lynel Saber Horn" quantity="2">
+                <Material name="Razorshroom" quantity="5">
+            </Tier>
+            <Tier level=3>
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Material name="Blue-maned Lynel Mace Horn" quantity="3">
+                <Material name="Blue-maned Lynel Saber Horn" quantity="3">
+                <Material name="Razorclaw Crab" quantity="3">
+            </Tier>
+            <Tier level=4>
+                <Defense>20</Defense>
+                <Cost>600</Cost>
+                <Material name="White-maned Lynel Mace Horn" quantity="3">
+                <Material name="White-maned Lynel Saber Horn" quantity="3">
+                <Material name="Bladed Rhino Beetle" quantity="3">
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Barbarian Leg Wraps">
+        <Description>Leg wraps once favored by a warlike tribe. The traditional design bolsters your fighting spirit to raise your strength.</Description>
+        <SetName>Barbarian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level=1>
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Material name="Mighty Thistle" quantity="3">
+            </Tier>
+            <Tier level=2>
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Material name="Lynel Mace Horn" quantity="2">
+                <Material name="Lynel Saber Horn" quantity="2">
+                <Material name="Razorshroom" quantity="5">
+            </Tier>
+            <Tier level=3>
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Material name="Blue-maned Lynel Mace Horn" quantity="3">
+                <Material name="Blue-maned Lynel Saber Horn" quantity="3">
+                <Material name="Razorclaw Crab" quantity="3">
+            </Tier>
+            <Tier level=4>
+                <Defense>20</Defense>
+                <Cost>600</Cost>
+                <Material name="White-maned Lynel Mace Horn" quantity="3">
+                <Material name="White-maned Lynel Saber Horn" quantity="3">
+                <Material name="Bladed Rhino Beetle" quantity="3">
+            </Tier>
+        </Tiers>
+    </Armor>
+</ArmorData>
