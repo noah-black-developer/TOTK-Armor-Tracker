@@ -1,6 +1,7 @@
-#include <appControl.cpp>
+#include <AppController.cpp>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -19,12 +20,20 @@ int main(int argc, char *argv[])
     QList<QObject*> appRootObjects = engine.rootObjects();
     QObject *qmlRootObject = appRootObjects.first();
 
+    // Register the controller class with the QML engine.
+    AppController *appController = new AppController(qmlRootObject);
+    engine.rootContext()->setContextProperty("AppController", appController);
+
     // Initialize the UI using local configuration files.
-    initialize(QString::fromStdString(R"(C:\Users\noahb\OneDrive\Documents\GitHub\TOTK-Armor-Tracker\TotkArmorTracker\data\armorData.xml)"), qmlRootObject);
+    appController->appInitialize(QString::fromStdString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/armorData.xml)"));
 
     // TEMP: Load in a default save upon startup.
     // Eventually will be replaced with more specialized startup steps.
-    //pullSave(QString::fromStdString(R"(C:\Users\noahb\OneDrive\Documents\GitHub\TOTK-Armor-Tracker\TotkArmorTracker\saves\test_save.xml)"), qmlRootObject);
+    //appController->appPullSave(QString::fromStdString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/saves/test_save.xml)"));
 
-    return app.exec();
+    int result = app.exec();
+
+    // Return results once finished.
+    delete appController;
+    return result;
 }

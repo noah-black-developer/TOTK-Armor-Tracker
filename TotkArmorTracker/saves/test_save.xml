@@ -1,94 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <Save name="default">
     <Armors>
-        <Armor name="Archaic Tunic" unlocked="1" level="0"/>
-        <Armor name="Archaic Warm Greaves" unlocked="1" level="1"/>
-        <Armor name="Barbarian Armor" unlocked="1" level="2"/>
-        <Armor name="Bokoblin Mask" unlocked="1" level="3"/>
-        <Armor name="Cap of the Sky" unlocked="1" level="4"/>
-        <Armor name="Cap of the Wild" unlocked="0" level="0"/>
-        <Armor name="Cap of the Wind" unlocked="1" level="0"/>
-        <Armor name="Cece Hat" unlocked="1" level="0"/>
-        <Armor name="Champion's Leathers" unlocked="1" level="0"/>
-        <Armor name="Charged Headdress" unlocked="1" level="0"/>
-        <Armor name="Charged Shirt" unlocked="1" level="0"/>
-        <Armor name="Charged Trousers" unlocked="1" level="0"/>
-        <Armor name="Climbing Gear" unlocked="1" level="0"/>
-        <Armor name="Dark Hood" unlocked="1" level="0"/>
-        <Armor name="Dark Trousers" unlocked="1" level="0"/>
-        <Armor name="Dark Tunic" unlocked="1" level="0"/>
-        <Armor name="Desert Voe Headband" unlocked="1" level="0"/>
-        <Armor name="Desert Voe Spaulder" unlocked="1" level="0"/>
-        <Armor name="Desert Voe Trousers" unlocked="1" level="0"/>
-        <Armor name="Diamond Circlet" unlocked="1" level="0"/>
-        <Armor name="Ember Headdress" unlocked="1" level="0"/>
-        <Armor name="Evil Spirit Armor" unlocked="1" level="0"/>
-        <Armor name="Fierce Deity Boots" unlocked="1" level="0"/>
-        <Armor name="Flamebreaker Armor" unlocked="1" level="0"/>
-        <Armor name="Flamebreaker Boots" unlocked="1" level="0"/>
-        <Armor name="Flamebreaker Helm" unlocked="1" level="0"/>
-        <Armor name="Froggy Hood" unlocked="1" level="0"/>
-        <Armor name="Froggy Leggings" unlocked="1" level="0"/>
-        <Armor name="Froggy Sleeve" unlocked="1" level="0"/>
-        <Armor name="Frostbite Headdress" unlocked="1" level="0"/>
-        <Armor name="Frostbite Shirt" unlocked="1" level="0"/>
-        <Armor name="Frostbite Trousers" unlocked="1" level="0"/>
-        <Armor name="Gaiters of the Depths" unlocked="1" level="0"/>
-        <Armor name="Glide Mask" unlocked="1" level="0"/>
-        <Armor name="Glide Shirt" unlocked="1" level="0"/>
-        <Armor name="Glide Tights" unlocked="1" level="0"/>
-        <Armor name="Hood of The Depths" unlocked="1" level="0"/>
-        <Armor name="Horriblin Mask" unlocked="1" level="0"/>
-        <Armor name="Hylian Hood" unlocked="1" level="0"/>
-        <Armor name="Hylian Trousers" unlocked="1" level="0"/>
-        <Armor name="Hylian Tunic" unlocked="1" level="0"/>
-        <Armor name="Korok Mask" unlocked="1" level="0"/>
-        <Armor name="Lizalfos Mask" unlocked="1" level="0"/>
-        <Armor name="Majora's Mask" unlocked="1" level="0"/>
-        <Armor name="Miner's Mask" unlocked="1" level="0"/>
-        <Armor name="Miner's Top" unlocked="1" level="0"/>
-        <Armor name="Miner's Trousers" unlocked="1" level="0"/>
-        <Armor name="Moblin Mask" unlocked="1" level="0"/>
-        <Armor name="Mystic Robe" unlocked="1" level="0"/>
-        <Armor name="Mystic Trousers" unlocked="1" level="0"/>
-        <Armor name="Opal Earrings" unlocked="1" level="0"/>
-        <Armor name="Ravio's Hood" unlocked="1" level="0"/>
-        <Armor name="Royal Guard Uniform" unlocked="1" level="0"/>
-        <Armor name="Rubber Armor" unlocked="1" level="0"/>
-        <Armor name="Ruby Circlet" unlocked="1" level="0"/>
-        <Armor name="Sand Boots" unlocked="1" level="0"/>
-        <Armor name="Sapphire Circlet" unlocked="1" level="0"/>
-        <Armor name="Snow Boots" unlocked="1" level="0"/>
-        <Armor name="Snowquill Headdress" unlocked="1" level="0"/>
-        <Armor name="Snowquill Trousers" unlocked="1" level="0"/>
-        <Armor name="Snowquill Tunic" unlocked="1" level="0"/>
-        <Armor name="Soldier's Armor" unlocked="1" level="0"/>
-        <Armor name="Soldier's Greaves" unlocked="1" level="0"/>
-        <Armor name="Soldier's Helm" unlocked="1" level="0"/>
-        <Armor name="Stealth Chest Guard" unlocked="1" level="0"/>
-        <Armor name="Stealth Mask" unlocked="1" level="0"/>
-        <Armor name="Stealth Tights" unlocked="1" level="0"/>
-        <Armor name="Topaz Earrings" unlocked="1" level="0"/>
-        <Armor name="Trousers of the Hero" unlocked="1" level="0"/>
-        <Armor name="Trousers of the Sky" unlocked="1" level="0"/>
-        <Armor name="Trousers of the Wind" unlocked="1" level="0"/>
-        <Armor name="Tunic of Memories" unlocked="1" level="0"/>
-        <Armor name="Tunic of the Depths" unlocked="1" level="0"/>
-        <Armor name="Tunic of the Wind" unlocked="1" level="0"/>
-        <Armor name="Tunic of Twilight" unlocked="1" level="0"/>
-        <Armor name="Vah Medoh Divine Helm" unlocked="1" level="0"/>
-        <Armor name="Vah Naboris Divine Helm" unlocked="1" level="0"/>
-        <Armor name="Vah Rudania Divine Helm" unlocked="1" level="0"/>
-        <Armor name="Vah Ruta Divine Helm" unlocked="1" level="0"/>
-        <Armor name="Well-Worn Hair Band" unlocked="1" level="0"/>
-        <Armor name="Yiga Armor" unlocked="1" level="0"/>
-        <Armor name="Yiga Mask" unlocked="1" level="0"/>
-        <Armor name="Zonaite Shin Guards" unlocked="1" level="0"/>
-        <Armor name="Zonaite Waistguard" unlocked="1" level="0"/>
-        <Armor name="Zonite Helm" unlocked="1" level="0"/>
-        <Armor name="Zora Armor" unlocked="1" level="0"/>
-        <Armor name="Zora Greaves" unlocked="1" level="0"/>
-        <Armor name="Zora Helm" unlocked="1" level="0"/>
+        <Armor name="Amber Earrings" unlocked="false" level="0"/>
+        <Armor name="Ancient Hero's Aspect" unlocked="false" level="0"/>
+        <Armor name="Archaic Legwear" unlocked="true" level="2"/>
+        <Armor name="Archaic Tunic" unlocked="true" level="0"/>
+        <Armor name="Archaic Warm Greaves" unlocked="true" level="1"/>
+        <Armor name="Barbarian Armor" unlocked="true" level="2"/>
+        <Armor name="Barbarian Helm" unlocked="true" level="2"/>
+        <Armor name="Barbarian Leg Wraps" unlocked="true" level="2"/>
+        <Armor name="Bokoblin Mask" unlocked="true" level="3"/>
+        <Armor name="Cap of Time" unlocked="true" level="4"/>
+        <Armor name="Cap of Twilight" unlocked="false" level="0"/>
+        <Armor name="Cap of the Hero" unlocked="true" level="0"/>
+        <Armor name="Cap of the Sky" unlocked="true" level="4"/>
+        <Armor name="Cap of the Wild" unlocked="false" level="0"/>
+        <Armor name="Cap of the Wind" unlocked="true" level="0"/>
+        <Armor name="Cece's Hat" unlocked="true" level="0"/>
+        <Armor name="Champion's Leathers" unlocked="true" level="0"/>
+        <Armor name="Charged Headdress" unlocked="true" level="0"/>
+        <Armor name="Charged Shirt" unlocked="true" level="0"/>
+        <Armor name="Charged Trousers" unlocked="true" level="0"/>
+        <Armor name="Climber's Bandana" unlocked="true" level="0"/>
+        <Armor name="Climbing Boots" unlocked="true" level="0"/>
+        <Armor name="Climbing Gear" unlocked="true" level="0"/>
+        <Armor name="Dark Hood" unlocked="true" level="0"/>
+        <Armor name="Dark Trousers" unlocked="true" level="0"/>
+        <Armor name="Dark Tunic" unlocked="true" level="0"/>
+        <Armor name="Desert Voe Headband" unlocked="true" level="0"/>
+        <Armor name="Desert Voe Spaulder" unlocked="true" level="0"/>
+        <Armor name="Desert Voe Trousers" unlocked="true" level="0"/>
+        <Armor name="Diamond Circlet" unlocked="true" level="0"/>
+        <Armor name="Ember Headdress" unlocked="true" level="0"/>
+        <Armor name="Ember Shirt" unlocked="true" level="0"/>
+        <Armor name="Ember Trousers" unlocked="true" level="0"/>
+        <Armor name="Evil Spirit Armor" unlocked="true" level="0"/>
+        <Armor name="Evil Spirit Greaves" unlocked="true" level="0"/>
+        <Armor name="Evil Spirit Mask" unlocked="true" level="0"/>
+        <Armor name="Fierce Deity Armor" unlocked="true" level="0"/>
+        <Armor name="Fierce Deity Boots" unlocked="true" level="0"/>
+        <Armor name="Fierce Deity Mask" unlocked="true" level="0"/>
+        <Armor name="Flamebreaker Armor" unlocked="true" level="0"/>
+        <Armor name="Flamebreaker Boots" unlocked="true" level="0"/>
+        <Armor name="Flamebreaker Helm" unlocked="true" level="0"/>
+        <Armor name="Froggy Hood" unlocked="true" level="0"/>
+        <Armor name="Froggy Leggings" unlocked="true" level="0"/>
+        <Armor name="Froggy Sleeve" unlocked="true" level="0"/>
+        <Armor name="Frostbite Headdress" unlocked="true" level="0"/>
+        <Armor name="Frostbite Shirt" unlocked="true" level="0"/>
+        <Armor name="Frostbite Trousers" unlocked="true" level="0"/>
+        <Armor name="Gaiters of the Depths" unlocked="true" level="0"/>
+        <Armor name="Glide Mask" unlocked="true" level="0"/>
+        <Armor name="Glide Shirt" unlocked="true" level="0"/>
+        <Armor name="Glide Tights" unlocked="true" level="0"/>
+        <Armor name="Hood of the Depths" unlocked="true" level="0"/>
+        <Armor name="Horriblin Mask" unlocked="true" level="0"/>
+        <Armor name="Hylian Hood" unlocked="true" level="0"/>
+        <Armor name="Hylian Trousers" unlocked="true" level="0"/>
+        <Armor name="Hylian Tunic" unlocked="true" level="0"/>
+        <Armor name="Korok Mask" unlocked="true" level="0"/>
+        <Armor name="Lizalfos Mask" unlocked="true" level="0"/>
+        <Armor name="Lobster Shirt" unlocked="true" level="0"/>
+        <Armor name="Lynel Mask" unlocked="true" level="0"/>
+        <Armor name="Mask of Awakening" unlocked="true" level="0"/>
+        <Armor name="Midna's Helmet" unlocked="true" level="0"/>
+        <Armor name="Majora's Mask" unlocked="true" level="0"/>
+        <Armor name="Miner's Mask" unlocked="true" level="0"/>
+        <Armor name="Miner's Top" unlocked="true" level="0"/>
+        <Armor name="Miner's Trousers" unlocked="true" level="0"/>
+        <Armor name="Moblin Mask" unlocked="true" level="0"/>
+        <Armor name="Mystic Headpiece" unlocked="true" level="0"/>
+        <Armor name="Mystic Robe" unlocked="true" level="0"/>
+        <Armor name="Mystic Trousers" unlocked="true" level="0"/>
+        <Armor name="Opal Earrings" unlocked="true" level="0"/>
+        <Armor name="Phantom Armor" unlocked="true" level="0"/>
+        <Armor name="Phantom Greaves" unlocked="true" level="0"/>
+        <Armor name="Phantom Helmet" unlocked="true" level="0"/>
+        <Armor name="Radiant Mask" unlocked="true" level="0"/>
+        <Armor name="Radiant Shirt" unlocked="true" level="0"/>
+        <Armor name="Radiant Tights" unlocked="true" level="0"/>
+        <Armor name="Ravio's Hood" unlocked="true" level="0"/>
+        <Armor name="Royal Guard Boots" unlocked="true" level="0"/>
+        <Armor name="Royal Guard Cap" unlocked="true" level="0"/>
+        <Armor name="Royal Guard Uniform" unlocked="true" level="0"/>
+        <Armor name="Rubber Armor" unlocked="true" level="0"/>
+        <Armor name="Rubber Helm" unlocked="true" level="0"/>
+        <Armor name="Rubber Tights" unlocked="true" level="0"/>
+        <Armor name="Ruby Circlet" unlocked="true" level="0"/>
+        <Armor name="Sand Boots" unlocked="true" level="0"/>
+        <Armor name="Sapphire Circlet" unlocked="true" level="0"/>
+        <Armor name="Sheik's Mask" unlocked="true" level="0"/>
+        <Armor name="Snow Boots" unlocked="true" level="0"/>
+        <Armor name="Snowquill Headdress" unlocked="true" level="0"/>
+        <Armor name="Snowquill Trousers" unlocked="true" level="0"/>
+        <Armor name="Snowquill Tunic" unlocked="true" level="0"/>
+        <Armor name="Soldier's Armor" unlocked="true" level="0"/>
+        <Armor name="Soldier's Greaves" unlocked="true" level="0"/>
+        <Armor name="Soldier's Helm" unlocked="true" level="0"/>
+        <Armor name="Stealth Chest Guard" unlocked="true" level="0"/>
+        <Armor name="Stealth Mask" unlocked="true" level="0"/>
+        <Armor name="Stealth Tights" unlocked="true" level="0"/>
+        <Armor name="Thunder Helm" unlocked="true" level="0"/>
+        <Armor name="Tingle's Hood" unlocked="true" level="0"/>
+        <Armor name="Tingle's Shirt" unlocked="true" level="0"/>
+        <Armor name="Tingle's Tights" unlocked="true" level="0"/>
+        <Armor name="Topaz Earrings" unlocked="true" level="0"/>
+        <Armor name="Trousers of Awakening" unlocked="true" level="0"/>
+        <Armor name="Trousers of Time" unlocked="true" level="0"/>
+        <Armor name="Trousers of Twilight" unlocked="true" level="0"/>
+        <Armor name="Trousers of the Hero" unlocked="true" level="0"/>
+        <Armor name="Trousers of the Sky" unlocked="true" level="0"/>
+        <Armor name="Trousers of the Wild" unlocked="true" level="0"/>
+        <Armor name="Trousers of the Wind" unlocked="true" level="0"/>
+        <Armor name="Tunic of Awakening" unlocked="true" level="0"/>
+        <Armor name="Tunic of Memories" unlocked="true" level="0"/>
+        <Armor name="Tunic of the Depths" unlocked="true" level="0"/>
+        <Armor name="Tunic of Time" unlocked="true" level="0"/>
+        <Armor name="Tunic of Twilight" unlocked="true" level="0"/>
+        <Armor name="Tunic of the Hero" unlocked="true" level="0"/>
+        <Armor name="Tunic of the Sky" unlocked="true" level="0"/>
+        <Armor name="Tunic of the Wild" unlocked="true" level="0"/>
+        <Armor name="Tunic of the Wind" unlocked="true" level="0"/>
+        <Armor name="Vah Medoh Divine Helm" unlocked="true" level="0"/>
+        <Armor name="Vah Naboris Divine Helm" unlocked="true" level="0"/>
+        <Armor name="Vah Rudania Divine Helm" unlocked="true" level="0"/>
+        <Armor name="Vah Ruta Divine Helm" unlocked="true" level="0"/>
+        <Armor name="Well-Worn Hair Band" unlocked="true" level="0"/>
+        <Armor name="Yiga Armor" unlocked="true" level="0"/>
+        <Armor name="Yiga Mask" unlocked="true" level="0"/>
+        <Armor name="Yiga Tights" unlocked="true" level="0"/>
+        <Armor name="Zant's Helmet" unlocked="true" level="0"/>
+        <Armor name="Zonaite Shin Guards" unlocked="true" level="0"/>
+        <Armor name="Zonaite Waistguard" unlocked="true" level="0"/>
+        <Armor name="Zonaite Helm" unlocked="true" level="0"/>
+        <Armor name="Zora Armor" unlocked="true" level="0"/>
+        <Armor name="Zora Greaves" unlocked="true" level="0"/>
+        <Armor name="Zora Helm" unlocked="true" level="0"/>
     </Armors>
     <Items>
         <Item name="Acorn" quantity="0"/>

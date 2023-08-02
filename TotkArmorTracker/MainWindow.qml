@@ -1,8 +1,6 @@
-import QtQuick 6.2
-import QtQuick.Controls 6.2
+import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Effects
-import QtQuick.Window
 
 Rectangle {
     id: rectangle

@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 import QtQuick.Shapes
 
 Item {
@@ -14,6 +14,7 @@ Item {
 
     // Formatting.
     property bool darkModeEnabled: false
+    property string nameColor: (darkModeEnabled) ? "white" : "black"
     property int namePointSize: 7
 
     // Selection.
@@ -69,8 +70,8 @@ Item {
             anchors.bottom: currentArmorLevelRow.top
             anchors.horizontalCenter: parent.horizontalCenter
 
-            // Change the text color based on dark mode settings.
-            color: (darkModeEnabled) ? "white" : "black"
+            // Change the text color based on dark mode settings and whether the armor is unlocked.
+            color: (armorIconMain.selectable) ? armorIconMain.nameColor : "gray"
             text: armorIconMain.armorName
 
             font.bold: true
