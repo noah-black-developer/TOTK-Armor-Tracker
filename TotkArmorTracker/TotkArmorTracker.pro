@@ -17,7 +17,8 @@ resources.files = main.qml
 resources.prefix = /$${TARGET}
 RESOURCES += resources \
     qml.qrc \
-    $$files(images/*.png)
+    $$files(images/*.png) \
+    $$files(images/*.svg)
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

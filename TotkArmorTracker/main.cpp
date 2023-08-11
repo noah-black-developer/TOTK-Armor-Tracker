@@ -27,10 +27,7 @@ int main(int argc, char *argv[])
     // Initialize the UI using local configuration files.
     appController->appInitialize(QString::fromStdString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/armorData.xml)"));
 
-    // TEMP: Load in a default save upon startup.
-    // Eventually will be replaced with more specialized startup steps.
-    //appController->appPullSave(QString::fromStdString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/saves/test_save.xml)"));
-
+    // Execute UI.
     int result = app.exec();
 
     // Return results once finished.

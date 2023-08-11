@@ -10,102 +10,127 @@ Item {
     property string armorName: "Default Armor"
     property string armorIconUrl: "images/Default.png"
     property int currentRank: 0
-    property bool isUpgradeable: true
+    property bool isUpgradeable: false
+    property bool isUnlocked: false
 
     // Formatting.
     property bool darkModeEnabled: false
-    property string nameColor: (darkModeEnabled) ? "white" : "black"
     property int namePointSize: 7
 
     // Selection.
     property bool selectable: true
     property bool selected: false
 
-    // Sometimes having the width defined by childrenRect can cause
-    // the control to randomly resize, so the icon is used instead
-    // to basically the same effect.
-    width: 100
+    width: 90
     height: 100
-
-    // Selection Designs.
-    // Sits BEHIND other icons to prevent covering up other parts of the control.
-    Rectangle {
-        id: rectangle
-        anchors.fill: parent
-        visible: armorIconMain.selected
-
-        color: "gray"
-        radius: 10
-    }
 
     Rectangle {
         id: armorIconContentsFrame
         anchors.fill: parent
-        anchors.margins: 5
         color: "#00ffffff"
 
         // Armor Image
         Image {
             id: armorImage
-            anchors.top: parent.top
-            anchors.bottom: armorNameLabel.top
-            anchors.horizontalCenter: parent.horizontalCenter
 
+            width: 60
+            height: 60
+            // Image is centered in the control to allow stars + text to flow above/below more easily.
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
             source: armorIconMain.armorIconUrl
             fillMode: Image.PreserveAspectFit
             antialiasing: true
 
+            // If selected, add a border to the image.
+            Rectangle {
+                id: armorImageBorder
+
+                anchors {
+                    fill: parent
+                    // Use negative margins to encircle the parent object.
+                    margins: -7
+                }
+                visible: armorIconMain.selected
+                border.color: "gray"
+                border.width: 4
+                color: "transparent"
+            }
+
             // "Shader" Rectangle - Overlays image to give a grayscaled appearance.
+            // Appears if the armor is not yet unlocked.
             Rectangle {
                 id: armorImageShader
+
                 anchors.fill: parent
-                visible: !armorIconMain.selectable
+                visible: !armorIconMain.isUnlocked
                 color: "#7e474747"
             }
-        }
-
-        // Armor Name.
-        Label {
-            id: armorNameLabel
-            anchors.bottom: currentArmorLevelRow.top
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            // Change the text color based on dark mode settings and whether the armor is unlocked.
-            color: (armorIconMain.selectable) ? armorIconMain.nameColor : "gray"
-            text: armorIconMain.armorName
-
-            font.bold: true
-            font.pointSize: armorIconMain.namePointSize
         }
 
         // Current Armor Level.
         // Adjusted based on current state.
         Row {
             id: currentArmorLevelRow
-            height: 12
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
 
-            spacing: 3
+            height: 12
+            anchors {
+                bottom: armorImage.top
+                horizontalCenter: parent.horizontalCenter
+                bottomMargin: 2
+            }
+            spacing: 2
+
+            // Hide stars if the item inside is not upgradeable.
+            visible: armorIconMain.isUpgradeable
 
             // Creates a num. of stars equal to current armor rank.
             // Only applicable if the armor can be upgraded.
             Repeater {
-                model: (isUpgradeable) ? armorIconMain.currentRank : 0
+                model: 4
 
                 Image {
+                    required property int index
+
                     height: currentArmorLevelRow.height
                     width: height
-                    source: (armorIconMain.darkModeEnabled) ? "images/Star Image.png" : "images/Star Image - Dark.png"
-                    antialiasing: true
+                    fillMode: Image.PreserveAspectFit
+
+                    // Choose a filled or unfilled star, depending on the item's current rank.
+                    source: (index <= armorIconMain.currentRank - 1) ? "images/star-solid.svg" : "images/star-regular.svg"
                 }
             }
+        }
+
+        // Armor Name.
+        Label {
+            id: armorNameLabel
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: armorImage.bottom
+                topMargin: 2
+            }
+
+            // Change the text color based on whether the armor is unlocked.
+            color: (armorIconMain.isUnlocked) ? "black" : "gray"
+            text: armorIconMain.armorName
+            horizontalAlignment: Text.AlignHCenter
+
+            font.bold: true
+            font.pointSize: armorIconMain.namePointSize
+            // If the text would extend past the full width of the control, wrap by word.
+            wrapMode: Text.WordWrap
         }
     }
 
     // Click handler for the icon.
     MouseArea {
         id: iconMouseArea
+
         anchors.fill: parent
         enabled: armorIconMain.selectable
 

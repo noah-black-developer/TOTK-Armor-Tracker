@@ -36,6 +36,7 @@ Rectangle {
         // Tracks what armor pieces are unlocked, current tiers, etc.
         ArmorProgressPage {
             id: mainWindowArmorProgressPage
+
             objectName: "mainWindowArmorProgressPage"
         }
     }

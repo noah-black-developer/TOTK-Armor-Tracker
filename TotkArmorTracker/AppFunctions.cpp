@@ -66,8 +66,8 @@ bool initialize(QString armorConfigsPath, QObject *qmlRootObject)
         armorObj->setProperty("armorIconUrl", armorIconUrl);
         armorObj->setProperty("isUpgradeable", armorIsUpgradeableVal);
 
-        // By default, all armor starts as locked until user save is loaded.
-        armorObj->setProperty("selectable", false);
+        // By default, all armor starts as not yet unlocked until user save is loaded.
+        armorObj->setProperty("isUnlocked", false);
     }
 
     return true;
@@ -119,7 +119,7 @@ bool pullSave(QString saveFilePath, QObject *qmlRootObject)
         }
 
         // Set QML properties from the configs file.
-        armorObj->setProperty("selectable", armorIsUnlocked);
+        armorObj->setProperty("isUnlocked", armorIsUnlocked);
         armorObj->setProperty("currentRank", armorLevel.toInt());
     }
 

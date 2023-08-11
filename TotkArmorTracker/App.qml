@@ -7,8 +7,8 @@ import QtQuick.Layouts
 import QtQuick.Dialogs
 
 Window {
-    width: 1600
-    height: 900
+    width: 1000
+    height: 700
 
     visible: true
     title: "TOTK Armor Tracker"
@@ -20,7 +20,10 @@ Window {
 
         // Opens the "saves" folder within the project.
         currentFolder: "./saves"
-        onAccepted: AppController.appPullSave(selectedFile)
+        onAccepted: {
+            console.log(AppController);
+            AppController.appPullSave(selectedFile);
+        }
     }
 
     MainWindow {
