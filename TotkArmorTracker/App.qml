@@ -21,7 +21,7 @@ Window {
         // Opens the "saves" folder within the project.
         currentFolder: "./saves"
         onAccepted: {
-            AppController.appPullSave(selectedFile);
+            AppController.pullSave(selectedFile);
         }
     }
 

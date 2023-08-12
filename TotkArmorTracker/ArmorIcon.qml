@@ -137,10 +137,10 @@ Item {
         // Whenever clicked, accesses methods in the AppController to handle selection/deselection.
         onClicked: {
             if(armorIconMain.selected) {
-                AppController.appDeselectAll();
+                AppController.deselectAll();
             }
             else {
-                AppController.appSetSelectedArmor(armorIconMain.armorName);
+                AppController.setSelectedArmor(armorIconMain.armorName);
             }
         }
     }

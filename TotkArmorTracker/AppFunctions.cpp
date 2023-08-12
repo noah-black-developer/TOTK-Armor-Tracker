@@ -2,6 +2,10 @@
 // Uses lower-level functions to expose methods into related QML files.
 //  ex. manipulating user saves, reading user inputs, etc...
 
+
+// DEPRECATED - Functionality merged into AppController.
+
+
 #include <QDebug>
 #include <QList>
 #include <QObject>
