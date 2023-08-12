@@ -2,12 +2,10 @@ QT += quick
 
 SOURCES += \
         AppController.cpp \
-        AppFunctions.cpp \
         main.cpp
 
 HEADERS += \
     AppController.h \
-    AppFunctions.h \
     rapidxml-1.13/rapidxml.hpp \
     rapidxml-1.13/rapidxml_iterators.hpp \
     rapidxml-1.13/rapidxml_print.hpp \
