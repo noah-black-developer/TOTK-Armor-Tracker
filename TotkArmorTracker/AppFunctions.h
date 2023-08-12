@@ -14,6 +14,7 @@
 // Author: Noah Black
 // Date: July 15th, 2023
 
+// GENERAL FUNCTIONS.
 // App startup functions.
 bool initialize(QString armorConfigsPath, QObject *qmlRootObject);
 

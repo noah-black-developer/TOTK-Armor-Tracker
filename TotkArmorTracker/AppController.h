@@ -13,11 +13,19 @@ class AppController : public QObject
 public:
     explicit AppController(QObject *qmlRootObject, QObject *parent = nullptr);
 
+    // GENERAL METHODS.
     Q_INVOKABLE bool appInitialize(QString armorConfigsPath);
     Q_INVOKABLE bool appPullSave(QUrl saveFilePath);
 
+    // APP ICON BAR METHODS.
+    Q_INVOKABLE bool appSetSelectedArmor(QString armorName);
+    Q_INVOKABLE void appDeselectAll();
+
 private:
     QObject *_qmlRootObject;
+    QObject *_selectedArmor;
+
+    QObject *_getArmorIconByName(QString armorName);
 
 };
 

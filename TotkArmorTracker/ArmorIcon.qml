@@ -134,8 +134,14 @@ Item {
         anchors.fill: parent
         enabled: armorIconMain.selectable
 
+        // Whenever clicked, accesses methods in the AppController to handle selection/deselection.
         onClicked: {
-            armorIconMain.selected = !armorIconMain.selected
+            if(armorIconMain.selected) {
+                AppController.appDeselectAll();
+            }
+            else {
+                AppController.appSetSelectedArmor(armorIconMain.armorName);
+            }
         }
     }
 }

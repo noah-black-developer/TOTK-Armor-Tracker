@@ -15,6 +15,7 @@
 
 using namespace rapidxml;
 
+// GENERAL FUNCTIONS.
 // Function to initialize the UI armor settings at startup.
 // Sources data from config XML files of a pre-set formatting.
 // Inputs:
