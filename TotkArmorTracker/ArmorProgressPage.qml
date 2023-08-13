@@ -5,19 +5,203 @@ import QtQuick.Layouts
 Rectangle {
     id: rectangle1
 
-    width: 1000
-    height: 700
+    // Armor Image.
+    // Displays a background image of the currently selected armor.
+    Image {
+        id: selectedArmorImage
+        objectName: "selectedArmorImage"
+
+        width: 350
+        height: 350
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
+        }
+
+        // Uses a default blank image as a starting source.
+        source: "images/Default.png"
+        mipmap: true
+    }
+
+    // Armor Details (Right Side).
+    Rectangle {
+        id: armorDetailsRectangle
+
+        width: 280
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            margins: 10
+        }
+        // Sits above the other controls on the z-axis.
+        z: 1
+        color: "transparent"
+
+        // Color Rectangle.
+        // Separated from main rectangle to allow just the backing of the controls to be transluscent,
+        // without diminishing all of the content objects (text, icons, etc...).
+        Rectangle {
+            id: armorDetailsColorRect
+
+            anchors.fill: parent
+            color: "#dedede"
+            opacity: 0.9
+        }
+
+        // DETAILS COLUMN.
+        // Contains fields for armor info, decorative objects, etc...
+        ColumnLayout {
+            id: armorDetailsColumnLayout
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+            }
+
+            // Selected Armor Name.
+            Text {
+                id: selectedArmorNameLabel
+                objectName: "selectedArmorNameLabel"
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "Lorem Ipsum"
+                font.bold: true
+                font.pointSize: 14
+            }
+
+            // Armor Set Name.
+            Text {
+                id: selectedArmorSetNameLabel
+                objectName: "selectedArmorSetNameLabel"
+
+                Layout.fillWidth: true
+                Layout.topMargin: -5
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "Lorem Ipsum"
+                font.pointSize: 9
+            }
+
+            // Armor Quote.
+            Text {
+                id: selectedArmorQuoteLabel
+                objectName: "selectedArmorQuoteLabel"
+
+                Layout.fillWidth: true
+                Layout.margins: 5
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum..."
+                font.italic: true
+                font.pointSize: 8
+                wrapMode: Text.Wrap
+            }
+
+            // Separator.
+            Rectangle {
+                id: selectedArmorQuoteSeparator
+
+                height: 2
+                Layout.fillWidth: true
+                Layout.leftMargin: 20
+                Layout.rightMargin: 20
+                Layout.alignment: Qt.AlignHCenter
+                color: "black"
+            }
+
+            // Unlock Status.
+            Text {
+                id: selectedArmorUnlockedLabel
+                objectName: "selectedArmorUnlockedLabel"
+
+                property bool isUnlocked: true
+
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "Armor Set is " + ((isUnlocked) ? "Unlocked" : "Locked")
+            }
+
+            // Armor Defense.
+            Text {
+                id: selectedArmorDefenseLabel
+                objectName: "selectedArmorDefenseLabel"
+
+                property int level: 0
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "> Current Level: " + level.toString()
+                wrapMode: Text.Wrap
+
+                // Only visible if the armor set is unlocked.
+                visible: selectedArmorUnlockedLabel.isUnlocked
+            }
+
+            // Passive Bonus.
+            Text {
+                id: selectedArmorPassiveLabel
+                objectName: "selectedArmorPassiveLabel"
+
+                property string passiveBonus: "None"
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "> Passive Bonus: " + passiveBonus
+                wrapMode: Text.Wrap
+
+                // Only visible if the armor set is unlocked.
+                visible: selectedArmorUnlockedLabel.isUnlocked
+            }
+
+            // Passive Bonus.
+            Text {
+                id: selectedArmorsSetBonusLabel
+                objectName: "selectedArmorSetBonusLabel"
+
+                property string setBonus: "None"
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: "> Set Bonus: " + setBonus
+                wrapMode: Text.Wrap
+
+                // Only visible if the armor set is unlocked.
+                visible: selectedArmorUnlockedLabel.isUnlocked
+            }
+        }
+    }
 
     // Armor Progress Bar (Left Side).
     Rectangle {
-        id: leftControlsRectangle
+        id: armorProgressRectangle
 
         width: 280
-        color: "#dedede"
         anchors {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
+            margins: 10
+        }
+        // Sits above the other controls on the z-axis.
+        z: 1
+        color: "transparent"
+
+        // Color Rectangle.
+        // Separated from main rectangle to allow just the backing of the controls to be transluscent,
+        // without diminishing all of the content objects (text, icons, etc...).
+        Rectangle {
+            id: armorIconsColorRect
+
+            anchors.fill: parent
+            color: "#dedede"
+            opacity: 0.9
         }
 
         // Armor Icon (Buttons).
@@ -26,178 +210,169 @@ Rectangle {
         Flickable {
             id: armorIconsFlickable
 
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                margins: 10
+            }
 
             ScrollView {
                 id: armorIconsScrollView
 
                 anchors.fill: parent
-                contentWidth: armorIconsGrid.width
-                contentHeight: armorIconsGrid.height + 100
 
                 // Allow the list to extend past the current window.
                 clip: true
+                // Force the scrollbar to only work vertically + to make grid fit inside.
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                contentWidth: availableWidth
 
                 GridLayout {
                     id: armorIconsGrid
 
-                    property string selectedArmor: ""
-
+                    anchors.fill: parent
+                    width: parent.width
                     columns: 3
 
                     // ARMOR ICONS.
                     // By default, each armor set loads in with just an object name.
                     // UI is initialized from c++ at runtime for things like name, image, etc.
-                    ArmorIcon { objectName: "Amber Earrings" }
-                    ArmorIcon { objectName: "Ancient Hero's Aspect" }
-                    ArmorIcon { objectName: "Archaic Legwear" }
-                    ArmorIcon { objectName: "Archaic Tunic" }
-                    ArmorIcon { objectName: "Archaic Warm Greaves" }
-                    ArmorIcon { objectName: "Barbarian Armor" }
-                    ArmorIcon { objectName: "Barbarian Helm" }
-                    ArmorIcon { objectName: "Barbarian Leg Wraps" }
-                    ArmorIcon { objectName: "Bokoblin Mask" }
-                    ArmorIcon { objectName: "Cap of Time" }
-                    ArmorIcon { objectName: "Cap of Twilight" }
-                    ArmorIcon { objectName: "Cap of the Hero" }
-                    ArmorIcon { objectName: "Cap of the Sky" }
-                    ArmorIcon { objectName: "Cap of the Wild" }
-                    ArmorIcon { objectName: "Cap of the Wind" }
-                    ArmorIcon { objectName: "Cece's Hat" }
-                    ArmorIcon { objectName: "Champion's Leathers" }
-                    ArmorIcon { objectName: "Charged Headdress" }
-                    ArmorIcon { objectName: "Charged Shirt" }
-                    ArmorIcon { objectName: "Charged Trousers" }
-                    ArmorIcon { objectName: "Climber's Bandana" }
-                    ArmorIcon { objectName: "Climbing Boots" }
-                    ArmorIcon { objectName: "Climbing Gear" }
-                    ArmorIcon { objectName: "Dark Hood" }
-                    ArmorIcon { objectName: "Dark Trousers" }
-                    ArmorIcon { objectName: "Dark Tunic" }
-                    ArmorIcon { objectName: "Desert Voe Headband" }
-                    ArmorIcon { objectName: "Desert Voe Spaulder" }
-                    ArmorIcon { objectName: "Desert Voe Trousers" }
-                    ArmorIcon { objectName: "Diamond Circlet" }
-                    ArmorIcon { objectName: "Ember Headdress" }
-                    ArmorIcon { objectName: "Ember Shirt" }
-                    ArmorIcon { objectName: "Ember Trousers" }
-                    ArmorIcon { objectName: "Evil Spirit Armor" }
-                    ArmorIcon { objectName: "Evil Spirit Greaves" }
-                    ArmorIcon { objectName: "Evil Spirit Mask" }
-                    ArmorIcon { objectName: "Fierce Deity Armor" }
-                    ArmorIcon { objectName: "Fierce Deity Boots" }
-                    ArmorIcon { objectName: "Fierce Deity Mask" }
-                    ArmorIcon { objectName: "Flamebreaker Armor" }
-                    ArmorIcon { objectName: "Flamebreaker Boots" }
-                    ArmorIcon { objectName: "Flamebreaker Helm" }
-                    ArmorIcon { objectName: "Froggy Hood" }
-                    ArmorIcon { objectName: "Froggy Leggings" }
-                    ArmorIcon { objectName: "Froggy Sleeve" }
-                    ArmorIcon { objectName: "Frostbite Headdress" }
-                    ArmorIcon { objectName: "Frostbite Shirt" }
-                    ArmorIcon { objectName: "Frostbite Trousers" }
-                    ArmorIcon { objectName: "Gaiters of the Depths" }
-                    ArmorIcon { objectName: "Glide Mask" }
-                    ArmorIcon { objectName: "Glide Shirt" }
-                    ArmorIcon { objectName: "Glide Tights" }
-                    ArmorIcon { objectName: "Hood of the Depths" }
-                    ArmorIcon { objectName: "Horriblin Mask" }
-                    ArmorIcon { objectName: "Hylian Hood" }
-                    ArmorIcon { objectName: "Hylian Trousers" }
-                    ArmorIcon { objectName: "Hylian Tunic" }
-                    ArmorIcon { objectName: "Korok Mask" }
-                    ArmorIcon { objectName: "Lizalfos Mask" }
-                    ArmorIcon { objectName: "Lobster Shirt" }
-                    ArmorIcon { objectName: "Lynel Mask" }
-                    ArmorIcon { objectName: "Majora's Mask" }
-                    ArmorIcon { objectName: "Mask of Awakening" }
-                    ArmorIcon { objectName: "Midna's Helmet" }
-                    ArmorIcon { objectName: "Miner's Mask" }
-                    ArmorIcon { objectName: "Miner's Top" }
-                    ArmorIcon { objectName: "Miner's Trousers" }
-                    ArmorIcon { objectName: "Moblin Mask" }
-                    ArmorIcon { objectName: "Mystic Headpiece" }
-                    ArmorIcon { objectName: "Mystic Robe" }
-                    ArmorIcon { objectName: "Mystic Trousers" }
-                    ArmorIcon { objectName: "Opal Earrings" }
-                    ArmorIcon { objectName: "Phantom Armor" }
-                    ArmorIcon { objectName: "Phantom Greaves" }
-                    ArmorIcon { objectName: "Phantom Helmet" }
-                    ArmorIcon { objectName: "Radiant Mask" }
-                    ArmorIcon { objectName: "Radiant Shirt" }
-                    ArmorIcon { objectName: "Radiant Tights" }
-                    ArmorIcon { objectName: "Ravio's Hood" }
-                    ArmorIcon { objectName: "Royal Guard Boots" }
-                    ArmorIcon { objectName: "Royal Guard Cap" }
-                    ArmorIcon { objectName: "Royal Guard Uniform" }
-                    ArmorIcon { objectName: "Rubber Armor" }
-                    ArmorIcon { objectName: "Rubber Helm" }
-                    ArmorIcon { objectName: "Rubber Tights" }
-                    ArmorIcon { objectName: "Ruby Circlet" }
-                    ArmorIcon { objectName: "Sand Boots" }
-                    ArmorIcon { objectName: "Sapphire Circlet" }
-                    ArmorIcon { objectName: "Sheik's Mask" }
-                    ArmorIcon { objectName: "Snow Boots" }
-                    ArmorIcon { objectName: "Snowquill Headdress" }
-                    ArmorIcon { objectName: "Snowquill Trousers" }
-                    ArmorIcon { objectName: "Snowquill Tunic" }
-                    ArmorIcon { objectName: "Soldier's Armor" }
-                    ArmorIcon { objectName: "Soldier's Greaves" }
-                    ArmorIcon { objectName: "Soldier's Helm" }
-                    ArmorIcon { objectName: "Stealth Chest Guard" }
-                    ArmorIcon { objectName: "Stealth Mask" }
-                    ArmorIcon { objectName: "Stealth Tights" }
-                    ArmorIcon { objectName: "Thunder Helm" }
-                    ArmorIcon { objectName: "Tingle's Hood" }
-                    ArmorIcon { objectName: "Tingle's Shirt" }
-                    ArmorIcon { objectName: "Tingle's Tights" }
-                    ArmorIcon { objectName: "Topaz Earrings" }
-                    ArmorIcon { objectName: "Trousers of Awakening" }
-                    ArmorIcon { objectName: "Trousers of Time" }
-                    ArmorIcon { objectName: "Trousers of Twilight" }
-                    ArmorIcon { objectName: "Trousers of the Hero" }
-                    ArmorIcon { objectName: "Trousers of the Sky" }
-                    ArmorIcon { objectName: "Trousers of the Wild" }
-                    ArmorIcon { objectName: "Trousers of the Wind" }
-                    ArmorIcon { objectName: "Tunic of Awakening" }
-                    ArmorIcon { objectName: "Tunic of Memories" }
-                    ArmorIcon { objectName: "Tunic of Time" }
-                    ArmorIcon { objectName: "Tunic of Twilight" }
-                    ArmorIcon { objectName: "Tunic of the Depths" }
-                    ArmorIcon { objectName: "Tunic of the Hero" }
-                    ArmorIcon { objectName: "Tunic of the Sky" }
-                    ArmorIcon { objectName: "Tunic of the Wild" }
-                    ArmorIcon { objectName: "Tunic of the Wind" }
-                    ArmorIcon { objectName: "Vah Medoh Divine Helm" }
-                    ArmorIcon { objectName: "Vah Naboris Divine Helm" }
-                    ArmorIcon { objectName: "Vah Rudania Divine Helm" }
-                    ArmorIcon { objectName: "Vah Ruta Divine Helm" }
-                    ArmorIcon { objectName: "Well-Worn Hair Band" }
-                    ArmorIcon { objectName: "Yiga Armor" }
-                    ArmorIcon { objectName: "Yiga Mask" }
-                    ArmorIcon { objectName: "Yiga Tights" }
-                    ArmorIcon { objectName: "Zant's Helmet" }
-                    ArmorIcon { objectName: "Zonaite Helm" }
-                    ArmorIcon { objectName: "Zonaite Shin Guards" }
-                    ArmorIcon { objectName: "Zonaite Waistguard" }
-                    ArmorIcon { objectName: "Zora Armor" }
-                    ArmorIcon { objectName: "Zora Greaves" }
-                    ArmorIcon { objectName: "Zora Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Amber Earrings" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Ancient Hero's Aspect" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Archaic Legwear" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Archaic Tunic" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Archaic Warm Greaves" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Barbarian Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Barbarian Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Barbarian Leg Wraps" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Bokoblin Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cap of Time" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cap of Twilight" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cap of the Hero" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cap of the Sky" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cap of the Wild" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cap of the Wind" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Cece's Hat" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Champion's Leathers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Charged Headdress" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Charged Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Charged Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Climber's Bandana" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Climbing Boots" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Climbing Gear" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Dark Hood" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Dark Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Dark Tunic" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Desert Voe Headband" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Desert Voe Spaulder" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Desert Voe Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Diamond Circlet" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Ember Headdress" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Ember Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Ember Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Evil Spirit Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Evil Spirit Greaves" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Evil Spirit Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Fierce Deity Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Fierce Deity Boots" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Fierce Deity Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Flamebreaker Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Flamebreaker Boots" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Flamebreaker Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Froggy Hood" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Froggy Leggings" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Froggy Sleeve" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Frostbite Headdress" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Frostbite Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Frostbite Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Gaiters of the Depths" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Glide Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Glide Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Glide Tights" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Hood of the Depths" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Horriblin Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Hylian Hood" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Hylian Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Hylian Tunic" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Korok Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Lizalfos Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Lobster Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Lynel Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Majora's Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Mask of Awakening" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Midna's Helmet" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Miner's Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Miner's Top" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Miner's Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Moblin Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Mystic Headpiece" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Mystic Robe" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Mystic Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Opal Earrings" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Phantom Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Phantom Greaves" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Phantom Helmet" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Radiant Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Radiant Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Radiant Tights" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Ravio's Hood" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Royal Guard Boots" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Royal Guard Cap" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Royal Guard Uniform" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Rubber Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Rubber Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Rubber Tights" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Ruby Circlet" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Sand Boots" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Sapphire Circlet" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Sheik's Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Snow Boots" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Snowquill Headdress" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Snowquill Trousers" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Snowquill Tunic" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Soldier's Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Soldier's Greaves" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Soldier's Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Stealth Chest Guard" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Stealth Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Stealth Tights" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Thunder Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tingle's Hood" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tingle's Shirt" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tingle's Tights" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Topaz Earrings" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of Awakening" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of Time" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of Twilight" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of the Hero" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of the Sky" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of the Wild" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Trousers of the Wind" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of Awakening" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of Memories" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of Time" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of Twilight" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Depths" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Hero" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Sky" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Wild" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Wind" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Vah Medoh Divine Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Vah Naboris Divine Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Vah Rudania Divine Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Vah Ruta Divine Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Well-Worn Hair Band" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Yiga Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Yiga Mask" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Yiga Tights" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zant's Helmet" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zonaite Helm" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zonaite Shin Guards" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zonaite Waistguard" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zora Armor" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zora Greaves" }
+                    ArmorIcon { Layout.fillWidth: true; objectName: "Zora Helm" }
                 }
             }
-        }
-    }
-
-    // Selected Armor Visualisation (Right Side).
-    // Displays an image of, and information about, currently selected armor pieces.
-    Rectangle {
-        id: rightArmorVisualRectangle
-
-        anchors {
-            left: leftControlsRectangle.right
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
         }
     }
 }

@@ -5,32 +5,12 @@ import QtQuick.Layouts
 Rectangle {
     id: rectangle
 
-    TabBar {
-        id: tabBar
-        anchors.top: menuBar.bottom
-
-        TabButton {
-            id: tabButton
-            text: qsTr("Armor Progress")
-        }
-
-        TabButton {
-            id: tabButton1
-            text: qsTr("Tracker")
-        }
-
-        TabButton {
-            id: tabButton2
-            text: qsTr("Inventory")
-        }
-    }
     StackLayout {
         id: stackLayout
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: tabBar.bottom
-        anchors.bottom: parent.bottom
-        currentIndex: tabBar.currentIndex
+
+        anchors.fill: parent
+        // TODO - Add in a control to toggle the active window.
+        currentIndex: 0
 
         // Page 1 - Armor Progress
         // Tracks what armor pieces are unlocked, current tiers, etc.
@@ -38,6 +18,8 @@ Rectangle {
             id: mainWindowArmorProgressPage
 
             objectName: "mainWindowArmorProgressPage"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
     }
 }

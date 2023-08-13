@@ -66,7 +66,8 @@ Item {
 
                 anchors.fill: parent
                 visible: !armorIconMain.isUnlocked
-                color: "#7e474747"
+                color: "#474747"
+                opacity: 0.8
             }
         }
 

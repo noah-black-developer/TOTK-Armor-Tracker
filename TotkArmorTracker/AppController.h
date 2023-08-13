@@ -5,7 +5,6 @@
 #include <QQmlEngine>
 #include <QDebug>
 #include <QList>
-#include <AppFunctions.h>
 #include <stdio.h>
 #include <fstream>
 #include <iostream>
@@ -33,11 +32,13 @@ public:
     Q_INVOKABLE void deselectAll();
 
 private:
-    QObject *_qmlRootObject;
-    QObject *_selectedArmor;
-    xml_document<> *_armorConfigsXmlDocument;
+    QString _armorConfigsPath = "";
+    QObject *_qmlRootObject = nullptr;
+    QObject *_selectedArmor = nullptr;
 
     QObject *_getArmorIconByName(QString armorName);
+    bool _setArmorDetailsByName(QString armorName);
+    bool _setArmorDetailsToDefault();
     std::vector<char> _readXmlToParseReadyObj(QString xmlFilePath);
 
 };

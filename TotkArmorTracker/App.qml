@@ -25,48 +25,58 @@ Window {
         }
     }
 
+    // Menu Options.
+    // Handles opening/saving load files and other misc. tasks.
+    MenuBar {
+        id: menuBar
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+
+        Menu {
+            title: "&File"
+            Action {
+                text: "&New"
+            }
+            Action {
+                text: "&Open"
+                onTriggered: openSaveFileDialog.open()
+            }
+            Action {
+                text: "Open &Recent"
+            }
+            Action {
+                text: "&Save"
+            }
+            MenuSeparator {}
+            Action {
+                text: "&Quit"
+            }
+        }
+        Menu {
+            title: "&Help"
+            Action {
+                text: "&How To"
+            }
+            MenuSeparator {}
+            Action {
+                text: "&Version Info"
+            }
+        }
+    }
+
     MainWindow {
         id: mainWindow
         objectName: "mainWindow"
 
-        // Menu Options.
-        // Handles opening/saving load files and other misc. tasks.
-        MenuBar {
-            id: menuBar
-            width: parent.width
-            anchors.top: parent.top
-            anchors.topMargin: 0
-
-            Menu {
-                title: "&File"
-                Action {
-                    text: "&New"
-                }
-                Action {
-                    text: "&Open"
-                    onTriggered: openSaveFileDialog.open()
-                }
-                Action {
-                    text: "Open &Recent"
-                }
-                Action {
-                    text: "&Save"
-                }
-                MenuSeparator {}
-                Action {
-                    text: "&Quit"
-                }
-            }
-            Menu {
-                title: "&Help"
-                Action {
-                    text: "&How To"
-                }
-                MenuSeparator {}
-                Action {
-                    text: "&Version Info"
-                }
-            }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: menuBar.bottom
+            bottom: parent.bottom
         }
     }
 }
