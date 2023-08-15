@@ -130,16 +130,13 @@ Rectangle {
                 id: selectedArmorDefenseLabel
                 objectName: "selectedArmorDefenseLabel"
 
-                property int level: 0
+                property int defense: 0
 
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 horizontalAlignment: Qt.AlignHCenter
-                text: "> Current Level: " + level.toString()
+                text: "> Current Defense: " + defense.toString()
                 wrapMode: Text.Wrap
-
-                // Only visible if the armor set is unlocked.
-                visible: selectedArmorUnlockedLabel.isUnlocked
             }
 
             // Passive Bonus.
@@ -154,9 +151,6 @@ Rectangle {
                 horizontalAlignment: Qt.AlignHCenter
                 text: "> Passive Bonus: " + passiveBonus
                 wrapMode: Text.Wrap
-
-                // Only visible if the armor set is unlocked.
-                visible: selectedArmorUnlockedLabel.isUnlocked
             }
 
             // Passive Bonus.
@@ -171,9 +165,6 @@ Rectangle {
                 horizontalAlignment: Qt.AlignHCenter
                 text: "> Set Bonus: " + setBonus
                 wrapMode: Text.Wrap
-
-                // Only visible if the armor set is unlocked.
-                visible: selectedArmorUnlockedLabel.isUnlocked
             }
         }
     }
