@@ -31,11 +31,13 @@ public:
     // APP ICON BAR METHODS.
     Q_INVOKABLE bool setSelectedArmor(QString armorName);
     Q_INVOKABLE void deselectAll();
+    Q_INVOKABLE bool setArmorSort(QString sortName);
 
 private:
     QString _armorConfigsPath = "";
     QObject *_qmlRootObject = nullptr;
     QObject *_selectedArmor = nullptr;
+    QString _currentSort = "";
 
     QObject *_getArmorIconByName(QString armorName);
     bool _setArmorDetailsByName(QString armorName);

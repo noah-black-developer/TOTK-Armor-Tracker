@@ -2,7 +2,7 @@
 <ArmorData>
     <Armor name="Amber Earrings">
         <Description>One of the items sold by the Gerudo jeweler. These earrings are made with amber, a gem that harnesses the power of the land to increase defense when equipped.</Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Armor Up</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -206,7 +206,7 @@
     </Armor>
     <Armor name="Bokoblin Mask">
         <Description>Kilton's handmade Bokoblin headgear. It's almost charming in a cute, monstrous kind of way... Equip it to blend in with Bokoblins.</Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Bokoblins</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -420,7 +420,7 @@
     </Armor>
     <Armor name="Cece's Hat">
         <Description>An avant-garde masterpiece designed by Cece. Guaranteed to make the fashionistas' heads turn.</Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>N/A</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -428,7 +428,7 @@
     </Armor>
     <Armor name="Champion's Leathers">
         <Description>This garment, worn by those in good standing with Hyrule royalty, has been reworked with the latest improvements, such as a new shoulder guard.</Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>5</BaseDefense>
         <PassiveBonus>Grants Link the ability to shoot sword beams with the Master Sword without full health</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1550,7 +1550,7 @@
     </Armor>
     <Armor name="Horriblin Mask">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Horriblins</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1663,7 +1663,7 @@
     </Armor>
     <Armor name="Korok Mask">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>1</BaseDefense>
         <PassiveBonus>Korok Detection</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1671,7 +1671,7 @@
     </Armor>
     <Armor name="Lizalfos Mask">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Lizalfos</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1679,7 +1679,7 @@
     </Armor>
     <Armor name="Lobster Shirt">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>1</BaseDefense>
         <PassiveBonus>N/A</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1687,7 +1687,7 @@
     </Armor>
     <Armor name="Lynel Mask">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Lynels</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1695,7 +1695,7 @@
     </Armor>
     <Armor name="Majora's Mask">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>1</BaseDefense>
         <PassiveBonus>Blend in with enemies</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1737,7 +1737,7 @@
     </Armor>
     <Armor name="Midna's Helmet">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>7</BaseDefense>
         <PassiveBonus>Gloom Resistance</PassiveBonus>
         <SetBonus>N/A</SetBonus>
@@ -1850,7 +1850,7 @@
     </Armor>
     <Armor name="Moblin Mask">
         <Description></Description>
-        <SetName>template</SetName>
+        <SetName>N/A</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Moblins</PassiveBonus>
         <SetBonus>N/A</SetBonus>

@@ -27,36 +27,51 @@ bool AppController::initialize(QString armorConfigsPath)
     armorConfigsFileXmlDocument->parse<0>(&parseReadyArmorConfigFile[0]);
 
     // LOAD IN ARMOR CONFIGS TO UI.
-    // For each armor type, apply values for armor name, image,
-    // and whether the armor can be upgraded or not.
-    xml_node<char> *armorBaseNode = armorConfigsFileXmlDocument->first_node("ArmorData");
-    for(xml_node<char> *armorNode = armorBaseNode->first_node(); armorNode != 0; armorNode = armorNode->next_sibling())
+    // Settings must be applied across all the different sort arrangements.
+    // Store references to all the different sorts available.
+    QList<QObject*> armorSortsList;
+    armorSortsList.append(_qmlRootObject->findChild<QObject*>("Alphabetical"));
+    armorSortsList.append(_qmlRootObject->findChild<QObject*>("By Set"));
+
+    // Initialize settings across all sorts.
+    for (int armorIndex = 0; armorIndex < armorSortsList.length(); armorIndex++)
     {
-        // STORE ARMOR PROPERTIES.
-        QString armorName = armorNode->first_attribute("name")->value();
-        QString armorIconUrl = "images/" + armorName + ".png";
-        QString armorIsUpgradeableVal = armorNode->first_node("CanBeUpgraded")->value();
+        // Store the current sort being configured.
+        QObject *currentSort = armorSortsList[armorIndex];
 
-        // APPLY PROPERTIES TO UI.
-        // Locate the correct QML object by name.
-        QObject *armorObj = _qmlRootObject->findChild<QObject*>(armorName);
-
-        // If no object could be found, print an error and continue to the next armor type.
-        if(armorObj == NULL)
+        // For each armor type, apply values for armor name, image, and whether the armor can be upgraded or not.
+        xml_node<char> *armorBaseNode = armorConfigsFileXmlDocument->first_node("ArmorData");
+        for(xml_node<char> *armorNode = armorBaseNode->first_node(); armorNode != 0; armorNode = armorNode->next_sibling())
         {
-            qDebug("Armor from config file does not have an associated QML object.");
-            qDebug("%s", armorNode->first_attribute("name")->value());
-            continue;
+            // STORE ARMOR PROPERTIES.
+            QString armorName = armorNode->first_attribute("name")->value();
+            QString armorIconUrl = "images/" + armorName + ".png";
+            QString armorIsUpgradeableVal = armorNode->first_node("CanBeUpgraded")->value();
+
+            // APPLY PROPERTIES TO UI.
+            // Locate the correct QML object by name.
+            QObject *armorObj = currentSort->findChild<QObject*>(armorName);
+
+            // If no object could be found, print an error and continue to the next armor type.
+            if(armorObj == NULL)
+            {
+                qDebug("Armor from config file does not have an associated QML object.");
+                qDebug("%s", armorNode->first_attribute("name")->value());
+                continue;
+            }
+
+            // Set QML properties from the configs file.
+            armorObj->setProperty("armorName", armorName);
+            armorObj->setProperty("armorIconUrl", armorIconUrl);
+            armorObj->setProperty("isUpgradeable", armorIsUpgradeableVal);
+
+            // By default, all armor starts as not yet unlocked until user save is loaded.
+            armorObj->setProperty("isUnlocked", false);
         }
-
-        // Set QML properties from the configs file.
-        armorObj->setProperty("armorName", armorName);
-        armorObj->setProperty("armorIconUrl", armorIconUrl);
-        armorObj->setProperty("isUpgradeable", armorIsUpgradeableVal);
-
-        // By default, all armor starts as not yet unlocked until user save is loaded.
-        armorObj->setProperty("isUnlocked", false);
     }
+
+    // Set the current armor sort to "alphabetical".
+    setArmorSort("Alphabetical");
 
     // Call any methods relating to defaulting/initializing the UI.
     _setArmorDetailsToDefault();
@@ -85,32 +100,45 @@ bool AppController::pullSave(QUrl saveFilePath)
     saveFileXmlDocument.parse<0>(&parseReadySaveFile[0]);
 
     // APPLY SAVE DATA TO APP.
-    // Iterate through all of the armor types in the user's save data.
-    // RapidXML implements the DOM tree using linked lists, so we can just traverse the list
-    //  until a non-valid node is reached to know we have gone over all of the armor types.
-    xml_node<char> *armorsNode = saveFileXmlDocument.first_node("Save")->first_node("Armors");
-    for (xml_node<char> *armorNode = armorsNode->first_node(); armorNode != 0; armorNode = armorNode->next_sibling())
+    // Settings must be applied across all the different sort arrangements.
+    // Store references to all the different sorts available.
+    QList<QObject*> armorSortsList;
+    armorSortsList.append(_qmlRootObject->findChild<QObject*>("Alphabetical"));
+    armorSortsList.append(_qmlRootObject->findChild<QObject*>("By Set"));
+
+    // Initialize settings across all sorts.
+    for (int armorIndex = 0; armorIndex < armorSortsList.length(); armorIndex++)
     {
-        // STORE ARMOR INFO.
-        QString armorName = armorNode->first_attribute("name")->value();
-        QString armorIsUnlocked = armorNode->first_attribute("unlocked")->value();
-        QString armorLevel = armorNode->first_attribute("level")->value();
+        // Store the current sort being configured.
+        QObject *currentSort = armorSortsList[armorIndex];
 
-        // APPLY ARMOR INFO TO UI.
-        // Locate the correct QML object by name.
-        QObject *armorObj = _qmlRootObject->findChild<QObject*>(armorName);
-
-        // If no object could be found, print an error and continue to the next armor type.
-        if(armorObj == NULL)
+        // Iterate through all of the armor types in the user's save data.
+        // RapidXML implements the DOM tree using linked lists, so we can just traverse the list
+        //  until a non-valid node is reached to know we have gone over all of the armor types.
+        xml_node<char> *armorsNode = saveFileXmlDocument.first_node("Save")->first_node("Armors");
+        for (xml_node<char> *armorNode = armorsNode->first_node(); armorNode != 0; armorNode = armorNode->next_sibling())
         {
-            qDebug("Armor from save file does not have an associated QML object.");
-            qDebug("%s", armorNode->first_attribute("name")->value());
-            continue;
-        }
+            // STORE ARMOR INFO.
+            QString armorName = armorNode->first_attribute("name")->value();
+            QString armorIsUnlocked = armorNode->first_attribute("unlocked")->value();
+            QString armorLevel = armorNode->first_attribute("level")->value();
 
-        // Set QML properties from the configs file.
-        armorObj->setProperty("isUnlocked", armorIsUnlocked);
-        armorObj->setProperty("currentRank", armorLevel.toInt());
+            // APPLY ARMOR INFO TO UI.
+            // Locate the correct QML object by name inside the current sort
+            QObject *armorObj = currentSort->findChild<QObject*>(armorName);
+
+            // If no object could be found, print an error and continue to the next armor type.
+            if(armorObj == NULL)
+            {
+                qDebug("Armor from save file does not have an associated QML object.");
+                qDebug("%s", armorNode->first_attribute("name")->value());
+                continue;
+            }
+
+            // Set QML properties from the configs file.
+            armorObj->setProperty("isUnlocked", armorIsUnlocked);
+            armorObj->setProperty("currentRank", armorLevel.toInt());
+        }
     }
 
     return true;
@@ -154,14 +182,44 @@ void AppController::deselectAll() {
     return;
 }
 
+bool AppController::setArmorSort(QString sortName) {
+    // SET SORT PROPERTIES.
+    // Set any properties relating to changing the displayed sort.
+    QObject *armorIconsParent = _qmlRootObject->findChild<QObject*>("armorIconsScrollView");
+    armorIconsParent->setProperty("activeSort", sortName);
+
+    // Store the new sort name.
+    _currentSort = sortName;
+
+    // ADJUST SELECTED ICON.
+    // If a piece of armor it selected, it will need to be transfered to the new sort arrangement.
+    if (_selectedArmor != nullptr) {
+        // Unselect the old selected armor and store its properties to be re-selected.
+        _selectedArmor->setProperty("selected", "false");
+        QString prevSelectedArmorName = _selectedArmor->property("armorName").toString();
+
+        // With the new sort, re-select the armor and store it as selected in c++.
+        QObject *currSelectedArmorObj = _getArmorIconByName(prevSelectedArmorName);
+        currSelectedArmorObj->setProperty("selected", true);
+        _selectedArmor = currSelectedArmorObj;
+    }
+
+    return true;
+}
+
+
+// PRIVATE METHODS.
 // Private method to get the associated ArmorIcon object for a given armor name.
 // Inputs:
 //  armorName - Name of the armor to select, as a QString.
 // Outputs:
 //  Returns a pointer to the ArmorIcon object, if successful. Otherwise, returns a nullptr.
 QObject* AppController::_getArmorIconByName(QString armorName) {
+    // Narrow search to the currently active sort.
+    QObject *activeSortObj = _qmlRootObject->findChild<QObject*>(_currentSort);
+
     // Search for the object. If not found, findChild auto-returns a nullptr.
-    return _qmlRootObject->findChild<QObject*>(armorName);
+    return activeSortObj->findChild<QObject*>(armorName);
 }
 
 // Private method to configure the displayed armor details to a given armor set.
