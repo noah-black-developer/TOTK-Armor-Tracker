@@ -200,7 +200,8 @@ Rectangle {
         ComboBox {
             id: armorSortComboBox
 
-            // Track initialized. Used to prevent accessing AppController before it is reachable.
+            // Track initialized. Used to prevent accessing AppController before it is reachable,
+            // which simplfies the code for changing selections significantly.
             property bool isInitialized: false
 
             anchors {
@@ -216,10 +217,7 @@ Rectangle {
 
             onCurrentTextChanged: {
                 if(isInitialized) {
-                    console.log(currentText);
-                    if(currentText === "Alphabetical" || currentText === "By Set") {
-                        AppController.setArmorSort(currentText);
-                    }
+                    AppController.setArmorSort(currentText);
                 }
             }
 
