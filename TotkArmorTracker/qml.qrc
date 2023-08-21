@@ -4,5 +4,6 @@
         <file>ArmorIcon.qml</file>
         <file>ArmorProgressPage.qml</file>
         <file>MainWindow.qml</file>
+        <file>ArmorUpgradeViewer.qml</file>
     </qresource>
 </RCC>

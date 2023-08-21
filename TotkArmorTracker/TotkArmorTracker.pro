@@ -33,6 +33,7 @@ DISTFILES += \
     App.qml \
     ArmorIcon.qml \
     ArmorProgressPage.qml \
+    ArmorUpgradeViewer.qml \
     MainWindow.qml \
     data/armorData.xml \
     images/* \

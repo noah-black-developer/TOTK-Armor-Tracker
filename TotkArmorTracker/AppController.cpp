@@ -273,9 +273,15 @@ bool AppController::_setArmorDetailsByName(QString armorName) {
     _qmlRootObject->findChild<QObject*>("selectedArmorNameLabel")->setProperty("visible", true);
 
     // Set the set name of the armor.
+    // If the armor isn't a part of a set (i.e. set name is N/A), hide this label from view.
     QString armorSetName = armorNode->first_node("SetName")->value();
-    _qmlRootObject->findChild<QObject*>("selectedArmorSetNameLabel")->setProperty("text", armorSetName);
-    _qmlRootObject->findChild<QObject*>("selectedArmorSetNameLabel")->setProperty("visible", true);
+    if (armorSetName != "N/A") {
+        _qmlRootObject->findChild<QObject*>("selectedArmorSetNameLabel")->setProperty("text", armorSetName);
+        _qmlRootObject->findChild<QObject*>("selectedArmorSetNameLabel")->setProperty("visible", true);
+    }
+    else {
+        _qmlRootObject->findChild<QObject*>("selectedArmorSetNameLabel")->setProperty("visible", false);
+    }
 
     // Set the desciption of the armor.
     QString armorDescription = armorNode->first_node("Description")->value();
@@ -285,8 +291,8 @@ bool AppController::_setArmorDetailsByName(QString armorName) {
     // Set whether the armor is currently unlocked or not.
     QObject *armorObj = _getArmorIconByName(armorName);
     bool armorIsUnlocked = armorObj->property("isUnlocked").toBool();
-    _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedLabel")->setProperty("isUnlocked", armorIsUnlocked);
-    _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedLabel")->setProperty("visible", true);
+    _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedIcon")->setProperty("isUnlocked", armorIsUnlocked);
+    _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedIcon")->setProperty("visible", true);
 
     // Store armor's current rank and whether it can be upgraded.
     int armorLevel = armorObj->property("currentRank").toInt();
@@ -322,26 +328,20 @@ bool AppController::_setArmorDetailsByName(QString armorName) {
     }
 
     // Set armor passive bonus.
-    // Only revealed if the armor is unlocked. Otherwise, make sure it is hidden from view.
-    if (armorIsUnlocked) {
-        QString armorPassiveBonus = armorNode->first_node("PassiveBonus")->value();
-        _qmlRootObject->findChild<QObject*>("selectedArmorPassiveLabel")->setProperty("passiveBonus", armorPassiveBonus);
-        _qmlRootObject->findChild<QObject*>("selectedArmorPassiveLabel")->setProperty("visible", true);
-    }
-    else {
-        _qmlRootObject->findChild<QObject*>("selectedArmorPassiveLabel")->setProperty("visible", false);
-    }
+    QString armorPassiveBonus = armorNode->first_node("PassiveBonus")->value();
+    _qmlRootObject->findChild<QObject*>("selectedArmorPassiveLabel")->setProperty("passiveBonus", armorPassiveBonus);
+    _qmlRootObject->findChild<QObject*>("selectedArmorPassiveLabel")->setProperty("visible", true);
 
     // Set armor set bonus.
-    // Only revealed if the armor is unlocked. Otherwise, make sure it is hidden from view.
-    if (armorIsUnlocked) {
-        QString armorSetBonus = armorNode->first_node("SetBonus")->value();
-        _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("setBonus", armorSetBonus);
-        _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("visible", true);
-    }
-    else {
-        _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("visible", false);
-    }
+    QString armorSetBonus = armorNode->first_node("SetBonus")->value();
+    _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("setBonus", armorSetBonus);
+    _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("visible", true);
+
+    // Reveal the armor upgrade fields and separator.
+    _qmlRootObject->findChild<QObject*>("armorUpgradeTierOne")->setProperty("visible", true);
+    _qmlRootObject->findChild<QObject*>("armorUpgradeTierTwo")->setProperty("visible", true);
+    _qmlRootObject->findChild<QObject*>("armorUpgradeTierThree")->setProperty("visible", true);
+    _qmlRootObject->findChild<QObject*>("armorUpgradeTierFour")->setProperty("visible", true);
 
     return true;
 }
@@ -362,10 +362,16 @@ bool AppController::_setArmorDetailsToDefault() {
         // Hide most of the text fields from the user.
         _qmlRootObject->findChild<QObject*>("selectedArmorNameLabel")->setProperty("visible", false);
         _qmlRootObject->findChild<QObject*>("selectedArmorSetNameLabel")->setProperty("visible", false);
-        _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedLabel")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedIcon")->setProperty("visible", false);
         _qmlRootObject->findChild<QObject*>("selectedArmorDefenseLabel")->setProperty("visible", false);
         _qmlRootObject->findChild<QObject*>("selectedArmorPassiveLabel")->setProperty("visible", false);
         _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("visible", false);
+
+        // Hid all object upgrade fields and the associated separator.
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierOne")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierTwo")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierThree")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierFour")->setProperty("visible", false);
 
         // Use the "quote" fields to let the user know that no armor is currently selected.
         QString noSelectionText = "No current selection. Click on a piece of armor in the left column to view it's current progress.";

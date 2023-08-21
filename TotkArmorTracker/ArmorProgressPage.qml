@@ -60,17 +60,39 @@ Rectangle {
                 verticalCenter: parent.verticalCenter
             }
 
-            // Selected Armor Name.
-            Text {
-                id: selectedArmorNameLabel
-                objectName: "selectedArmorNameLabel"
+            // ARMOR NAME ROW.
+            Row {
+                id: armorRowLayout
 
-                Layout.fillWidth: true
+                spacing: 8
                 Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "Lorem Ipsum"
-                font.bold: true
-                font.pointSize: 14
+
+                // Selected Armor Name.
+                Text {
+                    id: selectedArmorNameLabel
+                    objectName: "selectedArmorNameLabel"
+
+                    text: "Lorem Ipsum"
+                    font.bold: true
+                    font.pointSize: 14
+                }
+
+                // Unlock Status.
+                Image {
+                    id: selectedArmorUnlockedIcon
+                    objectName: "selectedArmorUnlockedIcon"
+
+                    property bool isUnlocked: true
+
+                    anchors {
+                        verticalCenter: selectedArmorNameLabel.verticalCenter
+                    }
+                    source: "images/lock-solid.svg"
+                    fillMode: Image.PreserveAspectFit
+                    // Hidden from view by setting the icon to 0 size.
+                    width: (isUnlocked) ? 0 : 18
+                    height: (isUnlocked) ? 0 : 18
+                }
             }
 
             // Armor Set Name.
@@ -105,24 +127,12 @@ Rectangle {
             Rectangle {
                 id: selectedArmorQuoteSeparator
 
-                height: 2
+                Layout.preferredHeight: 2
                 Layout.fillWidth: true
                 Layout.leftMargin: 20
                 Layout.rightMargin: 20
                 Layout.alignment: Qt.AlignHCenter
                 color: "black"
-            }
-
-            // Unlock Status.
-            Text {
-                id: selectedArmorUnlockedLabel
-                objectName: "selectedArmorUnlockedLabel"
-
-                property bool isUnlocked: true
-
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "Armor Set is " + ((isUnlocked) ? "Unlocked" : "Locked")
             }
 
             // Armor Defense.
@@ -165,6 +175,46 @@ Rectangle {
                 horizontalAlignment: Qt.AlignHCenter
                 text: "> Set Bonus: " + setBonus
                 wrapMode: Text.Wrap
+            }
+
+            // UPGRADE MATERIAL MENUS.
+            // Initializes one menu per armor tier. Displays what is required to bring armor to each tier.
+            ArmorUpgradeViewer {
+                id: armorUpgradeTierOne
+                objectName: "armorUpgradeTierOne"
+
+                Layout.fillWidth: true
+                Layout.topMargin: 10
+                Layout.leftMargin: 10
+                Layout.rightMargin: 10
+                upgradeRank: 1
+            }
+            ArmorUpgradeViewer {
+                id: armorUpgradeTierTwo
+                objectName: "armorUpgradeTierTwo"
+
+                Layout.fillWidth: true
+                Layout.leftMargin: 10
+                Layout.rightMargin: 10
+                upgradeRank: 2
+            }
+            ArmorUpgradeViewer {
+                id: armorUpgradeTierThree
+                objectName: "armorUpgradeTierThree"
+
+                Layout.fillWidth: true
+                Layout.leftMargin: 10
+                Layout.rightMargin: 10
+                upgradeRank: 3
+            }
+            ArmorUpgradeViewer {
+                id: armorUpgradeTierFour
+                objectName: "armorUpgradeTierFour"
+
+                Layout.fillWidth: true
+                Layout.leftMargin: 10
+                Layout.rightMargin: 10
+                upgradeRank: 4
             }
         }
     }
@@ -448,6 +498,9 @@ Rectangle {
                         ArmorIcon { Layout.fillWidth: true; objectName: "Dark Hood" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Dark Tunic" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Dark Trousers" }
+                        ArmorIcon { Layout.fillWidth: true; objectName: "Hood of the Depths" }
+                        ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Depths" }
+                        ArmorIcon { Layout.fillWidth: true; objectName: "Gaiters of the Depths" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Desert Voe Headband" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Desert Voe Spaulder" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Desert Voe Trousers" }
@@ -535,8 +588,6 @@ Rectangle {
                         ArmorIcon { Layout.fillWidth: true; objectName: "Cece's Hat" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Champion's Leathers" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Diamond Circlet" }
-                        ArmorIcon { Layout.fillWidth: true; objectName: "Gaiters of the Depths" }
-                        ArmorIcon { Layout.fillWidth: true; objectName: "Hood of the Depths" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Horriblin Mask" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Korok Mask" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Lizalfos Mask" }
@@ -555,7 +606,6 @@ Rectangle {
                         ArmorIcon { Layout.fillWidth: true; objectName: "Thunder Helm" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Topaz Earrings" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of Memories" }
-                        ArmorIcon { Layout.fillWidth: true; objectName: "Tunic of the Depths" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Vah Medoh Divine Helm" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Vah Naboris Divine Helm" }
                         ArmorIcon { Layout.fillWidth: true; objectName: "Vah Rudania Divine Helm" }

@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("AppController", appController);
 
     // Initialize the UI using local configuration files.
+    engine.rootContext()->setContextProperty("appPath", QGuiApplication::applicationDirPath());
     appController->initialize(QString::fromStdString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/armorData.xml)"));
 
     // Execute UI.

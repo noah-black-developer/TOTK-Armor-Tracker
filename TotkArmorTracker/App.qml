@@ -19,7 +19,6 @@ Window {
         id: openSaveFileDialog
 
         // Opens the "saves" folder within the project.
-        currentFolder: "./saves"
         onAccepted: {
             AppController.pullSave(selectedFile);
         }
@@ -43,7 +42,13 @@ Window {
             }
             Action {
                 text: "&Open"
-                onTriggered: openSaveFileDialog.open()
+                onTriggered: {
+                    // This works in the final executable, but not in debug builds,
+                    // due to how the file paths end up working out.
+                    // For testing, make sure that any builds have a local "saves" folder nearby.
+                    openSaveFileDialog.currentFolder = appPath + "/saves"
+                    openSaveFileDialog.open();
+                }
             }
             Action {
                 text: "Open &Recent"
