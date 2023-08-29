@@ -141,7 +141,6 @@
         <Item name="Acorn" quantity="0"/>
         <Item name="Aerocuda Eyeball" quantity="0"/>
         <Item name="Aerocuda Wing" quantity="0"/>
-        <Item name="Aerocuda Wings" quantity="0"/>
         <Item name="Amber" quantity="0"/>
         <Item name="Black Bokoblin Horn" quantity="0"/>
         <Item name="Black Horriblin Horn" quantity="0"/>
@@ -177,18 +176,15 @@
         <Item name="Deep Firefly" quantity="0"/>
         <Item name="Diamond" quantity="0"/>
         <Item name="Dinraal's Claw" quantity="0"/>
-        <Item name="Dinraal's Fang" quantity="0"/>
         <Item name="Dinraal's Horn" quantity="0"/>
         <Item name="Dinraal's Scale" quantity="0"/>
         <Item name="Electric Darner" quantity="0"/>
         <Item name="Electric Keese Wing" quantity="0"/>
-        <Item name="Electric Lizal Horn" quantity="0"/>
         <Item name="Electric Lizalfos Horn" quantity="0"/>
         <Item name="Electric Lizalfos Tail" quantity="0"/>
         <Item name="Electric Safflina" quantity="0"/>
         <Item name="Energetic Rhino Beetle" quantity="0"/>
         <Item name="Farosh's Claw" quantity="0"/>
-        <Item name="Farosh's Fang" quantity="0"/>
         <Item name="Farosh's Horn" quantity="0"/>
         <Item name="Farosh's Scale" quantity="0"/>
         <Item name="Fire Fruit" quantity="0"/>
@@ -224,21 +220,17 @@
         <Item name="Ice Fruit" quantity="0"/>
         <Item name="Ice Keese Wing" quantity="0"/>
         <Item name="Ice Like Stone" quantity="0"/>
-        <Item name="Ice-Breath Lizal Tail" quantity="0"/>
         <Item name="Ice-Breath Lizalfos Horn" quantity="0"/>
         <Item name="Ice-Breath Lizalfos Tail" quantity="0"/>
         <Item name="Keese Eyeball" quantity="0"/>
         <Item name="Keese Wing" quantity="0"/>
         <Item name="Large Zonai Charge" quantity="0"/>
         <Item name="Large Zonaite" quantity="0"/>
-        <Item name="Light Dragon Claw" quantity="0"/>
-        <Item name="Light Dragon Fang" quantity="0"/>
-        <Item name="Light Dragon Horn" quantity="0"/>
+        <Item name="Light Dragon's Horn" quantity="0"/>
         <Item name="Light Dragon's Scale" quantity="0"/>
         <Item name="Light Dragon's Talon" quantity="0"/>
         <Item name="Lizalfos Horn" quantity="0"/>
         <Item name="Lizalfos Tail" quantity="0"/>
-        <Item name="Lizalfos Talon" quantity="0"/>
         <Item name="Luminous Stone" quantity="0"/>
         <Item name="Lynel Hoof" quantity="0"/>
         <Item name="Lynel Guts" quantity="0"/>
@@ -252,7 +244,6 @@
         <Item name="Molduga Guts" quantity="0"/>
         <Item name="Molduga Jaw" quantity="0"/>
         <Item name="Naydra's Claw" quantity="0"/>
-        <Item name="Naydra's Fang" quantity="0"/>
         <Item name="Naydra's Horn" quantity="0"/>
         <Item name="Naydra's Scale" quantity="0"/>
         <Item name="Obsidian Frox Fang" quantity="0"/>
@@ -282,7 +273,7 @@
         <Item name="Sizzlefin Trout" quantity="0"/>
         <Item name="Smotherwing Butterfly" quantity="0"/>
         <Item name="Sneaky River Snail" quantity="0"/>
-        <Item name="Soldier Construct Horn" quantity="0"/>
+        <Item name="Soldier Construct I Horn" quantity="0"/>
         <Item name="Soldier Construct II Horn" quantity="0"/>
         <Item name="Soldier Construct III Horn" quantity="0"/>
         <Item name="Soldier Construct IV Horn" quantity="0"/>
