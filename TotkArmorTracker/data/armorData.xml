@@ -457,7 +457,7 @@
             <Tier level="4">
                 <Defense>32</Defense>
                 <Cost>500</Cost>
-                <Item name="Light Dragon Horn" quantity="2"/>
+                <Item name="Light Dragon's Horn" quantity="2"/>
                 <Item name="Silent Princess" quantity="10"/>
                 <Item name="Sundelion" quantity="20"/>
             </Tier>
@@ -1754,13 +1754,13 @@
             <Tier level="1">
                 <Defense>5</Defense>
                 <Cost>10</Cost>
-                <Item name="Brightbloom Seeds" quantity="3"/>
+                <Item name="Brightbloom Seed" quantity="3"/>
             </Tier>
             <Tier level="2">
                 <Defense>8</Defense>
                 <Cost>50</Cost>
-                <Item name="Bright Caps" quantity="5"/>
-                <Item name="Brightbloom Seeds" quantity="20"/>
+                <Item name="Brightcap" quantity="5"/>
+                <Item name="Brightbloom Seed" quantity="20"/>
             </Tier>
             <Tier level="3">
                 <Defense>12</Defense>
@@ -1789,13 +1789,13 @@
             <Tier level="1">
                 <Defense>5</Defense>
                 <Cost>10</Cost>
-                <Item name="Brightbloom Seeds" quantity="3"/>
+                <Item name="Brightbloom Seed" quantity="3"/>
             </Tier>
             <Tier level="2">
                 <Defense>8</Defense>
                 <Cost>50</Cost>
-                <Item name="Bright Caps" quantity="5"/>
-                <Item name="Brightbloom Seeds" quantity="20"/>
+                <Item name="Brightcap" quantity="5"/>
+                <Item name="Brightbloom Seed" quantity="20"/>
             </Tier>
             <Tier level="3">
                 <Defense>12</Defense>
@@ -1824,13 +1824,13 @@
             <Tier level="1">
                 <Defense>5</Defense>
                 <Cost>10</Cost>
-                <Item name="Brightbloom Seeds" quantity="3"/>
+                <Item name="Brightbloom Seed" quantity="3"/>
             </Tier>
             <Tier level="2">
                 <Defense>8</Defense>
                 <Cost>50</Cost>
-                <Item name="Bright Caps" quantity="5"/>
-                <Item name="Brightbloom Seeds" quantity="20"/>
+                <Item name="Brightcap" quantity="5"/>
+                <Item name="Brightbloom Seed" quantity="20"/>
             </Tier>
             <Tier level="3">
                 <Defense>12</Defense>
@@ -3163,7 +3163,7 @@
                 <Defense>28</Defense>
                 <Cost>500</Cost>
                 <Item name="Dinraal's Horn" quantity="2"/>
-                <Item name="Light Dragon Horn" quantity="1"/>
+                <Item name="Light Dragon's Horn" quantity="1"/>
                 <Item name="Silent Princess" quantity="10"/>
             </Tier>
         </Tiers>
@@ -3682,7 +3682,7 @@
             <Tier level="1">
                 <Defense>7</Defense>
                 <Cost>10</Cost>
-                <Item name="Soldier Construct Horn" quantity="5"/>
+                <Item name="Soldier Construct I Horn" quantity="5"/>
             </Tier>
             <Tier level="2">
                 <Defense>12</Defense>
@@ -3718,7 +3718,7 @@
             <Tier level="1">
                 <Defense>7</Defense>
                 <Cost>10</Cost>
-                <Item name="Soldier Construct Horn" quantity="5"/>
+                <Item name="Soldier Construct I Horn" quantity="5"/>
             </Tier>
             <Tier level="2">
                 <Defense>12</Defense>
@@ -3754,7 +3754,7 @@
             <Tier level="1">
                 <Defense>7</Defense>
                 <Cost>10</Cost>
-                <Item name="Soldier Construct Horn" quantity="5"/>
+                <Item name="Soldier Construct I Horn" quantity="5"/>
             </Tier>
             <Tier level="2">
                 <Defense>12</Defense>

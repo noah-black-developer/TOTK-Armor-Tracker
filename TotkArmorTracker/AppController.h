@@ -33,6 +33,10 @@ public:
     Q_INVOKABLE void deselectAll();
     Q_INVOKABLE bool setArmorSort(QString sortName);
 
+    // ARMOR DETAIL METHODS.
+    Q_INVOKABLE void setArmorUnlockedState(QString armorName, bool unlock);
+    Q_INVOKABLE void setArmorLevel(QString armorName, int newLevel);
+
 private:
     QString _armorConfigsPath = "";
     QObject *_qmlRootObject = nullptr;

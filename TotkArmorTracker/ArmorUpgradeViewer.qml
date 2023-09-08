@@ -16,29 +16,41 @@ Item {
     property int materialTwoQuantity: 0
     property int materialThreeQuantity: 0
     property int materialFourQuantity: 0
+    property int prevArmor: 0
+    property int nextArmor: 0
 
-    height: upgradeItem1.height + upgradeItem2.height + upgradeItem3.height + upgradeItem4.height + 30
+    height: (upgradeMaterialCount * 20) + 50
+    implicitHeight: height
 
     // HEADER ELEMENTS.
     // Main Border Rectangle.
+    // Has 4 variations, depending on how many crafting ingredients are presented.
     Canvas {
         id: upgradeViewerBorderRect
+        objectName: "upgradeViewerBorderRect"
 
         property double headerStart: upgradeViewerTierRow.x - 2
         property double headerEnd: upgradeViewerTierRow.x + upgradeViewerTierRow.width + 2
-        property double cornerRadius: 5
-        property double strokeWidthInPixels: 4
+        property double cornerRadius: 4
+        property double canvasHeight: upgradeViewerRoot.height
 
-        anchors.fill: parent
+        //height: (upgradeViewerRoot.upgradeMaterialCount === 1) ? canvasHeight : 0
+        height: (upgradeViewerRoot.visible) ? canvasHeight : 0
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+        //visible: upgradeViewerRoot.upgradeMaterialCount === 1
         onPaint: {
             var ctx = getContext("2d");
             ctx.strokeStyle = "black";
-            ctx.lineWidth = strokeWidthInPixels;
+            ctx.lineWidth = 5;
             ctx.beginPath();
             ctx.moveTo(headerEnd, 0);
-            ctx.lineTo(upgradeViewerBorderRect.width, 0);
-            ctx.lineTo(upgradeViewerBorderRect.width, upgradeViewerBorderRect.height);
-            ctx.lineTo(0, upgradeViewerBorderRect.height);
+            ctx.lineTo(upgradeViewerRoot.width, 0);
+            ctx.lineTo(upgradeViewerRoot.width, canvasHeight);
+            ctx.lineTo(0, canvasHeight);
             ctx.lineTo(0, 0);
             ctx.lineTo(headerStart, 0);
             ctx.stroke();
@@ -77,15 +89,62 @@ Item {
         }
     }
 
-    // DETAILS.
+    // HEADER ROW.
+    Rectangle {
+        id: headerRowRect
+
+        height: 20
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            leftMargin: 10
+            rightMargin: 10
+            topMargin: 10
+        }
+        color: "transparent"
+
+        // Armor Increases.
+        // TODO: Refactor this to include armor images, rather than just text.
+        Text {
+            id: armorIncreaseText
+
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                leftMargin: 5
+            }
+            text: upgradeViewerRoot.prevArmor + " Armor > " + upgradeViewerRoot.nextArmor + " Armor"
+        }
+
+        // Rupee Cost.
+        Text {
+            id: rupeeCostText
+
+            anchors {
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
+                rightMargin: 5
+            }
+            text: upgradeViewerRoot.rupeeCost + " Rupees"
+            horizontalAlignment: Qt.AlignRight
+        }
+    }
+
+    // ITEM DETAILS.
     Rectangle {
         id: upgradeDetailsRect
 
-        property int upgradeHeight: 20
-
         anchors {
-            fill: parent
-            margins: 10
+            left: parent.left
+            right: parent.right
+            top: headerRowRect.bottom
+            bottom: parent.bottom
+            leftMargin: 10
+            rightMargin: 10
+            bottomMargin: 10
         }
         color: "transparent"
 
@@ -97,7 +156,7 @@ Item {
         Rectangle {
             id: upgradeItem1
 
-            height: (upgradeViewerRoot.upgradeMaterialCount >= 1) ? upgradeDetailsRect.upgradeHeight : 0
+            height: (upgradeViewerRoot.upgradeMaterialCount >= 1) ? 20 : 0
             anchors {
                 left: parent.left
                 right: parent.right
@@ -106,42 +165,52 @@ Item {
             color: "lightgray"
             visible: upgradeViewerRoot.upgradeMaterialCount >= 1
 
-            RowLayout {
-                id: upgradeItem1Row
+            // Item Picture.
+            Image {
+                id: upgradeItem1Image
 
+                height: parent.height
+                width: parent.height
                 anchors {
-                    fill: parent
-                    leftMargin: 20
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: 5
+                }
+                fillMode: Image.PreserveAspectCrop
+                source: "images/" + upgradeViewerRoot.materialOneName + ".png"
+            }
+
+            // Item Name.
+            Text {
+                id: upgradeItem1NameText
+
+                width: 150
+                anchors {
+                    left: upgradeItem1Image.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: 10
+                }
+                text: upgradeViewerRoot.materialOneName
+                verticalAlignment: Qt.AlignVCenter
+                fontSizeMode: Text.HorizontalFit
+                minimumPointSize: 7
+            }
+
+            // Item Quantity.
+            Text {
+                id: upgradeItem1QuantityText
+
+                width: 15
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
                     rightMargin: 20
                 }
-
-                // Item Picture.
-                Image {
-                    id: upgradeItem1Image
-                    Layout.preferredHeight: parent.height
-                    Layout.preferredWidth: parent.height
-                    fillMode: Image.PreserveAspectCrop
-                    source: "images/" + upgradeViewerRoot.materialOneName + ".png"
-                }
-
-                // Item Name.
-                Text {
-                    id: upgradeItem1NameText
-                    Layout.leftMargin: 2
-                    text: upgradeViewerRoot.materialOneName
-                }
-
-                // Spacing Rect.
-                Rectangle {
-                    id: upgradeItem1Spacer
-                    Layout.fillWidth: true
-                }
-
-                // Item Quantity.
-                Text {
-                    id: upgradeItem1QuantityText
-                    text: "x" + upgradeViewerRoot.materialOneQuantity
-                }
+                text: "x" + upgradeViewerRoot.materialOneQuantity
+                horizontalAlignment: Qt.AlignLeft
             }
         }
 
@@ -149,52 +218,62 @@ Item {
         Rectangle {
             id: upgradeItem2
 
-            height: (upgradeViewerRoot.upgradeMaterialCount >= 2) ? upgradeDetailsRect.upgradeHeight : 0
+            height: (upgradeViewerRoot.upgradeMaterialCount >= 2) ? 20 : 0
             anchors {
                 left: parent.left
                 right: parent.right
                 top: upgradeItem1.bottom
-                topMargin: 2
+                topMargin: (upgradeViewerRoot.upgradeMaterialCount >= 2) ? 2 : 0
             }
             color: "lightgray"
             visible: upgradeViewerRoot.upgradeMaterialCount >= 2
 
-            RowLayout {
-                id: upgradeItem2Row
+            // Item Picture.
+            Image {
+                id: upgradeItem2Image
 
+                height: parent.height
+                width: parent.height
                 anchors {
-                    fill: parent
-                    leftMargin: 20
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: 5
+                }
+                fillMode: Image.PreserveAspectCrop
+                source: "images/" + upgradeViewerRoot.materialTwoName + ".png"
+            }
+
+            // Item Name.
+            Text {
+                id: upgradeItem2NameText
+
+                width: 150
+                anchors {
+                    left: upgradeItem2Image.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: 10
+                }
+                text: upgradeViewerRoot.materialTwoName
+                verticalAlignment: Qt.AlignVCenter
+                fontSizeMode: Text.HorizontalFit
+                minimumPointSize: 7
+            }
+
+            // Item Quantity.
+            Text {
+                id: upgradeItem2QuantityText
+
+                width: 15
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
                     rightMargin: 20
                 }
-
-                // Item Picture.
-                Image {
-                    id: upgradeItem2Image
-                    Layout.preferredHeight: parent.height
-                    Layout.preferredWidth: parent.height
-                    fillMode: Image.PreserveAspectCrop
-                    source: "images/" + upgradeViewerRoot.materialTwoName + ".png"
-                }
-
-                // Item Name.
-                Text {
-                    id: upgradeItem2NameText
-                    Layout.leftMargin: 2
-                    text: upgradeViewerRoot.materialTwoName
-                }
-
-                // Spacing Rect.
-                Rectangle {
-                    id: upgradeItem2Spacer
-                    Layout.fillWidth: true
-                }
-
-                // Item Quantity.
-                Text {
-                    id: upgradeItem2QuantityText
-                    text: "x" + upgradeViewerRoot.materialTwoQuantity
-                }
+                text: "x" + upgradeViewerRoot.materialTwoQuantity
+                horizontalAlignment: Qt.AlignLeft
             }
         }
 
@@ -203,106 +282,61 @@ Item {
         Rectangle {
             id: upgradeItem3
 
-            height: (upgradeViewerRoot.upgradeMaterialCount >= 3) ? upgradeDetailsRect.upgradeHeight : 0
+            height: (upgradeViewerRoot.upgradeMaterialCount >= 3) ? 20 : 0
             anchors {
                 left: parent.left
                 right: parent.right
                 top: upgradeItem2.bottom
-                topMargin: 2
+                topMargin: (upgradeViewerRoot.upgradeMaterialCount >= 3) ? 2 : 0
             }
             color: "lightgray"
             visible: upgradeViewerRoot.upgradeMaterialCount >= 3
 
-            RowLayout {
-                id: upgradeItem3Row
+            // Item Picture.
+            Image {
+                id: upgradeItem3Image
 
+                height: parent.height
+                width: parent.height
                 anchors {
-                    fill: parent
-                    leftMargin: 20
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: 5
+                }
+                fillMode: Image.PreserveAspectCrop
+                source: "images/" + upgradeViewerRoot.materialThreeName + ".png"
+            }
+
+            // Item Name.
+            Text {
+                id: upgradeItem3NameText
+
+                width: 150
+                anchors {
+                    left: upgradeItem3Image.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: 10
+                }
+                text: upgradeViewerRoot.materialThreeName
+                verticalAlignment: Qt.AlignVCenter
+                fontSizeMode: Text.HorizontalFit
+                minimumPointSize: 7
+            }
+
+            // Item Quantity.
+            Text {
+                id: upgradeItem3QuantityText
+
+                width: 15
+                anchors {
+                    right: parent.right
+                    top: parent.top
                     rightMargin: 20
                 }
-
-                // Item Picture.
-                Image {
-                    id: upgradeItem3Image
-                    Layout.preferredHeight: parent.height
-                    Layout.preferredWidth: parent.height
-                    fillMode: Image.PreserveAspectCrop
-                    source: "images/" + upgradeViewerRoot.materialThreeName + ".png"
-                }
-
-                // Item Name.
-                Text {
-                    id: upgradeItem3NameText
-                    Layout.leftMargin: 2
-                    text: upgradeViewerRoot.materialThreeName
-                }
-
-                // Spacing Rect.
-                Rectangle {
-                    id: upgradeItem3Spacer
-                    Layout.fillWidth: true
-                }
-
-                // Item Quantity.
-                Text {
-                    id: upgradeItem3QuantityText
-                    text: "x" + upgradeViewerRoot.materialThreeQuantity
-                }
-            }
-        }
-
-
-        // Item 4.
-        Rectangle {
-            id: upgradeItem4
-
-            height: (upgradeViewerRoot.upgradeMaterialCount >= 4) ? upgradeDetailsRect.upgradeHeight : 0
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: upgradeItem3.bottom
-                topMargin: 2
-            }
-            color: "lightgray"
-            visible: upgradeViewerRoot.upgradeMaterialCount >= 4
-
-            RowLayout {
-                id: upgradeItem4Row
-
-                anchors {
-                    fill: parent
-                    leftMargin: 20
-                    rightMargin: 20
-                }
-
-                // Item Picture.
-                Image {
-                    id: upgradeItem4Image
-                    Layout.preferredHeight: parent.height
-                    Layout.preferredWidth: parent.height
-                    fillMode: Image.PreserveAspectCrop
-                    source: "images/" + upgradeViewerRoot.materialFourName + ".png"
-                }
-
-                // Item Name.
-                Text {
-                    id: upgradeItem4NameText
-                    Layout.leftMargin: 2
-                    text: upgradeViewerRoot.materialFourName
-                }
-
-                // Spacing Rect.
-                Rectangle {
-                    id: upgradeItem4Spacer
-                    Layout.fillWidth: true
-                }
-
-                // Item Quantity.
-                Text {
-                    id: upgradeItem4QuantityText
-                    text: "x" + upgradeViewerRoot.materialFourQuantity
-                }
+                text: "x" + upgradeViewerRoot.materialThreeQuantity
+                horizontalAlignment: Qt.AlignLeft
             }
         }
     }

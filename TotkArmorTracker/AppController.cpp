@@ -207,6 +207,38 @@ bool AppController::setArmorSort(QString sortName) {
     return true;
 }
 
+void AppController::setArmorUnlockedState(QString armorName, bool unlock) {
+    // GET REFERENCE TO ARMOR.
+    QObject *armorObj = _getArmorIconByName(armorName);
+
+    // UPDATE UI.
+    // Set the new unlock state.
+    armorObj->setProperty("isUnlocked", unlock);
+
+    // Once property changes are made, reload the UI where needed.
+    bool armorIsSelected = armorObj->property("selected").toBool();
+    if (armorIsSelected) {
+        _setArmorDetailsByName(armorName);
+    }
+    return;
+}
+
+void AppController::setArmorLevel(QString armorName, int newLevel) {
+    // GET REFERENCE TO ARMOR.
+    QObject *armorObj = _getArmorIconByName(armorName);
+
+    // UPDATE UI.
+    // Set the new armor level
+    armorObj->setProperty("currentRank", newLevel);
+
+    // Once property changes are made, reload the UI where needed.
+    bool armorIsSelected = armorObj->property("selected").toBool();
+    if (armorIsSelected) {
+        _setArmorDetailsByName(armorName);
+    }
+    return;
+}
+
 
 // PRIVATE METHODS.
 // Private method to get the associated ArmorIcon object for a given armor name.
@@ -294,10 +326,11 @@ bool AppController::_setArmorDetailsByName(QString armorName) {
     _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedIcon")->setProperty("isUnlocked", armorIsUnlocked);
     _qmlRootObject->findChild<QObject*>("selectedArmorUnlockedIcon")->setProperty("visible", true);
 
-    // Store armor's current rank and whether it can be upgraded.
+    // Store and apply armor's current rank, as well as whether it can be upgraded.
     int armorLevel = armorObj->property("currentRank").toInt();
     QString armorIsUpgradeableStr = armorNode->first_node("CanBeUpgraded")->value();
     bool armorIsUpgradeable = (armorIsUpgradeableStr == "true") ? true : false;
+    _qmlRootObject->findChild<QObject*>("armorLevelRow")->setProperty("armorLevel", armorLevel);
 
     // Reference current armor defense.
     // Displayed value is determined based on the armor's current level.
@@ -337,11 +370,112 @@ bool AppController::_setArmorDetailsByName(QString armorName) {
     _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("setBonus", armorSetBonus);
     _qmlRootObject->findChild<QObject*>("selectedArmorSetBonusLabel")->setProperty("visible", true);
 
-    // Reveal the armor upgrade fields and separator.
-    _qmlRootObject->findChild<QObject*>("armorUpgradeTierOne")->setProperty("visible", true);
-    _qmlRootObject->findChild<QObject*>("armorUpgradeTierTwo")->setProperty("visible", true);
-    _qmlRootObject->findChild<QObject*>("armorUpgradeTierThree")->setProperty("visible", true);
-    _qmlRootObject->findChild<QObject*>("armorUpgradeTierFour")->setProperty("visible", true);
+    // SETUP ARMOR UPGRADES.
+    // Configure the visible controls based on if the armor is upgradeable or not.
+    // Additionally, if the armor is not yet unlocked, prevent upgrades from being displayed yet.
+    if (armorIsUpgradeable && armorIsUnlocked) {
+        // If it can be upgraded, start by revealing the armor upgrade fields and separator.
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierOne")->setProperty("visible", true);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierTwo")->setProperty("visible", true);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierThree")->setProperty("visible", true);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierFour")->setProperty("visible", true);
+
+        // Create + store initial references for the armor's strength stats.
+        // Two separate trackers will be used to track both pre-upgrade
+        // and post-upgrade statistics.
+        QString preUpgradeArmor = armorNode->first_node("BaseDefense")->value();
+        QString postUpgradeArmor;
+
+        // Begin an iterator from the first "Tier" header for the armor in data storage.
+        // For each tier, gather data and apply it to the matching display in the UI.
+        int currentTier = 1;
+        for(xml_node<char> *currentTierNode = armorNode->first_node("Tiers")->first_node("Tier"); currentTierNode != 0; currentTierNode = currentTierNode->next_sibling())
+        {
+            // Create a reference to the current tier's QML object.
+            QObject *tierObject;
+            if (currentTier == 1) {
+                tierObject = _qmlRootObject->findChild<QObject*>("armorUpgradeTierOne");
+            }
+            else if (currentTier == 2) {
+                tierObject = _qmlRootObject->findChild<QObject*>("armorUpgradeTierTwo");
+            }
+            else if (currentTier == 3) {
+                tierObject = _qmlRootObject->findChild<QObject*>("armorUpgradeTierThree");
+            }
+            else {
+                tierObject = _qmlRootObject->findChild<QObject*>("armorUpgradeTierFour");
+            }
+
+            // Apply the pre/post upgrade armor strengths, then prep for the next iteration.
+            postUpgradeArmor = currentTierNode->first_node("Defense")->value();
+            tierObject->setProperty("prevArmor", preUpgradeArmor);
+            tierObject->setProperty("nextArmor", postUpgradeArmor);
+            preUpgradeArmor = postUpgradeArmor;
+
+            // Set the rupee cost for the current upgrade.
+            QString rupeeCostValue = currentTierNode->first_node("Cost")->value();
+            tierObject->setProperty("rupeeCost", rupeeCostValue);
+
+            // For each required item, add it onto the upgrade visualized and count the total # of items added.
+            int itemCount = 0;
+            for (xml_node<char> *currentItemNode = currentTierNode->first_node("Item"); currentItemNode != 0; currentItemNode = currentItemNode->next_sibling())
+            {
+                // Increment counter and move to next node.
+                itemCount++;
+
+                // Set name and quantity by case.
+                QString nameValue;
+                QString quantityValue;
+                switch(itemCount)
+                {
+                    case 1:
+                        nameValue = currentItemNode->first_attribute("name")->value();
+                        tierObject->setProperty("materialOneName", nameValue);
+                        quantityValue = currentItemNode->first_attribute("quantity")->value();
+                        tierObject->setProperty("materialOneQuantity", quantityValue);
+                        break;
+                    case 2:
+                        nameValue = currentItemNode->first_attribute("name")->value();
+                        tierObject->setProperty("materialTwoName", nameValue);
+                        quantityValue = currentItemNode->first_attribute("quantity")->value();
+                        tierObject->setProperty("materialTwoQuantity", quantityValue);
+                        break;
+                    case 3:
+                        nameValue = currentItemNode->first_attribute("name")->value();
+                        tierObject->setProperty("materialThreeName", nameValue);
+                        quantityValue = currentItemNode->first_attribute("quantity")->value();
+                        tierObject->setProperty("materialThreeQuantity", quantityValue);
+                        break;
+                    case 4:
+                        nameValue = currentItemNode->first_attribute("name")->value();
+                        tierObject->setProperty("materialFourName", nameValue);
+                        quantityValue = currentItemNode->first_attribute("quantity")->value();
+                        tierObject->setProperty("materialFourQuantity", quantityValue);
+                        break;
+                }
+            }
+
+            // Once all items have been added, set the item count to the respective amount.
+            tierObject->setProperty("upgradeMaterialCount", itemCount);
+            currentTier++;
+        }
+
+        // As long as the armor is not at max level, reveal just the "upgrade" button.
+        bool armorIsMaxLevel = (armorLevel == 4);
+        _qmlRootObject->findChild<QObject*>("unlockArmorButton")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("upgradeArmorButton")->setProperty("visible", !armorIsMaxLevel);
+    }
+
+    else {
+        // Otherwise, if the armor cannot be upgraded, hide all of the upgrade fields from view.
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierOne")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierTwo")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierThree")->setProperty("visible", false);
+        _qmlRootObject->findChild<QObject*>("armorUpgradeTierFour")->setProperty("visible", false);
+        // Set the state of the "unlock" button depending on the armor's current unlock state.
+        _qmlRootObject->findChild<QObject*>("unlockArmorButton")->setProperty("visible", !armorIsUnlocked);
+        _qmlRootObject->findChild<QObject*>("upgradeArmorButton")->setProperty("visible", false);
+    }
 
     return true;
 }

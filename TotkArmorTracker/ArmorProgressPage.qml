@@ -1,11 +1,23 @@
 import QtQuick
 import QtQuick.Controls 2.15
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Rectangle {
     id: armorProgressPageRoot
 
-    // Armor Image.,
+    // DIALOGS.
+    // MessageBox to confirm the unlocking of armor sets.
+    MessageDialog {
+        id: unlockMessageDialog
+
+        property string armorSetName: "lorem ipsum"
+
+        text: "Unlock the " + armorSetName + "?"
+        buttons: MessageDialog.Ok | MessageDialog.Cancel
+    }
+
+    // Armor Image.
     // Displays a background image of ,the currently selected armor.
     Image {
         id: selectedArmorImage
@@ -58,6 +70,36 @@ Rectangle {
                 left: parent.left
                 right: parent.right
                 verticalCenter: parent.verticalCenter
+            }
+
+            // ARMOR LEVEL ROW.
+            Row {
+                id: armorLevelRow
+                objectName: "armorLevelRow"
+
+                property int armorLevel: 0
+
+                // Only visible if the armor has a level above 0.
+                visible: (armorLevel > 0)
+                Layout.alignment: Qt.AlignHCenter
+                spacing: 1
+
+                Repeater {
+                    id: armorLevelIcons
+
+                    model: armorLevelRow.armorLevel
+
+                    Image {
+                        required property int index
+
+                        width: 15
+                        height: width
+
+                        fillMode: Image.PreserveAspectFit
+
+                        source: "images/star-solid.svg"
+                    }
+                }
             }
 
             // ARMOR NAME ROW.
@@ -215,6 +257,39 @@ Rectangle {
                 Layout.leftMargin: 10
                 Layout.rightMargin: 10
                 upgradeRank: 4
+            }
+
+            // UPGRADE BUTTONS.
+            // Button displayed when the armor is still locked.
+            Button {
+                id: unlockArmorButton
+                objectName: "unlockArmorButton"
+
+                // Non-visible by default. Handled by backend code.
+                visible: false
+                Layout.alignment: Qt.AlignHCenter
+                text: "Unlock Armor"
+                icon.source: "images/unlock-solid.svg"
+                display: Button.TextBesideIcon
+
+                onClicked: {
+                    AppController.setArmorUnlockedState(selectedArmorNameLabel.text, true);
+                }
+            }
+
+            // Button displayed to increase armor level.
+            Button {
+                id: upgradeArmorButton
+                objectName: "upgradeArmorButton"
+
+                // Non-visible by default. Handled by backend code.
+                visible: false
+                Layout.alignment: Qt.AlignHCenter
+                text: "Enhance Away!"
+
+                onClicked: {
+                    AppController.setArmorLevel(selectedArmorNameLabel.text, armorLevelRow.armorLevel + 1);
+                }
             }
         }
     }
