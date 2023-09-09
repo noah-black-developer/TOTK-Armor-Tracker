@@ -61,234 +61,261 @@ Rectangle {
             opacity: 0.9
         }
 
-        // DETAILS COLUMN.
-        // Contains fields for armor info, decorative objects, etc...
-        ColumnLayout {
-            id: armorDetailsColumnLayout
+        // DETAILS.
+        // All detail controls are kept on a flickable to allow them to scroll with smaller UI sizes.
+        ScrollView {
+            id: armorDetailsScrollView
 
-            anchors {
-                left: parent.left
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
+            anchors.fill: parent
+            clip: true
 
-            // ARMOR LEVEL ROW.
-            Row {
-                id: armorLevelRow
-                objectName: "armorLevelRow"
+            Item {
+                id: armorDetailsContentsWrapper
 
-                property int armorLevel: 0
+                width: parent.width
+                height: childrenRect.height
+                implicitHeight: height
 
-                // Only visible if the armor has a level above 0.
-                visible: (armorLevel > 0)
-                Layout.alignment: Qt.AlignHCenter
-                spacing: 1
+                // DETAILS COLUMN.
+                // Contains fields for armor info, decorative objects, etc...
+                ColumnLayout {
+                    id: armorDetailsColumnLayout
 
-                Repeater {
-                    id: armorLevelIcons
+                    width: parent.width
 
-                    model: armorLevelRow.armorLevel
-
-                    Image {
-                        required property int index
-
-                        width: 15
-                        height: width
-
-                        fillMode: Image.PreserveAspectFit
-
-                        source: "images/star-solid.svg"
+                    // SPACER.
+                    // Add a blank element to push down the contents of the column a bit.
+                    Item {
+                        id: armorDetailsTopSpacer
+                        Layout.preferredHeight: 20
                     }
-                }
-            }
 
-            // ARMOR NAME ROW.
-            Row {
-                id: armorRowLayout
+                    // ARMOR LEVEL ROW.
+                    Row {
+                        id: armorLevelRow
+                        objectName: "armorLevelRow"
 
-                spacing: 8
-                Layout.alignment: Qt.AlignHCenter
+                        property int armorLevel: 0
 
-                // Selected Armor Name.
-                Text {
-                    id: selectedArmorNameLabel
-                    objectName: "selectedArmorNameLabel"
+                        // Only visible if the armor has a level above 0.
+                        visible: (armorLevel > 0)
+                        Layout.alignment: Qt.AlignHCenter
+                        spacing: 1
 
-                    text: "Lorem Ipsum"
-                    font.bold: true
-                    font.pointSize: 14
-                }
+                        Repeater {
+                            id: armorLevelIcons
 
-                // Unlock Status.
-                Image {
-                    id: selectedArmorUnlockedIcon
-                    objectName: "selectedArmorUnlockedIcon"
+                            model: armorLevelRow.armorLevel
 
-                    property bool isUnlocked: true
+                            Image {
+                                required property int index
 
-                    anchors {
-                        verticalCenter: selectedArmorNameLabel.verticalCenter
+                                width: 15
+                                height: width
+
+                                fillMode: Image.PreserveAspectFit
+
+                                source: "images/star-solid.svg"
+                            }
+                        }
                     }
-                    source: "images/lock-solid.svg"
-                    fillMode: Image.PreserveAspectFit
-                    // Hidden from view by setting the icon to 0 size.
-                    width: (isUnlocked) ? 0 : 18
-                    height: (isUnlocked) ? 0 : 18
-                }
-            }
 
-            // Armor Set Name.
-            Text {
-                id: selectedArmorSetNameLabel
-                objectName: "selectedArmorSetNameLabel"
+                    // ARMOR NAME ROW.
+                    Row {
+                        id: armorRowLayout
 
-                Layout.fillWidth: true
-                Layout.topMargin: -5
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "Lorem Ipsum"
-                font.pointSize: 9
-            }
+                        spacing: 8
+                        Layout.alignment: Qt.AlignHCenter
 
-            // Armor Quote.
-            Text {
-                id: selectedArmorQuoteLabel
-                objectName: "selectedArmorQuoteLabel"
+                        // Selected Armor Name.
+                        Text {
+                            id: selectedArmorNameLabel
+                            objectName: "selectedArmorNameLabel"
 
-                Layout.fillWidth: true
-                Layout.margins: 5
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum..."
-                font.italic: true
-                font.pointSize: 8
-                wrapMode: Text.Wrap
-            }
+                            text: "Lorem Ipsum"
+                            font.bold: true
+                            font.pointSize: 14
+                        }
 
-            // Separator.
-            Rectangle {
-                id: selectedArmorQuoteSeparator
+                        // Unlock Status.
+                        Image {
+                            id: selectedArmorUnlockedIcon
+                            objectName: "selectedArmorUnlockedIcon"
 
-                Layout.preferredHeight: 2
-                Layout.fillWidth: true
-                Layout.leftMargin: 20
-                Layout.rightMargin: 20
-                Layout.alignment: Qt.AlignHCenter
-                color: "black"
-            }
+                            property bool isUnlocked: true
 
-            // Armor Defense.
-            Text {
-                id: selectedArmorDefenseLabel
-                objectName: "selectedArmorDefenseLabel"
+                            anchors {
+                                verticalCenter: selectedArmorNameLabel.verticalCenter
+                            }
+                            source: "images/lock-solid.svg"
+                            fillMode: Image.PreserveAspectFit
+                            // Hidden from view by setting the icon to 0 size.
+                            width: (isUnlocked) ? 0 : 18
+                            height: (isUnlocked) ? 0 : 18
+                        }
+                    }
 
-                property int defense: 0
+                    // Armor Set Name.
+                    Text {
+                        id: selectedArmorSetNameLabel
+                        objectName: "selectedArmorSetNameLabel"
 
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "> Current Defense: " + defense.toString()
-                wrapMode: Text.Wrap
-            }
+                        Layout.fillWidth: true
+                        Layout.topMargin: -5
+                        Layout.alignment: Qt.AlignHCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: "Lorem Ipsum"
+                        font.pointSize: 9
+                    }
 
-            // Passive Bonus.
-            Text {
-                id: selectedArmorPassiveLabel
-                objectName: "selectedArmorPassiveLabel"
+                    // Armor Quote.
+                    Text {
+                        id: selectedArmorQuoteLabel
+                        objectName: "selectedArmorQuoteLabel"
 
-                property string passiveBonus: "None"
+                        Layout.fillWidth: true
+                        Layout.margins: 5
+                        Layout.alignment: Qt.AlignHCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum..."
+                        font.italic: true
+                        font.pointSize: 8
+                        wrapMode: Text.Wrap
+                    }
 
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "> Passive Bonus: " + passiveBonus
-                wrapMode: Text.Wrap
-            }
+                    // Separator.
+                    Rectangle {
+                        id: selectedArmorQuoteSeparator
 
-            // Passive Bonus.
-            Text {
-                id: selectedArmorsSetBonusLabel
-                objectName: "selectedArmorSetBonusLabel"
+                        Layout.preferredHeight: 2
+                        Layout.fillWidth: true
+                        Layout.leftMargin: 20
+                        Layout.rightMargin: 20
+                        Layout.alignment: Qt.AlignHCenter
+                        color: "black"
+                    }
 
-                property string setBonus: "None"
+                    // Armor Defense.
+                    Text {
+                        id: selectedArmorDefenseLabel
+                        objectName: "selectedArmorDefenseLabel"
 
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "> Set Bonus: " + setBonus
-                wrapMode: Text.Wrap
-            }
+                        property int defense: 0
 
-            // UPGRADE MATERIAL MENUS.
-            // Initializes one menu per armor tier. Displays what is required to bring armor to each tier.
-            ArmorUpgradeViewer {
-                id: armorUpgradeTierOne
-                objectName: "armorUpgradeTierOne"
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignHCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: "> Current Defense: " + defense.toString()
+                        wrapMode: Text.Wrap
+                    }
 
-                Layout.fillWidth: true
-                Layout.topMargin: 10
-                Layout.leftMargin: 10
-                Layout.rightMargin: 10
-                upgradeRank: 1
-            }
-            ArmorUpgradeViewer {
-                id: armorUpgradeTierTwo
-                objectName: "armorUpgradeTierTwo"
+                    // Passive Bonus.
+                    Text {
+                        id: selectedArmorPassiveLabel
+                        objectName: "selectedArmorPassiveLabel"
 
-                Layout.fillWidth: true
-                Layout.leftMargin: 10
-                Layout.rightMargin: 10
-                upgradeRank: 2
-            }
-            ArmorUpgradeViewer {
-                id: armorUpgradeTierThree
-                objectName: "armorUpgradeTierThree"
+                        property string passiveBonus: "None"
 
-                Layout.fillWidth: true
-                Layout.leftMargin: 10
-                Layout.rightMargin: 10
-                upgradeRank: 3
-            }
-            ArmorUpgradeViewer {
-                id: armorUpgradeTierFour
-                objectName: "armorUpgradeTierFour"
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignHCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: "> Passive Bonus: " + passiveBonus
+                        wrapMode: Text.Wrap
+                    }
 
-                Layout.fillWidth: true
-                Layout.leftMargin: 10
-                Layout.rightMargin: 10
-                upgradeRank: 4
-            }
+                    // Passive Bonus.
+                    Text {
+                        id: selectedArmorsSetBonusLabel
+                        objectName: "selectedArmorSetBonusLabel"
 
-            // UPGRADE BUTTONS.
-            // Button displayed when the armor is still locked.
-            Button {
-                id: unlockArmorButton
-                objectName: "unlockArmorButton"
+                        property string setBonus: "None"
 
-                // Non-visible by default. Handled by backend code.
-                visible: false
-                Layout.alignment: Qt.AlignHCenter
-                text: "Unlock Armor"
-                icon.source: "images/unlock-solid.svg"
-                display: Button.TextBesideIcon
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignHCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: "> Set Bonus: " + setBonus
+                        wrapMode: Text.Wrap
+                    }
 
-                onClicked: {
-                    AppController.setArmorUnlockedState(selectedArmorNameLabel.text, true);
-                }
-            }
+                    // UPGRADE MATERIAL MENUS.
+                    // Initializes one menu per armor tier. Displays what is required to bring armor to each tier.
+                    ArmorUpgradeViewer {
+                        id: armorUpgradeTierOne
+                        objectName: "armorUpgradeTierOne"
 
-            // Button displayed to increase armor level.
-            Button {
-                id: upgradeArmorButton
-                objectName: "upgradeArmorButton"
+                        Layout.fillWidth: true
+                        Layout.topMargin: 10
+                        Layout.leftMargin: 10
+                        Layout.rightMargin: 10
+                        upgradeRank: 1
+                    }
+                    ArmorUpgradeViewer {
+                        id: armorUpgradeTierTwo
+                        objectName: "armorUpgradeTierTwo"
 
-                // Non-visible by default. Handled by backend code.
-                visible: false
-                Layout.alignment: Qt.AlignHCenter
-                text: "Enhance Away!"
+                        Layout.fillWidth: true
+                        Layout.leftMargin: 10
+                        Layout.rightMargin: 10
+                        upgradeRank: 2
+                    }
+                    ArmorUpgradeViewer {
+                        id: armorUpgradeTierThree
+                        objectName: "armorUpgradeTierThree"
 
-                onClicked: {
-                    AppController.setArmorLevel(selectedArmorNameLabel.text, armorLevelRow.armorLevel + 1);
+                        Layout.fillWidth: true
+                        Layout.leftMargin: 10
+                        Layout.rightMargin: 10
+                        upgradeRank: 3
+                    }
+                    ArmorUpgradeViewer {
+                        id: armorUpgradeTierFour
+                        objectName: "armorUpgradeTierFour"
+
+                        Layout.fillWidth: true
+                        Layout.leftMargin: 10
+                        Layout.rightMargin: 10
+                        upgradeRank: 4
+                    }
+
+                    // UPGRADE BUTTONS.
+                    // Button displayed when the armor is still locked.
+                    Button {
+                        id: unlockArmorButton
+                        objectName: "unlockArmorButton"
+
+                        // Non-visible by default. Handled by backend code.
+                        visible: false
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "Unlock Armor"
+                        icon.source: "images/unlock-solid.svg"
+                        display: Button.TextBesideIcon
+
+                        onClicked: {
+                            AppController.setArmorUnlockedState(selectedArmorNameLabel.text, true);
+                        }
+                    }
+
+                    // Button displayed to increase armor level.
+                    Button {
+                        id: upgradeArmorButton
+                        objectName: "upgradeArmorButton"
+
+                        // Non-visible by default. Handled by backend code.
+                        visible: false
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "Enhance Away!"
+
+                        onClicked: {
+                            AppController.setArmorLevel(selectedArmorNameLabel.text, armorLevelRow.armorLevel + 1);
+                        }
+                    }
+
+                    // SPACER.
+                    // Add a blank element to add some space at the bottom of the column
+                    Item {
+                        id: armorDetailsBottomSpacer
+                        Layout.preferredHeight: 20
+                    }
                 }
             }
         }
