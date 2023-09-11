@@ -141,6 +141,14 @@ bool AppController::pullSave(QUrl saveFilePath)
         }
     }
 
+    // As a final step, store the name of the loaded save wherever it is needed.
+    // Removing the file's extension has to be done manually by grabbing characters left of it.
+    QString loadedSaveName = saveFilePath.fileName();
+    int loadedSaveExtStartIndex = loadedSaveName.lastIndexOf(".");
+    QString loadedSaveNameNoExt = loadedSaveName.left(loadedSaveExtStartIndex);
+    QObject *saveNameTextObj = _qmlRootObject->findChild<QObject*>("saveNameText");
+    saveNameTextObj->setProperty("saveName", loadedSaveNameNoExt);
+
     return true;
 }
 

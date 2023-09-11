@@ -18,7 +18,7 @@ Rectangle {
     }
 
     // Armor Image.
-    // Displays a background image of ,the currently selected armor.
+    // Displays a background image of the currently selected armor.
     Image {
         id: selectedArmorImage
         objectName: "selectedArmorImage"
@@ -717,6 +717,50 @@ Rectangle {
                     }
                 }
             }
+        }
+    }
+
+    // SAVE NAME.
+    // Displays the name of the current save, overlays the central area.
+    Rectangle {
+        id: saveNameRectangle
+
+        property int bufferSize: 10
+
+        // Set the control to match the size of the text it contains, plus some buffer
+        width: saveNameText.width + bufferSize
+        height: saveNameText.height + bufferSize
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+            margins: 10
+        }
+        // Sits above the other controls on the z-axis.
+        z: 1
+        color: "transparent"
+
+        // Color Rectangle.
+        // Separated from main rectangle to allow just the backing of the controls to be transluscent,
+        // without diminishing all of the content objects (text, icons, etc...).
+        Rectangle {
+            id: saveNameColorRect
+
+            anchors.fill: parent
+            color: "#dedede"
+            opacity: 0.9
+        }
+
+        Text {
+            id: saveNameText
+            objectName: "saveNameText"
+
+            property string saveName: "No Save Loaded"
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+            text: saveName
         }
     }
 }
