@@ -1,5 +1,20 @@
 #include <AppController.h>
 
+
+// HELPER FUNCTIONS.
+// Function to check for the existance of a file in the local file system.
+// https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exists-using-standard-c-c11-14-17-c
+inline bool fileExists (const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+// APPCONTROLLER METHODS.
 AppController::AppController(QObject *qmlRootObject, QObject *parent)
     : QObject{parent}
 {
@@ -141,13 +156,147 @@ bool AppController::pullSave(QUrl saveFilePath)
         }
     }
 
-    // As a final step, store the name of the loaded save wherever it is needed.
+    // Apply the name of the loaded save wherever it is needed in UI.
     // Removing the file's extension has to be done manually by grabbing characters left of it.
     QString loadedSaveName = saveFilePath.fileName();
     int loadedSaveExtStartIndex = loadedSaveName.lastIndexOf(".");
     QString loadedSaveNameNoExt = loadedSaveName.left(loadedSaveExtStartIndex);
     QObject *saveNameTextObj = _qmlRootObject->findChild<QObject*>("saveNameText");
     saveNameTextObj->setProperty("saveName", loadedSaveNameNoExt);
+
+    // Add the loaded save to the list of recent save files.
+    _addSaveToRecentList(saveFilePath);
+
+    // Store the active save and return.
+    _currentSaveFile = saveFilePath;
+    return true;
+}
+
+bool AppController::pushSave() {
+    // Verify that there is a currently loaded save.
+    // If not, return a failure.
+    if (_currentSaveFile == QUrl("")) {
+        return false;
+    }
+
+    // Convert QUrl to QString. Save file's path is stored as QUrl by default,
+    // which must be converted to a local path before use in backend code.
+    QString convertedSaveFilePath = _currentSaveFile.toLocalFile();
+
+    // Read in the save file as a string compatable with XML parsing.
+    std::vector<char> parseReadySaveFile = _readXmlToParseReadyObj(convertedSaveFilePath);
+
+    // If the returned string is empty, return a failure.
+    if(parseReadySaveFile == std::vector<char>('\0'))
+    {
+        return false;
+    }
+
+    // Convert the XML string into a RapidXML-compatable document object.
+    // Make a safe-to-modify copy of the save file string to load into RapidXML.
+    xml_document<> saveFileXmlDocument;
+    saveFileXmlDocument.parse<0>(&parseReadySaveFile[0]);
+
+    // SAVE CURRENT UI SETTINGS TO SAVE FILE.
+    // Store a reference to the currently active sort. Used to grab the best available armor icons.
+    QObject *currentSortObj = _qmlRootObject->findChild<QObject*>(_currentSort);
+
+    // Start an iterator to cycle through all of the save's armor fields.
+    // Each should have an associated armor icon that can be used to reference current armor level.
+    xml_node<char> *armorsNode = saveFileXmlDocument.first_node("Save")->first_node("Armors");
+    for (xml_node<char> *armorNode = armorsNode->first_node(); armorNode != 0; armorNode = armorNode->next_sibling()) {
+        // Store a reference to the armor icon for the current armor node.
+        // The ObjectName property of the armor icon should match the actual armor name.
+        QString armorName = armorNode->first_attribute("name")->value();
+        QObject *armorIconObj = currentSortObj->findChild<QObject*>(armorName);
+
+        // If no armor icon could be found, return a failure with error logging.
+        if (armorIconObj == nullptr) {
+            qDebug() << "Armor set does not have matching Armor Icon" + armorName;
+            return false;
+        }
+
+        // Save values for the armor's unlock state.
+        bool unlockedValue = armorIconObj->property("isUnlocked").toBool();
+        if (unlockedValue) {
+            armorNode->first_attribute("unlocked")->value("true");
+        } else {
+            armorNode->first_attribute("unlocked")->value("false");
+        }
+
+        // Save values for the armor's level.
+        // Issues were found in testing with getting the returned property
+        // as a properly formatted character string, so a switch statement is used instead.
+        int armorLevelValue = armorIconObj->property("currentRank").toInt();
+        switch (armorLevelValue) {
+            case 0:
+                armorNode->first_attribute("level")->value("0");
+                break;
+            case 1:
+                armorNode->first_attribute("level")->value("1");
+                break;
+            case 2:
+                armorNode->first_attribute("level")->value("2");
+                break;
+            case 3:
+                armorNode->first_attribute("level")->value("3");
+                break;
+            default:
+                // If an unsupported level was found, set the armor to base level with debug logs.
+                armorNode->first_attribute("level")->value("0");
+                qDebug("Unsupported armor level found during save. Setting to base level.");
+                break;
+        }
+    }
+
+    // WRITE BACK EDITED XML FILE.
+    // After all of the file properties are saved, write back the final results.
+    std::ofstream saveFile;
+    saveFile.open(_currentSaveFile.toLocalFile().toStdString());
+    saveFile << saveFileXmlDocument;
+    saveFile.close();
+
+    return true;
+}
+
+bool AppController::refreshRecentSaves() {
+    // SET RECENT SAVES.
+    // Store a reference to the parent menu option for recent saves.
+    QObject *recentSavesMenuParent = _qmlRootObject->findChild<QObject*>("openRecentMenu");
+
+    // Check if at least one entry exists in the list of recent saves.
+    bool recentSavesExist = _recentSavesList.length() > 0;
+
+    // If so, apply all of the saves in order to the menu options.
+    if (recentSavesExist) {
+        // Enable the parent menu option to allow user to select recent saves.
+        recentSavesMenuParent->setProperty("enabled", true);
+
+        // Start a loop up to the maximum number of possible recent saves.
+        for (int index = 0; index < MAX_RECENT_SAVES; index++) {
+            // Store a reference for the appropriate menu option in QML.
+            QString menuOptionName = QString("recentSave") + QString::number(index + 1);
+            QObject *recentSaveOption = recentSavesMenuParent->findChild<QObject*>(menuOptionName);
+
+            // If the current index is beyond the number of listed saves, hide the menu option and continue.
+            if (index + 1 > _recentSavesList.length()) {
+                recentSaveOption->setProperty("visible", false);
+                continue;
+            }
+
+            // Otherwise, reveal the menu item and set it's name to the name of the save file.
+            QUrl saveFilePath = _recentSavesList[index];
+            QString saveFileName = saveFilePath.fileName();
+            recentSaveOption->setProperty("visible", true);
+            recentSaveOption->setProperty("fileName", saveFileName);
+            recentSaveOption->setProperty("filePath", saveFilePath);
+        }
+    }
+
+    // Otherwise, if no recent saves are currently avaialble, disable the option to select recent saves altogether.
+    else {
+        recentSavesMenuParent->setProperty("enabled", true);
+    }
 
     return true;
 }
@@ -568,4 +717,49 @@ std::vector<char> AppController::_readXmlToParseReadyObj(QString xmlFilePath)
     std::vector<char> saveFileStreamCopy(xmlFileString.begin(), xmlFileString.end());
     saveFileStreamCopy.push_back('\0');
     return saveFileStreamCopy;
+}
+
+// Add a save file to the list of recently loaded save files.
+// Applies the change to the internal list of saves, then syncs that change with the external data storage.
+bool AppController::_addSaveToRecentList(QUrl saveFilePath) {
+    // ADD SAVE TO INTERNAL LIST.
+    // If this method was called before the list of saves was initialized internally, return a failure.
+//    if (!_recentSavesAreInitialized) {
+//        return false;
+//    }
+
+    for (int saveIndex = 0; saveIndex < _recentSavesList.length(); saveIndex++) {
+        // If a matching file is found, remove it from the list and break.
+        if (saveFilePath == _recentSavesList[saveIndex]) {
+            _recentSavesList.removeAt(saveIndex);
+            break;
+        }
+    }
+
+    // Insert the new entry at the front of the list.
+    _recentSavesList.insert(0, saveFilePath);
+
+    // Iterate over the entire list to remove any invalid or unneccesary entries.
+    int recentSavesCount = 1;
+    for (int saveIndex = 0; saveIndex < _recentSavesList.length(); saveIndex++) {
+        // REMOVAL CASES.
+        // If the current save file no longer exists in the file system, remove it.
+        bool fileNoLongerExists = !fileExists(_recentSavesList[saveIndex].toLocalFile().toStdString());
+        // If the current save count extends beyond the maximum # of recent entries, remove it.
+        bool fileIsOutdated = recentSavesCount > MAX_RECENT_SAVES;
+
+        // Compare all cases. If at least one is flagged, remove the save from the list.
+        if (fileNoLongerExists || fileIsOutdated) {
+            _recentSavesList.removeAt(saveIndex);
+            // Update the reference length for the full recent saves list.
+            recentSavesCount -= 1;
+        }
+
+        // Increment the # of recent saves that still remain. If one was removes, returns count to correct value.
+        recentSavesCount += 1;
+    }
+
+    // Refresh the save list shown to the user and return.
+    refreshRecentSaves();
+    return true;
 }

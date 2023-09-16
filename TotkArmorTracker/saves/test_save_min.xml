@@ -1,313 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?> 
 <Save name="default">
-    <Armors>
-        <Armor name="Amber Earrings" unlocked="false" level="0"/>
-        <Armor name="Ancient Hero's Aspect" unlocked="false" level="0"/>
-        <Armor name="Archaic Legwear" unlocked="false" level="0"/>
-        <Armor name="Archaic Tunic" unlocked="false" level="0"/>
-        <Armor name="Archaic Warm Greaves" unlocked="false" level="0"/>
-        <Armor name="Barbarian Armor" unlocked="false" level="0"/>
-        <Armor name="Barbarian Helm" unlocked="false" level="0"/>
-        <Armor name="Barbarian Leg Wraps" unlocked="false" level="0"/>
-        <Armor name="Bokoblin Mask" unlocked="false" level="0"/>
-        <Armor name="Cap of Time" unlocked="false" level="0"/>
-        <Armor name="Cap of Twilight" unlocked="false" level="0"/>
-        <Armor name="Cap of the Hero" unlocked="false" level="0"/>
-        <Armor name="Cap of the Sky" unlocked="false" level="0"/>
-        <Armor name="Cap of the Wild" unlocked="false" level="0"/>
-        <Armor name="Cap of the Wind" unlocked="false" level="0"/>
-        <Armor name="Cece's Hat" unlocked="false" level="0"/>
-        <Armor name="Champion's Leathers" unlocked="false" level="0"/>
-        <Armor name="Charged Headdress" unlocked="false" level="0"/>
-        <Armor name="Charged Shirt" unlocked="false" level="0"/>
-        <Armor name="Charged Trousers" unlocked="false" level="0"/>
-        <Armor name="Climber's Bandana" unlocked="false" level="0"/>
-        <Armor name="Climbing Boots" unlocked="false" level="0"/>
-        <Armor name="Climbing Gear" unlocked="false" level="0"/>
-        <Armor name="Dark Hood" unlocked="false" level="0"/>
-        <Armor name="Dark Trousers" unlocked="false" level="0"/>
-        <Armor name="Dark Tunic" unlocked="false" level="0"/>
-        <Armor name="Desert Voe Headband" unlocked="false" level="0"/>
-        <Armor name="Desert Voe Spaulder" unlocked="false" level="0"/>
-        <Armor name="Desert Voe Trousers" unlocked="false" level="0"/>
-        <Armor name="Diamond Circlet" unlocked="false" level="0"/>
-        <Armor name="Ember Headdress" unlocked="false" level="0"/>
-        <Armor name="Ember Shirt" unlocked="false" level="0"/>
-        <Armor name="Ember Trousers" unlocked="false" level="0"/>
-        <Armor name="Evil Spirit Armor" unlocked="false" level="0"/>
-        <Armor name="Evil Spirit Greaves" unlocked="false" level="0"/>
-        <Armor name="Evil Spirit Mask" unlocked="false" level="0"/>
-        <Armor name="Fierce Deity Armor" unlocked="false" level="0"/>
-        <Armor name="Fierce Deity Boots" unlocked="false" level="0"/>
-        <Armor name="Fierce Deity Mask" unlocked="false" level="0"/>
-        <Armor name="Flamebreaker Armor" unlocked="false" level="0"/>
-        <Armor name="Flamebreaker Boots" unlocked="false" level="0"/>
-        <Armor name="Flamebreaker Helm" unlocked="false" level="0"/>
-        <Armor name="Froggy Hood" unlocked="false" level="0"/>
-        <Armor name="Froggy Leggings" unlocked="false" level="0"/>
-        <Armor name="Froggy Sleeve" unlocked="false" level="0"/>
-        <Armor name="Frostbite Headdress" unlocked="false" level="0"/>
-        <Armor name="Frostbite Shirt" unlocked="false" level="0"/>
-        <Armor name="Frostbite Trousers" unlocked="false" level="0"/>
-        <Armor name="Gaiters of the Depths" unlocked="false" level="0"/>
-        <Armor name="Glide Mask" unlocked="false" level="0"/>
-        <Armor name="Glide Shirt" unlocked="false" level="0"/>
-        <Armor name="Glide Tights" unlocked="false" level="0"/>
-        <Armor name="Hood of the Depths" unlocked="false" level="0"/>
-        <Armor name="Horriblin Mask" unlocked="false" level="0"/>
-        <Armor name="Hylian Hood" unlocked="false" level="0"/>
-        <Armor name="Hylian Trousers" unlocked="false" level="0"/>
-        <Armor name="Hylian Tunic" unlocked="false" level="0"/>
-        <Armor name="Korok Mask" unlocked="false" level="0"/>
-        <Armor name="Lizalfos Mask" unlocked="false" level="0"/>
-        <Armor name="Lobster Shirt" unlocked="false" level="0"/>
-        <Armor name="Lynel Mask" unlocked="false" level="0"/>
-        <Armor name="Mask of Awakening" unlocked="false" level="0"/>
-        <Armor name="Midna's Helmet" unlocked="false" level="0"/>
-        <Armor name="Majora's Mask" unlocked="false" level="0"/>
-        <Armor name="Miner's Mask" unlocked="false" level="0"/>
-        <Armor name="Miner's Top" unlocked="false" level="0"/>
-        <Armor name="Miner's Trousers" unlocked="false" level="0"/>
-        <Armor name="Moblin Mask" unlocked="false" level="0"/>
-        <Armor name="Mystic Headpiece" unlocked="false" level="0"/>
-        <Armor name="Mystic Robe" unlocked="false" level="0"/>
-        <Armor name="Mystic Trousers" unlocked="false" level="0"/>
-        <Armor name="Opal Earrings" unlocked="false" level="0"/>
-        <Armor name="Phantom Armor" unlocked="false" level="0"/>
-        <Armor name="Phantom Greaves" unlocked="false" level="0"/>
-        <Armor name="Phantom Helmet" unlocked="false" level="0"/>
-        <Armor name="Radiant Mask" unlocked="false" level="0"/>
-        <Armor name="Radiant Shirt" unlocked="false" level="0"/>
-        <Armor name="Radiant Tights" unlocked="false" level="0"/>
-        <Armor name="Ravio's Hood" unlocked="false" level="0"/>
-        <Armor name="Royal Guard Boots" unlocked="false" level="0"/>
-        <Armor name="Royal Guard Cap" unlocked="false" level="0"/>
-        <Armor name="Royal Guard Uniform" unlocked="false" level="0"/>
-        <Armor name="Rubber Armor" unlocked="false" level="0"/>
-        <Armor name="Rubber Helm" unlocked="false" level="0"/>
-        <Armor name="Rubber Tights" unlocked="false" level="0"/>
-        <Armor name="Ruby Circlet" unlocked="false" level="0"/>
-        <Armor name="Sand Boots" unlocked="false" level="0"/>
-        <Armor name="Sapphire Circlet" unlocked="false" level="0"/>
-        <Armor name="Sheik's Mask" unlocked="false" level="0"/>
-        <Armor name="Snow Boots" unlocked="false" level="0"/>
-        <Armor name="Snowquill Headdress" unlocked="false" level="0"/>
-        <Armor name="Snowquill Trousers" unlocked="false" level="0"/>
-        <Armor name="Snowquill Tunic" unlocked="false" level="0"/>
-        <Armor name="Soldier's Armor" unlocked="false" level="0"/>
-        <Armor name="Soldier's Greaves" unlocked="false" level="0"/>
-        <Armor name="Soldier's Helm" unlocked="false" level="0"/>
-        <Armor name="Stealth Chest Guard" unlocked="false" level="0"/>
-        <Armor name="Stealth Mask" unlocked="false" level="0"/>
-        <Armor name="Stealth Tights" unlocked="false" level="0"/>
-        <Armor name="Thunder Helm" unlocked="false" level="0"/>
-        <Armor name="Tingle's Hood" unlocked="false" level="0"/>
-        <Armor name="Tingle's Shirt" unlocked="false" level="0"/>
-        <Armor name="Tingle's Tights" unlocked="false" level="0"/>
-        <Armor name="Topaz Earrings" unlocked="false" level="0"/>
-        <Armor name="Trousers of Awakening" unlocked="false" level="0"/>
-        <Armor name="Trousers of Time" unlocked="false" level="0"/>
-        <Armor name="Trousers of Twilight" unlocked="false" level="0"/>
-        <Armor name="Trousers of the Hero" unlocked="false" level="0"/>
-        <Armor name="Trousers of the Sky" unlocked="false" level="0"/>
-        <Armor name="Trousers of the Wild" unlocked="false" level="0"/>
-        <Armor name="Trousers of the Wind" unlocked="false" level="0"/>
-        <Armor name="Tunic of Awakening" unlocked="false" level="0"/>
-        <Armor name="Tunic of Memories" unlocked="false" level="0"/>
-        <Armor name="Tunic of the Depths" unlocked="false" level="0"/>
-        <Armor name="Tunic of Time" unlocked="false" level="0"/>
-        <Armor name="Tunic of Twilight" unlocked="false" level="0"/>
-        <Armor name="Tunic of the Hero" unlocked="false" level="0"/>
-        <Armor name="Tunic of the Sky" unlocked="false" level="0"/>
-        <Armor name="Tunic of the Wild" unlocked="false" level="0"/>
-        <Armor name="Tunic of the Wind" unlocked="false" level="0"/>
-        <Armor name="Vah Medoh Divine Helm" unlocked="false" level="0"/>
-        <Armor name="Vah Naboris Divine Helm" unlocked="false" level="0"/>
-        <Armor name="Vah Rudania Divine Helm" unlocked="false" level="0"/>
-        <Armor name="Vah Ruta Divine Helm" unlocked="false" level="0"/>
-        <Armor name="Well-Worn Hair Band" unlocked="false" level="0"/>
-        <Armor name="Yiga Armor" unlocked="false" level="0"/>
-        <Armor name="Yiga Mask" unlocked="false" level="0"/>
-        <Armor name="Yiga Tights" unlocked="false" level="0"/>
-        <Armor name="Zant's Helmet" unlocked="false" level="0"/>
-        <Armor name="Zonaite Shin Guards" unlocked="false" level="0"/>
-        <Armor name="Zonaite Waistguard" unlocked="false" level="0"/>
-        <Armor name="Zonaite Helm" unlocked="false" level="0"/>
-        <Armor name="Zora Armor" unlocked="false" level="0"/>
-        <Armor name="Zora Greaves" unlocked="false" level="0"/>
-        <Armor name="Zora Helm" unlocked="false" level="0"/>
-    </Armors>
-    <Items>
-        <Item name="Acorn" quantity="0"/>
-        <Item name="Aerocuda Eyeball" quantity="0"/>
-        <Item name="Aerocuda Wing" quantity="0"/>
-        <Item name="Aerocuda Wings" quantity="0"/>
-        <Item name="Amber" quantity="0"/>
-        <Item name="Black Bokoblin Horn" quantity="0"/>
-        <Item name="Black Horriblin Horn" quantity="0"/>
-        <Item name="Black Lizalfos Horn" quantity="0"/>
-        <Item name="Black Moblin Horn" quantity="0"/>
-        <Item name="Bladed Rhino Beetle" quantity="0"/>
-        <Item name="Blue Bokoblin Horn" quantity="0"/>
-        <Item name="Blue Horriblin Horn" quantity="0"/>
-        <Item name="Blue Lizalfos Horn" quantity="0"/>
-        <Item name="Blue Lizalfos Tail" quantity="0"/>
-        <Item name="Blue Moblin Horn" quantity="0"/>
-        <Item name="Blue Nightshade" quantity="0"/>
-        <Item name="Blue-Maned Lynel Mace Horn" quantity="0"/>
-        <Item name="Blue-Maned Lynel Saber Horn" quantity="0"/>
-        <Item name="Blue-White Frox Fang" quantity="0"/>
-        <Item name="Bokoblin Fang" quantity="0"/>
-        <Item name="Bokoblin Guts" quantity="0"/>
-        <Item name="Bokoblin Horn" quantity="0"/>
-        <Item name="Boss Bokoblin Horn" quantity="0"/>
-        <Item name="Bright Caps" quantity="0"/>
-        <Item name="Brightbloom Seeds" quantity="0"/>
-        <Item name="Captain Construct I Horn" quantity="0"/>
-        <Item name="Captain Construct II Horn" quantity="0"/>
-        <Item name="Captain Construct III Horn" quantity="0"/>
-        <Item name="Chillfin Trout" quantity="0"/>
-        <Item name="Chillshroom" quantity="0"/>
-        <Item name="Chuchu Jelly" quantity="0"/>
-        <Item name="Cold Darner" quantity="0"/>
-        <Item name="Cool Safflina" quantity="0"/>
-        <Item name="Courser Bee Honey" quantity="0"/>
-        <Item name="Dark Clump" quantity="0"/>
-        <Item name="Dazzlefruit" quantity="0"/>
-        <Item name="Deep Firefly" quantity="0"/>
-        <Item name="Diamond" quantity="0"/>
-        <Item name="Dinraal's Claw" quantity="0"/>
-        <Item name="Dinraal's Fang" quantity="0"/>
-        <Item name="Dinraal's Horn" quantity="0"/>
-        <Item name="Dinraal's Scale" quantity="0"/>
-        <Item name="Electric Darner" quantity="0"/>
-        <Item name="Electric Keese Wing" quantity="0"/>
-        <Item name="Electric Lizal Horn" quantity="0"/>
-        <Item name="Electric Lizalfos Horn" quantity="0"/>
-        <Item name="Electric Lizalfos Tail" quantity="0"/>
-        <Item name="Electric Safflina" quantity="0"/>
-        <Item name="Energetic Rhino Beetle" quantity="0"/>
-        <Item name="Farosh's Claw" quantity="0"/>
-        <Item name="Farosh's Fang" quantity="0"/>
-        <Item name="Farosh's Horn" quantity="0"/>
-        <Item name="Farosh's Scale" quantity="0"/>
-        <Item name="Fire Fruit" quantity="0"/>
-        <Item name="Fire Keese Wing" quantity="0"/>
-        <Item name="Fire Like Stone" quantity="0"/>
-        <Item name="Fire-Breath Lizalfos Horn" quantity="0"/>
-        <Item name="Fire-Breath Lizalfos Tail" quantity="0"/>
-        <Item name="Fireproof Lizard" quantity="0"/>
-        <Item name="Flint" quantity="0"/>
-        <Item name="Frox Fang" quantity="0"/>
-        <Item name="Frox Fingernail" quantity="0"/>
-        <Item name="Frox Guts" quantity="0"/>
-        <Item name="Giant Brightbloom Seed" quantity="0"/>
-        <Item name="Gibdo Bone" quantity="0"/>
-        <Item name="Gibdo Guts" quantity="0"/>
-        <Item name="Gibdo Wing" quantity="0"/>
-        <Item name="Gleeok Flame Horn" quantity="0"/>
-        <Item name="Gleeok Frost Horn" quantity="0"/>
-        <Item name="Gleeok Guts" quantity="0"/>
-        <Item name="Gleeok Thunder Horn" quantity="0"/>
-        <Item name="Gleeok Wing" quantity="0"/>
-        <Item name="Glowing Cave Fish" quantity="0"/>
-        <Item name="Hearty Bass" quantity="0"/>
-        <Item name="Hearty Lizard" quantity="0"/>
-        <Item name="Hightail Lizard" quantity="0"/>
-        <Item name="Hinox Guts" quantity="0"/>
-        <Item name="Hinox Toenail" quantity="0"/>
-        <Item name="Hinox Tooth" quantity="0"/>
-        <Item name="Horriblin Guts" quantity="0"/>
-        <Item name="Horriblin Horn" quantity="0"/>
-        <Item name="Hot-Footed Frog" quantity="0"/>
-        <Item name="Hyrule Bass" quantity="0"/>
-        <Item name="Ice Fruit" quantity="0"/>
-        <Item name="Ice Keese Wing" quantity="0"/>
-        <Item name="Ice Like Stone" quantity="0"/>
-        <Item name="Ice-Breath Lizal Tail" quantity="0"/>
-        <Item name="Ice-Breath Lizalfos Horn" quantity="0"/>
-        <Item name="Ice-Breath Lizalfos Tail" quantity="0"/>
-        <Item name="Keese Eyeball" quantity="0"/>
-        <Item name="Keese Wing" quantity="0"/>
-        <Item name="Large Zonai Charge" quantity="0"/>
-        <Item name="Large Zonaite" quantity="0"/>
-        <Item name="Light Dragon Claw" quantity="0"/>
-        <Item name="Light Dragon Fang" quantity="0"/>
-        <Item name="Light Dragon Horn" quantity="0"/>
-        <Item name="Light Dragon's Scale" quantity="0"/>
-        <Item name="Light Dragon's Talon" quantity="0"/>
-        <Item name="Lizalfos Horn" quantity="0"/>
-        <Item name="Lizalfos Tail" quantity="0"/>
-        <Item name="Lizalfos Talon" quantity="0"/>
-        <Item name="Luminous Stone" quantity="0"/>
-        <Item name="Lynel Hoof" quantity="0"/>
-        <Item name="Lynel Guts" quantity="0"/>
-        <Item name="Lynel Mace Horn" quantity="0"/>
-        <Item name="Lynel Saber Horn" quantity="0"/>
-        <Item name="Mighty Thistle" quantity="0"/>
-        <Item name="Moblin Fang" quantity="0"/>
-        <Item name="Moblin Guts" quantity="0"/>
-        <Item name="Moblin Horn" quantity="0"/>
-        <Item name="Molduga Fin" quantity="0"/>
-        <Item name="Molduga Guts" quantity="0"/>
-        <Item name="Molduga Jaw" quantity="0"/>
-        <Item name="Naydra's Claw" quantity="0"/>
-        <Item name="Naydra's Fang" quantity="0"/>
-        <Item name="Naydra's Horn" quantity="0"/>
-        <Item name="Naydra's Scale" quantity="0"/>
-        <Item name="Obsidian Frox Fang" quantity="0"/>
-        <Item name="Octo Balloon" quantity="0"/>
-        <Item name="Octorok Eyeball" quantity="0"/>
-        <Item name="Octorok Tentacle" quantity="0"/>
-        <Item name="Opal" quantity="0"/>
-        <Item name="Puffshroom" quantity="0"/>
-        <Item name="Razorclaw Crab" quantity="0"/>
-        <Item name="Razorshroom" quantity="0"/>
-        <Item name="Red Chuchu Jelly" quantity="0"/>
-        <Item name="Ruby" quantity="0"/>
-        <Item name="Rushroom" quantity="0"/>
-        <Item name="Sapphire" quantity="0"/>
-        <Item name="Shard of Dinraal's Fang" quantity="0"/>
-        <Item name="Shard of Dinraal's Spike" quantity="0"/>
-        <Item name="Shard of Farosh's Fang" quantity="0"/>
-        <Item name="Shard of Farosh's Spike" quantity="0"/>
-        <Item name="Shard of Light Dragon's Fang" quantity="0"/>
-        <Item name="Shard of Naydra's Fang" quantity="0"/>
-        <Item name="Shard of Naydra's Spike" quantity="0"/>
-        <Item name="Shock Fruit" quantity="0"/>
-        <Item name="Shock Like Stone" quantity="0"/>
-        <Item name="Silent Princess" quantity="0"/>
-        <Item name="Silent Shroom" quantity="0"/>
-        <Item name="Silver Bokoblin Horn" quantity="0"/>
-        <Item name="Sizzlefin Trout" quantity="0"/>
-        <Item name="Smotherwing Butterfly" quantity="0"/>
-        <Item name="Sneaky River Snail" quantity="0"/>
-        <Item name="Soldier Construct Horn" quantity="0"/>
-        <Item name="Soldier Construct II Horn" quantity="0"/>
-        <Item name="Soldier Construct III Horn" quantity="0"/>
-        <Item name="Soldier Construct IV Horn" quantity="0"/>
-        <Item name="Star Fragment" quantity="0"/>
-        <Item name="Stealthfin Trout" quantity="0"/>
-        <Item name="Sticky Frog" quantity="0"/>
-        <Item name="Sticky Lizard" quantity="0"/>
-        <Item name="Summerwing Butterfly" quantity="0"/>
-        <Item name="Sundelion" quantity="0"/>
-        <Item name="Sunset Firefly" quantity="0"/>
-        <Item name="Sunshroom" quantity="0"/>
-        <Item name="Swift Carrot" quantity="0"/>
-        <Item name="Swift Violet" quantity="0"/>
-        <Item name="Thunderwing Butterfly" quantity="0"/>
-        <Item name="Topaz" quantity="0"/>
-        <Item name="Voltfin Trout" quantity="0"/>
-        <Item name="Voltfruit" quantity="0"/>
-        <Item name="Warm Darner" quantity="0"/>
-        <Item name="Warm Safflina" quantity="0"/>
-        <Item name="White Chuchu Jelly" quantity="0"/>
-        <Item name="White-Maned Lynel Mace Horn" quantity="0"/>
-        <Item name="White-Maned Lynel Saber Horn" quantity="0"/>
-        <Item name="Winterwing Butterfly" quantity="0"/>
-        <Item name="Yellow Chuchu Jelly" quantity="0"/>
-        <Item name="Zapshroom" quantity="0"/>
-        <Item name="Zonaite" quantity="0"/>
-    </Items>
+	<Armors>
+		<Armor name="Amber Earrings" unlocked="true" level="�"/>
+		<Armor name="Ancient Hero's Aspect" unlocked="false" level="�"/>
+		<Armor name="Archaic Legwear" unlocked="false" level="�"/>
+		<Armor name="Archaic Tunic" unlocked="false" level="�"/>
+		<Armor name="Archaic Warm Greaves" unlocked="false" level="�"/>
+		<Armor name="Barbarian Armor" unlocked="false" level="�"/>
+		<Armor name="Barbarian Helm" unlocked="false" level="�"/>
+		<Armor name="Barbarian Leg Wraps" unlocked="false" level="�"/>
+		<Armor name="Bokoblin Mask" unlocked="false" level="�"/>
+		<Armor name="Cap of Time" unlocked="false" level="�"/>
+		<Armor name="Cap of Twilight" unlocked="false" level="�"/>
+		<Armor name="Cap of the Hero" unlocked="false" level="�"/>
+		<Armor name="Cap of the Sky" unlocked="false" level="�"/>
+		<Armor name="Cap of the Wild" unlocked="false" level="�"/>
+		<Armor name="Cap of the Wind" unlocked="false" level="�"/>
+		<Armor name="Cece's Hat" unlocked="false" level="�"/>
+		<Armor name="Champion's Leathers" unlocked="false" level="�"/>
+		<Armor name="Charged Headdress" unlocked="false" level="�"/>
+		<Armor name="Charged Shirt" unlocked="false" level="�"/>
+		<Armor name="Charged Trousers" unlocked="false" level="�"/>
+		<Armor name="Climber's Bandana" unlocked="false" level="�"/>
+		<Armor name="Climbing Boots" unlocked="false" level="�"/>
+		<Armor name="Climbing Gear" unlocked="false" level="�"/>
+		<Armor name="Dark Hood" unlocked="false" level="�"/>
+		<Armor name="Dark Trousers" unlocked="false" level="�"/>
+		<Armor name="Dark Tunic" unlocked="false" level="�"/>
+		<Armor name="Desert Voe Headband" unlocked="false" level="�"/>
+		<Armor name="Desert Voe Spaulder" unlocked="false" level="�"/>
+		<Armor name="Desert Voe Trousers" unlocked="false" level="�"/>
+		<Armor name="Diamond Circlet" unlocked="false" level="�"/>
+		<Armor name="Ember Headdress" unlocked="false" level="�"/>
+		<Armor name="Ember Shirt" unlocked="false" level="�"/>
+		<Armor name="Ember Trousers" unlocked="false" level="�"/>
+		<Armor name="Evil Spirit Armor" unlocked="false" level="�"/>
+		<Armor name="Evil Spirit Greaves" unlocked="false" level="�"/>
+		<Armor name="Evil Spirit Mask" unlocked="false" level="�"/>
+		<Armor name="Fierce Deity Armor" unlocked="false" level="�"/>
+		<Armor name="Fierce Deity Boots" unlocked="false" level="�"/>
+		<Armor name="Fierce Deity Mask" unlocked="false" level="�"/>
+		<Armor name="Flamebreaker Armor" unlocked="false" level="�"/>
+		<Armor name="Flamebreaker Boots" unlocked="false" level="�"/>
+		<Armor name="Flamebreaker Helm" unlocked="false" level="�"/>
+		<Armor name="Froggy Hood" unlocked="false" level="�"/>
+		<Armor name="Froggy Leggings" unlocked="false" level="�"/>
+		<Armor name="Froggy Sleeve" unlocked="false" level="�"/>
+		<Armor name="Frostbite Headdress" unlocked="false" level="�"/>
+		<Armor name="Frostbite Shirt" unlocked="false" level="�"/>
+		<Armor name="Frostbite Trousers" unlocked="false" level="�"/>
+		<Armor name="Gaiters of the Depths" unlocked="false" level="�"/>
+		<Armor name="Glide Mask" unlocked="false" level="�"/>
+		<Armor name="Glide Shirt" unlocked="false" level="�"/>
+		<Armor name="Glide Tights" unlocked="false" level="�"/>
+		<Armor name="Hood of the Depths" unlocked="false" level="�"/>
+		<Armor name="Horriblin Mask" unlocked="false" level="�"/>
+		<Armor name="Hylian Hood" unlocked="false" level="�"/>
+		<Armor name="Hylian Trousers" unlocked="false" level="�"/>
+		<Armor name="Hylian Tunic" unlocked="false" level="�"/>
+		<Armor name="Korok Mask" unlocked="false" level="�"/>
+		<Armor name="Lizalfos Mask" unlocked="false" level="�"/>
+		<Armor name="Lobster Shirt" unlocked="false" level="�"/>
+		<Armor name="Lynel Mask" unlocked="false" level="�"/>
+		<Armor name="Mask of Awakening" unlocked="false" level="�"/>
+		<Armor name="Midna's Helmet" unlocked="false" level="�"/>
+		<Armor name="Majora's Mask" unlocked="false" level="�"/>
+		<Armor name="Miner's Mask" unlocked="false" level="�"/>
+		<Armor name="Miner's Top" unlocked="false" level="�"/>
+		<Armor name="Miner's Trousers" unlocked="false" level="�"/>
+		<Armor name="Moblin Mask" unlocked="false" level="�"/>
+		<Armor name="Mystic Headpiece" unlocked="false" level="�"/>
+		<Armor name="Mystic Robe" unlocked="false" level="�"/>
+		<Armor name="Mystic Trousers" unlocked="false" level="�"/>
+		<Armor name="Opal Earrings" unlocked="false" level="�"/>
+		<Armor name="Phantom Armor" unlocked="false" level="�"/>
+		<Armor name="Phantom Greaves" unlocked="false" level="�"/>
+		<Armor name="Phantom Helmet" unlocked="false" level="�"/>
+		<Armor name="Radiant Mask" unlocked="false" level="�"/>
+		<Armor name="Radiant Shirt" unlocked="false" level="�"/>
+		<Armor name="Radiant Tights" unlocked="false" level="�"/>
+		<Armor name="Ravio's Hood" unlocked="false" level="�"/>
+		<Armor name="Royal Guard Boots" unlocked="false" level="�"/>
+		<Armor name="Royal Guard Cap" unlocked="false" level="�"/>
+		<Armor name="Royal Guard Uniform" unlocked="false" level="�"/>
+		<Armor name="Rubber Armor" unlocked="false" level="�"/>
+		<Armor name="Rubber Helm" unlocked="false" level="�"/>
+		<Armor name="Rubber Tights" unlocked="false" level="�"/>
+		<Armor name="Ruby Circlet" unlocked="false" level="�"/>
+		<Armor name="Sand Boots" unlocked="false" level="�"/>
+		<Armor name="Sapphire Circlet" unlocked="false" level="�"/>
+		<Armor name="Sheik's Mask" unlocked="false" level="�"/>
+		<Armor name="Snow Boots" unlocked="false" level="�"/>
+		<Armor name="Snowquill Headdress" unlocked="false" level="�"/>
+		<Armor name="Snowquill Trousers" unlocked="false" level="�"/>
+		<Armor name="Snowquill Tunic" unlocked="false" level="�"/>
+		<Armor name="Soldier's Armor" unlocked="false" level="�"/>
+		<Armor name="Soldier's Greaves" unlocked="false" level="�"/>
+		<Armor name="Soldier's Helm" unlocked="false" level="�"/>
+		<Armor name="Stealth Chest Guard" unlocked="false" level="�"/>
+		<Armor name="Stealth Mask" unlocked="false" level="�"/>
+		<Armor name="Stealth Tights" unlocked="false" level="�"/>
+		<Armor name="Thunder Helm" unlocked="false" level="�"/>
+		<Armor name="Tingle's Hood" unlocked="false" level="�"/>
+		<Armor name="Tingle's Shirt" unlocked="false" level="�"/>
+		<Armor name="Tingle's Tights" unlocked="false" level="�"/>
+		<Armor name="Topaz Earrings" unlocked="false" level="�"/>
+		<Armor name="Trousers of Awakening" unlocked="false" level="�"/>
+		<Armor name="Trousers of Time" unlocked="false" level="�"/>
+		<Armor name="Trousers of Twilight" unlocked="false" level="�"/>
+		<Armor name="Trousers of the Hero" unlocked="false" level="�"/>
+		<Armor name="Trousers of the Sky" unlocked="false" level="�"/>
+		<Armor name="Trousers of the Wild" unlocked="false" level="�"/>
+		<Armor name="Trousers of the Wind" unlocked="false" level="�"/>
+		<Armor name="Tunic of Awakening" unlocked="false" level="�"/>
+		<Armor name="Tunic of Memories" unlocked="false" level="�"/>
+		<Armor name="Tunic of the Depths" unlocked="false" level="�"/>
+		<Armor name="Tunic of Time" unlocked="false" level="�"/>
+		<Armor name="Tunic of Twilight" unlocked="false" level="�"/>
+		<Armor name="Tunic of the Hero" unlocked="false" level="�"/>
+		<Armor name="Tunic of the Sky" unlocked="false" level="�"/>
+		<Armor name="Tunic of the Wild" unlocked="false" level="�"/>
+		<Armor name="Tunic of the Wind" unlocked="false" level="�"/>
+		<Armor name="Vah Medoh Divine Helm" unlocked="false" level="�"/>
+		<Armor name="Vah Naboris Divine Helm" unlocked="false" level="�"/>
+		<Armor name="Vah Rudania Divine Helm" unlocked="false" level="�"/>
+		<Armor name="Vah Ruta Divine Helm" unlocked="false" level="�"/>
+		<Armor name="Well-Worn Hair Band" unlocked="false" level="�"/>
+		<Armor name="Yiga Armor" unlocked="false" level="�"/>
+		<Armor name="Yiga Mask" unlocked="false" level="�"/>
+		<Armor name="Yiga Tights" unlocked="false" level="�"/>
+		<Armor name="Zant's Helmet" unlocked="false" level="�"/>
+		<Armor name="Zonaite Shin Guards" unlocked="false" level="�"/>
+		<Armor name="Zonaite Waistguard" unlocked="false" level="�"/>
+		<Armor name="Zonaite Helm" unlocked="false" level="�"/>
+		<Armor name="Zora Armor" unlocked="false" level="�"/>
+		<Armor name="Zora Greaves" unlocked="false" level="�"/>
+		<Armor name="Zora Helm" unlocked="false" level="�"/>
+	</Armors>
 </Save>
