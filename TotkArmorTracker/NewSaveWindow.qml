@@ -140,101 +140,107 @@ Window {
         ListElement { name: "Zora Helm" }
     }
 
-    // Window elements.
-    GridLayout {
-        id: newSaveCentralColumn
+    Pane {
+        id: newSavePane
 
-        anchors {
-            fill: parent
-            margins: 20
-        }
-        rows: 2
+        anchors.fill: parent
 
-        // SAVE NAME.
-        RowLayout {
-            id: saveNameRow
+        // Window elements.
+        GridLayout {
+            id: newSaveCentralColumn
 
-            Layout.row: 0
+            anchors {
+                fill: parent
+                margins: 20
+            }
+            rows: 2
 
-            Text {
-                id: saveNameText
+            // SAVE NAME.
+            RowLayout {
+                id: saveNameRow
 
-                text: "Save Name:"
+                Layout.row: 0
+
+                Label {
+                    id: saveNameText
+
+                    text: "Save Name:"
+                }
+
+                TextField {
+                    id: saveNameTextField
+
+                    placeholderText: "Type save name here"
+                    Layout.preferredWidth: 300
+                }
             }
 
-            TextField {
-                id: saveNameTextField
+            // ARMOR CONFIGURATION.
+            // Gives the user a list of template armor pieces to select from.
+            ListView {
+                id: armorConfigGridView
 
-                placeholderText: "Type save name here"
-                Layout.preferredWidth: 300
-            }
-        }
+                Layout.row: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                spacing: 5
+                clip: true
 
-        // ARMOR CONFIGURATION.
-        // Gives the user a list of template armor pieces to select from.
-        ListView {
-            id: armorConfigGridView
+                model: armorSetListModel
+                delegate: Pane {
+                    id: armorPane
 
-            Layout.row: 1
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            spacing: 5
-            clip: true
+                    width: 300
+                    height: 60
 
-            model: armorSetListModel
-            delegate: Rectangle {
-                id: armorRect
+                    Image {
+                        id: armorImage
 
-                width: 300
-                height: 40
-
-                Image {
-                    id: armorImage
-
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                        left: parent.left
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                            left: parent.left
+                        }
+                        width: height
+                        source: "images/" + name + ".png"
                     }
-                    width: height
-                    source: "images/" + name + ".png"
-                }
-                Text {
-                    id: armorName
+                    Label {
+                        id: armorName
 
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                        left: armorImage.right
-                        leftMargin: 5
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                            left: armorImage.right
+                            leftMargin: 5
+                        }
+                        verticalAlignment: Qt.AlignVCenter
+                        text: name
                     }
-                    verticalAlignment: Qt.AlignVCenter
-                    text: name
-                }
 
-                Button {
-                    id: armorIncreaseButton
+                    Button {
+                        id: armorIncreaseButton
 
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                        right: parent.right
-                        margins: 5
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                            right: parent.right
+                            margins: 5
+                        }
+                        width: height
+                        text: ">"
                     }
-                    width: height
-                    text: ">"
-                }
-                Button {
-                    id: armorDecreaseButton
+                    Button {
+                        id: armorDecreaseButton
 
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                        right: armorIncreaseButton.left
-                        margins: 5
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                            right: armorIncreaseButton.left
+                            margins: 5
+                        }
+                        width: height
+                        text: "<"
                     }
-                    width: height
-                    text: "<"
                 }
             }
         }

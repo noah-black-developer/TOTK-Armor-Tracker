@@ -26,7 +26,7 @@ Item {
     Rectangle {
         id: armorIconContentsFrame
         anchors.fill: parent
-        color: "#00ffffff"
+        color: "transparent"
 
         // Armor Image
         Image {
@@ -115,8 +115,6 @@ Item {
                 topMargin: 2
             }
 
-            // Change the text color based on whether the armor is unlocked.
-            color: (armorIconMain.isUnlocked) ? "black" : "gray"
             text: armorIconMain.armorName
             horizontalAlignment: Text.AlignHCenter
 

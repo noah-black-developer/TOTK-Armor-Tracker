@@ -162,7 +162,6 @@ Item {
                 right: parent.right
                 top: parent.top
             }
-            color: "lightgray"
             visible: upgradeViewerRoot.upgradeMaterialCount >= 1
 
             // Item Picture.
@@ -225,7 +224,6 @@ Item {
                 top: upgradeItem1.bottom
                 topMargin: (upgradeViewerRoot.upgradeMaterialCount >= 2) ? 2 : 0
             }
-            color: "lightgray"
             visible: upgradeViewerRoot.upgradeMaterialCount >= 2
 
             // Item Picture.
@@ -289,7 +287,6 @@ Item {
                 top: upgradeItem2.bottom
                 topMargin: (upgradeViewerRoot.upgradeMaterialCount >= 3) ? 2 : 0
             }
-            color: "lightgray"
             visible: upgradeViewerRoot.upgradeMaterialCount >= 3
 
             // Item Picture.

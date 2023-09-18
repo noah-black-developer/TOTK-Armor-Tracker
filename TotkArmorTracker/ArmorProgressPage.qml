@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts
 import QtQuick.Dialogs
 
-Rectangle {
+Pane {
     id: armorProgressPageRoot
 
     // DIALOGS.
@@ -36,7 +36,7 @@ Rectangle {
     }
 
     // Armor Details (Right Side).
-    Rectangle {
+    Frame {
         id: armorDetailsRectangle
 
         width: 280
@@ -48,18 +48,6 @@ Rectangle {
         }
         // Sits above the other controls on the z-axis.
         z: 1
-        color: "transparent"
-
-        // Color Rectangle.
-        // Separated from main rectangle to allow just the backing of the controls to be transluscent,
-        // without diminishing all of the content objects (text, icons, etc...).
-        Rectangle {
-            id: armorDetailsColorRect
-
-            anchors.fill: parent
-            color: "#dedede"
-            opacity: 0.9
-        }
 
         // DETAILS.
         // All detail controls are kept on a flickable to allow them to scroll with smaller UI sizes.
@@ -128,7 +116,7 @@ Rectangle {
                         Layout.alignment: Qt.AlignHCenter
 
                         // Selected Armor Name.
-                        Text {
+                        Label {
                             id: selectedArmorNameLabel
                             objectName: "selectedArmorNameLabel"
 
@@ -156,7 +144,7 @@ Rectangle {
                     }
 
                     // Armor Set Name.
-                    Text {
+                    Label {
                         id: selectedArmorSetNameLabel
                         objectName: "selectedArmorSetNameLabel"
 
@@ -169,7 +157,7 @@ Rectangle {
                     }
 
                     // Armor Quote.
-                    Text {
+                    Label {
                         id: selectedArmorQuoteLabel
                         objectName: "selectedArmorQuoteLabel"
 
@@ -192,11 +180,10 @@ Rectangle {
                         Layout.leftMargin: 20
                         Layout.rightMargin: 20
                         Layout.alignment: Qt.AlignHCenter
-                        color: "black"
                     }
 
                     // Armor Defense.
-                    Text {
+                    Label {
                         id: selectedArmorDefenseLabel
                         objectName: "selectedArmorDefenseLabel"
 
@@ -210,7 +197,7 @@ Rectangle {
                     }
 
                     // Passive Bonus.
-                    Text {
+                    Label {
                         id: selectedArmorPassiveLabel
                         objectName: "selectedArmorPassiveLabel"
 
@@ -224,7 +211,7 @@ Rectangle {
                     }
 
                     // Passive Bonus.
-                    Text {
+                    Label {
                         id: selectedArmorsSetBonusLabel
                         objectName: "selectedArmorSetBonusLabel"
 
@@ -322,7 +309,7 @@ Rectangle {
     }
 
     // Armor Progress Bar (Left Side).
-    Rectangle {
+    Frame {
         id: armorProgressRectangle
 
         width: 280
@@ -334,18 +321,6 @@ Rectangle {
         }
         // Sits above the other controls on the z-axis.
         z: 1
-        color: "transparent"
-
-        // Color Rectangle.
-        // Separated from main rectangle to allow just the backing of the controls to be transluscent,
-        // without diminishing all of the content objects (text, icons, etc...).
-        Rectangle {
-            id: armorIconsColorRect
-
-            anchors.fill: parent
-            color: "#dedede"
-            opacity: 0.9
-        }
 
         // Sort Combobox.
         // Gives the user a number of different options for sorting the different armors.
@@ -722,7 +697,7 @@ Rectangle {
 
     // SAVE NAME.
     // Displays the name of the current save, overlays the central area.
-    Rectangle {
+    Frame {
         id: saveNameRectangle
 
         property int bufferSize: 10
@@ -737,20 +712,8 @@ Rectangle {
         }
         // Sits above the other controls on the z-axis.
         z: 1
-        color: "transparent"
 
-        // Color Rectangle.
-        // Separated from main rectangle to allow just the backing of the controls to be transluscent,
-        // without diminishing all of the content objects (text, icons, etc...).
-        Rectangle {
-            id: saveNameColorRect
-
-            anchors.fill: parent
-            color: "#dedede"
-            opacity: 0.9
-        }
-
-        Text {
+        Label {
             id: saveNameText
             objectName: "saveNameText"
 
