@@ -205,15 +205,33 @@ Window {
         }
     }
 
-    MainWindow {
-        id: mainWindow
-        objectName: "mainWindow"
+    // Main Controls.
+    Rectangle {
+        id: mainRectangle
 
         anchors {
             left: parent.left
             right: parent.right
             top: menuBar.bottom
             bottom: parent.bottom
+        }
+
+        StackLayout {
+            id: stackLayout
+
+            anchors.fill: parent
+            // TODO - Add in a control to toggle the active window.
+            currentIndex: 0
+
+            // Page 1 - Armor Progress
+            // Tracks what armor pieces are unlocked, current tiers, etc.
+            ArmorProgressPage {
+                id: mainWindowArmorProgressPage
+
+                objectName: "mainWindowArmorProgressPage"
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
         }
     }
 }

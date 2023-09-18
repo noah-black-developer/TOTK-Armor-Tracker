@@ -3,7 +3,7 @@
         <file>App.qml</file>
         <file>ArmorIcon.qml</file>
         <file>ArmorProgressPage.qml</file>
-        <file>MainWindow.qml</file>
         <file>ArmorUpgradeViewer.qml</file>
+        <file>newSaveWindow.qml</file>
     </qresource>
 </RCC>
