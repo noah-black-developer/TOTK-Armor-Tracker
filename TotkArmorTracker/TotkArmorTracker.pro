@@ -35,6 +35,7 @@ DISTFILES += \
     ArmorProgressPage.qml \
     ArmorUpgradeViewer.qml \
     MainWindow.qml \
+    NewSaveWindow.qml\
     data/armorData.xml \
     images/* \
     rapidxml-1.13/license.txt \

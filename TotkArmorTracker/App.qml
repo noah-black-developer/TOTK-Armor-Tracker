@@ -76,6 +76,12 @@ Window {
                 id: newAction
 
                 text: "&New"
+                onTriggered: {
+                    // When clicked, run the subwindow for creating a new save file.
+                    var component = Qt.createComponent("NewSaveWindow.qml")
+                    var window    = component.createObject(mainWindowRoot)
+                    window.show()
+                }
             }
             Action {
                 id: openAction
