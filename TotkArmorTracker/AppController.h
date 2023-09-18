@@ -45,19 +45,30 @@ public:
     int MAX_RECENT_SAVES = 5;
 
 private:
+    // APP VALUE STORAGE.
     QString _armorConfigsPath = "";
     QObject *_qmlRootObject = nullptr;
     QObject *_selectedArmor = nullptr;
     QString _currentSort = "";
     QUrl _currentSaveFile = QUrl("");
-    bool _recentSavesAreInitialized = false;
     QList<QUrl> _recentSavesList = QList<QUrl>();
 
+    // APP STATE.
+    bool _recentSavesAreInitialized = false;
+    bool _saveIsLoaded = false;
+
+    // GENERAL PRIVATE METHODS.
     QObject *_getArmorIconByName(QString armorName);
-    bool _setArmorDetailsByName(QString armorName);
-    bool _setArmorDetailsToDefault();
+
+    // SAVE/INIT PRIVATE METHODS.
     std::vector<char> _readXmlToParseReadyObj(QString xmlFilePath);
     bool _addSaveToRecentList(QUrl saveFilePath);
+    bool _pushRecentSavesToDataStorage();
+    bool _loadRecentSavesFromDataStorage();
+
+    // ARMOR DETAIL PRIVATE METHODS.
+    bool _setArmorDetailsByName(QString armorName);
+    bool _setArmorDetailsToDefault();
 };
 
 #endif // APPCONTROLLER_H

@@ -8,8 +8,11 @@ import QtQuick.Dialogs
 
 Window {
     id: mainWindowRoot
+    objectName: "mainWindowRoot"
 
-    property url currentSavePath
+    // UI STATE.
+    property bool saveIsLoaded: false
+    property bool userHasUnsavedChanges: false
 
     width: 1000
     height: 700
@@ -24,8 +27,6 @@ Window {
         // Opens the "saves" folder within the project.
         onAccepted: {
             AppController.pullSave(selectedFile);
-            mainWindowRoot.currentSavePath = selectedFile;
-            saveAction.enabled = true;
         }
     }
 
@@ -37,6 +38,25 @@ Window {
         text: "Are you sure you want to quit?"
         buttons: MessageDialog.Yes | MessageDialog.No
         onAccepted: Qt.quit()
+    }
+
+    // Dialog to ask if the user wants to save their changes when loading a new save.
+    MessageDialog {
+        id: saveChangesConfirmation
+
+        // File Path must be set to the incoming save file before opening the dialog.
+        property url filePath
+
+        title: "Save Unsaved Changes"
+        text: "Would you like to save your changes?"
+        buttons: MessageDialog.Yes | MessageDialog.No
+        onAccepted: {
+            AppController.pushSave();
+            AppController.pullSave(filePath);
+        }
+        onRejected: {
+            AppController.pullSave(filePath);
+        }
     }
 
     // Menu Options.
@@ -75,6 +95,18 @@ Window {
 
                 property int recentSaveCount: 0
 
+                function loadRecentSave(filePath) {
+                    // If user has a loaded save and unsaved changes, prompt them to save changes first.
+                    if (mainWindowRoot.saveIsLoaded && mainWindowRoot.userHasUnsavedChanges) {
+                        saveChangesConfirmation.filePath = filePath;
+                        saveChangesConfirmation.open();
+                    }
+                    // Otherwise, skip the confirmation box and load the save directly.
+                    else {
+                        AppController.pullSave(filePath);
+                    }
+                }
+
                 title: "Open &Recent"
                 enabled: (recentSaveCount > 0)
                 // The menu contains pre-defined fields for up to 5 recent saves.
@@ -89,7 +121,7 @@ Window {
                     text: fileName
                     visible: (openRecentMenu.recentSaveCount >= 1)
                     height: visible ? implicitHeight : 0
-                    onTriggered: AppController.pullSave(filePath)
+                    onTriggered: openRecentMenu.loadRecentSave(filePath)
                 }
                 MenuItem {
                     id: recentSave2
@@ -101,7 +133,7 @@ Window {
                     text: fileName
                     visible: (openRecentMenu.recentSaveCount >= 2)
                     height: visible ? implicitHeight : 0
-                    onTriggered: AppController.pullSave(filePath)
+                    onTriggered: openRecentMenu.loadRecentSave(filePath)
                 }
                 MenuItem {
                     id: recentSave3
@@ -113,7 +145,7 @@ Window {
                     text: fileName
                     visible: (openRecentMenu.recentSaveCount >= 3)
                     height: visible ? implicitHeight : 0
-                    onTriggered: AppController.pullSave(filePath)
+                    onTriggered: openRecentMenu.loadRecentSave(filePath)
                 }
                 MenuItem {
                     id: recentSave4
@@ -125,7 +157,7 @@ Window {
                     text: fileName
                     visible: (openRecentMenu.recentSaveCount >= 4)
                     height: visible ? implicitHeight : 0
-                    onTriggered: AppController.pullSave(filePath)
+                    onTriggered: openRecentMenu.loadRecentSave(filePath)
                 }
                 MenuItem {
                     id: recentSave5
@@ -137,16 +169,21 @@ Window {
                     text: fileName
                     visible: (openRecentMenu.recentSaveCount >= 5)
                     height: visible ? implicitHeight : 0
-                    onTriggered: AppController.pullSave(filePath)
+                    onTriggered: openRecentMenu.loadRecentSave(filePath)
                 }
             }
             Action {
                 id: saveAction
+                objectName: "saveAction"
 
                 text: "&Save"
                 // By default, this action is disabled.
                 enabled: false
-                onTriggered: AppController.pushSave()
+                onTriggered: {
+                    AppController.pushSave();
+                    // Reset flags showing user has unsaved changes.
+                    mainWindowRoot.userHasUnsavedChanges = false;
+                }
             }
             MenuSeparator {}
             Action {

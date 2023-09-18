@@ -2,8 +2,8 @@
 	<Armors>
 		<Armor name="Amber Earrings" unlocked="true" level="2"/>
 		<Armor name="Ancient Hero's Aspect" unlocked="true" level="2"/>
-		<Armor name="Archaic Legwear" unlocked="false" level="0"/>
-		<Armor name="Archaic Tunic" unlocked="false" level="0"/>
+		<Armor name="Archaic Legwear" unlocked="true" level="0"/>
+		<Armor name="Archaic Tunic" unlocked="true" level="0"/>
 		<Armor name="Archaic Warm Greaves" unlocked="false" level="0"/>
 		<Armor name="Barbarian Armor" unlocked="false" level="0"/>
 		<Armor name="Barbarian Helm" unlocked="false" level="0"/>
@@ -137,3 +137,4 @@
 		<Armor name="Zora Helm" unlocked="false" level="0"/>
 	</Armors>
 </Save>
+

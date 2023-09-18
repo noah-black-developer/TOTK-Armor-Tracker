@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?> 
 <UserData>
-    <RecentSaves>
-        <!-- Example -->
-        <!-- <Save name=test_save.xml>/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/saves/test_save.xml</Save> -->
-    </RecentSaves>
+	<RecentSaves>
+		<Armor>file:///home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/saves/test_save_max.xml</Armor>
+		<Armor>file:///home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/saves/test_save.xml</Armor>
+		<Armor>file:///home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/saves/test_save_min.xml</Armor>
+	</RecentSaves>
 </UserData>
+

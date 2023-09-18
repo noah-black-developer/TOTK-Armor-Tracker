@@ -90,6 +90,8 @@ bool AppController::initialize(QString armorConfigsPath)
 
     // Call any methods relating to defaulting/initializing the UI.
     _setArmorDetailsToDefault();
+    _loadRecentSavesFromDataStorage();
+    refreshRecentSaves();
 
     return true;
 }
@@ -167,7 +169,22 @@ bool AppController::pullSave(QUrl saveFilePath)
     // Add the loaded save to the list of recent save files.
     _addSaveToRecentList(saveFilePath);
 
-    // Store the active save and return.
+    // If this is the first save a user has loaded, change QML state variables to reflect that.
+    // This will allow user to access some options that are only usable with a loaded save.
+    bool saveHasBeenLoadedBefore = _qmlRootObject->property("saveIsLoaded").toBool();
+    if (!saveHasBeenLoadedBefore) {
+        _qmlRootObject->setProperty("saveIsLoaded", true);
+    }
+
+    // If the user has a current selection, reload the armor's stats.
+    bool armorIsSelected = (_selectedArmor != nullptr);
+    if (armorIsSelected) {
+        _setArmorDetailsByName(_selectedArmor->property("armorName").toString());
+    }
+
+    // Reset UI state and continue.
+    _qmlRootObject->findChild<QObject*>("saveAction")->setProperty("enabled", true);
+    _qmlRootObject->setProperty("userHasUnsavedChanges", false);
     _currentSaveFile = saveFilePath;
     return true;
 }
@@ -241,10 +258,14 @@ bool AppController::pushSave() {
             case 3:
                 armorNode->first_attribute("level")->value("3");
                 break;
+            case 4:
+                armorNode->first_attribute("level")->value("4");
+                break;
             default:
                 // If an unsupported level was found, set the armor to base level with debug logs.
                 armorNode->first_attribute("level")->value("0");
                 qDebug("Unsupported armor level found during save. Setting to base level.");
+                qDebug() << armorLevelValue;
                 break;
         }
     }
@@ -295,7 +316,7 @@ bool AppController::refreshRecentSaves() {
 
     // Otherwise, if no recent saves are currently avaialble, disable the option to select recent saves altogether.
     else {
-        recentSavesMenuParent->setProperty("enabled", true);
+        recentSavesMenuParent->setProperty("enabled", false);
     }
 
     return true;
@@ -377,6 +398,9 @@ void AppController::setArmorUnlockedState(QString armorName, bool unlock) {
     if (armorIsSelected) {
         _setArmorDetailsByName(armorName);
     }
+
+    // Note that changes have been made on the current save.
+    _qmlRootObject->setProperty("userHasUnsavedChanges", true);
     return;
 }
 
@@ -393,6 +417,9 @@ void AppController::setArmorLevel(QString armorName, int newLevel) {
     if (armorIsSelected) {
         _setArmorDetailsByName(armorName);
     }
+
+    // Note that changes have been made on the current save.
+    _qmlRootObject->setProperty("userHasUnsavedChanges", true);
     return;
 }
 
@@ -759,7 +786,85 @@ bool AppController::_addSaveToRecentList(QUrl saveFilePath) {
         recentSavesCount += 1;
     }
 
-    // Refresh the save list shown to the user and return.
+    // Refresh the save list shown to the user.
     refreshRecentSaves();
+
+    // Push the new list of saves to external storage and return. If this fails, returns a failure.
+    return _pushRecentSavesToDataStorage();
+}
+
+// Save the internal list of recent save files to local storage.
+bool AppController::_pushRecentSavesToDataStorage() {
+    // LOAD IN LOCAL STORAGE.
+    // Read in the local data file as a string compatable with XML parsing.
+    QString userDataFilePath = QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/userData.xml");
+    std::vector<char> parseReadyUserData = _readXmlToParseReadyObj(userDataFilePath);
+
+    // If the returned string is empty, return a failure.
+    if(parseReadyUserData == std::vector<char>('\0'))
+    {
+        return false;
+    }
+
+    // Convert the XML string into a RapidXML-compatable document object.
+    // Make a safe-to-modify copy of the save file string to load into RapidXML.
+    xml_document<> userDataFileXmlDocument;
+    userDataFileXmlDocument.parse<0>(&parseReadyUserData[0]);
+
+    // PUSH SAVE DATA.
+    // Remove all previous entries for recent save files.
+    xml_node<char> *recentSavesParentNode = userDataFileXmlDocument.first_node("UserData")->first_node("RecentSaves");
+    recentSavesParentNode->remove_all_nodes();
+
+    // Iterate across all of the currently entries in the recent saves list.
+    for (int saveIndex = 0; saveIndex < _recentSavesList.length(); saveIndex++) {
+        // Build a new XML node for the save, with appropriate name.
+        xml_node<char> *recentSave = userDataFileXmlDocument.allocate_node(node_element, "Armor");
+
+        // RapidXML doesn't "own" any of the data assigned to it, so to ensure that the path isn't changed down the line,
+        // a new allocation is created for the full file path is created, then applied.
+        char *savePathAlloc = userDataFileXmlDocument.allocate_string(_recentSavesList[saveIndex].toString().toStdString().c_str());
+        recentSave->value(savePathAlloc);
+        recentSavesParentNode->append_node(recentSave);
+    }
+
+    // Write back the XML changes and return.
+    std::ofstream userDataFile;
+    userDataFile.open(userDataFilePath.toStdString());
+    userDataFile << userDataFileXmlDocument;
+    userDataFile.close();
+
+    return true;
+}
+
+// Loads recent save files into app from external app storage.
+bool AppController::_loadRecentSavesFromDataStorage() {
+    // LOAD IN LOCAL STORAGE.
+    // Read in the local data file as a string compatable with XML parsing.
+    QString userDataFilePath = QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/userData.xml");
+    std::vector<char> parseReadyUserData = _readXmlToParseReadyObj(userDataFilePath);
+
+    // If the returned string is empty, return a failure.
+    if(parseReadyUserData == std::vector<char>('\0'))
+    {
+        return false;
+    }
+
+    // Convert the XML string into a RapidXML-compatable document object.
+    // Make a safe-to-modify copy of the save file string to load into RapidXML.
+    xml_document<> userDataFileXmlDocument;
+    userDataFileXmlDocument.parse<0>(&parseReadyUserData[0]);
+
+    // PULL IN SAVE DATA.
+    // Clear out any previous saves.
+    _recentSavesList.clear();
+
+    // Cycle through all nodes for recent armor files. If none are present, skip.
+    xml_node<char> *recentSavesParentNode = userDataFileXmlDocument.first_node("UserData")->first_node("RecentSaves");
+    for (xml_node<char> *recentSave = recentSavesParentNode->first_node("Armor"); recentSave != 0; recentSave = recentSave->next_sibling()) {
+        // Pull the save URL in and store it internally.
+        _recentSavesList.append(QUrl(recentSave->value()));
+    }
+
     return true;
 }
