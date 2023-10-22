@@ -44,7 +44,7 @@ Item {
         //visible: upgradeViewerRoot.upgradeMaterialCount === 1
         onPaint: {
             var ctx = getContext("2d");
-            ctx.strokeStyle = "black";
+            ctx.strokeStyle = "gray";
             ctx.lineWidth = 5;
             ctx.beginPath();
             ctx.moveTo(headerEnd, 0);
@@ -73,7 +73,25 @@ Item {
         Repeater {
             id: upgradeViewerTierIcons
 
-            model: 4
+            // Function to catch any errors in upgrade and return.
+            function getStarCount() {
+                if (upgradeViewerRoot.upgradeRank < 0) {
+                    // If rank ever falls below 0, print error logs and clamp to 0.
+                    console.log("Armor level for icon " + armorIconMain.armorName + " was below 0. Clamping value to 0.")
+                    return 0
+                }
+                else if (upgradeViewerRoot.upgradeRank > 4) {
+                    // If rank ever raises above 4, print error logs and clamp to 4.
+                    console.log("Armor level for icon " + armorIconMain.armorName + " was above 4. Clamping value to 4.")
+                    return 4
+                }
+                else {
+                    // If no errors, return upgrade rank.
+                    return upgradeViewerRoot.upgradeRank
+                }
+            }
+
+            model: getStarCount()
 
             Image {
                 required property int index
@@ -82,9 +100,7 @@ Item {
                 height: width
 
                 fillMode: Image.PreserveAspectFit
-
-                // Choose a filled or unfilled star, depending on the item's current rank.
-                source: (index <= upgradeViewerRoot.upgradeRank - 1) ? "images/star-solid.svg" : "images/star-regular.svg"
+                source: "images/closed-star-darkmode.svg"
             }
         }
     }
@@ -116,20 +132,36 @@ Item {
                 leftMargin: 5
             }
             text: upgradeViewerRoot.prevArmor + " Armor > " + upgradeViewerRoot.nextArmor + " Armor"
+            color: "white"
         }
 
         // Rupee Cost.
-        Text {
-            id: rupeeCostText
+        Image {
+            id: rupeeCostIcon
 
             anchors {
                 right: parent.right
                 top: parent.top
                 bottom: parent.bottom
                 rightMargin: 5
+                topMargin: 1
+                bottomMargin: 1
             }
-            text: upgradeViewerRoot.rupeeCost + " Rupees"
+            fillMode: Image.PreserveAspectFit
+            source: "images/rupee-darkmode.svg"
+        }
+        Text {
+            id: rupeeCostText
+
+            anchors {
+                right: rupeeCostIcon.left
+                top: parent.top
+                bottom: parent.bottom
+                rightMargin: 1
+            }
+            text: upgradeViewerRoot.rupeeCost
             horizontalAlignment: Qt.AlignRight
+            color: "white"
         }
     }
 
@@ -163,6 +195,7 @@ Item {
                 top: parent.top
             }
             visible: upgradeViewerRoot.upgradeMaterialCount >= 1
+            color: "transparent"
 
             // Item Picture.
             Image {
@@ -195,6 +228,7 @@ Item {
                 verticalAlignment: Qt.AlignVCenter
                 fontSizeMode: Text.HorizontalFit
                 minimumPointSize: 7
+                color: "white"
             }
 
             // Item Quantity.
@@ -210,6 +244,7 @@ Item {
                 }
                 text: "x" + upgradeViewerRoot.materialOneQuantity
                 horizontalAlignment: Qt.AlignLeft
+                color: "white"
             }
         }
 
@@ -225,6 +260,7 @@ Item {
                 topMargin: (upgradeViewerRoot.upgradeMaterialCount >= 2) ? 2 : 0
             }
             visible: upgradeViewerRoot.upgradeMaterialCount >= 2
+            color: "transparent"
 
             // Item Picture.
             Image {
@@ -257,6 +293,7 @@ Item {
                 verticalAlignment: Qt.AlignVCenter
                 fontSizeMode: Text.HorizontalFit
                 minimumPointSize: 7
+                color: "white"
             }
 
             // Item Quantity.
@@ -272,6 +309,7 @@ Item {
                 }
                 text: "x" + upgradeViewerRoot.materialTwoQuantity
                 horizontalAlignment: Qt.AlignLeft
+                color: "white"
             }
         }
 
@@ -288,6 +326,7 @@ Item {
                 topMargin: (upgradeViewerRoot.upgradeMaterialCount >= 3) ? 2 : 0
             }
             visible: upgradeViewerRoot.upgradeMaterialCount >= 3
+            color: "transparent"
 
             // Item Picture.
             Image {
@@ -320,6 +359,7 @@ Item {
                 verticalAlignment: Qt.AlignVCenter
                 fontSizeMode: Text.HorizontalFit
                 minimumPointSize: 7
+                color: "white"
             }
 
             // Item Quantity.
@@ -334,6 +374,7 @@ Item {
                 }
                 text: "x" + upgradeViewerRoot.materialThreeQuantity
                 horizontalAlignment: Qt.AlignLeft
+                color: "white"
             }
         }
     }

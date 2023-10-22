@@ -13,7 +13,7 @@ Item {
     property bool isUnlocked: false
 
     // Formatting.
-    property bool darkModeEnabled: false
+    property bool darkModeEnabled: true
     property int namePointSize: 7
 
     // Selection.
@@ -89,7 +89,25 @@ Item {
             // Creates a num. of stars equal to current armor rank.
             // Only applicable if the armor can be upgraded.
             Repeater {
-                model: 4
+                // Function to catch any errors in armor level and return current star count.
+                function getStarCount() {
+                    if (armorIconMain.currentRank < 0) {
+                        // If rank ever falls below 0, print error logs and clamp to 0.
+                        console.log("Armor level for icon " + armorIconMain.armorName + " was below 0. Clamping value to 0.")
+                        return 0
+                    }
+                    else if (armorIconMain.currentRank > 4) {
+                        // If rank ever raises above 4, print error logs and clamp to 4.
+                        console.log("Armor level for icon " + armorIconMain.armorName + " was above 4. Clamping value to 4.")
+                        return 4
+                    }
+                    else {
+                        // If no errors, return armor rank.
+                        return armorIconMain.currentRank
+                    }
+                }
+
+                model: getStarCount()
 
                 Image {
                     required property int index
@@ -97,9 +115,10 @@ Item {
                     height: currentArmorLevelRow.height
                     width: height
                     fillMode: Image.PreserveAspectFit
+                    mipmap: true
 
                     // Choose a filled or unfilled star, depending on the item's current rank.
-                    source: (index <= armorIconMain.currentRank - 1) ? "images/star-solid.svg" : "images/star-regular.svg"
+                    source: (armorIconMain.darkModeEnabled) ? "images/closed-star-darkmode.svg" : "images/closed-star-lightmode.svg"
                 }
             }
         }

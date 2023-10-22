@@ -3,8 +3,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts
 import QtQuick.Dialogs
 
-Pane {
+Rectangle {
     id: armorProgressPageRoot
+
+    color: "#929696"
 
     // DIALOGS.
     // MessageBox to confirm the unlocking of armor sets.
@@ -36,8 +38,11 @@ Pane {
     }
 
     // Armor Details (Right Side).
-    Frame {
+    Rectangle {
         id: armorDetailsRectangle
+
+        color: "#494b4b"
+        opacity: 0.9
 
         width: 280
         anchors {
@@ -60,7 +65,10 @@ Pane {
             Item {
                 id: armorDetailsContentsWrapper
 
-                width: parent.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 height: childrenRect.height
                 implicitHeight: height
 
@@ -103,7 +111,7 @@ Pane {
 
                                 fillMode: Image.PreserveAspectFit
 
-                                source: "images/star-solid.svg"
+                                source: "images/closed-star-darkmode.svg"
                             }
                         }
                     }
@@ -309,8 +317,11 @@ Pane {
     }
 
     // Armor Progress Bar (Left Side).
-    Frame {
+    Rectangle {
         id: armorProgressRectangle
+
+        color: "#494b4b"
+        opacity: 0.9
 
         width: 280
         anchors {
