@@ -312,6 +312,9 @@ bool AppController::refreshRecentSaves() {
             recentSaveOption->setProperty("fileName", saveFileName);
             recentSaveOption->setProperty("filePath", saveFilePath);
         }
+
+        // Mark that recent saves are initialized and available.
+        _recentSavesAreInitialized = true;
     }
 
     // Otherwise, if no recent saves are currently avaialble, disable the option to select recent saves altogether.
@@ -748,13 +751,15 @@ std::vector<char> AppController::_readXmlToParseReadyObj(QString xmlFilePath)
 
 // Add a save file to the list of recently loaded save files.
 // Applies the change to the internal list of saves, then syncs that change with the external data storage.
-bool AppController::_addSaveToRecentList(QUrl saveFilePath) {
+bool AppController::_addSaveToRecentList(QUrl saveFilePath)
+{
     // ADD SAVE TO INTERNAL LIST.
     // If this method was called before the list of saves was initialized internally, return a failure.
-//    if (!_recentSavesAreInitialized) {
-//        return false;
-//    }
+    if (!_recentSavesAreInitialized) {
+        return false;
+    }
 
+    // Check if the save file provided already exists inside the internal recent saves list.
     for (int saveIndex = 0; saveIndex < _recentSavesList.length(); saveIndex++) {
         // If a matching file is found, remove it from the list and break.
         if (saveFilePath == _recentSavesList[saveIndex]) {
