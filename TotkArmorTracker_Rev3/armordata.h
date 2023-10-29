@@ -28,7 +28,10 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 private:
-    QList<Armor> _mDatas;
+    QList<Armor> _mDatas = {
+        Armor(QString("test"), QString("test"), QString("test"), QString("test"), QString("test"), 0),
+        Armor(QString("test"), QString("test"), QString("test"), QString("test"), QString("test"), 1)
+    };
     QObject *_parent;
 };
 

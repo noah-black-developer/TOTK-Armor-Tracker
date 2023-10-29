@@ -9,6 +9,14 @@ class Armor
 {
 public:
     Armor();
+    Armor(
+        QString armorName,
+        QString armorSetName,
+        QString armorSetDesc,
+        QString armorPassiveBonus,
+        QString armorSetBonus,
+        int armorLevel
+    );
 
     // CLASS VARIABLES.
     // Armor Properties.

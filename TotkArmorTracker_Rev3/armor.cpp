@@ -2,6 +2,16 @@
 
 Armor::Armor() { }
 
+Armor::Armor(QString armorName, QString armorSetName, QString armorSetDesc, QString armorPassiveBonus, QString armorSetBonus, int armorLevel)
+{
+    name = armorName;
+    setName = armorSetName;
+    setDesc = armorSetDesc;
+    passiveBonus = armorPassiveBonus;
+    setBonus = armorSetBonus;
+    level = armorLevel;
+}
+
 void Armor::setUpgradeLevel(int level, Upgrade upgradeDetails)
 {
     // Add a new map entry, with level/upgrade as the key/value pair.

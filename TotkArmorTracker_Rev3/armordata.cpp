@@ -5,7 +5,8 @@ ArmorData::ArmorData(QObject *parent) : QAbstractListModel(parent)
     _parent = parent;
 }
 
-QHash<int, QByteArray> ArmorData::roleNames() {
+QHash<int, QByteArray> ArmorData::roleNames() const
+{
     return { { NameRole, "name" },
             { SetNameRole, "setName" },
             { SetDescRole, "description" },
@@ -15,7 +16,7 @@ QHash<int, QByteArray> ArmorData::roleNames() {
             };
 }
 
-int ArmorData::rowCount(const QModelIndex &parent = QModelIndex())
+int ArmorData::rowCount(const QModelIndex &parent) const
 {
     return _mDatas.size();
 }
@@ -59,33 +60,37 @@ bool ArmorData::setData(const QModelIndex &index, const QVariant &value, int rol
     return true;
 }
 
-QVariant ArmorData::data(const QModelIndex &index, int role)
+QVariant ArmorData::data(const QModelIndex &index, int role) const
 {
     if (!hasIndex(index.row(), index.column(), index.parent()))
     {
         return {};
     }
 
-    if (role == Qt::DisplayRole)
+    const Armor &armorItem = _mDatas[index.row()];
+    if (role == NameRole)
     {
-        if (index.column() == 0) {
-            return mDatas[index.row()].name;
-        }
-        if (index.column() == 1) {
-            return mDatas[index.row()].setName;
-        }
-        if (index.column() == 2) {
-            return mDatas[index.row()].setDesc;
-        }
-        if (index.column() == 3) {
-            return mDatas[index.row()].passiveBonus;
-        }
-        if (index.column() == 4) {
-            return mDatas[index.row()].setBonus;
-        }
-        if (index.column() == 5) {
-            return mDatas[index.row()].level;
-        }
+        return armorItem.name;
+    }
+    if (role == SetNameRole)
+    {
+        return armorItem.setName;
+    }
+    if (role == SetDescRole)
+    {
+        return armorItem.setDesc;
+    }
+    if (role == PassiveBonusRole)
+    {
+        return armorItem.passiveBonus;
+    }
+    if (role == SetBonusRole)
+    {
+        return armorItem.setBonus;
+    }
+    if (role == LevelRole)
+    {
+        return armorItem.level;
     }
 
     return {};

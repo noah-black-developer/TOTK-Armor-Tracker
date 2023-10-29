@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <armordata.h>
 
 int main(int argc, char *argv[])
@@ -16,12 +17,12 @@ int main(int argc, char *argv[])
             if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
-    engine.load(url);
 
     // Pass any required singletons into the QML engine.
-    ArmorData *tempArmorData = new ArmorData(nullptr);
-//    engine.rootContext()->setContextProperty("armorData", tempArmorData);
+    ArmorData *tempArmorData = new ArmorData();
+    engine.rootContext()->setContextProperty("testData", tempArmorData);
 
     // Run app. Any return codes given by the application are returned from this function.
+    engine.load(url);
     return app.exec();
 }
