@@ -802,7 +802,7 @@ bool AppController::_addSaveToRecentList(QUrl saveFilePath)
 bool AppController::_pushRecentSavesToDataStorage() {
     // LOAD IN LOCAL STORAGE.
     // Read in the local data file as a string compatable with XML parsing.
-    QString userDataFilePath = QString(R"(C:\Users\noahb\OneDrive\Documents\GitHub\TOTK-Armor-Tracker\TotkArmorTracker\data\userData.xml)");
+    QString userDataFilePath = QString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/userData.xml)");
     std::vector<char> parseReadyUserData = _readXmlToParseReadyObj(userDataFilePath);
 
     // If the returned string is empty, return a failure.
@@ -846,7 +846,7 @@ bool AppController::_pushRecentSavesToDataStorage() {
 bool AppController::_loadRecentSavesFromDataStorage() {
     // LOAD IN LOCAL STORAGE.
     // Read in the local data file as a string compatable with XML parsing.
-    QString userDataFilePath = QString(R"(C:\Users\noahb\OneDrive\Documents\GitHub\TOTK-Armor-Tracker\TotkArmorTracker\data\userData.xml)");
+    QString userDataFilePath = QString(R"(/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker/data/userData.xml)");
     std::vector<char> parseReadyUserData = _readXmlToParseReadyObj(userDataFilePath);
 
     // If the returned string is empty, return a failure.

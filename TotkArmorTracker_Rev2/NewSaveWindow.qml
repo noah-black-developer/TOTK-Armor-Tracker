@@ -7,6 +7,8 @@ Window {
 
     width: 600
     height: 500
+    minimumWidth: 600
+    maximumWidth: 600
     title: "Create a New Save"
 
     // ARMOR LIST.
@@ -177,72 +179,138 @@ Window {
 
             // ARMOR CONFIGURATION.
             // Gives the user a list of template armor pieces to select from.
-            ListView {
-                id: armorConfigGridView
+            Rectangle {
+                id: armorConfigBorderRect
 
                 Layout.row: 1
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                spacing: 5
-                clip: true
+                Layout.margins: 10
 
-                model: armorSetListModel
-                delegate: Pane {
-                    id: armorPane
+                color: "darkgray"
+                border.color: "gray"
+                border.width: 3
 
-                    width: 300
-                    height: 60
+                GridView {
+                    id: armorConfigGridView
 
-                    Image {
-                        id: armorImage
-
-                        anchors {
-                            top: parent.top
-                            bottom: parent.bottom
-                            left: parent.left
-                        }
-                        width: height
-                        source: "images/" + name + ".png"
-                    }
-                    Label {
-                        id: armorName
-
-                        anchors {
-                            top: parent.top
-                            bottom: parent.bottom
-                            left: armorImage.right
-                            leftMargin: 5
-                        }
-                        verticalAlignment: Qt.AlignVCenter
-                        text: name
+                    width: (idealCellWidth * 3)
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        bottom: parent.bottom
+                        margins: 10
                     }
 
-                    Button {
-                        id: armorIncreaseButton
+                    // "Desired" properties - view shoots to set spacing as these values,
+                    // but will adjust actual values as needed to fit in given space.
+                    property int idealCellWidth: 160
+                    property int idealCellHeight: 160
+                    property int spacing: 30
 
-                        anchors {
-                            top: parent.top
-                            bottom: parent.bottom
-                            right: parent.right
-                            margins: 5
-                        }
-                        width: height
-                        text: ">"
-                    }
-                    Button {
-                        id: armorDecreaseButton
+                    clip: true
 
-                        anchors {
-                            top: parent.top
-                            bottom: parent.bottom
-                            right: armorIncreaseButton.left
-                            margins: 5
+                    cellWidth: width / Math.floor(width / idealCellWidth)
+                    cellHeight: idealCellHeight
+                    model: armorSetListModel
+                    delegate: Rectangle {
+                        id: armorSetup
+
+                        width: armorConfigGridView.cellWidth - armorConfigGridView.spacing
+                        height: armorConfigGridView.cellHeight - armorConfigGridView.spacing
+                        color: "#494b4b"
+
+                        // Armor Image.
+                        Image {
+                            id: armorImage
+
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                top: parent.top
+                                leftMargin: 20
+                                rightMargin: 20
+                            }
+                            height: width
+                            source: "images/" + name + ".png"
                         }
-                        width: height
-                        text: "<"
+
+                        // Armor Name.
+                        Text {
+                            id: armorName
+
+                            width: parent.width
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                top: armorImage.bottom
+                            }
+                            color: "white"
+                            text: name
+                            horizontalAlignment: Qt.AlignHCenter
+                            fontSizeMode: Text.Fit
+                            minimumPixelSize: 5
+                            font.pixelSize: 12
+                        }
+
+                        // Armor Details/Controls.
+                        RowLayout {
+                            id: armorDetailsRow
+
+                            height: 30
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                top: armorName.bottom
+                                leftMargin: 20
+                                rightMargin: 20
+                            }
+
+                            // Unlock Buttons.
+                            Button {
+                                id: unlockArmorButton
+
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: "Unlock"
+                                z: 0
+                                // Initally shown to the user.
+                                visible: true
+
+                                onPressed: {
+                                    // When pressed, toggle widget settings to move into level adjustment.
+                                    visible = false;
+                                    levelDownButton.visible = true;
+                                    levelUpButton.visible = true;
+                                }
+                            }
+
+                            // Upgrade Buttons.
+                            Button {
+                                id: levelDownButton
+
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: "<"
+                                z: 1
+                                // Initally hidden from the user.
+                                visible: false
+                            }
+                            Button {
+                                id: levelUpButton
+
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: ">"
+                                z: 1
+                                // Initally hidden from the user.
+                                visible: false
+                            }
+                        }
                     }
                 }
+
             }
+
         }
     }
 }
