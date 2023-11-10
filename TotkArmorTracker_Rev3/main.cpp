@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <armordata.h>
+#include <appcontroller.h>
 
 int main(int argc, char *argv[])
 {
@@ -18,11 +18,14 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
 
-    // Pass any required singletons into the QML engine.
-    ArmorData *tempArmorData = new ArmorData();
-    engine.rootContext()->setContextProperty("testData", tempArmorData);
+    // Create and register the app controller singleton.
+    AppController *appController = new AppController();
+    engine.rootContext()->setContextProperty("appController", appController);
 
-    // Run app. Any return codes given by the application are returned from this function.
+    // Run application.
     engine.load(url);
-    return app.exec();
+    int appReturn = app.exec();
+
+    // After app quits, delete any remaining objects and return.
+    return appReturn;
 }

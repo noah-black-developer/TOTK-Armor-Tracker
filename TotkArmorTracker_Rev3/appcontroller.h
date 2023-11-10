@@ -3,15 +3,20 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <armordata.h>
 
-class appcontroller : public QObject
+class AppController : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
-public:
-    explicit appcontroller(QObject *parent = nullptr);
 
-signals:
+public:
+    explicit AppController(QObject *parent = nullptr);
+
+    Q_INVOKABLE ArmorData *getArmorData() const;
+
+private:
+    ArmorData *_armorData = new ArmorData();
 
 };
 

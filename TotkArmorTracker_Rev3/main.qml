@@ -7,49 +7,30 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    ListView {
+    GridView {
         id: tempListView
 
         anchors.fill: parent
         anchors.margins: 10
-        spacing: 5
-        model: testData
+        cellWidth: 80
+        cellHeight: 80
+
+        model: appController.getArmorData()
         delegate: Rectangle {
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            implicitHeight: 50
-            color: "gray"
+            id: armorBorder
 
-            RowLayout {
-                anchors.fill: parent
-                anchors.margins: 10
+            width: tempListView.cellWidth
+            height: tempListView.cellHeight
 
-                Text {
-                    text: name
-                    Layout.preferredWidth: 60
-                }
-                Text {
-                    text: setName
-                    Layout.preferredWidth: 60
-                }
-                Text {
-                    text: description
-                    Layout.preferredWidth: 60
-                }
-                Text {
-                    text: passive
-                    Layout.preferredWidth: 60
-                }
-                Text {
-                    text: setBonus
-                    Layout.preferredWidth: 60
-                }
-                Text {
-                    text: level
-                    Layout.preferredWidth: 60
-                }
+            Image {
+                id: armorImage
+
+                property int marginSize: 10
+
+                anchors.centerIn: parent
+                width: armorBorder.width - marginSize
+                height: armorBorder.height - marginSize
+                source: "images/" + name + ".png"
             }
         }
     }

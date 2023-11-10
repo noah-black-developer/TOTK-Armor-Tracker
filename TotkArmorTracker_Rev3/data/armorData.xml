@@ -1,0 +1,3887 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ArmorData>
+    <Armor name="Amber Earrings">
+        <Description>One of the items sold by the Gerudo jeweler. These earrings are made with amber, a gem that harnesses the power of the land to increase defense when equipped.</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Armor Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Amber" quantity="10"/>
+                <Item name="Flint" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Flint" quantity="10"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Flint" quantity="15"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="60"/>
+                <Item name="Flint" quantity="25"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ancient Hero's Aspect">
+        <Description>This item is said to contain the spirit of a hero who once saved Hyrule. That hero's aura will envelop the wearer.</Description>
+        <SetName>Ancient Hero Set</SetName>
+        <BaseDefense>12</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Master Beam Sword Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>21</Defense>
+                <Cost>30</Cost>
+                <Item name="Hinox Guts" quantity="9"/>
+                <Item name="Silver Bokoblin Horn" quantity="9"/>
+                <Item name="Zonaite" quantity="9"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>36</Defense>
+                <Cost>150</Cost>
+                <Item name="Frox Guts" quantity="9"/>
+                <Item name="Large Zonaite" quantity="10"/>
+                <Item name="Silver Moblin Horn" quantity="9"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>54</Defense>
+                <Cost>600</Cost>
+                <Item name="Large Zonaite" quantity="15"/>
+                <Item name="Molduga Guts" quantity="9"/>
+                <Item name="Silver Lizalfos Horn" quantity="9"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>84</Defense>
+                <Cost>1500</Cost>
+                <Item name="Gleeok Guts" quantity="9"/>
+                <Item name="Silver Lynel Mace Horn" quantity="9"/>
+                <Item name="Silver Lynel Saber Horn" quantity="9"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Archaic Tunic">
+        <Description>Old-fashioned upper-body wear. It's got some holes, but the soft cloth feels good to the touch. It's hard to keep it wrinkle-free.</Description>
+        <SetName>Archaic Set</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Archaic Legwear">
+        <Description>Simple, classic legwear. They're well-worn and showing their age, but they've still got a few good years left in them. It can be a bit cumbersome to have to tie the straps.</Description>
+        <SetName>Archaic Set</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Archaic Warm Greaves">
+        <Description>Warm greaves believed to be from a very long time ago. Despite the old look, the heat-retaining material makes it pleasantly resistant to cold temperatures.</Description>
+        <SetName>Archaic Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Barbarian Helm">
+        <Description>template</Description>
+        <SetName>Barbarian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Mighty Thistle" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Lynel Mace Horn" quantity="2"/>
+                <Item name="Lynel Saber Horn" quantity="2"/>
+                <Item name="Razorshroom" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue-maned Lynel Mace Horn" quantity="3"/>
+                <Item name="Blue-maned Lynel Saber Horn" quantity="3"/>
+                <Item name="Razorclaw Crab" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>600</Cost>
+                <Item name="White-maned Lynel Mace Horn" quantity="3"/>
+                <Item name="White-maned Lynel Saber Horn" quantity="3"/>
+                <Item name="Bladed Rhino Beetle" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Barbarian Armor">
+        <Description>template</Description>
+        <SetName>Barbarian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Mighty Thistle" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Lynel Mace Horn" quantity="2"/>
+                <Item name="Lynel Saber Horn" quantity="2"/>
+                <Item name="Razorshroom" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue-maned Lynel Mace Horn" quantity="3"/>
+                <Item name="Blue-maned Lynel Saber Horn" quantity="3"/>
+                <Item name="Razorclaw Crab" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>600</Cost>
+                <Item name="White-maned Lynel Mace Horn" quantity="3"/>
+                <Item name="White-maned Lynel Saber Horn" quantity="3"/>
+                <Item name="Bladed Rhino Beetle" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Barbarian Leg Wraps">
+        <Description>template</Description>
+        <SetName>Barbarian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Mighty Thistle" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Lynel Mace Horn" quantity="2"/>
+                <Item name="Lynel Saber Horn" quantity="2"/>
+                <Item name="Razorshroom" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue-maned Lynel Mace Horn" quantity="3"/>
+                <Item name="Blue-maned Lynel Saber Horn" quantity="3"/>
+                <Item name="Razorclaw Crab" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>600</Cost>
+                <Item name="White-maned Lynel Mace Horn" quantity="3"/>
+                <Item name="White-maned Lynel Saber Horn" quantity="3"/>
+                <Item name="Bladed Rhino Beetle" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Bokoblin Mask">
+        <Description>Kilton's handmade Bokoblin headgear. It's almost charming in a cute, monstrous kind of way... Equip it to blend in with Bokoblins.</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Blend in with Bokoblins</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Cap of Time">
+        <Description>According to legend, this cap was once worn by a hero who traveled through time. A truly timeless item perfect for kids and adults alike!</Description>
+        <SetName>Armor of Time Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Amber" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="40"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Cap of Twilight">
+        <Description>template</Description>
+        <SetName>Armor of Twilight Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Topaz" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Topaz" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Topaz" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Topaz" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Cap of the Hero">
+        <Description>template</Description>
+        <SetName>Armor of the Hero Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Ruby" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Ruby" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ruby" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Ruby" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Cap of the Sky">
+        <Description>template</Description>
+        <SetName>Armor of the Sky Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Sapphire" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Sapphire" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Sapphire" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Cap of the Wild">
+        <Description>template</Description>
+        <SetName>Armor of the Wild Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Acorn" quantity="10"/>
+                <Item name="Farosh's Scale" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Courser Bee Honey" quantity="5"/>
+                <Item name="Farosh's Claw" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Energetic Rhino Beetle" quantity="3"/>
+                <Item name="Shard of Farosh's Fang" quantity="2"/>
+                <Item name="Shard of Farosh's Spike" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Star Fragment" quantity="3"/>
+                <Item name="Farosh's Horn" quantity="2"/>
+                <Item name="Shard of Farosh's Spike" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Cap of the Wind">
+        <Description>template</Description>
+        <SetName>Armor of the Wind Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Opal" quantity="5"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Opal" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Opal" quantity="15"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Opal" quantity="25"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Cece's Hat">
+        <Description>An avant-garde masterpiece designed by Cece. Guaranteed to make the fashionistas' heads turn.</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Champion's Leathers">
+        <Description>This garment, worn by those in good standing with Hyrule royalty, has been reworked with the latest improvements, such as a new shoulder guard.</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>5</BaseDefense>
+        <PassiveBonus>Grants Link the ability to shoot sword beams with the Master Sword without full health</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>8</Defense>
+                <Cost>10</Cost>
+                <Item name="Light Dragon's Scale" quantity="2"/>
+                <Item name="Silent Princess" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>14</Defense>
+                <Cost>50</Cost>
+                <Item name="Light Dragon's Talon" quantity="2"/>
+                <Item name="Silent Princess" quantity="3"/>
+                <Item name="Sundelion" quantity="10"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>22</Defense>
+                <Cost>200</Cost>
+                <Item name="Shard of Light Dragon's Fang" quantity="2"/>
+                <Item name="Silent Princess" quantity="5"/>
+                <Item name="Sundelion" quantity="15"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>32</Defense>
+                <Cost>500</Cost>
+                <Item name="Light Dragon's Horn" quantity="2"/>
+                <Item name="Silent Princess" quantity="10"/>
+                <Item name="Sundelion" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Charged Headdress">
+        <Description>template</Description>
+        <SetName>Charged Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Stormy Weather Attack Up</PassiveBonus>
+        <SetBonus>Stormy Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Shock Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Thunderwing Butterfly" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Shock Like Stone" quantity="5"/>
+                <Item name="Electric Darner" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Gleeok Thunder Horn" quantity="5"/>
+                <Item name="Voltfin Trout" quantity="10"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Charged Shirt">
+        <Description>template</Description>
+        <SetName>Charged Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Stormy Weather Attack Up</PassiveBonus>
+        <SetBonus>Stormy Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Shock Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Thunderwing Butterfly" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Shock Like Stone" quantity="5"/>
+                <Item name="Electric Darner" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Gleeok Thunder Horn" quantity="5"/>
+                <Item name="Voltfin Trout" quantity="10"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Charged Trousers">
+        <Description>template</Description>
+        <SetName>Charged Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Stormy Weather Attack Up</PassiveBonus>
+        <SetBonus>Stormy Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Shock Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Thunderwing Butterfly" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Shock Like Stone" quantity="5"/>
+                <Item name="Electric Darner" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Gleeok Thunder Horn" quantity="5"/>
+                <Item name="Voltfin Trout" quantity="10"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Climber's Bandana">
+        <Description>template</Description>
+        <SetName>Climber's Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Climb Speed Up</PassiveBonus>
+        <SetBonus>Improved Climbing Jump</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Keese Wing" quantity="3"/>
+                <Item name="Rushroom" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Electric Keese Wing" quantity="5"/>
+                <Item name="Hightail Lizard" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ice Keese Wing" quantity="8"/>
+                <Item name="Hot-Footed Frog" quantity="10"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Fire Keese Wing" quantity="10"/>
+                <Item name="Swift Violet" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Climbing Boots">
+        <Description>template</Description>
+        <SetName>Climber's Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Climb Speed Up</PassiveBonus>
+        <SetBonus>Improved Climbing Jump</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Keese Wing" quantity="3"/>
+                <Item name="Rushroom" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Electric Keese Wing" quantity="5"/>
+                <Item name="Hightail Lizard" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ice Keese Wing" quantity="8"/>
+                <Item name="Hot-Footed Frog" quantity="10"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Fire Keese Wing" quantity="10"/>
+                <Item name="Swift Violet" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Climbing Gear">
+        <Description>template</Description>
+        <SetName>Climber's Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Climb Speed Up</PassiveBonus>
+        <SetBonus>Improved Climbing Jump</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Keese Wing" quantity="3"/>
+                <Item name="Rushroom" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Electric Keese Wing" quantity="5"/>
+                <Item name="Hightail Lizard" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ice Keese Wing" quantity="8"/>
+                <Item name="Hot-Footed Frog" quantity="10"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Fire Keese Wing" quantity="10"/>
+                <Item name="Swift Violet" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Dark Hood">
+        <Description>template</Description>
+        <SetName>Dark Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Dark Trousers">
+        <Description>template</Description>
+        <SetName>Dark Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Dark Tunic">
+        <Description>template</Description>
+        <SetName>Dark Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Desert Voe Headband">
+        <Description>template</Description>
+        <SetName>Desert Voe Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Heat Resistance Up</PassiveBonus>
+        <SetBonus>Shock Damage Resist</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="White Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Cool Safflina" quantity="3"/>
+                <Item name="White Chuchu Jelly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Chillshroom" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Ice Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Desert Voe Spaulder">
+        <Description>template</Description>
+        <SetName>Desert Voe Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Heat Resistance Up</PassiveBonus>
+        <SetBonus>Shock Damage Resist</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="White Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Cool Safflina" quantity="3"/>
+                <Item name="White Chuchu Jelly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Chillshroom" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Ice Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Desert Voe Trousers">
+        <Description>template</Description>
+        <SetName>Desert Voe Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Heat Resistance Up</PassiveBonus>
+        <SetBonus>Shock Damage Resist</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="White Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Cool Safflina" quantity="3"/>
+                <Item name="White Chuchu Jelly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Chillshroom" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Ice Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Diamond Circlet">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Diamond" quantity="2"/>
+                <Item name="Flint" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Diamond" quantity="3"/>
+                <Item name="Flint" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Diamond" quantity="5"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Diamond" quantity="8"/>
+                <Item name="Star Fragment" quantity="2"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ember Headdress">
+        <Description>template</Description>
+        <SetName>Ember Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Hot Weather Attack Up</PassiveBonus>
+        <SetBonus>Hot Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Fire Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Fire-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Summerwing Butterfly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Fire Like Stone" quantity="5"/>
+                <Item name="Warm Darner" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Gleeok Flame Horn" quantity="5"/>
+                <Item name="Sizzlefin Trout" quantity="10"/>
+                <Item name="Large Zonai Charge" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ember Shirt">
+        <Description>template</Description>
+        <SetName>Ember Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Hot Weather Attack Up</PassiveBonus>
+        <SetBonus>Hot Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Fire Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Fire-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Summerwing Butterfly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Fire Like Stone" quantity="5"/>
+                <Item name="Warm Darner" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Gleeok Flame Horn" quantity="5"/>
+                <Item name="Sizzlefin Trout" quantity="10"/>
+                <Item name="Large Zonai Charge" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ember Trousers">
+        <Description>template</Description>
+        <SetName>Ember Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Hot Weather Attack Up</PassiveBonus>
+        <SetBonus>Hot Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Fire Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Fire-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Summerwing Butterfly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Fire Like Stone" quantity="5"/>
+                <Item name="Warm Darner" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Gleeok Flame Horn" quantity="5"/>
+                <Item name="Sizzlefin Trout" quantity="10"/>
+                <Item name="Large Zonai Charge" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Evil Spirit Armor">
+        <Description>template</Description>
+        <SetName>Evil Spirit Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Evil Spirit Greaves">
+        <Description>template</Description>
+        <SetName>Evil Spirit Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Evil Spirit Mask">
+        <Description>template</Description>
+        <SetName>Evil Spirit Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Fierce Deity Armor">
+        <Description>template</Description>
+        <SetName>Fierce Deity Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Hinox Toenail" quantity="5"/>
+                <Item name="Naydra's Scale" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Hinox Tooth" quantity="4"/>
+                <Item name="Naydra's Claw" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Hinox Guts" quantity="2"/>
+                <Item name="Shard of Naydra's Fang" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Lynel Guts" quantity="2"/>
+                <Item name="Naydra's Horn" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Fierce Deity Boots">
+        <Description>template</Description>
+        <SetName>Fierce Deity Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Hinox Toenail" quantity="5"/>
+                <Item name="Farosh's Scale" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Hinox Tooth" quantity="4"/>
+                <Item name="Farosh's Claw" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Hinox Guts" quantity="2"/>
+                <Item name="Shard of Farosh's Fang" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Lynel Guts" quantity="2"/>
+                <Item name="Farosh's Horn" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Fierce Deity Mask">
+        <Description>template</Description>
+        <SetName>Fierce Deity Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>Charge Atk. Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Hinox Toenail" quantity="5"/>
+                <Item name="Dinraal's Scale" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Hinox Tooth" quantity="4"/>
+                <Item name="Dinraal's Claw" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Hinox Guts" quantity="2"/>
+                <Item name="Shard of Dinraal's Fang" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Lynel Guts" quantity="2"/>
+                <Item name="Dinraal's Horn" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Flamebreaker Armor">
+        <Description>template</Description>
+        <SetName>Flamebreaker Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Flame Guard</PassiveBonus>
+        <SetBonus>Fireproof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Moblin Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Fireproof Lizard" quantity="5"/>
+                <Item name="Moblin Fang" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Moblin Horn" quantity="5"/>
+                <Item name="Smotherwing Butterfly" quantity="3"/>
+                <Item name="Flint" quantity="15"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Moblin Horn" quantity="5"/>
+                <Item name="Smotherwing Butterfly" quantity="5"/>
+                <Item name="Flint" quantity="30"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Flamebreaker Boots">
+        <Description>template</Description>
+        <SetName>Flamebreaker Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Flame Guard</PassiveBonus>
+        <SetBonus>Fireproof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Moblin Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Fireproof Lizard" quantity="5"/>
+                <Item name="Moblin Fang" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Moblin Horn" quantity="5"/>
+                <Item name="Smotherwing Butterfly" quantity="3"/>
+                <Item name="Flint" quantity="15"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Moblin Horn" quantity="5"/>
+                <Item name="Smotherwing Butterfly" quantity="5"/>
+                <Item name="Flint" quantity="30"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Flamebreaker Helm">
+        <Description>template</Description>
+        <SetName>Flamebreaker Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Flame Guard</PassiveBonus>
+        <SetBonus>Fireproof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Moblin Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Fireproof Lizard" quantity="5"/>
+                <Item name="Moblin Fang" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Moblin Horn" quantity="5"/>
+                <Item name="Smotherwing Butterfly" quantity="3"/>
+                <Item name="Flint" quantity="15"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Moblin Horn" quantity="5"/>
+                <Item name="Smotherwing Butterfly" quantity="5"/>
+                <Item name="Flint" quantity="30"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Froggy Hood">
+        <Description>template</Description>
+        <SetName>Froggy Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Slip Resistance</PassiveBonus>
+        <SetBonus>Slipproof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Sticky Lizard" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Horriblin Horn" quantity="5"/>
+                <Item name="Sticky Lizard" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Horriblin Horn" quantity="5"/>
+                <Item name="Sticky Frog" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Horriblin Horn" quantity="5"/>
+                <Item name="Horriblin Guts" quantity="10"/>
+                <Item name="Opal" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Froggy Leggings">
+        <Description>template</Description>
+        <SetName>Froggy Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Slip Resistance</PassiveBonus>
+        <SetBonus>Slipproof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Sticky Lizard" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Horriblin Horn" quantity="5"/>
+                <Item name="Sticky Lizard" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Horriblin Horn" quantity="5"/>
+                <Item name="Sticky Frog" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Horriblin Horn" quantity="5"/>
+                <Item name="Horriblin Guts" quantity="10"/>
+                <Item name="Opal" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Froggy Sleeve">
+        <Description>template</Description>
+        <SetName>Froggy Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Slip Resistance</PassiveBonus>
+        <SetBonus>Slipproof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Sticky Lizard" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Horriblin Horn" quantity="5"/>
+                <Item name="Sticky Lizard" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Horriblin Horn" quantity="5"/>
+                <Item name="Sticky Frog" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Horriblin Horn" quantity="5"/>
+                <Item name="Horriblin Guts" quantity="10"/>
+                <Item name="Opal" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Frostbite Headdress">
+        <Description>template</Description>
+        <SetName>Frostbite Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Cold Weather Attack Up</PassiveBonus>
+        <SetBonus>Cold Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Ice Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Ice-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Winterwing Butterfly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Cold Darner" quantity="5"/>
+                <Item name="Ice Like Stone" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Chillfin Trout" quantity="10"/>
+                <Item name="Gleeok Frost Horn" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Frostbite Shirt">
+        <Description>template</Description>
+        <SetName>Frostbite Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Cold Weather Attack Up</PassiveBonus>
+        <SetBonus>Cold Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Ice Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Ice-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Winterwing Butterfly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Cold Darner" quantity="5"/>
+                <Item name="Ice Like Stone" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Chillfin Trout" quantity="10"/>
+                <Item name="Gleeok Frost Horn" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Frostbite Trousers">
+        <Description>template</Description>
+        <SetName>Frostbite Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Cold Weather Attack Up</PassiveBonus>
+        <SetBonus>Cold Weather Charge</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Ice Fruit" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Ice-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Winterwing Butterfly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Cold Darner" quantity="5"/>
+                <Item name="Ice Like Stone" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Chillfin Trout" quantity="10"/>
+                <Item name="Gleeok Frost Horn" quantity="5"/>
+                <Item name="Large Zonai Charge" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Gaiters of the Depths">
+        <Description>template</Description>
+        <SetName>Depths Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Gloom Resistance</PassiveBonus>
+        <SetBonus>Gloom Attack Resist</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Deep Firefly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Dark Clump" quantity="5"/>
+                <Item name="Frox Fang" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Frox Fingernail" quantity="3"/>
+                <Item name="Obsidian Frox Fang" quantity="3"/>
+                <Item name="Zonaite" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Blue-White Frox Fang" quantity="5"/>
+                <Item name="Frox Guts" quantity="3"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Glide Mask">
+        <Description>template</Description>
+        <SetName>Glide Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Skydive Mobility Up</PassiveBonus>
+        <SetBonus>Impact Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Keese Wing" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Aerocuda Eyeball" quantity="6"/>
+                <Item name="Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Aerocuda Eyeball" quantity="8"/>
+                <Item name="Aerocuda Wing" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Aerocuda Wing" quantity="10"/>
+                <Item name="Gibdo Wing" quantity="8"/>
+                <Item name="Gleeok Wing" quantity="12"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Glide Shirt">
+        <Description>template</Description>
+        <SetName>Glide Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Skydive Mobility Up</PassiveBonus>
+        <SetBonus>Impact Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Keese Wing" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Aerocuda Eyeball" quantity="6"/>
+                <Item name="Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Aerocuda Eyeball" quantity="8"/>
+                <Item name="Aerocuda Wing" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Aerocuda Wing" quantity="10"/>
+                <Item name="Gibdo Wing" quantity="8"/>
+                <Item name="Gleeok Wing" quantity="12"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Glide Tights">
+        <Description>template</Description>
+        <SetName>Glide Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Skydive Mobility Up</PassiveBonus>
+        <SetBonus>Impact Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Keese Wing" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Aerocuda Eyeball" quantity="6"/>
+                <Item name="Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Aerocuda Eyeball" quantity="8"/>
+                <Item name="Aerocuda Wing" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Aerocuda Wing" quantity="10"/>
+                <Item name="Gibdo Wing" quantity="8"/>
+                <Item name="Gleeok Wing" quantity="12"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Hood of the Depths">
+        <Description>template</Description>
+        <SetName>Depths Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Gloom Resistance</PassiveBonus>
+        <SetBonus>Gloom Attack Resist</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Deep Firefly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Dark Clump" quantity="5"/>
+                <Item name="Frox Fang" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Frox Fingernail" quantity="3"/>
+                <Item name="Obsidian Frox Fang" quantity="3"/>
+                <Item name="Zonaite" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Blue-White Frox Fang" quantity="5"/>
+                <Item name="Frox Guts" quantity="3"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Horriblin Mask">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Blend in with Horriblins</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Hylian Hood">
+        <Description>template</Description>
+        <SetName>Hylian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Horn" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Bokoblin Horn" quantity="5"/>
+                <Item name="Bokoblin Fang" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Black Bokoblin Horn" quantity="5"/>
+                <Item name="Bokoblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Bokoblin Guts" quantity="5"/>
+                <Item name="Silver Bokoblin Horn" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Hylian Trousers">
+        <Description>template</Description>
+        <SetName>Hylian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Horn" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Bokoblin Horn" quantity="5"/>
+                <Item name="Bokoblin Fang" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Black Bokoblin Horn" quantity="5"/>
+                <Item name="Bokoblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Bokoblin Guts" quantity="5"/>
+                <Item name="Silver Bokoblin Horn" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Hylian Tunic">
+        <Description>template</Description>
+        <SetName>Hylian Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Horn" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Bokoblin Horn" quantity="5"/>
+                <Item name="Bokoblin Fang" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Black Bokoblin Horn" quantity="5"/>
+                <Item name="Bokoblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Bokoblin Guts" quantity="5"/>
+                <Item name="Silver Bokoblin Horn" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Korok Mask">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>Korok Detection</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Lizalfos Mask">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Blend in with Lizalfos</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Lobster Shirt">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Lynel Mask">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Blend in with Lynels</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Majora's Mask">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>1</BaseDefense>
+        <PassiveBonus>Blend in with enemies</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Mask of Awakening">
+        <Description>Legend says this mask resembles a hero who explored a mysterious place that one could visit but not leave.</Description>
+        <SetName>Awakening Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Luminous Stone" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Luminous Stone" quantity="15"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Luminous Stone" quantity="20"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Luminous Stone" quantity="30"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Midna's Helmet">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>7</BaseDefense>
+        <PassiveBonus>Gloom Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Miner's Mask">
+        <Description>template</Description>
+        <SetName>Miner's Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Glow</PassiveBonus>
+        <SetBonus>Shining Steps</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Brightbloom Seed" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Brightcap" quantity="5"/>
+                <Item name="Brightbloom Seed" quantity="20"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Deep Firefly" quantity="10"/>
+                <Item name="Giant Brightbloom Seed" quantity="15"/>
+                <Item name="Glowing Cave Fish" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Diamond" quantity="3"/>
+                <Item name="Giant Brightbloom Seed" quantity="20"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Miner's Top">
+        <Description>template</Description>
+        <SetName>Miner's Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Glow</PassiveBonus>
+        <SetBonus>Shining Steps</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Brightbloom Seed" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Brightcap" quantity="5"/>
+                <Item name="Brightbloom Seed" quantity="20"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Deep Firefly" quantity="10"/>
+                <Item name="Giant Brightbloom Seed" quantity="15"/>
+                <Item name="Glowing Cave Fish" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Diamond" quantity="3"/>
+                <Item name="Giant Brightbloom Seed" quantity="20"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Miner's Trousers">
+        <Description>template</Description>
+        <SetName>Miner's Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Glow</PassiveBonus>
+        <SetBonus>Shining Steps</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Brightbloom Seed" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Brightcap" quantity="5"/>
+                <Item name="Brightbloom Seed" quantity="20"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Deep Firefly" quantity="10"/>
+                <Item name="Giant Brightbloom Seed" quantity="15"/>
+                <Item name="Glowing Cave Fish" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Diamond" quantity="3"/>
+                <Item name="Giant Brightbloom Seed" quantity="20"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Moblin Mask">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Blend in with Moblins</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Mystic Headpiece">
+        <Description></Description>
+        <SetName>Mystic Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Rupee Padding</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Mystic Robe">
+        <Description></Description>
+        <SetName>Mystic Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Rupee Padding</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Mystic Trousers">
+        <Description></Description>
+        <SetName>Mystic Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Rupee Padding</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Opal Earrings">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Swim Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Flint" quantity="5"/>
+                <Item name="Opal" quantity="6"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Flint" quantity="10"/>
+                <Item name="Opal" quantity="12"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Flint" quantity="15"/>
+                <Item name="Opal" quantity="18"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Flint" quantity="25"/>
+                <Item name="Opal" quantity="30"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Phantom Armor">
+        <Description></Description>
+        <SetName>Phantom Armor Set</SetName>
+        <BaseDefense>8</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Phantom Greaves">
+        <Description></Description>
+        <SetName>Phantom Armor Set</SetName>
+        <BaseDefense>8</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Phantom Helmet">
+        <Description></Description>
+        <SetName>Phantom Armor Set</SetName>
+        <BaseDefense>8</BaseDefense>
+        <PassiveBonus>Attack Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Radiant Mask">
+        <Description>template</Description>
+        <SetName>Radiant Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="1"/>
+                <Item name="Luminous Stone" quantity="10"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Luminous Stone" quantity="15"/>
+                <Item name="Moblin Guts" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Gibdo Bone" quantity="10"/>
+                <Item name="Horriblin Guts" quantity="3"/>
+                <Item name="Luminous Stone" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Luminous Stone" quantity="30"/>
+                <Item name="Lynel Guts" quantity="3"/>
+                <Item name="Molduga Jaw" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Radiant Shirt">
+        <Description>template</Description>
+        <SetName>Radiant Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="1"/>
+                <Item name="Luminous Stone" quantity="10"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Luminous Stone" quantity="15"/>
+                <Item name="Moblin Guts" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Gibdo Bone" quantity="10"/>
+                <Item name="Horriblin Guts" quantity="3"/>
+                <Item name="Luminous Stone" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Luminous Stone" quantity="30"/>
+                <Item name="Lynel Guts" quantity="3"/>
+                <Item name="Molduga Jaw" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Radiant Tights">
+        <Description>template</Description>
+        <SetName>Radiant Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="1"/>
+                <Item name="Luminous Stone" quantity="10"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Luminous Stone" quantity="15"/>
+                <Item name="Moblin Guts" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Gibdo Bone" quantity="10"/>
+                <Item name="Horriblin Guts" quantity="3"/>
+                <Item name="Luminous Stone" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Luminous Stone" quantity="30"/>
+                <Item name="Lynel Guts" quantity="3"/>
+                <Item name="Molduga Jaw" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ravio's Hood">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Sideways Climb Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Royal Guard Boots">
+        <Description>template</Description>
+        <SetName>Royal Guard Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Charge Attack Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>6</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="3"/>
+                <Item name="Boss Bokoblin Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>10</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Boss Bokoblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>15</Defense>
+                <Cost>200</Cost>
+                <Item name="Black Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Hinox Guts" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>24</Defense>
+                <Cost>500</Cost>
+                <Item name="Silver Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Molduga Guts" quantity="3"/>
+                <Item name="Gleeok Guts" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Royal Guard Cap">
+        <Description>template</Description>
+        <SetName>Royal Guard Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Charge Attack Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>6</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="3"/>
+                <Item name="Boss Bokoblin Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>10</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Boss Bokoblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>15</Defense>
+                <Cost>200</Cost>
+                <Item name="Black Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Hinox Guts" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>24</Defense>
+                <Cost>500</Cost>
+                <Item name="Silver Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Molduga Guts" quantity="3"/>
+                <Item name="Gleeok Guts" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Royal Guard Uniform">
+        <Description>template</Description>
+        <SetName>Royal Guard Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Charge Attack Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>6</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="3"/>
+                <Item name="Boss Bokoblin Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>10</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Boss Bokoblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>15</Defense>
+                <Cost>200</Cost>
+                <Item name="Black Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Hinox Guts" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>24</Defense>
+                <Cost>500</Cost>
+                <Item name="Silver Boss Bokoblin Horn" quantity="3"/>
+                <Item name="Molduga Guts" quantity="3"/>
+                <Item name="Gleeok Guts" quantity="3"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Rubber Armor">
+        <Description>template</Description>
+        <SetName>Rubber Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Shock Resistance</PassiveBonus>
+        <SetBonus>Lightning Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="1"/>
+                <Item name="Yellow Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Voltfruit" quantity="5"/>
+                <Item name="Yellow Chuchu Jelly" quantity="8"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Electric Safflina" quantity="8"/>
+                <Item name="Zapshroom" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Electric Lizalfos Tail" quantity="8"/>
+                <Item name="Topaz" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Rubber Armor">
+        <Description>template</Description>
+        <SetName>Rubber Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Shock Resistance</PassiveBonus>
+        <SetBonus>Lightning Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="1"/>
+                <Item name="Yellow Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Voltfruit" quantity="5"/>
+                <Item name="Yellow Chuchu Jelly" quantity="8"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Electric Safflina" quantity="8"/>
+                <Item name="Zapshroom" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Electric Lizalfos Tail" quantity="8"/>
+                <Item name="Topaz" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Rubber Helm">
+        <Description>template</Description>
+        <SetName>Rubber Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Shock Resistance</PassiveBonus>
+        <SetBonus>Lightning Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="1"/>
+                <Item name="Yellow Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Voltfruit" quantity="5"/>
+                <Item name="Yellow Chuchu Jelly" quantity="8"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Electric Safflina" quantity="8"/>
+                <Item name="Zapshroom" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Electric Lizalfos Tail" quantity="8"/>
+                <Item name="Topaz" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Rubber Tights">
+        <Description>template</Description>
+        <SetName>Rubber Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Shock Resistance</PassiveBonus>
+        <SetBonus>Lightning Proof</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="1"/>
+                <Item name="Yellow Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Voltfruit" quantity="5"/>
+                <Item name="Yellow Chuchu Jelly" quantity="8"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Electric Safflina" quantity="8"/>
+                <Item name="Zapshroom" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Electric Lizalfos Horn" quantity="5"/>
+                <Item name="Electric Lizalfos Tail" quantity="8"/>
+                <Item name="Topaz" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Ruby Circlet">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Flint" quantity="3"/>
+                <Item name="Ruby" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Flint" quantity="5"/>
+                <Item name="Ruby" quantity="4"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ruby" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Ruby" quantity="10"/>
+                <Item name="Star Fragment" quantity="2"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Sand Boots">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Sand Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Hightail Lizard" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Gibdo Bone" quantity="20"/>
+                <Item name="Swift Carrot" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Gibdo Guts" quantity="5"/>
+                <Item name="Molduga Fin" quantity="5"/>
+                <Item name="Rushroom" quantity="10"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Hearty Lizard" quantity="5"/>
+                <Item name="Molduga Guts" quantity="5"/>
+                <Item name="Swift Violet" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Sapphire Circlet">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Heat Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Flint" quantity="3"/>
+                <Item name="Sapphire" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Flint" quantity="5"/>
+                <Item name="Sapphire" quantity="4"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Sapphire" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="10"/>
+                <Item name="Star Fragment" quantity="2"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Sheik's Mask">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Silent Princess" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Silent Princess" quantity="2"/>
+                <Item name="Star Fragment" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Silent Princess" quantity="4"/>
+                <Item name="Star Fragment" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Silent Princess" quantity="8"/>
+                <Item name="Star Fragment" quantity="4"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Snow Boots">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Snow Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Hightail Lizard" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Octorok Tentacle" quantity="5"/>
+                <Item name="Swift Carrot" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Octo Balloon" quantity="5"/>
+                <Item name="Rushroom" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Naydra's Scale" quantity="2"/>
+                <Item name="Swift Violet" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Snowquill Headdress">
+        <Description>template</Description>
+        <SetName>Snowquill Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>Unfreezable</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Red Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Red Chuchu Jelly" quantity="5"/>
+                <Item name="Warm Safflina" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Sunshroom" quantity="5"/>
+                <Item name="Fire Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Fire-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="10"/>
+                <Item name="Ruby" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Snowquill Tunic">
+        <Description>template</Description>
+        <SetName>Snowquill Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>Unfreezable</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Red Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Red Chuchu Jelly" quantity="5"/>
+                <Item name="Warm Safflina" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Sunshroom" quantity="5"/>
+                <Item name="Fire Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Fire-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="10"/>
+                <Item name="Ruby" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Snowquill Trousers">
+        <Description>template</Description>
+        <SetName>Snowquill Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>Unfreezable</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Red Chuchu Jelly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Red Chuchu Jelly" quantity="5"/>
+                <Item name="Warm Safflina" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Sunshroom" quantity="5"/>
+                <Item name="Fire Keese Wing" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Fire-Breath Lizalfos Horn" quantity="5"/>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="10"/>
+                <Item name="Ruby" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Soldier's Armor">
+        <Description>template</Description>
+        <SetName>Soldier's Armor Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="3"/>
+                <Item name="Chuchu Jelly" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Keese Eyeball" quantity="5"/>
+                <Item name="Moblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Flint" quantity="30"/>
+                <Item name="Hinox Guts" quantity="3"/>
+                <Item name="Lizalfos Tail" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Lynel Hoof" quantity="5"/>
+                <Item name="Lynel Guts" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Soldier's Greaves">
+        <Description>template</Description>
+        <SetName>Soldier's Armor Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="3"/>
+                <Item name="Chuchu Jelly" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Keese Eyeball" quantity="5"/>
+                <Item name="Moblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Flint" quantity="30"/>
+                <Item name="Hinox Guts" quantity="3"/>
+                <Item name="Lizalfos Tail" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Lynel Hoof" quantity="5"/>
+                <Item name="Lynel Guts" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Soldier's Helm">
+        <Description>template</Description>
+        <SetName>Soldier's Armor Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Bokoblin Guts" quantity="3"/>
+                <Item name="Chuchu Jelly" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Keese Eyeball" quantity="5"/>
+                <Item name="Moblin Guts" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Flint" quantity="30"/>
+                <Item name="Hinox Guts" quantity="3"/>
+                <Item name="Lizalfos Tail" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Lynel Hoof" quantity="5"/>
+                <Item name="Lynel Guts" quantity="5"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Stealth Chest Guard">
+        <Description>template</Description>
+        <SetName>Stealth Armor Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Blue Nightshade" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Nightshade" quantity="5"/>
+                <Item name="Sunset Firefly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Silent Shroom" quantity="8"/>
+                <Item name="Sneaky River Snail" quantity="5"/>
+                <Item name="Sticky Frog" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Silent Princess" quantity="5"/>
+                <Item name="Stealthfin Trout" quantity="10"/>
+                <Item name="Sundelion" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Stealth Mask">
+        <Description>template</Description>
+        <SetName>Stealth Armor Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Blue Nightshade" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Nightshade" quantity="5"/>
+                <Item name="Sunset Firefly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Silent Shroom" quantity="8"/>
+                <Item name="Sneaky River Snail" quantity="5"/>
+                <Item name="Sticky Frog" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Silent Princess" quantity="5"/>
+                <Item name="Stealthfin Trout" quantity="10"/>
+                <Item name="Sundelion" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Stealth Tights">
+        <Description>template</Description>
+        <SetName>Stealth Armor Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Blue Nightshade" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Blue Nightshade" quantity="5"/>
+                <Item name="Sunset Firefly" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Silent Shroom" quantity="8"/>
+                <Item name="Sneaky River Snail" quantity="5"/>
+                <Item name="Sticky Frog" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Silent Princess" quantity="5"/>
+                <Item name="Stealthfin Trout" quantity="10"/>
+                <Item name="Sundelion" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Thunder Helm">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Lightning Proof</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Tingle's Hood">
+        <Description></Description>
+        <SetName>Tingle Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Night Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Tingle's Shirt">
+        <Description></Description>
+        <SetName>Tingle Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Night Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Tingle's Tights">
+        <Description></Description>
+        <SetName>Tingle Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Night Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Topaz Earrings">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Shock Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Flint" quantity="3"/>
+                <Item name="Topaz" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Flint" quantity="5"/>
+                <Item name="Topaz" quantity="4"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Star Fragment" quantity="1"/>
+                <Item name="Topaz" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>18</Defense>
+                <Cost>500</Cost>
+                <Item name="Star Fragment" quantity="2"/>
+                <Item name="Topaz" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of Awakening">
+        <Description>Legend says these trousers were worn by a hero who explored a mysterious island that one could visit but not leave.</Description>
+        <SetName>Awakening Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Luminous Stone" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Luminous Stone" quantity="15"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Luminous Stone" quantity="20"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Luminous Stone" quantity="30"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of Time">
+        <Description>template</Description>
+        <SetName>Armor of Time Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Amber" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="40"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of Twilight">
+        <Description>template</Description>
+        <SetName>Armor of Twilight Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Topaz" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Topaz" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Topaz" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Topaz" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of the Hero">
+        <Description>template</Description>
+        <SetName>Armor of the Hero Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Ruby" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Ruby" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ruby" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Ruby" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of the Sky">
+        <Description>template</Description>
+        <SetName>Armor of the Sky Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Sapphire" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Sapphire" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Sapphire" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of the Wild">
+        <Description>template</Description>
+        <SetName>Armor of the Wild Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Acorn" quantity="10"/>
+                <Item name="Farosh's Scale" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Courser Bee Honey" quantity="5"/>
+                <Item name="Farosh's Claw" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Energetic Rhino Beetle" quantity="3"/>
+                <Item name="Shard of Farosh's Fang" quantity="2"/>
+                <Item name="Shard of Farosh's Spike" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Star Fragment" quantity="3"/>
+                <Item name="Farosh's Horn" quantity="2"/>
+                <Item name="Shard of Farosh's Spike" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Trousers of the Wind">
+        <Description>template</Description>
+        <SetName>Armor of the Wind Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Opal" quantity="5"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Opal" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Opal" quantity="15"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Opal" quantity="25"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of Awakening">
+        <Description>Legend says this armor was worn by a hero who explored a mysterious area that one could visit but not leave.</Description>
+        <SetName>Awakening Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Luminous Stone" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Luminous Stone" quantity="15"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Luminous Stone" quantity="20"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Luminous Stone" quantity="30"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of Memories">
+        <Description></Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Light Dragon's Scale" quantity="1"/>
+                <Item name="Silent Princess" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Farosh's Horn" quantity="2"/>
+                <Item name="Light Dragon's Scale" quantity="1"/>
+                <Item name="Silent Princess" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Naydra's Horn" quantity="2"/>
+                <Item name="Shard of Light Dragon's Fang" quantity="1"/>
+                <Item name="Silent Princess" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Dinraal's Horn" quantity="2"/>
+                <Item name="Light Dragon's Horn" quantity="1"/>
+                <Item name="Silent Princess" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of Time">
+        <Description>template</Description>
+        <SetName>Armor of Time Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Amber" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Amber" quantity="20"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Amber" quantity="30"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Amber" quantity="40"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of Twilight">
+        <Description>template</Description>
+        <SetName>Armor of Twilight Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Topaz" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Topaz" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Topaz" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Topaz" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of the Depths">
+        <Description>template</Description>
+        <SetName>Depths Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Gloom Resistance</PassiveBonus>
+        <SetBonus>Gloom Attack Resist</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Deep Firefly" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Dark Clump" quantity="5"/>
+                <Item name="Frox Fang" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Frox Fingernail" quantity="3"/>
+                <Item name="Obsidian Frox Fang" quantity="3"/>
+                <Item name="Zonaite" quantity="20"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Blue-White Frox Fang" quantity="5"/>
+                <Item name="Frox Guts" quantity="3"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of the Hero">
+        <Description>template</Description>
+        <SetName>Armor of the Hero Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Ruby" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Ruby" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Ruby" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Ruby" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of the Sky">
+        <Description>template</Description>
+        <SetName>Armor of the Sky Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Sapphire" quantity="1"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Sapphire" quantity="4"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Sapphire" quantity="6"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Sapphire" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of the Wild">
+        <Description>template</Description>
+        <SetName>Armor of the Wild Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Acorn" quantity="10"/>
+                <Item name="Farosh's Scale" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Courser Bee Honey" quantity="5"/>
+                <Item name="Farosh's Claw" quantity="2"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Energetic Rhino Beetle" quantity="3"/>
+                <Item name="Shard of Farosh's Fang" quantity="2"/>
+                <Item name="Shard of Farosh's Spike" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Star Fragment" quantity="3"/>
+                <Item name="Farosh's Horn" quantity="2"/>
+                <Item name="Shard of Farosh's Spike" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Tunic of the Wind">
+        <Description>template</Description>
+        <SetName>Armor of the Wind Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>Attack Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Opal" quantity="5"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Opal" quantity="10"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Opal" quantity="15"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Opal" quantity="25"/>
+                <Item name="Star Fragment" quantity="1"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Vah Medoh Divine Helm">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Cold Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Sapphire" quantity="1"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Sapphire" quantity="4"/>
+                <Item name="Zonaite" quantity="10"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Dazzlefruit" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+                <Item name="Sapphire" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Dazzlefruit" quantity="10"/>
+                <Item name="Large Zonaite" quantity="10"/>
+                <Item name="Sapphire" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Vah Naboris Divine Helm">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Shock Resistance</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Topaz" quantity="1"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Topaz" quantity="4"/>
+                <Item name="Zonaite" quantity="10"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Dazzlefruit" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+                <Item name="Topaz" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Dazzlefruit" quantity="10"/>
+                <Item name="Large Zonaite" quantity="10"/>
+                <Item name="Topaz" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Vah Rudania Divine Helm">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Flame Guard</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Ruby" quantity="1"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Ruby" quantity="4"/>
+                <Item name="Zonaite" quantity="10"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Dazzlefruit" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+                <Item name="Ruby" quantity="6"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Dazzlefruit" quantity="10"/>
+                <Item name="Large Zonaite" quantity="10"/>
+                <Item name="Ruby" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Vah Ruta Divine Helm">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Swim Speed Up</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>4</Defense>
+                <Cost>10</Cost>
+                <Item name="Opal" quantity="5"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>6</Defense>
+                <Cost>50</Cost>
+                <Item name="Opal" quantity="10"/>
+                <Item name="Zonaite" quantity="10"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>9</Defense>
+                <Cost>200</Cost>
+                <Item name="Dazzlefruit" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+                <Item name="Opal" quantity="15"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>16</Defense>
+                <Cost>500</Cost>
+                <Item name="Dazzlefruit" quantity="10"/>
+                <Item name="Large Zonaite" quantity="10"/>
+                <Item name="Opal" quantity="25"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Well-Worn Hair Band">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>0</BaseDefense>
+        <PassiveBonus>N/A</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Yiga Armor">
+        <Description>template</Description>
+        <SetName>Yiga Armor Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>3</Defense>
+                <Cost>10</Cost>
+                <Item name="Octorok Eyeball" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>5</Defense>
+                <Cost>50</Cost>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Puffshroom" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>7</Defense>
+                <Cost>200</Cost>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="5"/>
+                <Item name="Keese Eyeball" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>12</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Hinox Horn" quantity="3"/>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Mighty Banana" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Yiga Mask">
+        <Description>template</Description>
+        <SetName>Yiga Armor Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>3</Defense>
+                <Cost>10</Cost>
+                <Item name="Octorok Eyeball" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>5</Defense>
+                <Cost>50</Cost>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Puffshroom" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>7</Defense>
+                <Cost>200</Cost>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="5"/>
+                <Item name="Keese Eyeball" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>12</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Hinox Horn" quantity="3"/>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Mighty Banana" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Yiga Tights">
+        <Description>template</Description>
+        <SetName>Yiga Armor Set</SetName>
+        <BaseDefense>2</BaseDefense>
+        <PassiveBonus>Stealth Up</PassiveBonus>
+        <SetBonus>Night Speed Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>3</Defense>
+                <Cost>10</Cost>
+                <Item name="Octorok Eyeball" quantity="2"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>5</Defense>
+                <Cost>50</Cost>
+                <Item name="Fire-Breath Lizalfos Tail" quantity="3"/>
+                <Item name="Puffshroom" quantity="3"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>7</Defense>
+                <Cost>200</Cost>
+                <Item name="Ice-Breath Lizalfos Tail" quantity="5"/>
+                <Item name="Keese Eyeball" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>12</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Hinox Horn" quantity="3"/>
+                <Item name="Electric Lizalfos Tail" quantity="5"/>
+                <Item name="Mighty Banana" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Zant's Helmet">
+        <Description>template</Description>
+        <SetName>N/A</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Unfreezable</PassiveBonus>
+        <SetBonus>N/A</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Zonaite Helm">
+        <Description>template</Description>
+        <SetName>Zonaite Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Energy Up</PassiveBonus>
+        <SetBonus>Energy Recharge Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Soldier Construct I Horn" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Captain Construct I Horn" quantity="5"/>
+                <Item name="Soldier Construct II Horn" quantity="5"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Captain Construct II Horn" quantity="5"/>
+                <Item name="Soldier Construct III Horn" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Captain Construct III Horn" quantity="5"/>
+                <Item name="Soldier Construct IV Horn" quantity="5"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Zonaite Shin Guards">
+        <Description>template</Description>
+        <SetName>Zonaite Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Energy Up</PassiveBonus>
+        <SetBonus>Energy Recharge Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Soldier Construct I Horn" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Captain Construct I Horn" quantity="5"/>
+                <Item name="Soldier Construct II Horn" quantity="5"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Captain Construct II Horn" quantity="5"/>
+                <Item name="Soldier Construct III Horn" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Captain Construct III Horn" quantity="5"/>
+                <Item name="Soldier Construct IV Horn" quantity="5"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Zonaite Waistguard">
+        <Description>template</Description>
+        <SetName>Zonaite Set</SetName>
+        <BaseDefense>4</BaseDefense>
+        <PassiveBonus>Energy Up</PassiveBonus>
+        <SetBonus>Energy Recharge Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>7</Defense>
+                <Cost>10</Cost>
+                <Item name="Soldier Construct I Horn" quantity="5"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>12</Defense>
+                <Cost>50</Cost>
+                <Item name="Captain Construct I Horn" quantity="5"/>
+                <Item name="Soldier Construct II Horn" quantity="5"/>
+                <Item name="Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>18</Defense>
+                <Cost>200</Cost>
+                <Item name="Captain Construct II Horn" quantity="5"/>
+                <Item name="Soldier Construct III Horn" quantity="5"/>
+                <Item name="Large Zonaite" quantity="5"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>28</Defense>
+                <Cost>500</Cost>
+                <Item name="Captain Construct III Horn" quantity="5"/>
+                <Item name="Soldier Construct IV Horn" quantity="5"/>
+                <Item name="Large Zonaite" quantity="10"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Zora Armor">
+        <Description>template</Description>
+        <SetName>Zora Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Waterfall Climb</PassiveBonus>
+        <SetBonus>Swim Dash Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Lizalfos Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Hyrule Bass" quantity="5"/>
+                <Item name="Lizalfos Horn" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Lizalfos Horn" quantity="5"/>
+                <Item name="Hearty Bass" quantity="3"/>
+                <Item name="Lizalfos Tail" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Lizalfos Horn" quantity="5"/>
+                <Item name="Blue Lizalfos Tail" quantity="5"/>
+                <Item name="Opal" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Zora Greaves">
+        <Description>template</Description>
+        <SetName>Zora Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Swim Speed Up</PassiveBonus>
+        <SetBonus>Swim Dash Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Lizalfos Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Hyrule Bass" quantity="5"/>
+                <Item name="Lizalfos Horn" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Lizalfos Horn" quantity="5"/>
+                <Item name="Hearty Bass" quantity="3"/>
+                <Item name="Lizalfos Tail" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Lizalfos Horn" quantity="5"/>
+                <Item name="Blue Lizalfos Tail" quantity="5"/>
+                <Item name="Opal" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+    <Armor name="Zora Helm">
+        <Description>template</Description>
+        <SetName>Zora Armor Set</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Swim Spin Attack</PassiveBonus>
+        <SetBonus>Swim Dash Stamina Up</SetBonus>
+        <CanBeUpgraded>true</CanBeUpgraded>
+        <Tiers>
+            <Tier level="1">
+                <Defense>5</Defense>
+                <Cost>10</Cost>
+                <Item name="Lizalfos Horn" quantity="3"/>
+            </Tier>
+            <Tier level="2">
+                <Defense>8</Defense>
+                <Cost>50</Cost>
+                <Item name="Hyrule Bass" quantity="5"/>
+                <Item name="Lizalfos Horn" quantity="5"/>
+            </Tier>
+            <Tier level="3">
+                <Defense>12</Defense>
+                <Cost>200</Cost>
+                <Item name="Blue Lizalfos Horn" quantity="5"/>
+                <Item name="Hearty Bass" quantity="3"/>
+                <Item name="Lizalfos Tail" quantity="3"/>
+            </Tier>
+            <Tier level="4">
+                <Defense>20</Defense>
+                <Cost>500</Cost>
+                <Item name="Black Lizalfos Horn" quantity="5"/>
+                <Item name="Blue Lizalfos Tail" quantity="5"/>
+                <Item name="Opal" quantity="20"/>
+            </Tier>
+        </Tiers>
+    </Armor>
+</ArmorData>

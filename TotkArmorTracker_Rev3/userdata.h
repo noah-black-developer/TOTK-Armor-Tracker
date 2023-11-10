@@ -11,8 +11,6 @@ class UserData : public QObject
 public:
     explicit UserData(QObject *parent = nullptr);
 
-signals:
-
 };
 
 #endif // USERDATA_H
