@@ -5,33 +5,95 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("TOTK Armor Tracker")
 
-    GridView {
-        id: tempListView
+    Rectangle {
+        id: gridBorder
 
-        anchors.fill: parent
-        anchors.margins: 10
-        cellWidth: 80
-        cellHeight: 80
+        anchors {
+            fill: parent
+            margins: 10
+        }
+        color: "lightgray"
+        clip: true
 
-        model: appController.getArmorData()
-        delegate: Rectangle {
-            id: armorBorder
+        GridView {
+            id: grid
 
-            width: tempListView.cellWidth
-            height: tempListView.cellHeight
+            width: 500
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                bottom: parent.bottom
+            }
 
-            Image {
-                id: armorImage
+            cellWidth: 100
+            cellHeight: 100
 
-                property int marginSize: 10
+            model: appController.getArmorData()
+            delegate: Item {
+                id: armorItem
 
-                anchors.centerIn: parent
-                width: armorBorder.width - marginSize
-                height: armorBorder.height - marginSize
-                source: "images/" + name + ".png"
+                property string armorName: name
+
+                width: grid.cellWidth
+                height: grid.cellHeight
+
+                ColumnLayout {
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        verticalCenter: parent.verticalCenter
+                    }
+
+                    Image {
+                        source: "images/" + name + ".png"
+                        Layout.preferredWidth: 60
+                        Layout.preferredHeight: 60
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                    }
+                    Text {
+                        id: armorLabel
+
+                        text: name
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        font.pointSize: 8
+                        minimumPointSize: 4
+                        horizontalAlignment: Qt.AlignHCenter
+                        fontSizeMode: Text.Fit
+                    }
+                }
+
+                MouseArea {
+                    id: armorMouseArea
+                    anchors.fill: parent
+                    onClicked: grid.currentIndex = index
+                }
+            }
+            highlight: Rectangle { color: "darkgreen"; radius: 5 }
+            highlightMoveDuration: 75
+            focus: true
+
+            Keys.onTabPressed: {
+                if (currentIndex === count - 1) {
+                    currentIndex = 0
+                }
+                else {
+                    currentIndex += 1
+                }
+            }
+            Keys.onBacktabPressed: {
+                if (currentIndex === 0) {
+                    currentIndex = count - 1
+                }
+                else {
+                    currentIndex -= 1
+                }
+            }
+            Keys.onEnterPressed: {
+                console.log(currentItem.armorName)
             }
         }
     }
 }
+
+
