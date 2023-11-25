@@ -1,18 +1,5 @@
 #include "armordata.h"
 
-// INLINE HELPER FUNCTIONS.
-// Function to check for the existance of a file in the local file system.
-// https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exists-using-standard-c-c11-14-17-c
-inline bool fileExists (const std::string& name) {
-    if (FILE *file = fopen(name.c_str(), "r")) {
-        fclose(file);
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
 ArmorData::ArmorData(QObject *parent) : QAbstractListModel(parent)
 {
     _parent = parent;
@@ -27,6 +14,8 @@ QHash<int, QByteArray> ArmorData::roleNames() const
             { SetDescRole, "description" },
             { PassiveBonusRole, "passive"},
             { SetBonusRole, "setBonus"},
+            { UnlockedRole, "isUnlocked"},
+            { UpgradeableRole, "isUpgradeable"},
             { LevelRole, "level"}
             };
 }
@@ -61,6 +50,14 @@ bool ArmorData::setData(const QModelIndex &index, const QVariant &value, int rol
     else if (role == SetBonusRole)
     {
         armorItem.setBonus = value.toString();
+    }
+    else if (role == UnlockedRole)
+    {
+        armorItem.isUnlocked = value.toBool();
+    }
+    else if (role == UpgradeableRole)
+    {
+        armorItem.isUpgradeable = value.toBool();
     }
     else if (role == LevelRole)
     {
@@ -103,6 +100,14 @@ QVariant ArmorData::data(const QModelIndex &index, int role) const
     {
         return armorItem.setBonus;
     }
+    if (role == UnlockedRole)
+    {
+        return armorItem.isUnlocked;
+    }
+    if (role == UpgradeableRole)
+    {
+        return armorItem.isUpgradeable;
+    }
     if (role == LevelRole)
     {
         return armorItem.level;
@@ -131,15 +136,15 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
 
     // Convert the XML string into a RapidXML-compatable document object.
     // Make a safe-to-modify copy of the save file string to load into RapidXML.
-    xml_document<> armorDataXmlDocument;
+    rapidxml::xml_document<> armorDataXmlDocument;
     armorDataXmlDocument.parse<0>(&parseReadyArmorData[0]);
 
     // LOAD DATA INTO INTERNAL LISTS.
     // Iterate through all of the armor types in the user's save data.
     // RapidXML implements the DOM tree using linked lists, so we can just traverse the list
     //  until a non-valid node is reached to know we have gone over all of the armor types.
-    xml_node<char> *armorsNode = armorDataXmlDocument.first_node("ArmorData");
-    for (xml_node<char> *armorNode = armorsNode->first_node("Armor"); armorNode != 0; armorNode = armorNode->next_sibling())
+    rapidxml::xml_node<char> *armorsNode = armorDataXmlDocument.first_node("ArmorData");
+    for (rapidxml::xml_node<char> *armorNode = armorsNode->first_node("Armor"); armorNode != 0; armorNode = armorNode->next_sibling())
     {
         // Pull and store high-level properties for the armor piece.
         Armor armor = Armor();
@@ -148,8 +153,11 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
         armor.setDesc = armorNode->first_node("Description")->value();
         armor.passiveBonus = armorNode->first_node("PassiveBonus")->value();
         armor.setBonus = armorNode->first_node("SetBonus")->value();
+        QString upgradeStatus = armorNode->first_node("CanBeUpgraded")->value();
+        armor.isUpgradeable = (upgradeStatus == QString("true")) ? true : false;
 
-        // Level of the armor is initialized to 0.
+        // Initialize all user-specific fields to default values.
+        armor.isUnlocked = false;
         armor.level = 0;
 
         // Add the armor into the internal list.
@@ -159,8 +167,81 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
     return true;
 }
 
+int ArmorData::armorCount()
+{
+    return _mDatas.length();
+}
+
 void ArmorData::addArmor(Armor armor)
 {
     _mDatas.append(armor);
     return;
+}
+
+Armor ArmorData::getArmorByIndex(int index)
+{
+    return _mDatas[index];
+}
+
+bool ArmorData::getArmorByName(QString armorName, Armor *&armorOut)
+{
+    // Search the list for the correct armor set.
+    for (int row = 0; row < armorCount(); row++)
+    {
+        if (_mDatas[row].name == armorName)
+        {
+            armorOut = std::addressof(_mDatas[row]);
+            return true;
+        }
+    }
+    return false;
+}
+
+int ArmorData::getArmorRowByName(QString armorName)
+{
+    // Search the list for the correct armor set.
+    for (int row = 0; row < armorCount(); row++)
+    {
+        QModelIndex rowIndex = createIndex(row, 0);
+        if (data(rowIndex, NameRole).toString() == armorName)
+        {
+            return row;
+        }
+    }
+    return -1;
+}
+
+QList<Armor> ArmorData::getFullArmorList()
+{
+    return _mDatas;
+}
+
+bool ArmorData::setArmorUnlockStatus(QString armorName, bool isUnlocked)
+{
+    // Search the list for the correct armor set. If not found, return a failure.
+    int armorRow = getArmorRowByName(armorName);
+    if (armorRow == -1)
+    {
+        return false;
+    }
+
+    // Set armor unlock status and return.
+    QModelIndex armorIndex = createIndex(armorRow, 0);
+    setData(armorIndex, QVariant(isUnlocked), UnlockedRole);
+    return true;
+}
+
+bool ArmorData::setArmorLevel(QString armorName, int level)
+{
+    // Search the list for the correct armor set. If not found, return a failure.
+    int armorRow = getArmorRowByName(armorName);
+    if (armorRow == -1)
+    {
+        return false;
+    }
+
+    // Set armor level and return.
+    QModelIndex armorIndex = createIndex(armorRow, 0);
+    setData(armorIndex, QVariant(level), LevelRole);
+    return true;
 }

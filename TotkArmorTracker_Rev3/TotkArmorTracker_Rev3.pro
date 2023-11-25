@@ -2,14 +2,14 @@ QT += quick
 QT += core
 
 SOURCES += \
-        appcontroller.cpp \
-        armor.cpp \
-        armordata.cpp \
-        helper.cpp \
-        item.cpp \
-        main.cpp \
-        upgrade.cpp \
-        userdata.cpp
+    appcontroller.cpp \
+    armor.cpp \
+    armordata.cpp \
+    helper.cpp \
+    item.cpp \
+    main.cpp \
+    upgrade.cpp \
+    userdata.cpp
 
 HEADERS += \
     appcontroller.h \
@@ -25,7 +25,9 @@ HEADERS += \
     rapidxml-1.13/rapidxml_utils.hpp
 
 resources.files = main.qml \
-    $$files(images/*.png, true)
+    NewSaveDialog.qml \
+    $$files(images/*.png, true) \
+    $$files(images/*.svg, true)
 resources.prefix = /$${TARGET}
 RESOURCES += resources
 
@@ -39,3 +41,11 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+# Create any required folders.
+QMAKE_EXTRA_TARGETS += saves
+saves.target = $$OUT_PWD/saves
+saves.commands = $(MKDIR) $$OUT_PWD/saves
+
+DISTFILES += \
+    NewSaveDialog.qml

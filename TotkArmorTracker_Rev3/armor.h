@@ -15,6 +15,8 @@ public:
         QString armorSetDesc,
         QString armorPassiveBonus,
         QString armorSetBonus,
+        bool isUnlocked,
+        bool isUpgradeable,
         int armorLevel
     );
 
@@ -25,6 +27,8 @@ public:
     QString setDesc = "";
     QString passiveBonus = "";
     QString setBonus = "";
+    bool isUnlocked = false;
+    bool isUpgradeable = false;
     int level = 0;
 
     // CLASS METHODS.

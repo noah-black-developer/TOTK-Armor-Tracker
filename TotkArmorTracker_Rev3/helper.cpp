@@ -45,3 +45,14 @@ inline bool readXmlToParseReadyObj(QString xmlFilePath, std::vector<char> &parse
     parseReadyDataOut = saveFileStreamCopy;
     return true;
 }
+
+// Function to check for the existance of a file in the local file system.
+// https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exists-using-standard-c-c11-14-17-c
+inline bool fileExists (const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }
+}

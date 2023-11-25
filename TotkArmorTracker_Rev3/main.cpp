@@ -22,6 +22,15 @@ int main(int argc, char *argv[])
     AppController *appController = new AppController();
     engine.rootContext()->setContextProperty("appController", appController);
 
+    // Store any required constants as context properties.
+    QDir savesDir = QDir(".");
+    bool savesFolderFound = savesDir.cd("saves");
+    if (!savesFolderFound) {
+        qDebug() << "Saves folder could not be located.";
+        return -1;
+    }
+    engine.rootContext()->setContextProperty("savesFolderPath", savesDir.absolutePath());
+
     // Run application.
     engine.load(url);
     int appReturn = app.exec();

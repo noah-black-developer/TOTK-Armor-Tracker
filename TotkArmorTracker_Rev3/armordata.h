@@ -8,10 +8,9 @@
 #include <QVariant>
 #include <rapidxml-1.13/rapidxml.hpp>
 #include <rapidxml-1.13/rapidxml_print.hpp>
+#include <rapidxml-1.13/rapidxml_utils.hpp>
 #include <armor.h>
 #include <helper.cpp>
-
-using namespace rapidxml;
 
 class ArmorData : public QAbstractListModel
 {
@@ -24,6 +23,8 @@ public:
         SetDescRole,
         PassiveBonusRole,
         SetBonusRole,
+        UnlockedRole,
+        UpgradeableRole,
         LevelRole
     } ArmorRoles;
 
@@ -38,6 +39,13 @@ public:
     // Armor list methods.
     bool loadArmorDataFromFile(QString armorFilePath);
     void addArmor(Armor armor);
+    int armorCount();
+    Armor getArmorByIndex(int index);
+    bool getArmorByName(QString armorName, Armor *&armorOut);
+    int getArmorRowByName(QString armorName);
+    QList<Armor> getFullArmorList();
+    bool setArmorUnlockStatus(QString armorName, bool isUnlocked);
+    bool setArmorLevel(QString armorName, int level);
 
 private:
     QList<Armor> _mDatas = QList<Armor>();

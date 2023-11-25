@@ -2,13 +2,23 @@
 
 Armor::Armor() { }
 
-Armor::Armor(QString armorName, QString armorSetName, QString armorSetDesc, QString armorPassiveBonus, QString armorSetBonus, int armorLevel)
+Armor::Armor(
+    QString armorName,
+    QString armorSetName,
+    QString armorSetDesc,
+    QString armorPassiveBonus,
+    QString armorSetBonus,
+    bool isUnlocked,
+    bool isUpgradeable,
+    int armorLevel)
 {
     name = armorName;
     setName = armorSetName;
     setDesc = armorSetDesc;
     passiveBonus = armorPassiveBonus;
     setBonus = armorSetBonus;
+    isUnlocked = isUnlocked;
+    isUpgradeable = isUpgradeable;
     level = armorLevel;
 }
 
