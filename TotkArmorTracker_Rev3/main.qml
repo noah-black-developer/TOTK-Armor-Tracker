@@ -9,8 +9,8 @@ ApplicationWindow {
     readonly property int minimumArmorLevel: 0
     readonly property int maximumArmorLevel: 4
 
-    width: 640
-    height: 480
+    width: 800
+    height: 600
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
@@ -225,7 +225,18 @@ ApplicationWindow {
 
             // If user has not yet loaded a save, disable view and display following label.
             Rectangle {
-                id: viewNotEnabledRectangle
+                id: viewNotEnabledOverlay
+
+                anchors.fill: parent
+                color: "gray"
+                opacity: 0.5
+
+                // Visible by default, hidden when user loads a save.
+                visible: !appController.saveIsLoaded
+            }
+
+            Rectangle {
+                id: viewNotEnabledTextBox
 
                 width: 100
                 height: 60
@@ -251,6 +262,25 @@ ApplicationWindow {
             }
         }
 
+        Text {
+            id: loadedSaveNameText
+
+            anchors {
+                left: parent.left
+                bottom: parent.bottom
+                leftMargin: 10
+                bottomMargin: 10
+            }
+
+            // Initially set to default value - updated when save is loaded.
+            text: appController.saveName
+            color: systemPalette.text
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            horizontalAlignment: Qt.AlignLeft
+            verticalAlignment: Qt.AlignVCenter
+        }
+
+
         RowLayout {
             id: armorControlsRow
 
@@ -259,17 +289,6 @@ ApplicationWindow {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
                 margins: 10
-            }
-
-            Text {
-                id: loadedSaveNameText
-
-                // Initially set to default value - updated when save is loaded.
-                text: appController.saveName
-                color: systemPalette.text
-                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                horizontalAlignment: Qt.AlignLeft
-                verticalAlignment: Qt.AlignVCenter
             }
 
             Button {

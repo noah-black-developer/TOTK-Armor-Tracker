@@ -167,15 +167,21 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
     return true;
 }
 
-int ArmorData::armorCount()
-{
-    return _mDatas.length();
-}
-
 void ArmorData::addArmor(Armor armor)
 {
     _mDatas.append(armor);
     return;
+}
+
+void ArmorData::clearArmor()
+{
+    _mDatas.clear();
+    return;
+}
+
+int ArmorData::armorCount()
+{
+    return _mDatas.length();
 }
 
 Armor ArmorData::getArmorByIndex(int index)

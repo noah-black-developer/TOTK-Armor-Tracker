@@ -39,6 +39,7 @@ public:
     // Armor list methods.
     bool loadArmorDataFromFile(QString armorFilePath);
     void addArmor(Armor armor);
+    void clearArmor();
     int armorCount();
     Armor getArmorByIndex(int index);
     bool getArmorByName(QString armorName, Armor *&armorOut);

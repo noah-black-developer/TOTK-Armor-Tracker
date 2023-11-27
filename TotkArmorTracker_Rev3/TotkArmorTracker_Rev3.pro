@@ -25,6 +25,7 @@ HEADERS += \
     rapidxml-1.13/rapidxml_utils.hpp
 
 resources.files = main.qml \
+    AppIcon.qml \
     NewSaveDialog.qml \
     $$files(images/*.png, true) \
     $$files(images/*.svg, true)
@@ -48,4 +49,5 @@ saves.target = $$OUT_PWD/saves
 saves.commands = $(MKDIR) $$OUT_PWD/saves
 
 DISTFILES += \
+    AppIcon.qml \
     NewSaveDialog.qml

@@ -4,11 +4,38 @@ AppController::AppController(QObject *parent) : QObject{parent}
 {
     // TEMP: Load in armor data.
     _armorData->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
+    _newSaveArmorData->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
+}
+
+AppController::~AppController()
+{
+    delete _armorData;
+    delete _newSaveArmorData;
 }
 
 ArmorData *AppController::getArmorData() const
 {
     return _armorData;
+}
+
+ArmorData *AppController::getNewSaveArmorData() const
+{
+    return _newSaveArmorData;
+}
+
+void AppController::clearNewSaveArmorData()
+{
+    // RE-INITIALIZE ARMOR DATA.
+    // Re-apply any armor properties defined for main list + set default values.
+    for (int armorIndex = 0; armorIndex < _armorData->armorCount(); armorIndex++)
+    {
+        // Set user-adjustable fields to default values.
+        Armor armor = _newSaveArmorData->getArmorByIndex(armorIndex);
+        _newSaveArmorData->setArmorUnlockStatus(armor.name, false);
+        _newSaveArmorData->setArmorLevel(armor.name, 0);
+    }
+
+    return;
 }
 
 bool AppController::createNewSave(QString name)
@@ -37,7 +64,8 @@ bool AppController::createNewSave(QString name)
     for (int armorIndex = 0; armorIndex < _armorData->armorCount(); armorIndex++)
     {
         // Generate a new node for the current armor set.
-        Armor currentArmorSet = _armorData->getArmorByIndex(armorIndex);
+        // Armor nodes are sourced directly off of the secondary "new save" data set.
+        Armor currentArmorSet = _newSaveArmorData->getArmorByIndex(armorIndex);
         rapidxml::xml_node<> *newArmorNode = newSaveDocument.allocate_node(rapidxml::node_element, "Armor");
 
         // Add attributes for name, armor unlock status, and level.
@@ -46,10 +74,11 @@ bool AppController::createNewSave(QString name)
         rapidxml::xml_attribute<> *nameAttrib = newSaveDocument.allocate_attribute("Name", armorName);
         newArmorNode->append_attribute(nameAttrib);
         // Unlock status, default of false (locked).
-        rapidxml::xml_attribute<> *unlockedAttrib = newSaveDocument.allocate_attribute("Unlocked", "false");
+        char *armorIsUnlocked = newSaveDocument.allocate_string((currentArmorSet.isUnlocked) ? "true" : "false");
+        rapidxml::xml_attribute<> *unlockedAttrib = newSaveDocument.allocate_attribute("Unlocked", armorIsUnlocked);
         newArmorNode->append_attribute(unlockedAttrib);
         // Armor level, default of 0.
-        char *armorLevel = newSaveDocument.allocate_string("0");
+        char *armorLevel = newSaveDocument.allocate_string(std::to_string(currentArmorSet.level).c_str());
         rapidxml::xml_attribute<> *levelAttrib = newSaveDocument.allocate_attribute("Level", armorLevel);
         newArmorNode->append_attribute(levelAttrib);
 
@@ -158,12 +187,22 @@ bool AppController::saveUserData()
     return true;
 }
 
-bool AppController::increaseArmorLevel(QString armorName)
+bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
 {
+    // Determine which data set to use.
+    ArmorData *dataSet;
+    if (useNewSaveData)
+    {
+        dataSet = _newSaveArmorData;
+    }
+    else {
+        dataSet = _armorData;
+    }
+
     // FIND ARMOR OBJECT.
     // Grab a reference to the full armor piece.
     Armor *armor;
-    bool getArmorWasSuccessful = _armorData->getArmorByName(armorName, armor);
+    bool getArmorWasSuccessful = dataSet->getArmorByName(armorName, armor);
     if (!getArmorWasSuccessful)
     {
         // If an armor piece was not found using provided name, fail and return.
@@ -187,16 +226,26 @@ bool AppController::increaseArmorLevel(QString armorName)
     }
 
     // Bump armor level and return a success.
-    _armorData->setArmorLevel(armorName, armor->level + 1);
+    dataSet->setArmorLevel(armorName, armor->level + 1);
     return true;
 }
 
-bool AppController::decreaseArmorLevel(QString armorName)
+bool AppController::decreaseArmorLevel(QString armorName, bool useNewSaveData)
 {
+    // Determine which data set to use.
+    ArmorData *dataSet;
+    if (useNewSaveData)
+    {
+        dataSet = _newSaveArmorData;
+    }
+    else {
+        dataSet = _armorData;
+    }
+
     // FIND ARMOR OBJECT.
     // Grab a reference to the full armor piece.
     Armor *armor;
-    bool getArmorWasSuccessful = _armorData->getArmorByName(armorName, armor);
+    bool getArmorWasSuccessful = dataSet->getArmorByName(armorName, armor);
     if (!getArmorWasSuccessful)
     {
         // If an armor piece was not found using provided name, fail and return.
@@ -220,16 +269,26 @@ bool AppController::decreaseArmorLevel(QString armorName)
     }
 
     // Decrease armor level and return a success.
-    _armorData->setArmorLevel(armorName, armor->level - 1);
+    dataSet->setArmorLevel(armorName, armor->level - 1);
     return true;
 }
 
-bool AppController::toggleArmorUnlock(QString armorName)
+bool AppController::toggleArmorUnlock(QString armorName, bool useNewSaveData)
 {
+    // Determine which data set to use.
+    ArmorData *dataSet;
+    if (useNewSaveData)
+    {
+        dataSet = _newSaveArmorData;
+    }
+    else {
+        dataSet = _armorData;
+    }
+
     // FIND ARMOR OBJECT.
     // Grab a reference to the full armor piece.
     Armor *armor;
-    bool getArmorWasSuccessful = _armorData->getArmorByName(armorName, armor);
+    bool getArmorWasSuccessful = dataSet->getArmorByName(armorName, armor);
     if (!getArmorWasSuccessful)
     {
         // If an armor piece was not found using provided name, fail and return.
@@ -239,6 +298,6 @@ bool AppController::toggleArmorUnlock(QString armorName)
 
     // TOGGLE UNLOCK STATE.
     // Set the unlock to its inverse and return.
-    _armorData->setArmorUnlockStatus(armorName, !armor->isUnlocked);
+    dataSet->setArmorUnlockStatus(armorName, !armor->isUnlocked);
     return true;
 }
