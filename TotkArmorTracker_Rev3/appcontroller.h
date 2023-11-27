@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <armordata.h>
+#include <armorsortfilter.h>
 
 class AppController : public QObject
 {
@@ -22,14 +23,20 @@ public:
     ~AppController();
 
     // MODEL METHODS.
-    Q_INVOKABLE ArmorData *getArmorData() const;
-    Q_INVOKABLE ArmorData *getNewSaveArmorData() const;
+    Q_INVOKABLE ArmorSortFilter *getArmorData() const;
+    Q_INVOKABLE ArmorSortFilter *getNewSaveArmorData() const;
     Q_INVOKABLE void clearNewSaveArmorData();
 
     // SAVE FILE METHODS.
     Q_INVOKABLE bool createNewSave(QString name);
     Q_INVOKABLE bool loadUserData(QUrl filePath);
     Q_INVOKABLE bool saveUserData();
+
+    // SORT METHODS.
+    Q_INVOKABLE QString currentSortType() const;
+    Q_INVOKABLE bool currentSortIsAsc() const;
+    Q_INVOKABLE void setSortType(QString sortType);
+    Q_INVOKABLE void setSortDirection(bool ascending);
 
     // MODIFY ARMOR METHODS.
     // Default to modifying the main dataset. Additional parameters can be set
@@ -45,8 +52,8 @@ public:
 
 private:
     QString _loadedSavePath = "";
-    ArmorData *_armorData = new ArmorData();
-    ArmorData *_newSaveArmorData = new ArmorData();
+    ArmorSortFilter *_armorData;
+    ArmorSortFilter *_newSaveArmorData;
 
 signals:
     void loadedSaveChanged(bool saveIsLoaded);

@@ -82,182 +82,220 @@ ApplicationWindow {
         color: systemPalette.alternateBase
         clip: true
 
-        Rectangle {
-            id: selectedArmorName
+        Item {
+            id: gridWrapper
 
-            height: 20
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.top
-                margins: 20
-            }
-            color: systemPalette.highlight
-
-            Text {
-                id: armorNameText
-
-                anchors.centerIn: parent
-                text: {
-                    if (grid.currentIndex === -1) {
-                        "No Armor Selected"
-                    }
-                    else {
-                        grid.currentItem.armorName
-                    }
-                }
-                color: systemPalette.highlightedText
-            }
-        }
-
-        GridView {
-            id: grid
-
-            width: 500
+            width: 480
             anchors {
                 horizontalCenter: parent.horizontalCenter
-                top: selectedArmorName.bottom
+                top: parent.top
                 bottom: armorControlsRow.top
                 margins: 10
             }
-            clip: true
 
-            cellWidth: 80
-            cellHeight: 80
+            GridLayout {
+                id: gridHeader
 
-            // Disabled by default, enabled when user loads a save.
-            interactive: appController.saveIsLoaded
+                height: 20
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+                columns: 3
 
-            model: appController.getArmorData()
-            delegate: Item {
-                id: armorItem
+                Rectangle {
+                    id: selectedArmorName
 
-                property bool armorIsUnlocked: isUnlocked
-                property bool armorIsUpgradeable: isUpgradeable
-                property string armorName: name
-                property string armorLevel: level
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: parent.width / parent.columns
+                    Layout.fillHeight: true
+                    Layout.column: 0
+                    color: systemPalette.alternateBase
+                    border.color: systemPalette.highlight
+                    border.width: 2
+                    radius: 2
 
-                width: grid.cellWidth
-                height: grid.cellHeight
+                    Text {
+                        id: armorNameText
 
-                ColumnLayout {
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        verticalCenter: parent.verticalCenter
-                    }
-
-                    Image {
-                        source: "images/" + armorItem.armorName + ".png"
-                        Layout.preferredWidth: 60
-                        Layout.preferredHeight: 60
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-
-                        // Armor Level Indicator.
-                        Rectangle {
-                            anchors {
-                                right: parent.right
-                                top: parent.top
-                                rightMargin: 5
-                                topMargin: 5
+                        anchors.centerIn: parent
+                        text: {
+                            if (grid.currentIndex === -1) {
+                                "No Armor Selected"
                             }
-                            width: 15
-                            height: 15
-                            radius: 5
-                            color: systemPalette.highlight
-                            visible: isUpgradeable
-
-                            Text {
-                                anchors.fill: parent
-                                text: level
-                                font.pointSize: 8
-                                horizontalAlignment: Qt.AlignHCenter
-                                color: "white"
+                            else {
+                                grid.currentItem.armorName
                             }
                         }
-
-                        // "Locked" overlay.
-                        Rectangle{
-                            anchors.fill: parent
-                            color: "gray"
-                            opacity: 0.5
-                            visible: !isUnlocked
-                        }
+                        color: systemPalette.highlightedText
                     }
                 }
 
-                MouseArea {
-                    id: armorMouseArea
-                    anchors.fill: parent
+                ComboBox {
+                    id: gridSortComboBox
+
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: parent.width / parent.columns
+                    Layout.fillHeight: true
+                    Layout.column: 1
+                    enabled: appController.saveIsLoaded
+
+                    model: [ "Name", "Level", "Unlocked" ]
+
+                    onCurrentTextChanged: {
+                        appController.setSortType(currentText);
+                        grid.positionViewAtBeginning();
+                        grid.currentIndex = 0;
+                        //grid.forceLayout();
+                    }
+                }
+
+                Button {
+                    id: gridSortDirectionToggle
+
+                    Layout.preferredWidth: parent.height
+                    Layout.preferredHeight: parent.height
+                    Layout.column: 2
+                    enabled: appController.saveIsLoaded
+
+                    icon.source: "images/arrows-up-down-solid.svg"
+                    icon.color: systemPalette.text
+
                     onClicked: {
-                        // If a save is currently loaded, adjust selection accordingly.
-                        if (appController.saveIsLoaded) {
-                            grid.currentIndex = index
+                        appController.setSortDirection(!appController.currentSortIsAsc());
+                        grid.positionViewAtBeginning();
+                        grid.currentIndex = 0;
+                    }
+                }
+            }
+
+            GridView {
+                id: grid
+
+                width: 500
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: gridHeader.bottom
+                    bottom: parent.bottom
+                    topMargin: 5
+                }
+                clip: true
+
+                cellWidth: 80
+                cellHeight: 80
+
+                // Disabled by default, enabled when user loads a save.
+                interactive: appController.saveIsLoaded
+
+                model: appController.getArmorData()
+                delegate: Item {
+                    id: armorItem
+
+                    property bool armorIsUnlocked: isUnlocked
+                    property bool armorIsUpgradeable: isUpgradeable
+                    property string armorName: name
+                    property string armorLevel: level
+
+                    width: grid.cellWidth
+                    height: grid.cellHeight
+
+                    ColumnLayout {
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            verticalCenter: parent.verticalCenter
+                        }
+
+                        Image {
+                            source: "images/" + armorItem.armorName + ".png"
+                            Layout.preferredWidth: 60
+                            Layout.preferredHeight: 60
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+
+                            // Armor Level Indicator.
+                            Rectangle {
+                                anchors {
+                                    right: parent.right
+                                    top: parent.top
+                                    rightMargin: 5
+                                    topMargin: 5
+                                }
+                                width: 15
+                                height: 15
+                                radius: 5
+                                color: systemPalette.highlight
+                                visible: isUpgradeable
+
+                                Text {
+                                    anchors.fill: parent
+                                    text: level
+                                    font.pointSize: 8
+                                    horizontalAlignment: Qt.AlignHCenter
+                                    color: "white"
+                                }
+                            }
+
+                            // "Locked" overlay.
+                            Rectangle{
+                                anchors.fill: parent
+                                color: "gray"
+                                opacity: 0.5
+                                visible: !isUnlocked
+                            }
+                        }
+                    }
+
+                    MouseArea {
+                        id: armorMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            // If a save is currently loaded, adjust selection accordingly.
+                            if (appController.saveIsLoaded) {
+                                grid.currentIndex = index
+                            }
                         }
                     }
                 }
-            }
-            highlight: Rectangle { color: systemPalette.highlight; radius: 5 }
-            highlightMoveDuration: 75
-            focus: true
+                highlight: Rectangle { color: systemPalette.highlight; radius: 5 }
+                highlightMoveDuration: 75
 
-            Keys.onTabPressed: {
-                // If save is loaded, adjust current selection.
-                if (appController.saveIsLoaded) {
-                    if (currentIndex === count - 1) {
-                        currentIndex = 0
-                    }
-                    else {
-                        currentIndex += 1
-                    }
+                // If user has not yet loaded a save, disable view and display following label.
+                Rectangle {
+                    id: viewNotEnabledOverlay
+
+                    anchors.fill: parent
+                    color: "gray"
+                    opacity: 0.5
+
+                    // Visible by default, hidden when user loads a save.
+                    visible: !appController.saveIsLoaded
                 }
-            }
-            Keys.onBacktabPressed: {
-                // If save is loaded, adjust current selection.
-                if (appController.saveIsLoaded) {
-                    if (currentIndex === 0) {
-                        currentIndex = count - 1
+
+                Rectangle {
+                    id: viewNotEnabledTextBox
+
+                    width: 100
+                    height: 60
+                    anchors.centerIn: parent
+                    color: systemPalette.alternateBase
+                    border.color: systemPalette.highlight
+                    border.width: 2
+
+                    // Visible by default, hidden when user loads a save.
+                    visible: !appController.saveIsLoaded
+
+                    Text {
+                        anchors {
+                            fill: parent
+                            margins: 10
+                        }
+                        text: "No save file loaded."
+                        color: systemPalette.text
+                        horizontalAlignment: Qt.AlignHCenter
+                        verticalAlignment: Qt.AlignVCenter
+                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     }
-                    else {
-                        currentIndex -= 1
-                    }
-                }
-            }
-
-            // If user has not yet loaded a save, disable view and display following label.
-            Rectangle {
-                id: viewNotEnabledOverlay
-
-                anchors.fill: parent
-                color: "gray"
-                opacity: 0.5
-
-                // Visible by default, hidden when user loads a save.
-                visible: !appController.saveIsLoaded
-            }
-
-            Rectangle {
-                id: viewNotEnabledTextBox
-
-                width: 100
-                height: 60
-                anchors.centerIn: parent
-                color: systemPalette.alternateBase
-                border.color: systemPalette.highlight
-                border.width: 2
-
-                // Visible by default, hidden when user loads a save.
-                visible: !appController.saveIsLoaded
-
-                Text {
-                    anchors {
-                        fill: parent
-                        margins: 10
-                    }
-                    text: "No save file loaded."
-                    color: systemPalette.text
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 }
             }
         }

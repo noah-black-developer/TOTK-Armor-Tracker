@@ -5,6 +5,7 @@ SOURCES += \
     appcontroller.cpp \
     armor.cpp \
     armordata.cpp \
+    armorsortfilter.cpp \
     helper.cpp \
     item.cpp \
     main.cpp \
@@ -15,6 +16,7 @@ HEADERS += \
     appcontroller.h \
     armor.h \
     armordata.h \
+    armorsortfilter.h \
     item.h \
     upgrade.h \
     userdata.h \

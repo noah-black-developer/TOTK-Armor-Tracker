@@ -2,9 +2,15 @@
 
 AppController::AppController(QObject *parent) : QObject{parent}
 {
+    // Initialize data models and sort/filter wrappers.
+    ArmorSortFilter *mainArmorDataSort = new ArmorSortFilter(new ArmorData());
+    _armorData = mainArmorDataSort;
+    ArmorSortFilter *newSaveArmorDataSort = new ArmorSortFilter(new ArmorData());
+    _newSaveArmorData = newSaveArmorDataSort;
+
     // TEMP: Load in armor data.
-    _armorData->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
-    _newSaveArmorData->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
+    _armorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
+    _newSaveArmorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
 }
 
 AppController::~AppController()
@@ -13,12 +19,12 @@ AppController::~AppController()
     delete _newSaveArmorData;
 }
 
-ArmorData *AppController::getArmorData() const
+ArmorSortFilter *AppController::getArmorData() const
 {
     return _armorData;
 }
 
-ArmorData *AppController::getNewSaveArmorData() const
+ArmorSortFilter *AppController::getNewSaveArmorData() const
 {
     return _newSaveArmorData;
 }
@@ -27,12 +33,12 @@ void AppController::clearNewSaveArmorData()
 {
     // RE-INITIALIZE ARMOR DATA.
     // Re-apply any armor properties defined for main list + set default values.
-    for (int armorIndex = 0; armorIndex < _armorData->armorCount(); armorIndex++)
+    for (int armorIndex = 0; armorIndex < _armorData->model()->armorCount(); armorIndex++)
     {
         // Set user-adjustable fields to default values.
-        Armor armor = _newSaveArmorData->getArmorByIndex(armorIndex);
-        _newSaveArmorData->setArmorUnlockStatus(armor.name, false);
-        _newSaveArmorData->setArmorLevel(armor.name, 0);
+        Armor armor = _newSaveArmorData->model()->getArmorByIndex(armorIndex);
+        _newSaveArmorData->model()->setArmorUnlockStatus(armor.name, false);
+        _newSaveArmorData->model()->setArmorLevel(armor.name, 0);
     }
 
     return;
@@ -61,11 +67,11 @@ bool AppController::createNewSave(QString name)
 
     // INITIALIZE ARMOR DATA.
     // Iterate over all of the armor sets current stored internally.
-    for (int armorIndex = 0; armorIndex < _armorData->armorCount(); armorIndex++)
+    for (int armorIndex = 0; armorIndex < _armorData->model()->armorCount(); armorIndex++)
     {
         // Generate a new node for the current armor set.
         // Armor nodes are sourced directly off of the secondary "new save" data set.
-        Armor currentArmorSet = _newSaveArmorData->getArmorByIndex(armorIndex);
+        Armor currentArmorSet = _newSaveArmorData->model()->getArmorByIndex(armorIndex);
         rapidxml::xml_node<> *newArmorNode = newSaveDocument.allocate_node(rapidxml::node_element, "Armor");
 
         // Add attributes for name, armor unlock status, and level.
@@ -125,9 +131,9 @@ bool AppController::loadUserData(QUrl filePath)
 
         // Set the armor's current level and unlock status.
         bool armorUnlockStatus((QString(currentArmor->first_attribute("Unlocked")->value()) == "true") ? true : false);
-        _armorData->setArmorUnlockStatus(armorName, armorUnlockStatus);
+        _armorData->model()->setArmorUnlockStatus(armorName, armorUnlockStatus);
         int armorLevel(std::stoi(std::string(currentArmor->first_attribute("Level")->value())));
-        _armorData->setArmorLevel(armorName, armorLevel);
+        _armorData->model()->setArmorLevel(armorName, armorLevel);
     }
 
     // Update save file info and emit required signals.
@@ -165,7 +171,7 @@ bool AppController::saveUserData()
         // Search for a matching armor object for the current node.
         QString armorName = QString(currentArmor->first_attribute("Name")->value());
         Armor *armor;
-        bool armorWasFound = _armorData->getArmorByName(armorName, armor);
+        bool armorWasFound = _armorData->model()->getArmorByName(armorName, armor);
         if (!armorWasFound)
         {
             // If the current armor in save file does not match the internal list, print errors and continue.
@@ -187,16 +193,36 @@ bool AppController::saveUserData()
     return true;
 }
 
+QString AppController::currentSortType() const
+{
+    return _armorData->currentSortType();
+}
+
+bool AppController::currentSortIsAsc() const
+{
+    return _armorData->currentSortIsAsc();
+}
+
+void AppController::setSortType(QString sortType)
+{
+    _armorData->setSortType(sortType);
+}
+
+void AppController::setSortDirection(bool ascending)
+{
+    _armorData->setSortDirection(ascending);
+}
+
 bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
 {
     // Determine which data set to use.
     ArmorData *dataSet;
     if (useNewSaveData)
     {
-        dataSet = _newSaveArmorData;
+        dataSet = _newSaveArmorData->model();
     }
     else {
-        dataSet = _armorData;
+        dataSet = _armorData->model();
     }
 
     // FIND ARMOR OBJECT.
@@ -236,10 +262,10 @@ bool AppController::decreaseArmorLevel(QString armorName, bool useNewSaveData)
     ArmorData *dataSet;
     if (useNewSaveData)
     {
-        dataSet = _newSaveArmorData;
+        dataSet = _newSaveArmorData->model();
     }
     else {
-        dataSet = _armorData;
+        dataSet = _armorData->model();
     }
 
     // FIND ARMOR OBJECT.
@@ -279,10 +305,10 @@ bool AppController::toggleArmorUnlock(QString armorName, bool useNewSaveData)
     ArmorData *dataSet;
     if (useNewSaveData)
     {
-        dataSet = _newSaveArmorData;
+        dataSet = _newSaveArmorData->model();
     }
     else {
-        dataSet = _armorData;
+        dataSet = _armorData->model();
     }
 
     // FIND ARMOR OBJECT.
