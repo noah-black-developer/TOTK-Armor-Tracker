@@ -26,13 +26,9 @@ HEADERS += \
     rapidxml-1.13/rapidxml_print.hpp \
     rapidxml-1.13/rapidxml_utils.hpp
 
-resources.files = main.qml \
-    AppIcon.qml \
-    NewSaveDialog.qml \
+RESOURCES += qml.qrc \
     $$files(images/*.png, true) \
     $$files(images/*.svg, true)
-resources.prefix = /$${TARGET}
-RESOURCES += resources
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -49,6 +45,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 QMAKE_EXTRA_TARGETS += saves
 saves.target = $$OUT_PWD/saves
 saves.commands = $(MKDIR) $$OUT_PWD/saves
+
+# Copy config file to build dir.
+CONFIG += file_copies
+COPIES += config
+config.files = appData.xml
+config.path = $$OUT_PWD
 
 DISTFILES += \
     AppIcon.qml \

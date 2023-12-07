@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     // Create the app engine and run. Loading in main .qml file as the starting point for execution.s
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/TotkArmorTracker_Rev3/main.qml"_qs);
+    const QUrl url(u"qrc:/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)

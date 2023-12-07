@@ -15,8 +15,9 @@ class AppController : public QObject
     Q_OBJECT
     QML_ELEMENT
 
-    Q_PROPERTY(bool saveIsLoaded MEMBER saveIsLoaded NOTIFY loadedSaveChanged)
-    Q_PROPERTY(QString saveName MEMBER saveName NOTIFY saveNameChanged)
+    Q_PROPERTY(bool saveIsLoaded READ saveIsLoaded NOTIFY loadedSaveChanged)
+    Q_PROPERTY(QString saveName READ getSaveName NOTIFY saveNameChanged)
+    Q_PROPERTY(QList<QString> recentSaveNames MEMBER recentSaveNames NOTIFY recentSaveNamesChanged)
 
 public:
     explicit AppController(QObject *parent = nullptr);
@@ -29,14 +30,26 @@ public:
 
     // SAVE FILE METHODS.
     Q_INVOKABLE bool createNewSave(QString name);
-    Q_INVOKABLE bool loadUserData(QUrl filePath);
-    Q_INVOKABLE bool saveUserData();
+    Q_INVOKABLE bool loadSave(QUrl filePath);
+    Q_INVOKABLE bool loadRecentSave(QString saveName);
+    Q_INVOKABLE bool saveCurrentSave();
+    // Class q_property definitions are given getters that return based on class state.
+    Q_INVOKABLE bool saveIsLoaded();
+    Q_INVOKABLE QString getSaveName();
+    Q_INVOKABLE QList<QString> getRecentSaveNames();
+
+    // APP CONFIG METHODS.
+    bool loadAppConfig(QString filePath);
+    bool addLocalSaveToAppConfig(QString saveName);
+    bool removeLocalSaveFromAppConfig(QString saveName);
+    bool setMostRecentlyAccessedSave(QString saveName);
 
     // SORT METHODS.
     Q_INVOKABLE QString currentSortType() const;
     Q_INVOKABLE bool currentSortIsAsc() const;
     Q_INVOKABLE void setSortType(QString sortType);
     Q_INVOKABLE void setSortDirection(bool ascending);
+    Q_INVOKABLE void setSortSearchFilter(QString newSortString);
 
     // MODIFY ARMOR METHODS.
     // Default to modifying the main dataset. Additional parameters can be set
@@ -45,19 +58,19 @@ public:
     Q_INVOKABLE bool decreaseArmorLevel(QString armorName, bool useNewSaveData = false);
     Q_INVOKABLE bool toggleArmorUnlock(QString armorName, bool useNewSaveData = false);
 
-    // EXPOSED QML PROPERTY.
-    // Set to default values for no loaded save file.
-    bool saveIsLoaded = false;
-    QString saveName = "No Save Loaded";
+    // Q_PROPERTY OBJECTS.
+    QList<QString> recentSaveNames = QList<QString>();
 
 private:
     QString _loadedSavePath = "";
+    QString _loadedAppConfigPath = "";
     ArmorSortFilter *_armorData;
     ArmorSortFilter *_newSaveArmorData;
 
 signals:
     void loadedSaveChanged(bool saveIsLoaded);
     void saveNameChanged(QString saveName);
+    void recentSaveNamesChanged();
 };
 
 #endif // APPCONTROLLER_H

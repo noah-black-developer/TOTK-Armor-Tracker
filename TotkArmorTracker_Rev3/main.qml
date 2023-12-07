@@ -14,11 +14,6 @@ ApplicationWindow {
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
-    SystemPalette {
-        id: systemPalette
-        colorGroup: SystemPalette.Active
-    }
-
     NewSaveDialog {
         id: createNewSaveDialog
     }
@@ -29,7 +24,7 @@ ApplicationWindow {
         title: "Load Save File"
         // The save folder needs to be given the "file" schema to allow the path to be read in as url.
         currentFolder: "file://" + savesFolderPath
-        onAccepted: appController.loadUserData(selectedFile)
+        onAccepted: appController.loadSave(selectedFile)
     }
 
     MessageDialog {
@@ -54,13 +49,35 @@ ApplicationWindow {
                     loadSaveDialog.open()
                 }
             }
-            Action { text: "Load Recent" }
+            Menu {
+                id: loadRecentMenu
+                title: "Load Recent"
+
+                // If no saves are currently instantiated, menu option is disabled.
+                enabled: loadRecentMenuInstantiator.count > 0
+
+                Instantiator {
+                    id: loadRecentMenuInstantiator
+
+                    model: appController.recentSaveNames
+                    delegate: Action {
+                        // Model is populated directly with list of strings, so the full modelData
+                        // object can be used to assign the text for this element.
+                        text: modelData
+                        onTriggered: appController.loadRecentSave(modelData)
+                    }
+
+                    // Required functions whenever Instantiator adds/removes Actions.
+                    onObjectAdded: (index, object)=> loadRecentMenu.insertAction(index, object)
+                    onObjectRemoved: (index, object)=> loadRecentMenu.removeAction(object)
+                }
+            }
             Action {
                 // Disabled by default. Enabled when user loads save.
                 enabled: appController.saveIsLoaded
                 text: "Save"
                 onTriggered: {
-                    appController.saveUserData();
+                    appController.saveCurrentSave();
                     userDataSavedDialog.open();
                 }
             }
@@ -73,13 +90,13 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: gridBorder
+        id: centralRect
 
         anchors {
             fill: parent
             margins: 10
         }
-        color: systemPalette.alternateBase
+        color: Material.backgroundColor
         clip: true
 
         Item {
@@ -87,7 +104,7 @@ ApplicationWindow {
 
             width: 480
             anchors {
-                horizontalCenter: parent.horizontalCenter
+                left: parent.left
                 top: parent.top
                 bottom: armorControlsRow.top
                 margins: 10
@@ -96,7 +113,7 @@ ApplicationWindow {
             GridLayout {
                 id: gridHeader
 
-                height: 20
+                height: 40
                 anchors {
                     left: parent.left
                     right: parent.right
@@ -104,32 +121,17 @@ ApplicationWindow {
                 }
                 columns: 3
 
-                Rectangle {
-                    id: selectedArmorName
+                TextField {
+                    id: gridSortSearchBox
 
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width / parent.columns
-                    Layout.fillHeight: true
+                    Layout.preferredHeight: parent.height - 12
                     Layout.column: 0
-                    color: systemPalette.alternateBase
-                    border.color: systemPalette.highlight
-                    border.width: 2
-                    radius: 2
+                    enabled: appController.saveIsLoaded
+                    placeholderText: "Search"
 
-                    Text {
-                        id: armorNameText
-
-                        anchors.centerIn: parent
-                        text: {
-                            if (grid.currentIndex === -1) {
-                                "No Armor Selected"
-                            }
-                            else {
-                                grid.currentItem.armorName
-                            }
-                        }
-                        color: systemPalette.highlightedText
-                    }
+                    onTextChanged: appController.setSortSearchFilter(text)
                 }
 
                 ComboBox {
@@ -137,7 +139,7 @@ ApplicationWindow {
 
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width / parent.columns
-                    Layout.fillHeight: true
+                    Layout.preferredHeight: parent.height
                     Layout.column: 1
                     enabled: appController.saveIsLoaded
 
@@ -147,20 +149,20 @@ ApplicationWindow {
                         appController.setSortType(currentText);
                         grid.positionViewAtBeginning();
                         grid.currentIndex = 0;
-                        //grid.forceLayout();
                     }
                 }
 
                 Button {
                     id: gridSortDirectionToggle
 
-                    Layout.preferredWidth: parent.height
                     Layout.preferredHeight: parent.height
                     Layout.column: 2
                     enabled: appController.saveIsLoaded
 
                     icon.source: "images/arrows-up-down-solid.svg"
-                    icon.color: systemPalette.text
+                    //icon.color: systemPalette.text
+                    icon.color: Material.primaryTextColor
+                    text: "Sort"
 
                     onClicked: {
                         appController.setSortDirection(!appController.currentSortIsAsc());
@@ -193,9 +195,13 @@ ApplicationWindow {
                 delegate: Item {
                     id: armorItem
 
+                    property string armorName: name
+                    property string armorSetName: setName
+                    property string armorSetDesc: description
+                    property string armorPassiveBonus: passive
+                    property string armorSetBonus: setBonus
                     property bool armorIsUnlocked: isUnlocked
                     property bool armorIsUpgradeable: isUpgradeable
-                    property string armorName: name
                     property string armorLevel: level
 
                     width: grid.cellWidth
@@ -224,15 +230,16 @@ ApplicationWindow {
                                 width: 15
                                 height: 15
                                 radius: 5
-                                color: systemPalette.highlight
-                                visible: isUpgradeable
+                                //color: systemPalette.highlight
+                                color: Material.accentColor
+                                visible: isUpgradeable && isUnlocked
 
                                 Text {
                                     anchors.fill: parent
                                     text: level
                                     font.pointSize: 8
                                     horizontalAlignment: Qt.AlignHCenter
-                                    color: "white"
+                                    color: Material.Grey
                                 }
                             }
 
@@ -257,7 +264,8 @@ ApplicationWindow {
                         }
                     }
                 }
-                highlight: Rectangle { color: systemPalette.highlight; radius: 5 }
+                //highlight: Rectangle { color: systemPalette.highlight; radius: 5 }
+                highlight: Rectangle { color: Material.accentColor; radius: 5 }
                 highlightMoveDuration: 75
 
                 // If user has not yet loaded a save, disable view and display following label.
@@ -278,9 +286,12 @@ ApplicationWindow {
                     width: 100
                     height: 60
                     anchors.centerIn: parent
-                    color: systemPalette.alternateBase
-                    border.color: systemPalette.highlight
+                    //color: systemPalette.alternateBase
+                    color: Material.dialogColor
+                    //border.color: systemPalette.highlight
+                    border.color: Material.accentColor
                     border.width: 2
+                    radius: 5
 
                     // Visible by default, hidden when user loads a save.
                     visible: !appController.saveIsLoaded
@@ -291,10 +302,268 @@ ApplicationWindow {
                             margins: 10
                         }
                         text: "No save file loaded."
-                        color: systemPalette.text
+                        //color: systemPalette.text
+                        color: Material.primaryTextColor
                         horizontalAlignment: Qt.AlignHCenter
                         verticalAlignment: Qt.AlignVCenter
                         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                    }
+                }
+            }
+        }
+
+        Item {
+            id: detailsWrapper
+
+            anchors {
+                left: gridWrapper.right
+                right: parent.right
+                top: parent.top
+                bottom: armorControlsRow.top
+                margins: 10
+            }
+
+            Rectangle {
+                id: detailsBorderRect
+
+                anchors.fill: parent
+                color: "transparent"
+                border.color: Material.accentColor
+                border.width: 1
+                radius: 5
+
+                Rectangle {
+                    id: detaislsBodyRect
+
+                    anchors {
+                        fill: parent
+                        margins: 5
+                    }
+                    color: Material.dialogColor
+                    radius: 3
+
+                    ColumnLayout {
+                        id: detailsColumnLayout
+
+                        anchors {
+                            fill: parent
+                            margins: 10
+                        }
+
+                        // ARMOR DETAILS.
+                        // References current item. If none is selected, short-circuits to default values.
+                        RowLayout {
+                            id: detailsNameRow
+
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                            spacing: 2
+
+                            Text {
+                                id: detailsNameText
+
+                                Layout.alignment: Qt.AlignLeft
+                                text: (grid.currentItem == null) ? "" : grid.currentItem.armorName
+                                color: Material.primaryTextColor
+                                horizontalAlignment: Qt.AlignLeft
+                            }
+
+                            IconImage {
+                                id: detailsUnlockedIcon
+
+                                Layout.preferredWidth: 12
+                                Layout.preferredHeight: 12
+                                Layout.leftMargin: 3
+                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                source: "images/lock-solid.svg"
+                                color: Material.primaryTextColor
+                                fillMode: IconImage.PreserveAspectFit
+                                visible: (grid.currentItem == null) ? false : !grid.currentItem.armorIsUnlocked
+                            }
+
+                            Item { Layout.fillWidth: true }
+
+                            Repeater {
+                                model: (grid.currentItem == null) ? 0 : grid.currentItem.armorLevel
+                                delegate: IconImage {
+                                    id: detailsLevelIcon
+
+                                    Layout.preferredWidth: 12
+                                    Layout.preferredHeight: 12
+                                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                    source: "images/star-solid.svg"
+                                    color: Material.primaryTextColor
+                                    fillMode: IconImage.PreserveAspectFit
+                                    visible: (grid.currentItem == null) ? false : grid.currentItem.armorIsUnlocked
+
+                                }
+                            }
+                        }
+
+                        Text {
+                            id: detailsDescNameText
+
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                            text: (grid.currentItem == null) ? "" : '"' + grid.currentItem.armorSetDesc + '"'
+                            color: Material.primaryTextColor
+                            wrapMode: Text.Wrap
+                            font.pointSize: 8
+                            font.italic: true
+                            horizontalAlignment: Qt.AlignLeft
+                        }
+
+                        // Horizontal line.
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 1
+                            Layout.topMargin: 2
+                            Layout.bottomMargin: 2
+                            color: Material.accentColor
+                            visible: (grid.currentItem != null)
+                        }
+
+                        Label {
+                            id: detailsPassiveBonusText
+
+                            property int horizontalPadding: 10
+                            property int verticalPadding: 3
+
+                            Layout.leftMargin: horizontalPadding
+                            Layout.rightMargin: horizontalPadding
+                            Layout.topMargin: verticalPadding
+                            Layout.bottomMargin: verticalPadding
+                            Layout.maximumWidth: parent.width - (2 * horizontalPadding)
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
+                            text: (grid.currentItem == null) ? "" : grid.currentItem.armorPassiveBonus
+                            font.pointSize: 9
+                            elide: Label.ElideMiddle
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+
+                            ToolTip.text: text
+                            ToolTip.visible: (text === "") ? false : detailsPassiveBonusMouseArea.containsMouse
+
+                            MouseArea {
+                                id: detailsPassiveBonusMouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                            }
+
+                            background: Rectangle {
+                                id: detailsPassiveBonusBorder
+
+                                anchors.centerIn: parent
+                                width: parent.width + (2 * parent.horizontalPadding)
+                                height: parent.height + (2 * parent.verticalPadding)
+                                color: "transparent"
+                                border.color: Material.accentColor
+                                border.width: 2
+                                radius: 3
+                                visible: (grid.currentItem != null)
+                            }
+                        }
+
+                        Label {
+                            id: detailsSetBonusText
+
+                            property int horizontalPadding: 10
+                            property int verticalPadding: 3
+
+                            Layout.leftMargin: horizontalPadding
+                            Layout.rightMargin: horizontalPadding
+                            Layout.topMargin: verticalPadding
+                            Layout.bottomMargin: verticalPadding
+                            Layout.maximumWidth: parent.width - (2 * horizontalPadding)
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
+                            text: (grid.currentItem == null) ? "" : grid.currentItem.armorSetBonus
+                            font.pointSize: 9
+                            elide: Label.ElideMiddle
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+
+                            ToolTip.text: text
+                            ToolTip.visible: (text === "") ? false : detailsSetBonusMouseArea.containsMouse
+
+                            MouseArea {
+                                id: detailsSetBonusMouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                            }
+
+                            background: Rectangle {
+                                id: detailsSetBonusBorder
+
+                                anchors.centerIn: parent
+                                width: parent.width + (2 * parent.horizontalPadding)
+                                height: parent.height + (2 * parent.verticalPadding)
+                                color: "transparent"
+                                border.color: Material.accentColor
+                                border.width: 2
+                                radius: 3
+                                visible: (grid.currentItem != null)
+                            }
+                        }
+
+                        Label {
+                            id: detailsDefenseText
+
+                            property int horizontalPadding: 10
+                            property int verticalPadding: 3
+
+                            Layout.leftMargin: horizontalPadding
+                            Layout.rightMargin: horizontalPadding
+                            Layout.topMargin: verticalPadding
+                            Layout.bottomMargin: verticalPadding
+                            Layout.maximumWidth: parent.width - (2 * horizontalPadding)
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
+                            text: "Current Defense: ###"
+                            font.pointSize: 9
+                            elide: Label.ElideMiddle
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+
+                            ToolTip.text: text
+                            ToolTip.visible: (text === "") ? false : detailsDefenseMouseArea.containsMouse
+
+                            MouseArea {
+                                id: detailsDefenseMouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                            }
+
+                            background: Rectangle {
+                                id: detailsDefenseBorder
+
+                                anchors.centerIn: parent
+                                width: parent.width + (2 * parent.horizontalPadding)
+                                height: parent.height + (2 * parent.verticalPadding)
+                                color: "transparent"
+                                border.color: Material.accentColor
+                                border.width: 2
+                                radius: 3
+                                visible: (grid.currentItem != null)
+                            }
+                        }
+
+                        // Horizontal line.
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 1
+                            Layout.topMargin: 2
+                            Layout.bottomMargin: 2
+                            color: Material.accentColor
+                            visible: (grid.currentItem != null)
+                        }
+
+                        // Buffer element to push all other elements to the top of rectangle.
+                        Item {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                        }
                     }
                 }
             }
@@ -311,8 +580,8 @@ ApplicationWindow {
             }
 
             // Initially set to default value - updated when save is loaded.
-            text: appController.saveName
-            color: systemPalette.text
+            text: appController.getSaveName()
+            color: Material.primaryTextColor
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             horizontalAlignment: Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
@@ -322,7 +591,7 @@ ApplicationWindow {
         RowLayout {
             id: armorControlsRow
 
-            height: 20
+            height: 40
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
@@ -332,10 +601,26 @@ ApplicationWindow {
             Button {
                 id: unlockArmorButton
 
-                icon.source: (grid.currentItem.armorIsUnlocked) ? "images/lock-solid.svg" : "images/unlock-solid.svg"
-                icon.color: systemPalette.highlightedText
-                Layout.fillHeight: true
-                Layout.preferredWidth: 20
+                icon.source: {
+                    if (grid.currentItem != null)
+                    {
+                        (grid.currentItem.armorIsUnlocked) ? "images/lock-solid.svg" : "images/unlock-solid.svg"
+                    }
+                    else {
+                        "images/lock-solid.svg"
+                    }
+                }
+                icon.color: Material.primaryTextColor
+                text: {
+                    if (grid.currentItem != null)
+                    {
+                        (grid.currentItem.armorIsUnlocked) ? "Lock" : "Unlock"
+                    }
+                    else {
+                        "Unlock"
+                    }
+                }
+                Layout.preferredHeight: parent.height
                 Layout.alignment: Qt.AlignHCenter
 
                 // Disabled until a save is loaded.
@@ -348,18 +633,27 @@ ApplicationWindow {
 
             Button {
                 id: decreaseLevelButton
-                text: "-"
-                Layout.fillHeight: true
-                Layout.preferredWidth: 20
+
+                icon.source: "images/minus-solid.svg"
+                icon.color: Material.primaryTextColor
+                text: "Decrease Level"
+                Layout.preferredHeight: parent.height
                 Layout.alignment: Qt.AlignHCenter
 
                 // Only enabled if save is loaded, armor is unlocked,
                 // armor is upgradeable, and is not at minimum level.
-                enabled:
-                    appController.saveIsLoaded &&
-                    grid.currentItem.armorIsUnlocked &&
-                    grid.currentItem.armorIsUpgradeable &&
-                    (grid.currentItem.armorLevel > appRoot.minimumArmorLevel)
+                enabled: {
+                    if (grid.currentItem != null)
+                    {
+                        appController.saveIsLoaded &&
+                        grid.currentItem.armorIsUnlocked &&
+                        grid.currentItem.armorIsUpgradeable &&
+                        (grid.currentItem.armorLevel > appRoot.minimumArmorLevel);
+                    }
+                    else {
+                        false;
+                    }
+                }
 
                 onClicked: {
                     appController.decreaseArmorLevel(grid.currentItem.armorName);
@@ -368,18 +662,27 @@ ApplicationWindow {
 
             Button {
                 id: increaseLevelButton
-                text: "+"
-                Layout.fillHeight: true
-                Layout.preferredWidth: 20
+
+                icon.source: "images/plus-solid.svg"
+                icon.color: Material.primaryTextColor
+                text: "Increase Level"
+                Layout.preferredHeight: parent.height
                 Layout.alignment: Qt.AlignHCenter
 
                 // Only enabled if save is loaded, armor is unlocked,
                 // armor is upgradeable, and is not at maximum level.
-                enabled:
-                    appController.saveIsLoaded &&
-                    grid.currentItem.armorIsUnlocked &&
-                    grid.currentItem.armorIsUpgradeable &&
-                    (grid.currentItem.armorLevel < appRoot.maximumArmorLevel)
+                enabled: {
+                    if (grid.currentItem != null)
+                    {
+                        appController.saveIsLoaded &&
+                        grid.currentItem.armorIsUnlocked &&
+                        grid.currentItem.armorIsUpgradeable &&
+                        (grid.currentItem.armorLevel < appRoot.maximumArmorLevel);
+                    }
+                    else {
+                        false;
+                    }
+                }
 
                 onClicked: {
                     appController.increaseArmorLevel(grid.currentItem.armorName);

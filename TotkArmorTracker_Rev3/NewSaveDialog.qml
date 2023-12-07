@@ -10,8 +10,8 @@ Dialog {
 
     signal newSaveCreated(string name)
 
-    width: 600
-    height: 400
+    width: parent.width - 100
+    height: parent.height - 100
     anchors.centerIn: parent
     title: "Create New Save"
     standardButtons: Dialog.Ok | Dialog.Cancel
@@ -23,6 +23,7 @@ Dialog {
 
     onOpened: {
         // Whenever the window is first opened, return the armor list to default settings
+        nameTextInput.clear();
         appController.clearNewSaveArmorData();
         armorSetupView.forceLayout();
         armorSetupView.positionViewAtBeginning();
@@ -69,6 +70,7 @@ Dialog {
             Layout.alignment: Qt.AlignVCenter
             // Valid file names allow characters, dashes, underscores, and spaces.
             validator: RegularExpressionValidator { regularExpression: /^[\w\- ]+$/ }
+            placeholderText: "Save Name"
 
             // Update the "OK" button every time the user edits the field.
             onTextChanged: {
@@ -137,20 +139,17 @@ Dialog {
                     Layout.alignment: Qt.AlignLeft
                     horizontalAlignment: Qt.AlignLeft
                     verticalAlignment: Qt.AlignVCenter
-                    text: armorRoot.armorName
                     color: systemPalette.text
-                }
 
-                Button {
-                    id: armorUnlockButton
-
-                    icon.source: (armorRoot.armorIsUnlocked) ? "images/lock-solid.svg" : "images/unlock-solid.svg"
-                    icon.color: systemPalette.highlightedText
-                    Layout.preferredWidth: 25
-                    Layout.preferredHeight: 25
-                    Layout.alignment: Qt.AlignRight
-
-                    onClicked: appController.toggleArmorUnlock(armorRoot.armorName, true)
+                    text: {
+                        if (armorRoot.armorIsUpgradeable)
+                        {
+                            armorRoot.armorName + " - Level " + armorRoot.armorLevel
+                        }
+                        else {
+                            armorRoot.armorName
+                        }
+                    }
                 }
 
                 // SPACER.
@@ -159,15 +158,14 @@ Dialog {
                     Layout.fillHeight: true
                 }
 
-                Button {
+                ToolButton {
                     id: armorLevelDownButton
 
                     text: "-"
-                    Layout.preferredWidth: 25
-                    Layout.preferredHeight: 25
                     Layout.alignment: Qt.AlignRight
                     // Enabled as long as armor is unlocked.
-                    visible: armorRoot.armorIsUnlocked && armorRoot.armorIsUpgradeable
+                    enabled: armorRoot.armorIsUnlocked
+                    visible: armorRoot.armorIsUpgradeable
 
                     onClicked: armorLevelSlider.value -= 1
                 }
@@ -180,11 +178,12 @@ Dialog {
                     stepSize: 1
                     snapMode: Slider.SnapAlways
                     value: armorRoot.armorLevel
-                    Layout.preferredWidth: 150
+                    Layout.preferredWidth: 120
                     Layout.preferredHeight: parent.height
                     Layout.alignment: Qt.AlignRight
                     // Enabled as long as armor is unlocked.
-                    visible: armorRoot.armorIsUnlocked && armorRoot.armorIsUpgradeable
+                    enabled: armorRoot.armorIsUnlocked
+                    visible: armorRoot.armorIsUpgradeable
 
                     onValueChanged: {
                         if (armorRoot.armorLevel < value)
@@ -197,26 +196,26 @@ Dialog {
                     }
                 }
 
-                Button {
+                ToolButton {
                     id: armorLevelUpButton
 
                     text: "+"
-                    Layout.preferredWidth: 25
-                    Layout.preferredHeight: 25
                     Layout.alignment: Qt.AlignRight
                     // Enabled as long as armor is unlocked.
-                    visible: armorRoot.armorIsUnlocked && armorRoot.armorIsUpgradeable
+                    enabled: armorRoot.armorIsUnlocked
+                    visible: armorRoot.armorIsUpgradeable
 
                     onClicked: armorLevelSlider.value += 1
                 }
 
-                Text {
-                    id: armorLevelText
+                Button {
+                    id: armorUnlockButton
 
-                    text: "Level " + parseInt(armorRoot.armorLevel)
-                    color: systemPalette.text
+                    text: (armorRoot.armorIsUnlocked) ? "Lock" : "Unlock"
+                    Layout.preferredWidth: 100
                     Layout.alignment: Qt.AlignRight
-                    visible: armorRoot.armorIsUnlocked && armorRoot.armorIsUpgradeable
+
+                    onClicked: appController.toggleArmorUnlock(armorRoot.armorName, true)
                 }
             }
         }

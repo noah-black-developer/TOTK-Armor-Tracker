@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
+        <file>AppIcon.qml</file>
+        <file>main.qml</file>
+        <file>NewSaveDialog.qml</file>
+    </qresource>
+</RCC>

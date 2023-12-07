@@ -8,9 +8,12 @@ AppController::AppController(QObject *parent) : QObject{parent}
     ArmorSortFilter *newSaveArmorDataSort = new ArmorSortFilter(new ArmorData());
     _newSaveArmorData = newSaveArmorDataSort;
 
+    // Attempt to load in local app configs.
+    loadAppConfig("appData.xml");
+
     // TEMP: Load in armor data.
     _armorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
-    _newSaveArmorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
+    _newSaveArmorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));    
 }
 
 AppController::~AppController()
@@ -100,26 +103,24 @@ bool AppController::createNewSave(QString name)
     newSaveFile.close();
 
     // Now that the new save is created, load it in as the active save file.
-    loadUserData(QUrl::fromLocalFile(outputPath));
+    loadSave(QUrl::fromLocalFile(outputPath));
 
     return true;
 }
 
-bool AppController::loadUserData(QUrl filePath)
+bool AppController::loadSave(QUrl filePath)
 {
-    // GENERATE PATHS.
-    // If the given file does not exist, return a failure.
-    QString saveFilePath = filePath.toLocalFile();
-    if (!fileExists(saveFilePath.toStdString()))
+    // LOAD SAVE FILE.
+    // If the given save file doesn't exist, return a failure.
+    if (!fileExists(filePath.toLocalFile().toStdString()))
     {
         return false;
     }
 
-    // LOAD DOCUMENT TREE.
     // Parse in the save file as a rapidxml-style object.
-    rapidxml::xml_document<> saveDocument;
-    rapidxml::file<> saveFile(saveFilePath.toStdString().c_str());
-    saveDocument.parse<0>(saveFile.data());
+    rapidxml::xml_document<> saveDocument = rapidxml::xml_document<>();
+    rapidxml::file<> file(filePath.toLocalFile().toStdString().c_str());
+    saveDocument.parse<0>(file.data());
 
     // UPDATE ARMOR DATA.
     // Iterate over the full list of armor entries and update the presented UI elements.
@@ -136,18 +137,67 @@ bool AppController::loadUserData(QUrl filePath)
         _armorData->model()->setArmorLevel(armorName, armorLevel);
     }
 
-    // Update save file info and emit required signals.
-    saveIsLoaded = true;
-    emit loadedSaveChanged(saveIsLoaded);
-    saveName = filePath.fileName();
-    emit saveNameChanged(saveName);
+    // Attempt to store the loaded save as a 'recent save' in app configs.
+    addLocalSaveToAppConfig(filePath.fileName());
+    setMostRecentlyAccessedSave(filePath.fileName());
 
     // Once all armor sets have been pushed to save file, store file references and return a success.
-    _loadedSavePath = saveFilePath;
+    _loadedSavePath = filePath.toLocalFile();
+    emit loadedSaveChanged(true);
+    emit saveNameChanged(filePath.fileName());
     return true;
 }
 
-bool AppController::saveUserData()
+bool AppController::loadRecentSave(QString saveName)
+{
+    // GENERATE PATHS.
+    // If the given file does not exist in saves folder, or saves folder does not exist, return a failure.
+    QDir saveFileDir = QDir("saves");
+    if (!saveFileDir.exists())
+    {
+        return false;
+    }
+    QString saveFilePath = saveFileDir.filePath(saveName);
+    if (!fileExists(saveFilePath.toStdString()))
+    {
+        // Any removed files are similarly removed from the application configs file.
+        removeLocalSaveFromAppConfig(saveName);
+        return false;
+    }
+
+    // LOAD SAVE FILE.
+    // Parse in the save file as a rapidxml-style object.
+    rapidxml::xml_document<> saveDocument = rapidxml::xml_document<>();
+    rapidxml::file<> file(saveFilePath.toStdString().c_str());
+    saveDocument.parse<0>(file.data());
+
+    // UPDATE ARMOR DATA.
+    // Iterate over the full list of armor entries and update the presented UI elements.
+    rapidxml::xml_node<> *saveNode = saveDocument.first_node("Save");
+    for (rapidxml::xml_node<> *currentArmor = saveNode->first_node(); currentArmor != 0; currentArmor = currentArmor->next_sibling())
+    {
+        // Get the name of the current armor set.
+        QString armorName = QString(currentArmor->first_attribute("Name")->value());
+
+        // Set the armor's current level and unlock status.
+        bool armorUnlockStatus((QString(currentArmor->first_attribute("Unlocked")->value()) == "true") ? true : false);
+        _armorData->model()->setArmorUnlockStatus(armorName, armorUnlockStatus);
+        int armorLevel(std::stoi(std::string(currentArmor->first_attribute("Level")->value())));
+        _armorData->model()->setArmorLevel(armorName, armorLevel);
+    }
+
+    // Pump save up to the most recently accessed recent save.
+    setMostRecentlyAccessedSave(saveName);
+
+    // Once all armor sets have been pushed to save file, store file references and return a success.
+    _loadedSavePath = saveFilePath;
+    emit loadedSaveChanged(true);
+    emit saveNameChanged(saveName);
+    return true;
+
+}
+
+bool AppController::saveCurrentSave()
 {
     // INITIALIZE LOADED SAVE.
     // If no save is currently loaded, fail with logs.
@@ -193,6 +243,205 @@ bool AppController::saveUserData()
     return true;
 }
 
+bool AppController::saveIsLoaded()
+{
+    // If a save file path has been stored, save is loaded.
+    return _loadedSavePath != "";
+}
+
+QString AppController::getSaveName()
+{
+    if (saveIsLoaded())
+    {
+        // Use QFileInfo to split file name from full path.
+        QFileInfo saveFileInfo(_loadedSavePath);
+        return saveFileInfo.fileName();
+    }
+    else {
+        // If no save is loaded, return an empty string.
+        return QString();
+    }
+}
+
+QList<QString> AppController::getRecentSaveNames()
+{
+    return recentSaveNames;
+}
+
+bool AppController::loadAppConfig(QString filePath)
+{
+    // If the app config file cannot be found, return a failure.
+    if (!fileExists(filePath.toStdString()))
+    {
+        return false;
+    }
+
+    // Parse in the config file as a rapidxml-style object.
+    rapidxml::xml_document<> localConfigDoc = rapidxml::xml_document<>();
+    rapidxml::file<> file(filePath.toStdString().c_str());
+    localConfigDoc.parse<0>(file.data());
+
+    // Pull out all listed Recent Saves from respective locations. If required sections are missing, return a failure.
+    rapidxml::xml_node<> *recentSavesNode = localConfigDoc.first_node("RecentSaves");
+    if (recentSavesNode == 0)
+    {
+        return false;
+    }
+    recentSaveNames.clear();
+    QList<rapidxml::xml_node<>*> nodesToRemove = QList<rapidxml::xml_node<>*> ();
+    for (rapidxml::xml_node<> *currentNode = recentSavesNode->first_node("Save"); currentNode != 0; currentNode = currentNode->next_sibling())
+    {
+        // If the current node is already listed in the recent save list, mark it to be removed and continue.
+        if (recentSaveNames.contains(currentNode->value()))
+        {
+            nodesToRemove.append(currentNode);
+            continue;
+        }
+
+        // For each save found, append the name given to the internal list of recent saves.
+        recentSaveNames.append(QString::fromStdString(currentNode->value()));
+        emit recentSaveNamesChanged();
+    }
+
+    // Remove any flagged duplicates.
+    for (int nodeIndex = 0; nodeIndex < nodesToRemove.length(); nodeIndex++)
+    {
+        recentSavesNode->remove_node(nodesToRemove[nodeIndex]);
+    }
+
+    // Save off any changes that were made to list saves, such as removing duplicates.
+    std::ofstream configFileOut;
+    configFileOut.open(filePath.toStdString());
+    configFileOut << localConfigDoc;
+    configFileOut.close();
+
+    // Store file path for later and return.
+    _loadedAppConfigPath = filePath;
+    return true;
+}
+
+bool AppController::addLocalSaveToAppConfig(QString saveName)
+{
+    // If no app config is laoded, return a failure.
+    if (_loadedAppConfigPath == "")
+    {
+        return false;
+    }
+
+    // ADD NEW SAVE.
+    // Parse in the config file as a rapidxml-style object.
+    rapidxml::xml_document<> localConfigDoc = rapidxml::xml_document<>();
+    rapidxml::file<> file(_loadedAppConfigPath.toStdString().c_str());
+    localConfigDoc.parse<0>(file.data());
+
+    // Allocate and add a new node for the provided save file.
+    char *saveNameChar = localConfigDoc.allocate_string(saveName.toStdString().c_str());
+    rapidxml::xml_node<> *recentSavesNode = localConfigDoc.first_node("RecentSaves");
+    rapidxml::xml_node<> *newSaveFileNode = localConfigDoc.allocate_node(rapidxml::node_element, "Save", saveNameChar);
+    // Node is added as top element to show it as most recently accessed file.
+    recentSavesNode->prepend_node(newSaveFileNode);
+
+    // Save out the modified file at original location.
+    std::ofstream configFileOut;
+    configFileOut.open(_loadedAppConfigPath.toStdString());
+    configFileOut << localConfigDoc;
+    configFileOut.close();
+
+    // Re-load the app configs as needed to refresh save lists.
+    loadAppConfig(_loadedAppConfigPath);
+    return true;
+}
+
+bool AppController::removeLocalSaveFromAppConfig(QString saveName)
+{
+    // If no app config is laoded, return a failure.
+    if (_loadedAppConfigPath == "")
+    {
+        return false;
+    }
+
+    // REMOVE SAVE BY NAME.
+    // Parse in the config file as a rapidxml-style object.
+    rapidxml::xml_document<> localConfigDoc = rapidxml::xml_document<>();
+    rapidxml::file<> file(_loadedAppConfigPath.toStdString().c_str());
+    localConfigDoc.parse<0>(file.data());
+
+    // Look through the listed recent saves for a matching listing.
+    rapidxml::xml_node<> *recentSavesRoot = localConfigDoc.first_node("RecentSaves");
+    for (rapidxml::xml_node<> *currentNode = recentSavesRoot->first_node("Save"); currentNode != 0; currentNode = currentNode->next_sibling())
+    {
+        // If a match is found, remove it from the parent document and save out changes.
+        if (QString(currentNode->value()) == saveName)
+        {
+            // Remove node from document.
+            recentSavesRoot->remove_node(currentNode);
+
+            // Save and return a success.
+            std::ofstream configFileOut;
+            configFileOut.open(_loadedAppConfigPath.toStdString());
+            configFileOut << localConfigDoc;
+            configFileOut.close();
+
+            // Re-load the app configs as needed to refresh save lists.
+            loadAppConfig(_loadedAppConfigPath);
+            return true;
+        }
+    }
+
+    // Otherwise, no match was found. Return a failure.
+    return false;
+}
+
+bool AppController::setMostRecentlyAccessedSave(QString saveName)
+{
+    // If no app config is laoded, return a failure.
+    if (_loadedAppConfigPath == "")
+    {
+        return false;
+    }
+
+    // ADJUST NODE ORDERING.
+    // Parse in the config file as a rapidxml-style object.
+    rapidxml::xml_document<> localConfigDoc = rapidxml::xml_document<>();
+    rapidxml::file<> file(_loadedAppConfigPath.toStdString().c_str());
+    localConfigDoc.parse<0>(file.data());
+
+    // Iterate over recent save list until a matching node is found.
+    rapidxml::xml_node<> *recentSavesNode = localConfigDoc.first_node("RecentSaves");
+    rapidxml::xml_node<> *matchingNode = 0;
+    for (rapidxml::xml_node<> *currentNode = recentSavesNode->first_node("Save"); currentNode != 0; currentNode = currentNode->next_sibling())
+    {
+        QString currentValue(currentNode->value());
+        if (currentValue == saveName)
+        {
+            // Once a match is found, remove it from the original document and store.
+            matchingNode = currentNode;
+            recentSavesNode->remove_node(currentNode);
+            break;
+        }
+    }
+
+    // If a matching node could not be found, return a failure.
+    if (matchingNode == 0)
+    {
+        return false;
+    }
+
+    // Prepend the given save file as the most recently accessed save.
+    recentSavesNode->prepend_node(matchingNode);
+
+    // SAVE CHANGES.
+    // Save out the modified file at original location.
+    std::ofstream configFileOut;
+    configFileOut.open(_loadedAppConfigPath.toStdString());
+    configFileOut << localConfigDoc;
+    configFileOut.close();
+
+    // Re-load the app configs as needed to refresh save lists.
+    loadAppConfig(_loadedAppConfigPath);
+    return true;
+}
+
 QString AppController::currentSortType() const
 {
     return _armorData->currentSortType();
@@ -211,6 +460,12 @@ void AppController::setSortType(QString sortType)
 void AppController::setSortDirection(bool ascending)
 {
     _armorData->setSortDirection(ascending);
+}
+
+void AppController::setSortSearchFilter(QString newSortString)
+{
+    _armorData->setFilterRegularExpression(QRegularExpression(newSortString, QRegularExpression::CaseInsensitiveOption));
+    _armorData->setFilterRole(ArmorData::NameRole);
 }
 
 bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
