@@ -18,6 +18,7 @@ class AppController : public QObject
     Q_PROPERTY(bool saveIsLoaded READ saveIsLoaded NOTIFY loadedSaveChanged)
     Q_PROPERTY(QString saveName READ getSaveName NOTIFY saveNameChanged)
     Q_PROPERTY(QList<QString> recentSaveNames MEMBER recentSaveNames NOTIFY recentSaveNamesChanged)
+    Q_PROPERTY(bool sortIsAsc MEMBER sortIsAsc NOTIFY sortDirectionChanged)
 
 public:
     explicit AppController(QObject *parent = nullptr);
@@ -46,7 +47,6 @@ public:
 
     // SORT METHODS.
     Q_INVOKABLE QString currentSortType() const;
-    Q_INVOKABLE bool currentSortIsAsc() const;
     Q_INVOKABLE void setSortType(QString sortType);
     Q_INVOKABLE void setSortDirection(bool ascending);
     Q_INVOKABLE void setSortSearchFilter(QString newSortString);
@@ -60,6 +60,7 @@ public:
 
     // Q_PROPERTY OBJECTS.
     QList<QString> recentSaveNames = QList<QString>();
+    bool sortIsAsc = true;
 
 private:
     QString _loadedSavePath = "";
@@ -71,6 +72,7 @@ signals:
     void loadedSaveChanged(bool saveIsLoaded);
     void saveNameChanged(QString saveName);
     void recentSaveNamesChanged();
+    void sortDirectionChanged();
 };
 
 #endif // APPCONTROLLER_H

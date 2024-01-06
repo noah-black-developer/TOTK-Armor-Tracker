@@ -447,11 +447,6 @@ QString AppController::currentSortType() const
     return _armorData->currentSortType();
 }
 
-bool AppController::currentSortIsAsc() const
-{
-    return _armorData->currentSortIsAsc();
-}
-
 void AppController::setSortType(QString sortType)
 {
     _armorData->setSortType(sortType);

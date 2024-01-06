@@ -147,6 +147,9 @@ ApplicationWindow {
 
                     onCurrentTextChanged: {
                         appController.setSortType(currentText);
+                        appController.sortIsAsc = true;
+                        // When changing sort types, reset sort direction to defaults.
+                        appController.setSortDirection(true);
                         grid.positionViewAtBeginning();
                         grid.currentIndex = 0;
                     }
@@ -159,14 +162,13 @@ ApplicationWindow {
                     Layout.column: 2
                     enabled: appController.saveIsLoaded
 
-                    icon.source: "images/arrows-up-down-solid.svg"
-                    //icon.color: systemPalette.text
+                    icon.source: (appController.sortIsAsc) ? "images/arrow-up-solid.svg" : "images/arrow-down-solid.svg"
                     icon.color: Material.primaryTextColor
                     text: "Sort"
 
                     onClicked: {
-                        appController.setSortDirection(!appController.currentSortIsAsc());
-                        grid.positionViewAtBeginning();
+                        appController.sortIsAsc = !appController.sortIsAsc;
+                        appController.setSortDirection(appController.sortIsAsc);
                         grid.currentIndex = 0;
                     }
                 }
