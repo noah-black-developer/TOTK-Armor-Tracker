@@ -19,6 +19,7 @@ public:
         bool isUpgradeable,
         int armorLevel
     );
+    ~Armor();
 
     // CLASS VARIABLES.
     // Armor Properties.
@@ -32,13 +33,13 @@ public:
     int level = 0;
 
     // CLASS METHODS.
-    void setUpgradeLevel(int level, Upgrade upgradeDetails);
-    bool getUpgradeDetailsByLevel(int level, Upgrade &upgradeOut);
+    void addUpgradeTierByLevel(int level, Upgrade *upgradeDetails);
+    bool getUpgradeDetailsByLevel(int level, Upgrade *&upgradeOut);
 
 private:
     // Armor Upgrade Details.
-    // Upgrade tiers are indexed by level.
-    QMap<int, Upgrade> _upgradeDetails = QMap<int, Upgrade>();
+    // Upgrade tiers are indexed by level, and stored in QObject pointers.
+    QMap<int, Upgrade*> _upgradeDetails = QMap<int, Upgrade*>();
 
 };
 

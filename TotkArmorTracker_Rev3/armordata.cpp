@@ -160,6 +160,38 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
         armor.isUnlocked = false;
         armor.level = 0;
 
+        // Loop over all upgrade tiers to intiialze each level's requirements, if available.
+        if (armor.isUpgradeable){
+            for (rapidxml::xml_node<char> *upgradeNode = armorNode->first_node("Tiers")->first_node("Tier"); upgradeNode != 0; upgradeNode = upgradeNode->next_sibling())
+            {
+                // Create a new Upgrade object.
+                Upgrade *newUpgrade = new Upgrade();
+
+                // Store the current level's defense rupee cost as class properties.
+                QString tierDefense = upgradeNode->first_node("Defense")->value();
+                newUpgrade->defense = tierDefense.toInt();
+                QString tierCostInRupees = upgradeNode->first_node("Cost")->value();
+                newUpgrade->costInRupees = tierCostInRupees.toInt();
+
+                // Iterate over all listed in the class and append a new Item requirement for each.
+                for (rapidxml::xml_node<char> *itemNode = upgradeNode->first_node("Item"); itemNode != 0; itemNode = itemNode->next_sibling("Item"))
+                {
+                    // Parse out the item name and quantity.
+                    QString itemName = itemNode->first_attribute("name")->value();
+                    QString itemQuantityStr = itemNode->first_attribute("quantity")->value();
+                    int itemQuantity = itemQuantityStr.toInt();
+
+                    // Add the item to the current upgrade.
+                    newUpgrade->addItem(itemName, itemQuantity);
+                }
+
+                // Append the upgrade by tier.
+                QString levelStr = upgradeNode->first_attribute("level")->value();
+                int level = levelStr.toInt();
+                armor.addUpgradeTierByLevel(level, newUpgrade);
+            }
+        }
+
         // Add the armor into the internal list.
         addArmor(armor);
     }

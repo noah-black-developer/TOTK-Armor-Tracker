@@ -1,10 +1,13 @@
 #include "upgrade.h"
 
-Upgrade::Upgrade() { }
-
-Upgrade::Upgrade(int upgradeDefence, int upgradeCostInRupees)
+Upgrade::Upgrade(QObject *parent) : QObject(parent)
 {
-    defence = upgradeDefence;
+
+}
+
+Upgrade::Upgrade(int upgradeDefense, int upgradeCostInRupees, QObject *parent) : QObject(parent)
+{
+    defense = upgradeDefense;
     costInRupees = upgradeCostInRupees;
 }
 
