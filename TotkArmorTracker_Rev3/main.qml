@@ -344,406 +344,335 @@ ApplicationWindow {
                     color: Material.dialogColor
                     radius: 3
 
-                    ColumnLayout {
-                        id: detailsColumnLayout
+                    ScrollView {
+                        id: detailsScrollView
 
                         anchors {
                             fill: parent
-                            margins: 10
+                            margins: 5
                         }
+                        contentWidth: detailsColumnLayout.width
+                        contentHeight: detailsColumnLayout.height
 
-                        // ARMOR DETAILS.
-                        // References current item. If none is selected, short-circuits to default values.
+                        ColumnLayout {
+                            id: detailsColumnLayout
 
-                        // Armor Name + Icons.
-                        RowLayout {
-                            id: detailsNameRow
+                            // The background rectangle is somehow a more *consistent* source of width
+                            // here, so it is used and modified with the margins size to get correct sizing.
+                            width: detaislsBodyRect.width - 10
 
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                            spacing: 2
+                            // ARMOR DETAILS.
+                            // References current item. If none is selected, short-circuits to default values.
 
-                            Text {
-                                id: detailsNameText
+                            // Armor Name + Icons.
+                            RowLayout {
+                                id: detailsNameRow
 
-                                Layout.alignment: Qt.AlignLeft
-                                text: (grid.currentItem == null) ? "" : grid.currentItem.armorName
-                                color: Material.primaryTextColor
-                                horizontalAlignment: Qt.AlignLeft
-                            }
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                                spacing: 2
 
-                            IconImage {
-                                id: detailsUnlockedIcon
+                                Text {
+                                    id: detailsNameText
 
-                                Layout.preferredWidth: 12
-                                Layout.preferredHeight: 12
-                                Layout.leftMargin: 3
-                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                                source: "images/lock-solid.svg"
-                                color: Material.primaryTextColor
-                                fillMode: IconImage.PreserveAspectFit
-                                visible: (grid.currentItem == null) ? false : !grid.currentItem.armorIsUnlocked
-                            }
+                                    Layout.alignment: Qt.AlignLeft
+                                    text: (grid.currentItem == null) ? "" : grid.currentItem.armorName
+                                    color: Material.primaryTextColor
+                                    horizontalAlignment: Qt.AlignLeft
+                                }
 
-                            Item { Layout.fillWidth: true }
-
-                            Repeater {
-                                model: (grid.currentItem == null) ? 0 : grid.currentItem.armorLevel
-                                delegate: IconImage {
-                                    id: detailsLevelIcon
+                                IconImage {
+                                    id: detailsUnlockedIcon
 
                                     Layout.preferredWidth: 12
                                     Layout.preferredHeight: 12
-                                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                                    source: "images/star-solid.svg"
+                                    Layout.leftMargin: 3
+                                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                    source: "images/lock-solid.svg"
                                     color: Material.primaryTextColor
                                     fillMode: IconImage.PreserveAspectFit
-                                    visible: (grid.currentItem == null) ? false : grid.currentItem.armorIsUnlocked
+                                    visible: (grid.currentItem == null) ? false : !grid.currentItem.armorIsUnlocked
+                                }
 
+                                Item { Layout.fillWidth: true }
+
+                                Repeater {
+                                    model: (grid.currentItem == null) ? 0 : grid.currentItem.armorLevel
+                                    delegate: IconImage {
+                                        id: detailsLevelIcon
+
+                                        Layout.preferredWidth: 12
+                                        Layout.preferredHeight: 12
+                                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                        source: "images/star-solid.svg"
+                                        color: Material.primaryTextColor
+                                        fillMode: IconImage.PreserveAspectFit
+                                        visible: (grid.currentItem == null) ? false : grid.currentItem.armorIsUnlocked
+
+                                    }
                                 }
                             }
-                        }
 
-                        // Armor Description.
-                        Text {
-                            id: detailsDescNameText
+                            // Armor Description.
+                            Text {
+                                id: detailsDescNameText
 
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                            text: (grid.currentItem == null) ? "" : '"' + grid.currentItem.armorSetDesc + '"'
-                            color: Material.primaryTextColor
-                            wrapMode: Text.Wrap
-                            font.pointSize: 8
-                            font.italic: true
-                            horizontalAlignment: Qt.AlignLeft
-                        }
-
-                        // Horizontal line.
-                        Rectangle {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 1
-                            Layout.topMargin: 2
-                            Layout.bottomMargin: 2
-                            color: Material.accentColor
-                            visible: (grid.currentItem != null)
-                        }
-
-                        // Passive Bonuses.
-                        Label {
-                            id: detailsPassiveBonusText
-
-                            property int horizontalPadding: 10
-                            property int verticalPadding: 3
-
-                            Layout.leftMargin: horizontalPadding
-                            Layout.rightMargin: horizontalPadding
-                            Layout.topMargin: verticalPadding
-                            Layout.bottomMargin: verticalPadding
-                            Layout.maximumWidth: parent.width - (2 * horizontalPadding)
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-
-                            text: (grid.currentItem == null) ? "" : grid.currentItem.armorPassiveBonus
-                            font.pointSize: 9
-                            elide: Label.ElideMiddle
-                            horizontalAlignment: Qt.AlignHCenter
-                            verticalAlignment: Qt.AlignVCenter
-
-                            ToolTip.text: text
-                            ToolTip.visible: (text === "") ? false : detailsPassiveBonusMouseArea.containsMouse
-
-                            MouseArea {
-                                id: detailsPassiveBonusMouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                                text: (grid.currentItem == null) ? "" : '"' + grid.currentItem.armorSetDesc + '"'
+                                color: Material.primaryTextColor
+                                wrapMode: Text.Wrap
+                                font.pointSize: 8
+                                font.italic: true
+                                horizontalAlignment: Qt.AlignLeft
                             }
 
-                            background: Rectangle {
-                                id: detailsPassiveBonusBorder
-
-                                anchors.centerIn: parent
-                                width: parent.width + (2 * parent.horizontalPadding)
-                                height: parent.height + (2 * parent.verticalPadding)
-                                color: "transparent"
-                                border.color: Material.accentColor
-                                border.width: 2
-                                radius: 3
+                            // Horizontal line.
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 1
+                                Layout.topMargin: 2
+                                Layout.bottomMargin: 2
+                                color: Material.accentColor
                                 visible: (grid.currentItem != null)
                             }
-                        }
 
-                        // Set Bonuses.
-                        Label {
-                            id: detailsSetBonusText
+                            // Passive Bonuses.
+                            Label {
+                                id: detailsPassiveBonusText
 
-                            property int horizontalPadding: 10
-                            property int verticalPadding: 3
+                                property int horizontalPadding: 10
+                                property int verticalPadding: 3
 
-                            Layout.leftMargin: horizontalPadding
-                            Layout.rightMargin: horizontalPadding
-                            Layout.topMargin: verticalPadding
-                            Layout.bottomMargin: verticalPadding
-                            Layout.maximumWidth: parent.width - (2 * horizontalPadding)
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                                Layout.leftMargin: horizontalPadding
+                                Layout.rightMargin: horizontalPadding
+                                Layout.topMargin: verticalPadding
+                                Layout.bottomMargin: verticalPadding
+                                Layout.maximumWidth: parent.width - (2 * horizontalPadding)
+                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
 
-                            text: (grid.currentItem == null) ? "" : grid.currentItem.armorSetBonus
-                            font.pointSize: 9
-                            elide: Label.ElideMiddle
-                            horizontalAlignment: Qt.AlignHCenter
-                            verticalAlignment: Qt.AlignVCenter
+                                text: (grid.currentItem == null) ? "" : grid.currentItem.armorPassiveBonus
+                                font.pointSize: 9
+                                elide: Label.ElideMiddle
+                                horizontalAlignment: Qt.AlignHCenter
+                                verticalAlignment: Qt.AlignVCenter
 
-                            ToolTip.text: text
-                            ToolTip.visible: (text === "") ? false : detailsSetBonusMouseArea.containsMouse
+                                ToolTip.text: text
+                                ToolTip.visible: (text === "") ? false : detailsPassiveBonusMouseArea.containsMouse
 
-                            MouseArea {
-                                id: detailsSetBonusMouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
-                            }
-
-                            background: Rectangle {
-                                id: detailsSetBonusBorder
-
-                                anchors.centerIn: parent
-                                width: parent.width + (2 * parent.horizontalPadding)
-                                height: parent.height + (2 * parent.verticalPadding)
-                                color: "transparent"
-                                border.color: Material.accentColor
-                                border.width: 2
-                                radius: 3
-                                visible: (grid.currentItem != null)
-                            }
-                        }
-
-                        // Armor Defense (at current level).
-                        Label {
-                            id: detailsDefenseText
-
-                            property int horizontalPadding: 10
-                            property int verticalPadding: 3
-
-                            Layout.leftMargin: horizontalPadding
-                            Layout.rightMargin: horizontalPadding
-                            Layout.topMargin: verticalPadding
-                            Layout.bottomMargin: verticalPadding
-                            Layout.maximumWidth: parent.width - (2 * horizontalPadding)
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-
-                            text: "Current Defense: ###"
-                            font.pointSize: 9
-                            elide: Label.ElideMiddle
-                            horizontalAlignment: Qt.AlignHCenter
-                            verticalAlignment: Qt.AlignVCenter
-
-                            ToolTip.text: text
-                            ToolTip.visible: (text === "") ? false : detailsDefenseMouseArea.containsMouse
-
-                            MouseArea {
-                                id: detailsDefenseMouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
-                            }
-
-                            background: Rectangle {
-                                id: detailsDefenseBorder
-
-                                anchors.centerIn: parent
-                                width: parent.width + (2 * parent.horizontalPadding)
-                                height: parent.height + (2 * parent.verticalPadding)
-                                color: "transparent"
-                                border.color: Material.accentColor
-                                border.width: 2
-                                radius: 3
-                                visible: (grid.currentItem != null)
-                            }
-                        }
-
-                        // Horizontal line.
-                        Rectangle {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 1
-                            Layout.topMargin: 2
-                            Layout.bottomMargin: 2
-                            color: Material.accentColor
-                            visible: (grid.currentItem != null)
-                        }
-
-                        // Armor Upgrades.
-                        // Displays upgrades required for all upgrades the armor currently supports.
-                        Repeater {
-                            id: detailsArmorUpgradesRepeater
-
-                            property int rowHeightsInPixels: 18
-                            property int marginSizeInPixels: 5
-
-                            // The fields for showing armor upgrades are always shown, but hidden if the armor cannot be upgraded.
-                            model: 4
-                            delegate: Rectangle {
-                                id: armorUpgradeRect
-
-                                required property int index
-                                property string levelStr: {
-                                    var level = armorUpgradeRect.index + 1;
-                                    level.toString();
+                                MouseArea {
+                                    id: detailsPassiveBonusMouseArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
                                 }
-                                property int itemCount: {
-                                    if (grid.currentItem) {
-                                        // Defaults to 0 if item is not upgradeable.
-                                        if (grid.currentItem.armorIsUpgradeable) {
-                                            grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList().length;
+
+                                background: Rectangle {
+                                    id: detailsPassiveBonusBorder
+
+                                    anchors.centerIn: parent
+                                    width: parent.width + (2 * parent.horizontalPadding)
+                                    height: parent.height + (2 * parent.verticalPadding)
+                                    color: "transparent"
+                                    border.color: Material.accentColor
+                                    border.width: 2
+                                    radius: 3
+                                    visible: (grid.currentItem != null)
+                                }
+                            }
+
+                            // Set Bonuses.
+                            Label {
+                                id: detailsSetBonusText
+
+                                property int horizontalPadding: 10
+                                property int verticalPadding: 3
+
+                                Layout.leftMargin: horizontalPadding
+                                Layout.rightMargin: horizontalPadding
+                                Layout.topMargin: verticalPadding
+                                Layout.bottomMargin: verticalPadding
+                                Layout.maximumWidth: parent.width - (2 * horizontalPadding)
+                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
+                                text: (grid.currentItem == null) ? "" : grid.currentItem.armorSetBonus
+                                font.pointSize: 9
+                                elide: Label.ElideMiddle
+                                horizontalAlignment: Qt.AlignHCenter
+                                verticalAlignment: Qt.AlignVCenter
+
+                                ToolTip.text: text
+                                ToolTip.visible: (text === "") ? false : detailsSetBonusMouseArea.containsMouse
+
+                                MouseArea {
+                                    id: detailsSetBonusMouseArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                }
+
+                                background: Rectangle {
+                                    id: detailsSetBonusBorder
+
+                                    anchors.centerIn: parent
+                                    width: parent.width + (2 * parent.horizontalPadding)
+                                    height: parent.height + (2 * parent.verticalPadding)
+                                    color: "transparent"
+                                    border.color: Material.accentColor
+                                    border.width: 2
+                                    radius: 3
+                                    visible: (grid.currentItem != null)
+                                }
+                            }
+
+                            // Armor Defense (at current level).
+                            Label {
+                                id: detailsDefenseText
+
+                                property int horizontalPadding: 10
+                                property int verticalPadding: 3
+
+                                Layout.leftMargin: horizontalPadding
+                                Layout.rightMargin: horizontalPadding
+                                Layout.topMargin: verticalPadding
+                                Layout.bottomMargin: verticalPadding
+                                Layout.maximumWidth: parent.width - (2 * horizontalPadding)
+                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
+                                text: "Current Defense: ###"
+                                font.pointSize: 9
+                                elide: Label.ElideMiddle
+                                horizontalAlignment: Qt.AlignHCenter
+                                verticalAlignment: Qt.AlignVCenter
+
+                                ToolTip.text: text
+                                ToolTip.visible: (text === "") ? false : detailsDefenseMouseArea.containsMouse
+
+                                MouseArea {
+                                    id: detailsDefenseMouseArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                }
+
+                                background: Rectangle {
+                                    id: detailsDefenseBorder
+
+                                    anchors.centerIn: parent
+                                    width: parent.width + (2 * parent.horizontalPadding)
+                                    height: parent.height + (2 * parent.verticalPadding)
+                                    color: "transparent"
+                                    border.color: Material.accentColor
+                                    border.width: 2
+                                    radius: 3
+                                    visible: (grid.currentItem != null)
+                                }
+                            }
+
+                            // Horizontal line.
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 1
+                                Layout.topMargin: 2
+                                Layout.bottomMargin: 2
+                                color: Material.accentColor
+                                visible: (grid.currentItem != null)
+                            }
+
+                            // Armor Upgrades.
+                            // Displays upgrades required for all upgrades the armor currently supports.
+                            Repeater {
+                                id: detailsArmorUpgradesRepeater
+
+                                property int rowHeightsInPixels: 18
+                                property int marginSizeInPixels: 5
+
+                                // The fields for showing armor upgrades are always shown, but hidden if the armor cannot be upgraded.
+                                model: 4
+                                delegate: Rectangle {
+                                    id: armorUpgradeRect
+
+                                    required property int index
+                                    property string levelStr: {
+                                        var level = armorUpgradeRect.index + 1;
+                                        level.toString();
+                                    }
+                                    property int itemCount: {
+                                        if (grid.currentItem) {
+                                            // Defaults to 0 if item is not upgradeable.
+                                            if (grid.currentItem.armorIsUpgradeable) {
+                                                grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList().length;
+                                            } else {
+                                                0;
+                                            }
                                         } else {
                                             0;
                                         }
-                                    } else {
-                                        0;
                                     }
-                                }
-                                property bool isExpanded: {
-                                    // Field is *generally* expanded when armor is unlocked and currently at the prior level.
-                                    var prevLevel = armorUpgradeRect.index;
-                                    if (grid.currentItem) {
-                                        if (grid.currentItem.armorIsUnlocked) {
-                                            grid.currentItem.armorLevel === prevLevel.toString();
+                                    property bool isExpanded: {
+                                        // Field is *generally* expanded when armor is unlocked and currently at the prior level.
+                                        var prevLevel = armorUpgradeRect.index;
+                                        if (grid.currentItem) {
+                                            if (grid.currentItem.armorIsUnlocked) {
+                                                grid.currentItem.armorLevel === prevLevel.toString();
+                                            } else {
+                                                false;
+                                            }
                                         } else {
+                                            // If no current item is available, set to false.
                                             false;
                                         }
-                                    } else {
-                                        // If no current item is available, set to false.
-                                        false;
                                     }
-                                }
-                                property color textColor: (isExpanded) ? Material.backgroundColor : Material.primaryTextColor
+                                    property color textColor: (isExpanded) ? Material.backgroundColor : Material.primaryTextColor
 
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: {
-                                    if (isExpanded) {
-                                        // Height is determined by if the current upgrade is expanded.
-                                        (detailsArmorUpgradesRepeater.rowHeightsInPixels * (itemCount + 1)) // Height of all items...
-                                        + (detailsArmorUpgradesRepeater.marginSizeInPixels * 2)             // ...plus the top/bottom margins...
-                                        + (itemCount * detailsArmorUpgradesRepeater.marginSizeInPixels)     // ...plus space between each item
-                                    } else {
-                                        // Otherwise, set to default values for just the header row.
-                                        detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                        + (detailsArmorUpgradesRepeater.marginSizeInPixels + 2)
-                                    }
-                                }
-                                visible: (grid.currentItem) ? grid.currentItem.armorIsUpgradeable : false
-                                // Changed to more visible color when armor is at level before current upgrade tier.
-                                color: (isExpanded) ? Material.accentColor : Material.dividerColor
-
-                                radius: 5
-
-                                // When clicked, toggle the expansion of this specific row.
-                                MouseArea {
-                                    id: armorUpgradeMouseArea
-
-                                    anchors.fill: parent
-                                    onClicked: armorUpgradeRect.isExpanded = !armorUpgradeRect.isExpanded
-                                }
-
-                                // Each upgrade tier is composed of multiple rows, each containing info on a specific requirement or header.
-                                ColumnLayout {
-                                    id: armorUpgradeColumn
-
-                                    anchors {
-                                        fill: parent
-                                        margins: 5
-                                    }
-                                    spacing: 5
-
-                                    // Header information and basic cost info.
-                                    RowLayout {
-                                        id: upgradeHeaderRow
-
-                                        Layout.fillWidth: true
-                                        Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
-
-                                        // Upgrade Level Info.
-                                        Text {
-                                            id: upgradeLevelInfoText
-
-                                            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                                            text: "Level " + (armorUpgradeRect.index + 1)
-                                            font.bold: true
-                                            color: armorUpgradeRect.textColor
-                                        }
-
-                                        // Spacer.
-                                        Item {
-                                            Layout.fillWidth: true
-                                        }
-
-                                        // Upgrade Rupee Cost.
-                                        Text {
-                                            id: upgradeRupeeCostText
-
-                                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                                            Layout.fillHeight: true
-                                            text: {
-                                                if (grid.currentItem) {
-                                                    (grid.currentItem.armorIsUpgradeable)
-                                                        ? grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].costInRupees
-                                                        : "0";
-                                                } else {
-                                                    "0";
-                                                }
-                                            }
-                                            color: armorUpgradeRect.textColor
-                                        }
-                                        AppIcon {
-                                            id: upgradeRupeeCostIcon
-
-                                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                                            Layout.fillHeight: true
-                                            Layout.preferredWidth: 10
-                                            Layout.leftMargin: 5
-                                            icon.source: "images/rupee-lightmode.svg"
-                                            icon.color: armorUpgradeRect.textColor
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: {
+                                        if (isExpanded) {
+                                            // Height is determined by if the current upgrade is expanded.
+                                            (detailsArmorUpgradesRepeater.rowHeightsInPixels * (itemCount + 1)) // Height of all items...
+                                            + (detailsArmorUpgradesRepeater.marginSizeInPixels * 2)             // ...plus the top/bottom margins...
+                                            + (itemCount * detailsArmorUpgradesRepeater.marginSizeInPixels)     // ...plus space between each item
+                                        } else {
+                                            // Otherwise, set to default values for just the header row.
+                                            detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                            + (detailsArmorUpgradesRepeater.marginSizeInPixels + 2)
                                         }
                                     }
+                                    visible: (grid.currentItem) ? grid.currentItem.armorIsUpgradeable : false
+                                    // Changed to more visible color when armor is at level before current upgrade tier.
+                                    color: (isExpanded) ? Material.accentColor : Material.dividerColor
 
-                                    // Required Items.
-                                    // Instantiates based on how many items are required at each tier.
-                                    Repeater {
-                                        id: upgradeItemsRepeater
+                                    radius: 5
 
-                                        model: {
-                                            if (grid.currentItem) {
-                                                // Only shown if current item is upgradeable and element is currently expanded.
-                                                if (grid.currentItem.armorIsUpgradeable && armorUpgradeRect.isExpanded) {
-                                                    grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList();
-                                                } else {
-                                                    []
-                                                }
-                                            } else {
-                                                []
-                                            }
+                                    // When clicked, toggle the expansion of this specific row.
+                                    MouseArea {
+                                        id: armorUpgradeMouseArea
 
+                                        anchors.fill: parent
+                                        onClicked: armorUpgradeRect.isExpanded = !armorUpgradeRect.isExpanded
+                                    }
+
+                                    // Each upgrade tier is composed of multiple rows, each containing info on a specific requirement or header.
+                                    ColumnLayout {
+                                        id: armorUpgradeColumn
+
+                                        anchors {
+                                            fill: parent
+                                            margins: 5
                                         }
-                                        delegate: RowLayout {
-                                            id: upgradeItemRow
+                                        spacing: 5
 
-                                            required property var modelData
+                                        // Header information and basic cost info.
+                                        RowLayout {
+                                            id: upgradeHeaderRow
 
                                             Layout.fillWidth: true
                                             Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
 
-                                            // Item image.
-                                            Image {
-                                                id: upgradeItemImage
-
-                                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                                                Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                fillMode: Image.PreserveAspectFit
-                                                source: "images/" + modelData.name + ".png"
-                                            }
-
-                                            // Item Name.
+                                            // Upgrade Level Info.
                                             Text {
-                                                id: upgradeItemName
+                                                id: upgradeLevelInfoText
 
                                                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                                                text: modelData.name
+                                                text: "Level " + (armorUpgradeRect.index + 1)
+                                                font.bold: true
                                                 color: armorUpgradeRect.textColor
                                             }
 
@@ -752,24 +681,107 @@ ApplicationWindow {
                                                 Layout.fillWidth: true
                                             }
 
-                                            // Item Quantity.
+                                            // Upgrade Rupee Cost.
                                             Text {
-                                                id: upgradeItemQuantity
+                                                id: upgradeRupeeCostText
 
-                                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                                                text: "x" + modelData.quantity
+                                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                                Layout.fillHeight: true
+                                                text: {
+                                                    if (grid.currentItem) {
+                                                        (grid.currentItem.armorIsUpgradeable)
+                                                            ? grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].costInRupees
+                                                            : "0";
+                                                    } else {
+                                                        "0";
+                                                    }
+                                                }
                                                 color: armorUpgradeRect.textColor
+                                            }
+                                            AppIcon {
+                                                id: upgradeRupeeCostIcon
+
+                                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                                Layout.fillHeight: true
+                                                Layout.preferredWidth: 10
+                                                Layout.leftMargin: 5
+                                                icon.source: "images/rupee-lightmode.svg"
+                                                icon.color: armorUpgradeRect.textColor
+                                            }
+                                        }
+
+                                        // Required Items.
+                                        // Instantiates based on how many items are required at each tier.
+                                        Repeater {
+                                            id: upgradeItemsRepeater
+
+                                            model: {
+                                                if (grid.currentItem) {
+                                                    // Only shown if current item is upgradeable and element is currently expanded.
+                                                    if (grid.currentItem.armorIsUpgradeable && armorUpgradeRect.isExpanded) {
+                                                        grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList();
+                                                    } else {
+                                                        []
+                                                    }
+                                                } else {
+                                                    []
+                                                }
+
+                                            }
+                                            delegate: RowLayout {
+                                                id: upgradeItemRow
+
+                                                required property var modelData
+
+                                                Layout.fillWidth: true
+                                                Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
+
+                                                // Item image.
+                                                Image {
+                                                    id: upgradeItemImage
+
+                                                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                                    Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                                    Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                                    fillMode: Image.PreserveAspectFit
+                                                    source: "images/" + modelData.name + ".png"
+                                                }
+
+                                                // Item Name.
+                                                Text {
+                                                    id: upgradeItemName
+
+                                                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                                    text: modelData.name
+                                                    color: armorUpgradeRect.textColor
+                                                }
+
+                                                // Spacer.
+                                                Item {
+                                                    Layout.fillWidth: true
+                                                }
+
+                                                // Item Quantity.
+                                                Text {
+                                                    id: upgradeItemQuantity
+
+                                                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                                    text: "x" + modelData.quantity
+                                                    color: armorUpgradeRect.textColor
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        // Buffer element to push all other elements to the top of rectangle.
-                        Item {
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
+                            // Buffer element to push all other elements to the top of rectangle,
+                            // as well as add some empty space at the bottom of the window.
+                            Item {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.minimumHeight: 50
+                            }
                         }
                     }
                 }
