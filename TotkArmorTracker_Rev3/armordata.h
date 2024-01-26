@@ -25,7 +25,8 @@ public:
         SetBonusRole,
         UnlockedRole,
         UpgradeableRole,
-        LevelRole
+        LevelRole,
+        UpgradeReqsRole
     } ArmorRoles;
 
     ArmorData(QObject *parent = nullptr);

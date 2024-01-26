@@ -205,6 +205,7 @@ ApplicationWindow {
                     property bool armorIsUnlocked: isUnlocked
                     property bool armorIsUpgradeable: isUpgradeable
                     property string armorLevel: level
+                    property var armorUpgradeReqMap: upgradeReqs
 
                     width: grid.cellWidth
                     height: grid.cellHeight
@@ -266,7 +267,6 @@ ApplicationWindow {
                         }
                     }
                 }
-                //highlight: Rectangle { color: systemPalette.highlight; radius: 5 }
                 highlight: Rectangle { color: Material.accentColor; radius: 5 }
                 highlightMoveDuration: 75
 
@@ -354,6 +354,8 @@ ApplicationWindow {
 
                         // ARMOR DETAILS.
                         // References current item. If none is selected, short-circuits to default values.
+
+                        // Armor Name + Icons.
                         RowLayout {
                             id: detailsNameRow
 
@@ -402,6 +404,7 @@ ApplicationWindow {
                             }
                         }
 
+                        // Armor Description.
                         Text {
                             id: detailsDescNameText
 
@@ -425,6 +428,7 @@ ApplicationWindow {
                             visible: (grid.currentItem != null)
                         }
 
+                        // Passive Bonuses.
                         Label {
                             id: detailsPassiveBonusText
 
@@ -467,6 +471,7 @@ ApplicationWindow {
                             }
                         }
 
+                        // Set Bonuses.
                         Label {
                             id: detailsSetBonusText
 
@@ -509,6 +514,7 @@ ApplicationWindow {
                             }
                         }
 
+                        // Armor Defense (at current level).
                         Label {
                             id: detailsDefenseText
 
@@ -559,6 +565,205 @@ ApplicationWindow {
                             Layout.bottomMargin: 2
                             color: Material.accentColor
                             visible: (grid.currentItem != null)
+                        }
+
+                        // Armor Upgrades.
+                        // Displays upgrades required for all upgrades the armor currently supports.
+                        Repeater {
+                            id: detailsArmorUpgradesRepeater
+
+                            property int rowHeightsInPixels: 18
+                            property int marginSizeInPixels: 5
+
+                            // The fields for showing armor upgrades are always shown, but hidden if the armor cannot be upgraded.
+                            model: 4
+                            delegate: Rectangle {
+                                id: armorUpgradeRect
+
+                                required property int index
+                                property string levelStr: {
+                                    var level = armorUpgradeRect.index + 1;
+                                    level.toString();
+                                }
+                                property int itemCount: {
+                                    if (grid.currentItem) {
+                                        // Defaults to 0 if item is not upgradeable.
+                                        if (grid.currentItem.armorIsUpgradeable) {
+                                            grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList().length;
+                                        } else {
+                                            0;
+                                        }
+                                    } else {
+                                        0;
+                                    }
+                                }
+                                property bool isExpanded: {
+                                    // Field is *generally* expanded when armor is unlocked and currently at the prior level.
+                                    var prevLevel = armorUpgradeRect.index;
+                                    if (grid.currentItem) {
+                                        if (grid.currentItem.armorIsUnlocked) {
+                                            grid.currentItem.armorLevel === prevLevel.toString();
+                                        } else {
+                                            false;
+                                        }
+                                    } else {
+                                        // If no current item is available, set to false.
+                                        false;
+                                    }
+                                }
+                                property color textColor: (isExpanded) ? Material.backgroundColor : Material.primaryTextColor
+
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: {
+                                    if (isExpanded) {
+                                        // Height is determined by if the current upgrade is expanded.
+                                        (detailsArmorUpgradesRepeater.rowHeightsInPixels * (itemCount + 1)) // Height of all items...
+                                        + (detailsArmorUpgradesRepeater.marginSizeInPixels * 2)             // ...plus the top/bottom margins...
+                                        + (itemCount * detailsArmorUpgradesRepeater.marginSizeInPixels)     // ...plus space between each item
+                                    } else {
+                                        // Otherwise, set to default values for just the header row.
+                                        detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                        + (detailsArmorUpgradesRepeater.marginSizeInPixels + 2)
+                                    }
+                                }
+                                visible: (grid.currentItem) ? grid.currentItem.armorIsUpgradeable : false
+                                // Changed to more visible color when armor is at level before current upgrade tier.
+                                color: (isExpanded) ? Material.accentColor : Material.dividerColor
+
+                                radius: 5
+
+                                // When clicked, toggle the expansion of this specific row.
+                                MouseArea {
+                                    id: armorUpgradeMouseArea
+
+                                    anchors.fill: parent
+                                    onClicked: armorUpgradeRect.isExpanded = !armorUpgradeRect.isExpanded
+                                }
+
+                                // Each upgrade tier is composed of multiple rows, each containing info on a specific requirement or header.
+                                ColumnLayout {
+                                    id: armorUpgradeColumn
+
+                                    anchors {
+                                        fill: parent
+                                        margins: 5
+                                    }
+                                    spacing: 5
+
+                                    // Header information and basic cost info.
+                                    RowLayout {
+                                        id: upgradeHeaderRow
+
+                                        Layout.fillWidth: true
+                                        Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
+
+                                        // Upgrade Level Info.
+                                        Text {
+                                            id: upgradeLevelInfoText
+
+                                            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                            text: "Level " + (armorUpgradeRect.index + 1)
+                                            font.bold: true
+                                            color: armorUpgradeRect.textColor
+                                        }
+
+                                        // Spacer.
+                                        Item {
+                                            Layout.fillWidth: true
+                                        }
+
+                                        // Upgrade Rupee Cost.
+                                        Text {
+                                            id: upgradeRupeeCostText
+
+                                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                            Layout.fillHeight: true
+                                            text: {
+                                                if (grid.currentItem) {
+                                                    (grid.currentItem.armorIsUpgradeable)
+                                                        ? grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].costInRupees
+                                                        : "0";
+                                                } else {
+                                                    "0";
+                                                }
+                                            }
+                                            color: armorUpgradeRect.textColor
+                                        }
+                                        AppIcon {
+                                            id: upgradeRupeeCostIcon
+
+                                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                            Layout.fillHeight: true
+                                            Layout.preferredWidth: 10
+                                            Layout.leftMargin: 5
+                                            icon.source: "images/rupee-lightmode.svg"
+                                            icon.color: armorUpgradeRect.textColor
+                                        }
+                                    }
+
+                                    // Required Items.
+                                    // Instantiates based on how many items are required at each tier.
+                                    Repeater {
+                                        id: upgradeItemsRepeater
+
+                                        model: {
+                                            if (grid.currentItem) {
+                                                // Only shown if current item is upgradeable and element is currently expanded.
+                                                if (grid.currentItem.armorIsUpgradeable && armorUpgradeRect.isExpanded) {
+                                                    grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList();
+                                                } else {
+                                                    []
+                                                }
+                                            } else {
+                                                []
+                                            }
+
+                                        }
+                                        delegate: RowLayout {
+                                            id: upgradeItemRow
+
+                                            required property var modelData
+
+                                            Layout.fillWidth: true
+                                            Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
+
+                                            // Item image.
+                                            Image {
+                                                id: upgradeItemImage
+
+                                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                                Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                                Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                                fillMode: Image.PreserveAspectFit
+                                                source: "images/" + modelData.name + ".png"
+                                            }
+
+                                            // Item Name.
+                                            Text {
+                                                id: upgradeItemName
+
+                                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                                text: modelData.name
+                                                color: armorUpgradeRect.textColor
+                                            }
+
+                                            // Spacer.
+                                            Item {
+                                                Layout.fillWidth: true
+                                            }
+
+                                            // Item Quantity.
+                                            Text {
+                                                id: upgradeItemQuantity
+
+                                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                                text: "x" + modelData.quantity
+                                                color: armorUpgradeRect.textColor
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         // Buffer element to push all other elements to the top of rectangle.
@@ -645,7 +850,7 @@ ApplicationWindow {
                 // Only enabled if save is loaded, armor is unlocked,
                 // armor is upgradeable, and is not at minimum level.
                 enabled: {
-                    if (grid.currentItem != null)
+                    if (grid.currentItem)
                     {
                         appController.saveIsLoaded &&
                         grid.currentItem.armorIsUnlocked &&

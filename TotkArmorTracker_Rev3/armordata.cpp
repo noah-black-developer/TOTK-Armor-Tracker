@@ -16,7 +16,8 @@ QHash<int, QByteArray> ArmorData::roleNames() const
             { SetBonusRole, "setBonus"},
             { UnlockedRole, "isUnlocked"},
             { UpgradeableRole, "isUpgradeable"},
-            { LevelRole, "level"}
+            { LevelRole, "level"},
+            { UpgradeReqsRole, "upgradeReqs" }
             };
 }
 
@@ -62,6 +63,11 @@ bool ArmorData::setData(const QModelIndex &index, const QVariant &value, int rol
     else if (role == LevelRole)
     {
         armorItem.level = value.toInt();
+    }
+    else if (role == UpgradeReqsRole)
+    {
+        // Unsupported setter. Return false if an attempt is made to adjust upgrade list.
+        return false;
     }
     else {
         return false;
@@ -111,6 +117,10 @@ QVariant ArmorData::data(const QModelIndex &index, int role) const
     if (role == LevelRole)
     {
         return armorItem.level;
+    }
+    if (role == UpgradeReqsRole)
+    {
+        return QVariant(armorItem.getFullUpgradeDetailsMap());
     }
 
     return {};
@@ -187,8 +197,7 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
 
                 // Append the upgrade by tier.
                 QString levelStr = upgradeNode->first_attribute("level")->value();
-                int level = levelStr.toInt();
-                armor.addUpgradeTierByLevel(level, newUpgrade);
+                armor.addUpgradeTierByLevel(levelStr, newUpgrade);
             }
         }
 

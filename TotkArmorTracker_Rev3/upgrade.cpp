@@ -16,12 +16,12 @@ Upgrade::Upgrade(int upgradeDefense, int upgradeCostInRupees, QObject *parent) :
 void Upgrade::addItem(QString name, int quantity)
 {
     // Build a new Item object and add it to the internal list.
-    Item newItem = Item(name, quantity);
+    Item *newItem = new Item(name, quantity);
     _requiredItems.append(newItem);
     return;
 }
 
-QList<Item> Upgrade::getFullItemList()
+QList<Item*> Upgrade::getFullItemList()
 {
     // List is returned as a QList of Item objects.
     return _requiredItems;
@@ -29,13 +29,13 @@ QList<Item> Upgrade::getFullItemList()
 
 int Upgrade::getItemQuantityByName(QString itemName)
 {
-    // Iterate over all added items. Start with the quantity set as an invalid value -1.
+    // Iterate over all added items.
     for (int itemIndex = 0; itemIndex < _requiredItems.count(); itemIndex++)
     {
         // If a matching item is found, return its quantity.
-        Item currentItem = _requiredItems[itemIndex];
-        if (currentItem.name == itemName) {
-            return currentItem.quantity;
+        Item *currentItem = _requiredItems[itemIndex];
+        if (currentItem->name == itemName) {
+            return currentItem->quantity;
         }
     }
 
