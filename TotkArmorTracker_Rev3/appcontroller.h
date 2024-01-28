@@ -19,6 +19,7 @@ class AppController : public QObject
     Q_PROPERTY(QString saveName READ getSaveName NOTIFY saveNameChanged)
     Q_PROPERTY(QList<QString> recentSaveNames MEMBER recentSaveNames NOTIFY recentSaveNamesChanged)
     Q_PROPERTY(bool sortIsAsc MEMBER sortIsAsc NOTIFY sortDirectionChanged)
+    Q_PROPERTY(bool unsavedChanges MEMBER unsavedChanges NOTIFY unsavedChangesStateChanged)
 
 public:
     explicit AppController(QObject *parent = nullptr);
@@ -61,6 +62,7 @@ public:
     // Q_PROPERTY OBJECTS.
     QList<QString> recentSaveNames = QList<QString>();
     bool sortIsAsc = true;
+    bool unsavedChanges = false;
 
 private:
     QString _loadedSavePath = "";
@@ -73,6 +75,7 @@ signals:
     void saveNameChanged(QString saveName);
     void recentSaveNamesChanged();
     void sortDirectionChanged();
+    void unsavedChangesStateChanged();
 };
 
 #endif // APPCONTROLLER_H

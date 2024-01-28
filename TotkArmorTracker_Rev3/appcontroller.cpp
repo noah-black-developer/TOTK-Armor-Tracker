@@ -141,6 +141,10 @@ bool AppController::loadSave(QUrl filePath)
     addLocalSaveToAppConfig(filePath.fileName());
     setMostRecentlyAccessedSave(filePath.fileName());
 
+    // Clear any flags from the previous save, if any.
+    unsavedChanges = false;
+    emit unsavedChangesStateChanged();
+
     // Once all armor sets have been pushed to save file, store file references and return a success.
     _loadedSavePath = filePath.toLocalFile();
     emit loadedSaveChanged(true);
@@ -189,6 +193,10 @@ bool AppController::loadRecentSave(QString saveName)
     // Pump save up to the most recently accessed recent save.
     setMostRecentlyAccessedSave(saveName);
 
+    // Clear any flags from the previous save, if any.
+    unsavedChanges = false;
+    emit unsavedChangesStateChanged();
+
     // Once all armor sets have been pushed to save file, store file references and return a success.
     _loadedSavePath = saveFilePath;
     emit loadedSaveChanged(true);
@@ -235,11 +243,15 @@ bool AppController::saveCurrentSave()
         currentArmor->first_attribute("Level")->value(level);
     }
 
-    // Push changes to the original file and return.
+    // Push changes to the original file.
     std::ofstream saveFileOut;
     saveFileOut.open(_loadedSavePath.toStdString());
     saveFileOut << saveDocument;
     saveFileOut.close();
+
+    // Clear save flags and return.
+    unsavedChanges = false;
+    emit unsavedChangesStateChanged();
     return true;
 }
 
@@ -501,8 +513,10 @@ bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
         return false;
     }
 
-    // Bump armor level and return a success.
+    // Bump armor level and return a success. Flag that saveable changes have been made.
     dataSet->setArmorLevel(armorName, armor->level + 1);
+    unsavedChanges = true;
+    emit unsavedChangesStateChanged();
     return true;
 }
 
@@ -544,8 +558,10 @@ bool AppController::decreaseArmorLevel(QString armorName, bool useNewSaveData)
         return false;
     }
 
-    // Decrease armor level and return a success.
+    // Decrease armor level and return a success. Flag that saveable changes have been made.
     dataSet->setArmorLevel(armorName, armor->level - 1);
+    unsavedChanges = true;
+    emit unsavedChangesStateChanged();
     return true;
 }
 
@@ -573,7 +589,9 @@ bool AppController::toggleArmorUnlock(QString armorName, bool useNewSaveData)
     }
 
     // TOGGLE UNLOCK STATE.
-    // Set the unlock to its inverse and return.
+    // Set the unlock to its inverse and return. Flag that saveable changes have been made.
     dataSet->setArmorUnlockStatus(armorName, !armor->isUnlocked);
+    unsavedChanges = true;
+    emit unsavedChangesStateChanged();
     return true;
 }

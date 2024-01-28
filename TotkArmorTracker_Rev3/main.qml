@@ -10,10 +10,86 @@ ApplicationWindow {
     readonly property int maximumArmorLevel: 4
 
     width: 800
-    height: 600
+    height: 800
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
+    // Disable horizontal resizing.
+    minimumWidth: width
+    maximumWidth: width
+
+    // KEYBOARD SHORTCUTS.
+    // Ctrl + S is used to save the user's current changes.
+    Shortcut {
+        id: saveShortcut
+
+        sequence: "Ctrl+S"
+        context: Qt.ApplicationShortcut
+        onActivated: {
+            if (appController.saveIsLoaded) {
+                appController.saveCurrentSave();
+            }
+        }
+    }
+    // Ctrl + U can be used to lock/unlock the current armor set.
+    Shortcut {
+        id: lockUnlockShortcut
+
+        sequence: "Ctrl+U"
+        context: Qt.ApplicationShortcut
+        onActivated: {
+            if (appController.saveIsLoaded) {
+                appController.toggleArmorUnlock(grid.currentItem.armorName);
+            }
+        }
+    }
+    // Ctrl + Up or Ctrl + Down are used to increase/decrease the level of the current armor, if unlocked.
+    // If the armor is *not* unlocked, shortcut will auto-unlock the armor before increasing level.
+    // Similarly, if attempting to decrease the level below 0, shortcuts will lock the armor automatically.
+    Shortcut {
+        id: increaseLevelShortcut
+
+        sequence: "Ctrl+Up"
+        context: Qt.ApplicationShortcut
+        onActivated: {
+            if (grid.currentItem && appController.saveIsLoaded) {
+                // If locked, unlock the armor set first unlock the armor set.
+                if (grid.currentItem.armorIsUnlocked === false) {
+                    appController.toggleArmorUnlock(grid.currentItem.armorName);
+                }
+
+                else {
+                    // Increase the armor level, if possible.
+                    if (grid.currentItem.armorLevel !== "4") {
+                        appController.increaseArmorLevel(grid.currentItem.armorName);
+                    }
+                }
+            }
+        }
+    }
+    Shortcut {
+        id: decreaseLevelShortcut
+
+        sequence: "Ctrl+Down"
+        context: Qt.ApplicationShortcut
+        onActivated: {
+            if (grid.currentItem && appController.saveIsLoaded) {
+                // If armor is already at the minimum level, lock it.
+                if (grid.currentItem.armorLevel === "0" && grid.currentItem.armorIsUnlocked === true) {
+                    appController.toggleArmorUnlock(grid.currentItem.armorName);
+                }
+
+                else {
+                    // Decrease the armor level, if possible.
+                    if (grid.currentItem.armorLevel !== "0") {
+                        appController.decreaseArmorLevel(grid.currentItem.armorName);
+                    }
+                }
+            }
+        }
+    }
+
+    // DIALOG WINDOWS.
     NewSaveDialog {
         id: createNewSaveDialog
     }
@@ -28,12 +104,40 @@ ApplicationWindow {
     }
 
     MessageDialog {
-        id: userDataSavedDialog
+        id: unsavedChangesDialog
 
-        text: "Save is complete."
-        buttons: MessageDialog.Ok
+        property var localSaveName: null
+
+        title: "Save Unsaved Changes"
+        text: "Would you like to save any unsaved changes?"
+        buttons: MessageDialog.Yes | MessageDialog.No
+        onAccepted: {
+            // Save all unsaved changes.
+            appController.saveCurrentSave();
+
+            // If a local save name was set, use it to load a local save.
+            if (localSaveName) {
+                appController.loadRecentSave(localSaveName);
+            }
+            // Otherwise, open the main save loading dialog.
+            else {
+                loadSaveDialog.open();
+            }
+        }
+        onRejected: {
+            // If a local save name was set, use it to load a local save.
+            if (localSaveName) {
+                appController.loadRecentSave(localSaveName);
+            }
+            // Otherwise, open the main save loading dialog.
+            else {
+                loadSaveDialog.open();
+            }
+        }
     }
 
+
+    // MENU OPTIONS.
     menuBar: MenuBar {
         id: menuBar
 
@@ -46,7 +150,15 @@ ApplicationWindow {
             Action {
                 text: "Load"
                 onTriggered: {
-                    loadSaveDialog.open()
+                    // If the user has unsaved changes, prompt them to save them.
+                    if (appController.unsavedChanges) {
+                        unsavedChangesDialog.localSaveName = null;
+                        unsavedChangesDialog.open();
+                    }
+                    // Otherwise, open the save loading menu directly.
+                    else {
+                        loadSaveDialog.open();
+                    }
                 }
             }
             Menu {
@@ -64,7 +176,18 @@ ApplicationWindow {
                         // Model is populated directly with list of strings, so the full modelData
                         // object can be used to assign the text for this element.
                         text: modelData
-                        onTriggered: appController.loadRecentSave(modelData)
+                        onTriggered: {
+                            // If the user has unsaved changes, prompt them to save them.
+                            if (appController.unsavedChanges) {
+                                unsavedChangesDialog.localSaveName = modelData;
+                                unsavedChangesDialog.open();
+                            }
+                            // Otherwise, load the recent save directly.
+                            else {
+                                appController.loadRecentSave(modelData);
+
+                            }
+                        }
                     }
 
                     // Required functions whenever Instantiator adds/removes Actions.
@@ -76,10 +199,7 @@ ApplicationWindow {
                 // Disabled by default. Enabled when user loads save.
                 enabled: appController.saveIsLoaded
                 text: "Save"
-                onTriggered: {
-                    appController.saveCurrentSave();
-                    userDataSavedDialog.open();
-                }
+                onTriggered: appController.saveCurrentSave();
             }
             MenuSeparator { }
             Action {
@@ -89,6 +209,17 @@ ApplicationWindow {
         }
     }
 
+    // FOOTER LABELS.
+    // Small labels present at the bottom of the app window.
+    footer: Text {
+        id: userChangesMadeText
+
+        padding: 5
+        text: (appController.unsavedChanges) ? "Unsaved changes." : ""
+        color: Material.secondaryTextColor
+    }
+
+    // MAIN WINDOW CONTENTS.
     Rectangle {
         id: centralRect
 
@@ -177,6 +308,8 @@ ApplicationWindow {
             GridView {
                 id: grid
 
+                property bool isInit: false
+
                 width: 500
                 anchors {
                     left: parent.left
@@ -192,6 +325,16 @@ ApplicationWindow {
 
                 // Disabled by default, enabled when user loads a save.
                 interactive: appController.saveIsLoaded
+
+                // Arrow keys can be used to navigate the selected armor set around the selection area.
+                Keys.onLeftPressed: (appController.saveIsLoaded) ? grid.moveCurrentIndexLeft() : ""
+                Keys.onRightPressed: (appController.saveIsLoaded) ? grid.moveCurrentIndexRight() : ""
+                Keys.onUpPressed: (appController.saveIsLoaded) ? grid.moveCurrentIndexUp() : ""
+                Keys.onDownPressed: (appController.saveIsLoaded) ? grid.moveCurrentIndexDown() : ""
+                // Also need to set focus on the grid for these key inputs to be properly registered.
+                // This element should ALWAYS hold focus, so whenever lost, refocus the element.
+                focus: true
+                onFocusChanged: focus = true
 
                 model: appController.getArmorData()
                 delegate: Item {
@@ -606,8 +749,9 @@ ApplicationWindow {
                                             0;
                                         }
                                     }
-                                    property bool isExpanded: {
-                                        // Field is *generally* expanded when armor is unlocked and currently at the prior level.
+                                    property bool isNextUpgrade: {
+                                        // Set to true when the displaying the upgrades required for the armor's next level.
+                                        // Used in determining default settings for color and expansion state.
                                         var prevLevel = armorUpgradeRect.index;
                                         if (grid.currentItem) {
                                             if (grid.currentItem.armorIsUnlocked) {
@@ -620,34 +764,20 @@ ApplicationWindow {
                                             false;
                                         }
                                     }
-                                    property color textColor: (isExpanded) ? Material.backgroundColor : Material.primaryTextColor
+
+                                    property color textColor: (isNextUpgrade) ? Material.backgroundColor : Material.secondaryTextColor
 
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: {
-                                        if (isExpanded) {
-                                            // Height is determined by if the current upgrade is expanded.
-                                            (detailsArmorUpgradesRepeater.rowHeightsInPixels * (itemCount + 1)) // Height of all items...
-                                            + (detailsArmorUpgradesRepeater.marginSizeInPixels * 2)             // ...plus the top/bottom margins...
-                                            + (itemCount * detailsArmorUpgradesRepeater.marginSizeInPixels)     // ...plus space between each item
-                                        } else {
-                                            // Otherwise, set to default values for just the header row.
-                                            detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                            + (detailsArmorUpgradesRepeater.marginSizeInPixels + 2)
-                                        }
+                                        // Height is determined by a combination of all displayed rows and margins.
+                                        (detailsArmorUpgradesRepeater.rowHeightsInPixels * (itemCount + 1)) // Height of all items...
+                                        + (detailsArmorUpgradesRepeater.marginSizeInPixels * 2)             // ...plus the top/bottom margins...
+                                        + (itemCount * detailsArmorUpgradesRepeater.marginSizeInPixels)     // ...plus space between each item
                                     }
                                     visible: (grid.currentItem) ? grid.currentItem.armorIsUpgradeable : false
                                     // Changed to more visible color when armor is at level before current upgrade tier.
-                                    color: (isExpanded) ? Material.accentColor : Material.dividerColor
-
+                                    color: (isNextUpgrade) ? Material.accentColor : Material.dividerColor
                                     radius: 5
-
-                                    // When clicked, toggle the expansion of this specific row.
-                                    MouseArea {
-                                        id: armorUpgradeMouseArea
-
-                                        anchors.fill: parent
-                                        onClicked: armorUpgradeRect.isExpanded = !armorUpgradeRect.isExpanded
-                                    }
 
                                     // Each upgrade tier is composed of multiple rows, each containing info on a specific requirement or header.
                                     ColumnLayout {
@@ -701,8 +831,9 @@ ApplicationWindow {
                                             AppIcon {
                                                 id: upgradeRupeeCostIcon
 
-                                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                                                Layout.fillHeight: true
+                                                Layout.alignment: Qt.AlignRight | Qt.AlignTop
+                                                // Icon size is fixed to prevent resizing issues.
+                                                Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                 Layout.preferredWidth: 10
                                                 Layout.leftMargin: 5
                                                 icon.source: "images/rupee-lightmode.svg"
@@ -716,9 +847,9 @@ ApplicationWindow {
                                             id: upgradeItemsRepeater
 
                                             model: {
+                                                // Item elements are only generated if an armor set is selected AND that armor has items to present.
                                                 if (grid.currentItem) {
-                                                    // Only shown if current item is upgradeable and element is currently expanded.
-                                                    if (grid.currentItem.armorIsUpgradeable && armorUpgradeRect.isExpanded) {
+                                                    if (grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr]) {
                                                         grid.currentItem.armorUpgradeReqMap[armorUpgradeRect.levelStr].getFullItemList();
                                                     } else {
                                                         []
@@ -726,7 +857,6 @@ ApplicationWindow {
                                                 } else {
                                                     []
                                                 }
-
                                             }
                                             delegate: RowLayout {
                                                 id: upgradeItemRow
