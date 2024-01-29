@@ -42,6 +42,7 @@ Dialog {
         colorGroup: SystemPalette.Active
     }
 
+    // SAVE DATA ENTRY FIELDS.
     RowLayout {
         id: nameRow
 
@@ -79,143 +80,240 @@ Dialog {
         }
     }
 
-    ListView {
+    // ARMOR LIST SORTING.
+
+    // ARMOR LIST.
+    Rectangle {
+        id: armorSetupViewFrame
+
+        anchors {
+            top: nameRow.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            margins: 10
+        }
+        // Add some padding to help with rendering the different list elements properly.
+        height: parent.height + 40
+        color: "transparent"
+        border.color: Material.accentColor
+        border.width: 2
+        radius: 5
+
+        Rectangle {
+            id: armorSetupViewBackground
+
+            anchors {
+                fill: parent
+                margins: 5
+            }
+            color: Material.backgroundColor
+            radius: 3
+        }
+    }
+
+    GridView {
         id: armorSetupView
 
         anchors {
-            left: parent.left
-            right: parent.right
-            top: nameRow.bottom
-            bottom: parent.bottom
-            topMargin: 10
-            leftMargin: 20
-            rightMargin: 20
+            fill: armorSetupViewFrame
+            margins: 15
         }
         clip: true
-        spacing: 5
+        cellWidth: 200
+        cellHeight: 80
+        // Set width up to allow for 3 columns.
+        width: cellWidth * 3
+
         model: appController.getNewSaveArmorData();
-        delegate: Rectangle {
+        delegate: Item {
             id: armorRoot
 
             property string armorName: name
-            property bool armorIsUpgradeable: isUpgradeable
-            property bool armorIsUnlocked: isUnlocked
             property int armorLevel: level
+            property bool armorIsUnlocked: isUnlocked
+            property bool armorIsUpgradeable: isUpgradeable
 
-            height: 50
-            width: armorSetupView.width
-            color: systemPalette.alternateBase
+            width: armorSetupView.cellWidth
+            height: armorSetupView.cellHeight
 
-            RowLayout {
+            Rectangle {
+                id: armorRootRect
+
                 anchors {
                     fill: parent
-                    leftMargin: 10
-                    rightMargin: 10
-                    topMargin: 5
-                    bottomMargin: 5
+                    margins: 5
                 }
+                radius: 5
+                color: Material.dialogColor
 
-                Image {
-                    id: armorImage
+                ColumnLayout {
+                    id: armorContentColumn
 
-                    Layout.preferredWidth: parent.height
-                    Layout.preferredHeight: parent.height
-                    Layout.alignment: Qt.AlignLeft
-                    source: "images/" + armorRoot.armorName + ".png"
-
-                    // If armor is unlocked, gray out picture.
-                    Rectangle {
-                        anchors.fill: parent
-                        color: "gray"
-                        opacity: 0.5
-                        visible: !armorRoot.armorIsUnlocked
+                    anchors {
+                        fill: parent
+                        leftMargin: 10
+                        rightMargin: 10
+                        topMargin: 5
+                        bottomMargin: 5
                     }
-                }
 
-                Text {
-                    id: armorNameText
+                    Text {
+                        id: armorNameText
 
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignLeft
-                    horizontalAlignment: Qt.AlignLeft
-                    verticalAlignment: Qt.AlignVCenter
-                    color: systemPalette.text
+                        Layout.fillWidth: true
+                        text: armorRoot.armorName
+                        color: Material.primaryTextColor
+                        horizontalAlignment: Qt.AlignLeft
+                        verticalAlignment: Qt.AlignVCenter
+                        minimumPointSize: 5
+                        fontSizeMode: Text.Fit
+                    }
 
-                    text: {
-                        if (armorRoot.armorIsUpgradeable)
-                        {
-                            armorRoot.armorName + " - Level " + armorRoot.armorLevel
+                    RowLayout {
+                        id: armorDetailsRow
+
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        Image {
+                            id: armorImage
+
+                            Layout.preferredHeight: parent.height
+                            Layout.preferredWidth: parent.height
+                            Layout.alignment: Qt.AlignLeft
+                            source: "images/" + name + ".png"
+                            fillMode: Image.PreserveAspectFit
+
+                            // If armor is unlocked, gray out picture.
+                            Rectangle {
+                                anchors.fill: parent
+                                color: "gray"
+                                opacity: 0.5
+                                visible: !armorRoot.armorIsUnlocked
+                            }
                         }
-                        else {
-                            armorRoot.armorName
+
+                        IconImage {
+                            id: armorUnlockedIcon
+
+                            Layout.preferredWidth: 12
+                            Layout.preferredHeight: 12
+                            Layout.leftMargin: 3
+                            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                            source: "images/lock-solid.svg"
+                            color: Material.primaryTextColor
+                            fillMode: IconImage.PreserveAspectFit
+                            visible: !armorRoot.armorIsUnlocked
+                        }
+
+                        Repeater {
+                            model: armorRoot.armorLevel
+                            delegate: IconImage {
+                                id: armorLevelIcon
+
+                                Layout.preferredWidth: 12
+                                Layout.preferredHeight: 12
+                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                source: "images/star-solid.svg"
+                                color: Material.primaryTextColor
+                                fillMode: IconImage.PreserveAspectFit
+                                visible: armorRoot.armorIsUnlocked
+                            }
+                        }
+
+                        // SPACER.
+                        Item {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                        }
+
+                        // LEVEL MODIFIERS.
+                        RowLayout {
+                            id: armorLevelColumnLayout
+
+                            Layout.fillHeight: true
+                            Layout.topMargin: 2
+                            Layout.bottomMargin: 2
+                            spacing: 2
+
+                            Rectangle {
+                                id: armorLevelDownButton
+
+                                Layout.preferredWidth: 25
+                                Layout.fillHeight: true
+                                color: (enabled) ? Material.frameColor : Material.backgroundDimColor
+                                radius: 2
+                                visible: armorRoot.armorIsUpgradeable
+                                // Enabled as long as the armor is unlocked (since level can be reduced until it locks).
+                                enabled: armorRoot.armorIsUnlocked
+
+                                Text {
+                                    id: armorLevelDownText
+
+                                    anchors.fill: parent
+                                    text: "-"
+                                    font.pointSize: 11
+                                    font.bold: true
+                                    horizontalAlignment: Qt.AlignHCenter
+                                    verticalAlignment: Qt.AlignVCenter
+                                    color: Material.primaryTextColor
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        onClicked: {
+                                            // If the armor is being reduced to below 0, lock it instead.
+                                            if (armorRoot.armorLevel === minimumArmorLevel) {
+                                                appController.toggleArmorUnlock(armorRoot.armorName, true);
+                                            }
+                                            // Otherwise, decrease the armor level.
+                                            else {
+                                                appController.decreaseArmorLevel(armorRoot.armorName, true);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                id: armorLevelUpButton
+
+                                Layout.preferredWidth: 25
+                                Layout.fillHeight: true
+                                color: (enabled) ? Material.frameColor : Material.backgroundDimColor
+                                radius: 2
+                                visible: armorRoot.armorIsUpgradeable
+                                // Enabled as long as the armor is below the maximum level.
+                                enabled: (armorRoot.armorLevel < maximumArmorLevel)
+
+                                Text {
+                                    id: armorLevelUpText
+
+                                    anchors.fill: parent
+                                    text: "+"
+                                    font.pointSize: 11
+                                    font.bold: true
+                                    horizontalAlignment: Qt.AlignHCenter
+                                    verticalAlignment: Qt.AlignVCenter
+                                    color: Material.primaryTextColor
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        onClicked: {
+                                            // If armor is locked, unlock it.
+                                            if (!armorRoot.armorIsUnlocked) {
+                                                appController.toggleArmorUnlock(armorRoot.armorName, true);
+                                            }
+                                            // Otherwise, increase the armor level.
+                                            else {
+                                                appController.increaseArmorLevel(armorRoot.armorName, true);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-
-                // SPACER.
-                Item {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                }
-
-                ToolButton {
-                    id: armorLevelDownButton
-
-                    text: "-"
-                    Layout.alignment: Qt.AlignRight
-                    // Enabled as long as armor is unlocked.
-                    enabled: armorRoot.armorIsUnlocked
-                    visible: armorRoot.armorIsUpgradeable
-
-                    onClicked: armorLevelSlider.value -= 1
-                }
-
-                Slider {
-                    id: armorLevelSlider
-
-                    from: newSaveDialog.minimumArmorLevel
-                    to: newSaveDialog.maximumArmorLevel
-                    stepSize: 1
-                    snapMode: Slider.SnapAlways
-                    value: armorRoot.armorLevel
-                    Layout.preferredWidth: 120
-                    Layout.preferredHeight: parent.height
-                    Layout.alignment: Qt.AlignRight
-                    // Enabled as long as armor is unlocked.
-                    enabled: armorRoot.armorIsUnlocked
-                    visible: armorRoot.armorIsUpgradeable
-
-                    onValueChanged: {
-                        if (armorRoot.armorLevel < value)
-                        {
-                            appController.increaseArmorLevel(armorRoot.armorName, true);
-                        }
-                        else {
-                            appController.decreaseArmorLevel(armorRoot.armorName, true);
-                        }
-                    }
-                }
-
-                ToolButton {
-                    id: armorLevelUpButton
-
-                    text: "+"
-                    Layout.alignment: Qt.AlignRight
-                    // Enabled as long as armor is unlocked.
-                    enabled: armorRoot.armorIsUnlocked
-                    visible: armorRoot.armorIsUpgradeable
-
-                    onClicked: armorLevelSlider.value += 1
-                }
-
-                Button {
-                    id: armorUnlockButton
-
-                    text: (armorRoot.armorIsUnlocked) ? "Lock" : "Unlock"
-                    Layout.preferredWidth: 100
-                    Layout.alignment: Qt.AlignRight
-
-                    onClicked: appController.toggleArmorUnlock(armorRoot.armorName, true)
                 }
             }
         }

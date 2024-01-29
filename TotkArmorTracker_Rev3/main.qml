@@ -211,12 +211,26 @@ ApplicationWindow {
 
     // FOOTER LABELS.
     // Small labels present at the bottom of the app window.
-    footer: Text {
-        id: userChangesMadeText
+    footer: RowLayout {
+        Text {
+            id: userChangesMadeText
 
-        padding: 5
-        text: (appController.unsavedChanges) ? "Unsaved changes." : ""
-        color: Material.secondaryTextColor
+            padding: 5
+            text: (appController.unsavedChanges) ? "Unsaved changes" : ""
+            color: Material.secondaryTextColor
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        Text {
+            id: saveNameText
+
+            padding: 5
+            text: appController.saveName
+            color: Material.secondaryTextColor
+        }
     }
 
     // MAIN WINDOW CONTENTS.
@@ -431,9 +445,7 @@ ApplicationWindow {
                     width: 100
                     height: 60
                     anchors.centerIn: parent
-                    //color: systemPalette.alternateBase
                     color: Material.dialogColor
-                    //border.color: systemPalette.highlight
                     border.color: Material.accentColor
                     border.width: 2
                     radius: 5
@@ -551,7 +563,6 @@ ApplicationWindow {
                                         color: Material.primaryTextColor
                                         fillMode: IconImage.PreserveAspectFit
                                         visible: (grid.currentItem == null) ? false : grid.currentItem.armorIsUnlocked
-
                                     }
                                 }
                             }

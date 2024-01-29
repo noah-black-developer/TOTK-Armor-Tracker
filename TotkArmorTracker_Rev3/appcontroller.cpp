@@ -148,7 +148,8 @@ bool AppController::loadSave(QUrl filePath)
     // Once all armor sets have been pushed to save file, store file references and return a success.
     _loadedSavePath = filePath.toLocalFile();
     emit loadedSaveChanged(true);
-    emit saveNameChanged(filePath.fileName());
+    saveName = filePath.fileName();
+    emit saveNameChanged(saveName);
     return true;
 }
 
@@ -200,6 +201,7 @@ bool AppController::loadRecentSave(QString saveName)
     // Once all armor sets have been pushed to save file, store file references and return a success.
     _loadedSavePath = saveFilePath;
     emit loadedSaveChanged(true);
+    this->saveName = QUrl(saveFilePath).fileName();
     emit saveNameChanged(saveName);
     return true;
 
@@ -475,6 +477,27 @@ void AppController::setSortSearchFilter(QString newSortString)
     _armorData->setFilterRole(ArmorData::NameRole);
 }
 
+QString AppController::newSaveCurrentSortType() const
+{
+    return _newSaveArmorData->currentSortType();
+}
+
+void AppController::newSaveSetSortType(QString sortType)
+{
+    _newSaveArmorData->setSortType(sortType);
+}
+
+void AppController::newSaveSetSortDirection(bool ascending)
+{
+    _newSaveArmorData->setSortDirection(ascending);
+}
+
+void AppController::newSaveSetSortSearchFilter(QString newSortString)
+{
+    _newSaveArmorData->setFilterRegularExpression(QRegularExpression(newSortString, QRegularExpression::CaseInsensitiveOption));
+    _newSaveArmorData->setFilterRole(ArmorData::NameRole);
+}
+
 bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
 {
     // Determine which data set to use.
@@ -515,8 +538,10 @@ bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
 
     // Bump armor level and return a success. Flag that saveable changes have been made.
     dataSet->setArmorLevel(armorName, armor->level + 1);
-    unsavedChanges = true;
-    emit unsavedChangesStateChanged();
+    if (!useNewSaveData) {
+        unsavedChanges = true;
+        emit unsavedChangesStateChanged();
+    }
     return true;
 }
 
@@ -558,10 +583,12 @@ bool AppController::decreaseArmorLevel(QString armorName, bool useNewSaveData)
         return false;
     }
 
-    // Decrease armor level and return a success. Flag that saveable changes have been made.
+    // Decrease armor level and return a success. If needed, flag that saveable changes have been made.
     dataSet->setArmorLevel(armorName, armor->level - 1);
-    unsavedChanges = true;
-    emit unsavedChangesStateChanged();
+    if (!useNewSaveData) {
+        unsavedChanges = true;
+        emit unsavedChangesStateChanged();
+    }
     return true;
 }
 
@@ -589,9 +616,11 @@ bool AppController::toggleArmorUnlock(QString armorName, bool useNewSaveData)
     }
 
     // TOGGLE UNLOCK STATE.
-    // Set the unlock to its inverse and return. Flag that saveable changes have been made.
+    // Set the unlock to its inverse and return. If needed, flag that saveable changes have been made.
     dataSet->setArmorUnlockStatus(armorName, !armor->isUnlocked);
-    unsavedChanges = true;
-    emit unsavedChangesStateChanged();
+    if (!useNewSaveData) {
+        unsavedChanges = true;
+        emit unsavedChangesStateChanged();
+    }
     return true;
 }

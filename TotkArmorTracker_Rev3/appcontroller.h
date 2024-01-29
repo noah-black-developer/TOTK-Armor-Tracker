@@ -16,7 +16,7 @@ class AppController : public QObject
     QML_ELEMENT
 
     Q_PROPERTY(bool saveIsLoaded READ saveIsLoaded NOTIFY loadedSaveChanged)
-    Q_PROPERTY(QString saveName READ getSaveName NOTIFY saveNameChanged)
+    Q_PROPERTY(QString saveName MEMBER saveName NOTIFY saveNameChanged)
     Q_PROPERTY(QList<QString> recentSaveNames MEMBER recentSaveNames NOTIFY recentSaveNamesChanged)
     Q_PROPERTY(bool sortIsAsc MEMBER sortIsAsc NOTIFY sortDirectionChanged)
     Q_PROPERTY(bool unsavedChanges MEMBER unsavedChanges NOTIFY unsavedChangesStateChanged)
@@ -47,10 +47,16 @@ public:
     bool setMostRecentlyAccessedSave(QString saveName);
 
     // SORT METHODS.
+    // Main armor list.
     Q_INVOKABLE QString currentSortType() const;
     Q_INVOKABLE void setSortType(QString sortType);
     Q_INVOKABLE void setSortDirection(bool ascending);
     Q_INVOKABLE void setSortSearchFilter(QString newSortString);
+    // New save armor list.
+    Q_INVOKABLE QString newSaveCurrentSortType() const;
+    Q_INVOKABLE void newSaveSetSortType(QString sortType);
+    Q_INVOKABLE void newSaveSetSortDirection(bool ascending);
+    Q_INVOKABLE void newSaveSetSortSearchFilter(QString newSortString);
 
     // MODIFY ARMOR METHODS.
     // Default to modifying the main dataset. Additional parameters can be set
@@ -60,6 +66,7 @@ public:
     Q_INVOKABLE bool toggleArmorUnlock(QString armorName, bool useNewSaveData = false);
 
     // Q_PROPERTY OBJECTS.
+    QString saveName = "";
     QList<QString> recentSaveNames = QList<QString>();
     bool sortIsAsc = true;
     bool unsavedChanges = false;
