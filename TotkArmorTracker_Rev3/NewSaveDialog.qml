@@ -81,15 +81,37 @@ Dialog {
     }
 
     // ARMOR LIST SORTING.
+    RowLayout {
+        id: armorSortingRow
+
+        height: 30
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: nameRow.bottom
+            margins: 10
+        }
+
+        // Search field.
+        TextField {
+            id: armorSortTextField
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            placeholderText: "Search"
+
+            onTextChanged: appController.newSaveSetSortSearchFilter(text)
+        }
+    }
 
     // ARMOR LIST.
     Rectangle {
         id: armorSetupViewFrame
 
         anchors {
-            top: nameRow.bottom
             left: parent.left
             right: parent.right
+            top: armorSortingRow.bottom
             bottom: parent.bottom
             margins: 10
         }
