@@ -17,6 +17,7 @@ QHash<int, QByteArray> ArmorData::roleNames() const
             { UnlockedRole, "isUnlocked"},
             { UpgradeableRole, "isUpgradeable"},
             { LevelRole, "level"},
+            { BaseDefenseRole, "baseDefense"},
             { UpgradeReqsRole, "upgradeReqs" }
             };
 }
@@ -63,6 +64,10 @@ bool ArmorData::setData(const QModelIndex &index, const QVariant &value, int rol
     else if (role == LevelRole)
     {
         armorItem.level = value.toInt();
+    }
+    else if (role == BaseDefenseRole)
+    {
+        armorItem.baseDefense = value.toInt();
     }
     else if (role == UpgradeReqsRole)
     {
@@ -118,6 +123,10 @@ QVariant ArmorData::data(const QModelIndex &index, int role) const
     {
         return armorItem.level;
     }
+    if (role == BaseDefenseRole)
+    {
+        return armorItem.baseDefense;
+    }
     if (role == UpgradeReqsRole)
     {
         return QVariant(armorItem.getFullUpgradeDetailsMap());
@@ -165,6 +174,8 @@ bool ArmorData::loadArmorDataFromFile(QString armorFilePath)
         armor.setBonus = armorNode->first_node("SetBonus")->value();
         QString upgradeStatus = armorNode->first_node("CanBeUpgraded")->value();
         armor.isUpgradeable = (upgradeStatus == QString("true")) ? true : false;
+        QString baseDefense = armorNode->first_node("BaseDefense")->value();
+        armor.baseDefense = baseDefense.toInt();
 
         // Initialize all user-specific fields to default values.
         armor.isUnlocked = false;

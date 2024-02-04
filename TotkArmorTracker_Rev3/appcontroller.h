@@ -35,6 +35,7 @@ public:
     Q_INVOKABLE bool loadSave(QUrl filePath);
     Q_INVOKABLE bool loadRecentSave(QString saveName);
     Q_INVOKABLE bool saveCurrentSave();
+    Q_INVOKABLE bool saveExists(QString saveName);
     // Class q_property definitions are given getters that return based on class state.
     Q_INVOKABLE bool saveIsLoaded();
     Q_INVOKABLE QString getSaveName();

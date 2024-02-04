@@ -2,10 +2,10 @@
 <ArmorData>
     <Armor name="Amber Earrings">
         <Description>One of the items sold by the Gerudo jeweler. These earrings are made with amber, a gem that harnesses the power of the land to increase defense when equipped.</Description>
-        <SetName>N/A</SetName>
+        <SetName>None</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Armor Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -38,7 +38,7 @@
         <Description>This item is said to contain the spirit of a hero who once saved Hyrule. That hero's aura will envelop the wearer.</Description>
         <SetName>Ancient Hero Set</SetName>
         <BaseDefense>12</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Master Beam Sword Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -76,16 +76,16 @@
         <Description>Old-fashioned upper-body wear. It's got some holes, but the soft cloth feels good to the touch. It's hard to keep it wrinkle-free.</Description>
         <SetName>Archaic Set</SetName>
         <BaseDefense>1</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Archaic Legwear">
         <Description>Simple, classic legwear. They're well-worn and showing their age, but they've still got a few good years left in them. It can be a bit cumbersome to have to tie the straps.</Description>
         <SetName>Archaic Set</SetName>
         <BaseDefense>1</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Archaic Warm Greaves">
@@ -93,11 +93,11 @@
         <SetName>Archaic Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Cold Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Barbarian Helm">
-        <Description>template</Description>
+        <Description>A helmet once worn by the warriors of an ancient warlike tribe from the Faron region.</Description>
         <SetName>Barbarian Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
@@ -133,7 +133,7 @@
         </Tiers>
     </Armor>
     <Armor name="Barbarian Armor">
-        <Description>template</Description>
+        <Description>Armor once favored by an ancient warlike tribe from the Faron region.</Description>
         <SetName>Barbarian Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
@@ -169,7 +169,7 @@
         </Tiers>
     </Armor>
     <Armor name="Barbarian Leg Wraps">
-        <Description>template</Description>
+        <Description>Leg wraps once favored by a warlike tribe. The traditional design bolsters your fighting spirit to raise your strength.</Description>
         <SetName>Barbarian Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
@@ -206,17 +206,17 @@
     </Armor>
     <Armor name="Bokoblin Mask">
         <Description>Kilton's handmade Bokoblin headgear. It's almost charming in a cute, monstrous kind of way... Equip it to blend in with Bokoblins.</Description>
-        <SetName>N/A</SetName>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Bokoblins</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Cap of Time">
         <Description>According to legend, this cap was once worn by a hero who traveled through time. A truly timeless item perfect for kids and adults alike!</Description>
         <SetName>Armor of Time Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -247,10 +247,10 @@
         </Tiers>
     </Armor>
     <Armor name="Cap of Twilight">
-        <Description>template</Description>
+        <Description>According to legend, this cap was worn by a hero who battled the creatures of twilight.</Description>
         <SetName>Armor of Twilight Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -281,10 +281,10 @@
         </Tiers>
     </Armor>
     <Armor name="Cap of the Hero">
-        <Description>template</Description>
+        <Description>According to legend, this cap was once treasured by an ancient hero.</Description>
         <SetName>Armor of the Hero Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -315,10 +315,10 @@
         </Tiers>
     </Armor>
     <Armor name="Cap of the Sky">
-        <Description>template</Description>
+        <Description>According to legend, this cap was once worn by a hero who appeared from the sky riding a mighty bird.</Description>
         <SetName>Armor of the Sky Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -349,10 +349,10 @@
         </Tiers>
     </Armor>
     <Armor name="Cap of the Wild">
-        <Description>template</Description>
+        <Description>According to legend, this cap was crafted for a hero who travels the wildlands.</Description>
         <SetName>Armor of the Wild Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -385,10 +385,10 @@
         </Tiers>
     </Armor>
     <Armor name="Cap of the Wind">
-        <Description>template</Description>
+        <Description>According to legend, this cap was treasured by a hero who sailed the Great Sea.</Description>
         <SetName>Armor of the Wind Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -420,18 +420,18 @@
     </Armor>
     <Armor name="Cece's Hat">
         <Description>An avant-garde masterpiece designed by Cece. Guaranteed to make the fashionistas' heads turn.</Description>
-        <SetName>N/A</SetName>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Champion's Leathers">
         <Description>This garment, worn by those in good standing with Hyrule royalty, has been reworked with the latest improvements, such as a new shoulder guard.</Description>
-        <SetName>N/A</SetName>
+        <SetName>None</SetName>
         <BaseDefense>5</BaseDefense>
         <PassiveBonus>Grants Link the ability to shoot sword beams with the Master Sword without full health</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -464,7 +464,7 @@
         </Tiers>
     </Armor>
     <Armor name="Charged Headdress">
-        <Description>template</Description>
+        <Description>Used in ancient rituals and made from conductive material, this item produces electricity during thunderstorms.</Description>
         <SetName>Charged Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Stormy Weather Attack Up</PassiveBonus>
@@ -499,7 +499,7 @@
         </Tiers>
     </Armor>
     <Armor name="Charged Shirt">
-        <Description>template</Description>
+        <Description>Used in ancient rituals and made from conductive material, this item produces electricity during thunderstorms.</Description>
         <SetName>Charged Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Stormy Weather Attack Up</PassiveBonus>
@@ -534,7 +534,7 @@
         </Tiers>
     </Armor>
     <Armor name="Charged Trousers">
-        <Description>template</Description>
+        <Description>Used in ancient rituals and made from conductive material, this item produces electricity during thunderstorms.</Description>
         <SetName>Charged Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Stormy Weather Attack Up</PassiveBonus>
@@ -569,7 +569,7 @@
         </Tiers>
     </Armor>
     <Armor name="Climber's Bandana">
-        <Description>template</Description>
+        <Description>This bandanna uses ancient technology that enhances core strength to improve your climbing ability.</Description>
         <SetName>Climber's Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Climb Speed Up</PassiveBonus>
@@ -603,7 +603,7 @@
         </Tiers>
     </Armor>
     <Armor name="Climbing Boots">
-        <Description>template</Description>
+        <Description>The ancient technology used in making this gear and its no-slip glove will make you a better climber.</Description>
         <SetName>Climber's Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Climb Speed Up</PassiveBonus>
@@ -637,7 +637,7 @@
         </Tiers>
     </Armor>
     <Armor name="Climbing Gear">
-        <Description>template</Description>
+        <Description>The special no-slip toes of these boots make you a more efficient climber.</Description>
         <SetName>Climber's Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Climb Speed Up</PassiveBonus>
@@ -671,31 +671,31 @@
         </Tiers>
     </Armor>
     <Armor name="Dark Hood">
-        <Description>template</Description>
+        <Description>Headwear obtained by offering Poes to a strange statue. It resembles the head of a monster born of shadow, and its eyes glow eerie red in the dark.</Description>
         <SetName>Dark Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Night Speed Up</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Dark Trousers">
-        <Description>template</Description>
+        <Description>A tunic obtained by offering Poes to a strange statue. It's a spurious replica of the green outfit once worn by a legendary hero.</Description>
         <SetName>Dark Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Night Speed Up</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Dark Tunic">
-        <Description>template</Description>
+        <Description>Trousers obtained by offering Poes to a strange statue. They look ordinary at first, but on closer inspection, they resemble the legs of a monster born of shadow.</Description>
         <SetName>Dark Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Night Speed Up</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Desert Voe Headband">
-        <Description>template</Description>
+        <Description>Gerudo armor for males. Contains sapphire, which harnesses the power of ice to make the heat more bearable.</Description>
         <SetName>Desert Voe Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Heat Resistance Up</PassiveBonus>
@@ -730,7 +730,7 @@
         </Tiers>
     </Armor>
     <Armor name="Desert Voe Spaulder">
-        <Description>template</Description>
+        <Description>Gerudo armor for males. Contains sapphire, which harnesses the power of ice to make the heat more bearable.</Description>
         <SetName>Desert Voe Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Heat Resistance Up</PassiveBonus>
@@ -765,7 +765,7 @@
         </Tiers>
     </Armor>
     <Armor name="Desert Voe Trousers">
-        <Description>template</Description>
+        <Description>Gerudo trousers for males sold in the Gerudo Secret Club. Sapphire used in their creation offers protection from the heat.</Description>
         <SetName>Desert Voe Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Heat Resistance Up</PassiveBonus>
@@ -800,11 +800,11 @@
         </Tiers>
     </Armor>
     <Armor name="Diamond Circlet">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A Gerudo headpiece set with a diamond, which increases attack power.</Description>
+        <SetName>None</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -834,7 +834,7 @@
         </Tiers>
     </Armor>
     <Armor name="Ember Headdress">
-        <Description>template</Description>
+        <Description>Used in ancient rituals, this item is made of heat-absorbing cloth that produces flame in high-temperature environments.</Description>
         <SetName>Ember Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Hot Weather Attack Up</PassiveBonus>
@@ -869,7 +869,7 @@
         </Tiers>
     </Armor>
     <Armor name="Ember Shirt">
-        <Description>template</Description>
+        <Description>Used in ancient rituals, this item is made of heat-absorbing cloth that produces flame in high-temperature environments.</Description>
         <SetName>Ember Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Hot Weather Attack Up</PassiveBonus>
@@ -904,7 +904,7 @@
         </Tiers>
     </Armor>
     <Armor name="Ember Trousers">
-        <Description>template</Description>
+        <Description>Used in ancient rituals, this item is made of heat-absorbing cloth that produces flame in high-temperature environments.</Description>
         <SetName>Ember Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Hot Weather Attack Up</PassiveBonus>
@@ -939,7 +939,7 @@
         </Tiers>
     </Armor>
     <Armor name="Evil Spirit Armor">
-        <Description>template</Description>
+        <Description>Some believe this armor is inspirited by a malevolent entity. It's a rather rare find.</Description>
         <SetName>Evil Spirit Set</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -947,7 +947,7 @@
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Evil Spirit Greaves">
-        <Description>template</Description>
+        <Description>Some believe these greaves are inspired by a malevolent entity. They're a rather rare find.</Description>
         <SetName>Evil Spirit Set</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -955,7 +955,7 @@
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Evil Spirit Mask">
-        <Description>template</Description>
+        <Description>Some believe this eerie mask is inspired by a malevolent entity. It's a rather rare find.</Description>
         <SetName>Evil Spirit Set</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -963,7 +963,7 @@
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Fierce Deity Armor">
-        <Description>template</Description>
+        <Description>Armor worn by the hero from a world in which the moon threatened to fall. Wearing it provides godlike power.</Description>
         <SetName>Fierce Deity Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
@@ -997,7 +997,7 @@
         </Tiers>
     </Armor>
     <Armor name="Fierce Deity Boots">
-        <Description>template</Description>
+        <Description>Boots worn by a hero from a world in which the moon threatened to fall. Wearing them provides godlike power.</Description>
         <SetName>Fierce Deity Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
@@ -1031,7 +1031,7 @@
         </Tiers>
     </Armor>
     <Armor name="Fierce Deity Mask">
-        <Description>template</Description>
+        <Description>A mask worn by a hero from a world in which the moon was falling, granting godlike power.</Description>
         <SetName>Fierce Deity Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
@@ -1065,7 +1065,7 @@
         </Tiers>
     </Armor>
     <Armor name="Flamebreaker Armor">
-        <Description>template</Description>
+        <Description>Fire-resistant armor crafted by Gorons for Hylians curious enough to visit Goron City.</Description>
         <SetName>Flamebreaker Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Flame Guard</PassiveBonus>
@@ -1100,7 +1100,7 @@
         </Tiers>
     </Armor>
     <Armor name="Flamebreaker Boots">
-        <Description>template</Description>
+        <Description>Goron artisans used flame-resistant rocks to craft these fireproof boots for Hylians visiting Goron City.</Description>
         <SetName>Flamebreaker Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Flame Guard</PassiveBonus>
@@ -1135,7 +1135,7 @@
         </Tiers>
     </Armor>
     <Armor name="Flamebreaker Helm">
-        <Description>template</Description>
+        <Description>Stone headgear made for tourists by Goron crafters. Not only is it flame-resistant, but it also covers your entire head.</Description>
         <SetName>Flamebreaker Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Flame Guard</PassiveBonus>
@@ -1170,7 +1170,7 @@
         </Tiers>
     </Armor>
     <Armor name="Froggy Hood">
-        <Description>template</Description>
+        <Description>A good hood for a rainy day. The perfectly weighted headband keeps the Wearer focus and stabilized, making it easier to climb wet, slippery surfaces.</Description>
         <SetName>Froggy Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Slip Resistance</PassiveBonus>
@@ -1204,7 +1204,7 @@
         </Tiers>
     </Armor>
     <Armor name="Froggy Leggings">
-        <Description>template</Description>
+        <Description>Good leggings for a rainy day. The feet are covered in small dimples and fed with an anti-slip substance, giving them great traction on wet, slippery surfaces.</Description>
         <SetName>Froggy Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Slip Resistance</PassiveBonus>
@@ -1238,7 +1238,7 @@
         </Tiers>
     </Armor>
     <Armor name="Froggy Sleeve">
-        <Description>template</Description>
+        <Description>A good sleeve for a rainy day. Small dimples on the fingers act as suction cups, giving good grip on wet, slippery surfaces.</Description>
         <SetName>Froggy Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Slip Resistance</PassiveBonus>
@@ -1272,7 +1272,7 @@
         </Tiers>
     </Armor>
     <Armor name="Frostbite Headdress">
-        <Description>template</Description>
+        <Description>Used in ancient rituals, this item's cold-absorbing cloth produces frost in low-temperature environments.</Description>
         <SetName>Frostbite Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Cold Weather Attack Up</PassiveBonus>
@@ -1307,7 +1307,7 @@
         </Tiers>
     </Armor>
     <Armor name="Frostbite Shirt">
-        <Description>template</Description>
+        <Description>Used in ancient rituals, this item's cold-absorbing cloth produces frost in low-temperature environments.</Description>
         <SetName>Frostbite Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Cold Weather Attack Up</PassiveBonus>
@@ -1342,7 +1342,7 @@
         </Tiers>
     </Armor>
     <Armor name="Frostbite Trousers">
-        <Description>template</Description>
+        <Description>Used in ancient rituals, this item's cold-absorbing cloth produces frost in low-temperature environments.</Description>
         <SetName>Frostbite Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Cold Weather Attack Up</PassiveBonus>
@@ -1377,7 +1377,7 @@
         </Tiers>
     </Armor>
     <Armor name="Gaiters of the Depths">
-        <Description>template</Description>
+        <Description>Gaiters acquired by offering Poes to a strange statue found in the Depths. They offer some resistance to gloom.</Description>
         <SetName>Depths Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Gloom Resistance</PassiveBonus>
@@ -1412,7 +1412,7 @@
         </Tiers>
     </Armor>
     <Armor name="Glide Mask">
-        <Description>template</Description>
+        <Description>A mask with a wind-resistant design that allows for steadier gliding while the wearer plummets from the sky.</Description>
         <SetName>Glide Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Skydive Mobility Up</PassiveBonus>
@@ -1446,7 +1446,7 @@
         </Tiers>
     </Armor>
     <Armor name="Glide Shirt">
-        <Description>template</Description>
+        <Description>The cloth sewn to this shirt helps it "catch" air, increasing the wearer's ability to glide while they plummet from the sky.</Description>
         <SetName>Glide Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Skydive Mobility Up</PassiveBonus>
@@ -1480,7 +1480,7 @@
         </Tiers>
     </Armor>
     <Armor name="Glide Tights">
-        <Description>template</Description>
+        <Description>The cloth sewn to these tights allows their wearer to glide more easily as they plummet from the sky.</Description>
         <SetName>Glide Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Skydive Mobility Up</PassiveBonus>
@@ -1514,7 +1514,7 @@
         </Tiers>
     </Armor>
     <Armor name="Hood of the Depths">
-        <Description>template</Description>
+        <Description>A hood acquired by offering Poes to a strange statue found in the Depths. It offers some resistance to gloom.</Description>
         <SetName>Depths Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Gloom Resistance</PassiveBonus>
@@ -1549,19 +1549,19 @@
         </Tiers>
     </Armor>
     <Armor name="Horriblin Mask">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>Kilton's handmade Horriblin headgear. The big nose and smiley mouth look just like those of the real monster...</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Horriblins</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Hylian Hood">
-        <Description>template</Description>
+        <Description>A hood woven using traditional Hyrulean methods, made from sturdy material.</Description>
         <SetName>Hylian Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -1592,11 +1592,11 @@
         </Tiers>
     </Armor>
     <Armor name="Hylian Trousers">
-        <Description>template</Description>
+        <Description>These trousers are common throughout the Hyrule region. The soft fabric makes them quite comfortable.</Description>
         <SetName>Hylian Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -1627,11 +1627,11 @@
         </Tiers>
     </Armor>
     <Armor name="Hylian Tunic">
-        <Description>template</Description>
+        <Description>A common garb popular in Hyrule, especially among travelers. Its light-yet-sturdy fabric doesn't limit movement.</Description>
         <SetName>Hylian Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -1662,50 +1662,58 @@
         </Tiers>
     </Armor>
     <Armor name="Korok Mask">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>A mask inspired by those fun-loving Koroks. It shakes when one is nearby. It's a rather rare find.</Description>
+        <SetName>None</SetName>
         <BaseDefense>1</BaseDefense>
         <PassiveBonus>Korok Detection</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
+        <CanBeUpgraded>false</CanBeUpgraded>
+    </Armor>
+    <Armor name="Lightning Helm">
+        <Description>The Yiga copied a precious heirloom passed down among the Gerudo for this helm. Adorned with topaz, it deflects lightning.</Description>
+        <SetName>None</SetName>
+        <BaseDefense>3</BaseDefense>
+        <PassiveBonus>Lightning Proof</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Lizalfos Mask">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>Kilton's handmade Lizalfos headgear. It's designed to replicate even the goggling eyeballs of the Lizalfos.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Lizalfos</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Lobster Shirt">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>A soft, comfortable shirt traditional to a southern island. It's made of breathable fabric, so it's well-suited to warm regions.</Description>
+        <SetName>None</SetName>
         <BaseDefense>1</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Lynel Mask">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>Kilton's handmade Lynel headgear. It's so well-crafted that it can deceive a real Lynel.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Lynels</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Majora's Mask">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>An eerie mask passed down from ancient times. Wearing it makes it harder for certain enemies to spot you. It's a rather rare find.</Description>
+        <SetName>None</SetName>
         <BaseDefense>1</BaseDefense>
         <PassiveBonus>Blend in with enemies</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Mask of Awakening">
         <Description>Legend says this mask resembles a hero who explored a mysterious place that one could visit but not leave.</Description>
         <SetName>Awakening Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -1736,15 +1744,15 @@
         </Tiers>
     </Armor>
     <Armor name="Midna's Helmet">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>A helmet much like the one Midna wore when she fought alongside the Hero of Twilight. It's a rather rare find.</Description>
+        <SetName>None</SetName>
         <BaseDefense>7</BaseDefense>
         <PassiveBonus>Gloom Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Miner's Mask">
-        <Description>template</Description>
+        <Description>A mask used for working in darkness. The attached lamps are filled with bioluminescent material to light one's surroundings.</Description>
         <SetName>Miner's Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Glow</PassiveBonus>
@@ -1779,7 +1787,7 @@
         </Tiers>
     </Armor>
     <Armor name="Miner's Top">
-        <Description>template</Description>
+        <Description>A shirt featuring lamps of various sizes filled with bioluminescent material. Made to help with excavating dark environments.</Description>
         <SetName>Miner's Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Glow</PassiveBonus>
@@ -1814,7 +1822,7 @@
         </Tiers>
     </Armor>
     <Armor name="Miner's Trousers">
-        <Description>template</Description>
+        <Description>The bioluminescent lamps on these trousers shed light on where you step. They come in handy when walking in darkness.</Description>
         <SetName>Miner's Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Glow</PassiveBonus>
@@ -1849,43 +1857,43 @@
         </Tiers>
     </Armor>
     <Armor name="Moblin Mask">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>Kilton's handmade Moblin headgear. It's designed to replicate the distinct, long, Moblin nose and hanging tongue.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Blend in with Moblins</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Mystic Headpiece">
-        <Description></Description>
+        <Description>Headgear acquired in exchange for Bubbul gems. Made with prayers spirits, it protects the wear allowing them to lose rupees instead of health when hit.</Description>
         <SetName>Mystic Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Rupee Padding</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Mystic Robe">
-        <Description></Description>
+        <Description>A robe acquired in exchange for, Bubbul gems. Woven with prayers to spirits, it protects the wearer, allowing them to lose rupees instead of health when hit.</Description>
         <SetName>Mystic Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Rupee Padding</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Mystic Trousers">
-        <Description></Description>
+        <Description>Trousers acquired in exchange for Bubbul gems. Each thread is blessed by spirits, protecting the wearer by allowig them to lose rupees instead of health when hit.</Description>
         <SetName>Mystic Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Rupee Padding</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Opal Earrings">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>Earrings containing opal, a gem that harnesses the power of water to increase your swimming speed.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Swim Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -1915,34 +1923,34 @@
         </Tiers>
     </Armor>
     <Armor name="Phantom Armor">
-        <Description></Description>
+        <Description>Myths abound about armored phantoms that terrorized brave heroes. This piece looks just like the armor they allegedly wore. It's a rather rare find.</Description>
         <SetName>Phantom Armor Set</SetName>
         <BaseDefense>8</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Phantom Greaves">
-        <Description></Description>
+        <Description>Myths abound about armored phantoms that terrorized brave heroes. These greaves look just like the ones they supposedly wore. They're a rather rare find.</Description>
         <SetName>Phantom Armor Set</SetName>
         <BaseDefense>8</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Phantom Helmet">
-        <Description></Description>
+        <Description>Myths abound about armored phantoms that terrorized brave heroes. This helmet looks just like the ones they supposedly wore. It's a rather rare find.</Description>
         <SetName>Phantom Armor Set</SetName>
         <BaseDefense>8</BaseDefense>
         <PassiveBonus>Attack Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Radiant Mask">
-        <Description>template</Description>
+        <Description>A mask made from crushed luminous stones that gives off a radiant glow in the dark.</Description>
         <SetName>Radiant Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -1975,10 +1983,10 @@
         </Tiers>
     </Armor>
     <Armor name="Radiant Shirt">
-        <Description>template</Description>
+        <Description>A shirt that glows in the dark due to dye made from luminous stones.</Description>
         <SetName>Radiant Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2011,10 +2019,10 @@
         </Tiers>
     </Armor>
     <Armor name="Radiant Tights">
-        <Description>template</Description>
+        <Description>Paint made from crushed luminous stones causes these tights to glow in the dark.</Description>
         <SetName>Radiant Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Skeletal Disguise, Bone Weapon Proficiency</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2047,18 +2055,18 @@
         </Tiers>
     </Armor>
     <Armor name="Ravio's Hood">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>The hood of a traveling merchant who had a bracelet that could turn the wearer into a painting. Wearing it increases your sideways climbing speed. It's a rather rare find.</Description>
+        <SetName>None</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Sideways Climb Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Royal Guard Boots">
-        <Description>template</Description>
+        <Description>These boots are part of the uniform for Hyrule's royal guard. They're a fine blend of style and function.</Description>
         <SetName>Royal Guard Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Charge Attack Stamina Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2090,10 +2098,10 @@
         </Tiers>
     </Armor>
     <Armor name="Royal Guard Cap">
-        <Description>template</Description>
+        <Description>This spiffy cap is part of the uniform for Hyrule's royal guard. It's lighter than it looks and easy to move around in.</Description>
         <SetName>Royal Guard Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Charge Attack Stamina Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2125,10 +2133,10 @@
         </Tiers>
     </Armor>
     <Armor name="Royal Guard Uniform">
-        <Description>template</Description>
+        <Description>The dignified uniform for Hyrule's royal guard. It's made of high-quality materials and is both stylish and practical.</Description>
         <SetName>Royal Guard Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Charge Attack Stamina Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2160,43 +2168,7 @@
         </Tiers>
     </Armor>
     <Armor name="Rubber Armor">
-        <Description>template</Description>
-        <SetName>Rubber Armor Set</SetName>
-        <BaseDefense>3</BaseDefense>
-        <PassiveBonus>Shock Resistance</PassiveBonus>
-        <SetBonus>Lightning Proof</SetBonus>
-        <CanBeUpgraded>true</CanBeUpgraded>
-        <Tiers>
-            <Tier level="1">
-                <Defense>5</Defense>
-                <Cost>10</Cost>
-                <Item name="Electric Lizalfos Horn" quantity="1"/>
-                <Item name="Yellow Chuchu Jelly" quantity="3"/>
-            </Tier>
-            <Tier level="2">
-                <Defense>8</Defense>
-                <Cost>50</Cost>
-                <Item name="Voltfruit" quantity="5"/>
-                <Item name="Yellow Chuchu Jelly" quantity="8"/>
-            </Tier>
-            <Tier level="3">
-                <Defense>12</Defense>
-                <Cost>200</Cost>
-                <Item name="Electric Lizalfos Tail" quantity="5"/>
-                <Item name="Electric Safflina" quantity="8"/>
-                <Item name="Zapshroom" quantity="5"/>
-            </Tier>
-            <Tier level="4">
-                <Defense>20</Defense>
-                <Cost>500</Cost>
-                <Item name="Electric Lizalfos Horn" quantity="5"/>
-                <Item name="Electric Lizalfos Tail" quantity="8"/>
-                <Item name="Topaz" quantity="5"/>
-            </Tier>
-        </Tiers>
-    </Armor>
-    <Armor name="Rubber Armor">
-        <Description>template</Description>
+        <Description>This armor owes its electricity resistance to an ancient material called "rubber," which is nearly impossible to find.</Description>
         <SetName>Rubber Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Shock Resistance</PassiveBonus>
@@ -2232,7 +2204,7 @@
         </Tiers>
     </Armor>
     <Armor name="Rubber Helm">
-        <Description>template</Description>
+        <Description>An electricity-resistant helmet made from an ancient material called "rubber."</Description>
         <SetName>Rubber Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Shock Resistance</PassiveBonus>
@@ -2268,7 +2240,7 @@
         </Tiers>
     </Armor>
     <Armor name="Rubber Tights">
-        <Description>template</Description>
+        <Description>These invaluable tights are resistant to electricity. They're made with an ancient technology called "rubber."</Description>
         <SetName>Rubber Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Shock Resistance</PassiveBonus>
@@ -2304,11 +2276,11 @@
         </Tiers>
     </Armor>
     <Armor name="Ruby Circlet">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A traditional Gerudo headpiece set with a ruby, which uses the power of fire to make the cold more bearable.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Cold Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2338,11 +2310,11 @@
         </Tiers>
     </Armor>
     <Armor name="Sand Boots">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>These Gerudo-made boots evenly distribute your weight so you can maintain your normal movement speed on sand.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Sand Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2373,11 +2345,11 @@
         </Tiers>
     </Armor>
     <Armor name="Sapphire Circlet">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A Gerudo headpiece set with a sapphire, which harnesses the power of ice to make the heat more bearable.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Heat Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2407,11 +2379,11 @@
         </Tiers>
     </Armor>
     <Armor name="Sheik's Mask">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A mask said to have been worn by a Sheikah who saved a time-traveling hero. Ideal for undercover work.</Description>
+        <SetName>None</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2441,11 +2413,11 @@
         </Tiers>
     </Armor>
     <Armor name="Snow Boots">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>These boots distribute your body weight so you can maintain your normal movement speed on deep snow.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Snow Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2474,7 +2446,7 @@
         </Tiers>
     </Armor>
     <Armor name="Snowquill Headdress">
-        <Description>template</Description>
+        <Description>A Rito accessory made from snow-bird feathers. Adorned with a gem that harnesses the power of fire.</Description>
         <SetName>Snowquill Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Cold Resistance</PassiveBonus>
@@ -2509,7 +2481,7 @@
         </Tiers>
     </Armor>
     <Armor name="Snowquill Tunic">
-        <Description>template</Description>
+        <Description>Made by Rito artisans, this tunic stacks molted Rito feathers in each layer to help retain body heat.</Description>
         <SetName>Snowquill Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Cold Resistance</PassiveBonus>
@@ -2544,7 +2516,7 @@
         </Tiers>
     </Armor>
     <Armor name="Snowquill Trousers">
-        <Description>template</Description>
+        <Description>The Rito feathers that line these trousers make them excellent at retaining body heat.</Description>
         <SetName>Snowquill Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Cold Resistance</PassiveBonus>
@@ -2579,11 +2551,11 @@
         </Tiers>
     </Armor>
     <Armor name="Soldier's Armor">
-        <Description>template</Description>
+        <Description>Hyrulean guards praised this sturdy armor for its superior defense. Its craftsmanship is obvious.</Description>
         <SetName>Soldier's Armor Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2615,11 +2587,11 @@
         </Tiers>
     </Armor>
     <Armor name="Soldier's Greaves">
-        <Description>template</Description>
+        <Description>Greaves favored by Hyrulean guards. They owe their distinctly high defense to the metal plates they're made from.</Description>
         <SetName>Soldier's Armor Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2651,11 +2623,11 @@
         </Tiers>
     </Armor>
     <Armor name="Soldier's Helm">
-        <Description>template</Description>
+        <Description>Sturdy headgear for protecting frontline soldiers from vicious monsters. Praised for its superior defense.</Description>
         <SetName>Soldier's Armor Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2687,7 +2659,7 @@
         </Tiers>
     </Armor>
     <Armor name="Stealth Chest Guard">
-        <Description>template</Description>
+        <Description>Armor designed for stealth, passed down through the Sheikah tribe. Its special fabric suppresses sound.</Description>
         <SetName>Stealth Armor Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -2722,7 +2694,7 @@
         </Tiers>
     </Armor>
     <Armor name="Stealth Mask">
-        <Description>template</Description>
+        <Description>A Sheikah-made mask that suppresses the noisy rustling of clothes. Perfect for sneaking about.</Description>
         <SetName>Stealth Armor Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -2757,7 +2729,7 @@
         </Tiers>
     </Armor>
     <Armor name="Stealth Tights">
-        <Description>template</Description>
+        <Description>Tights crafted by the Sheikah, laced with ancient technology that suppresses the noisy rustling of clothes.</Description>
         <SetName>Stealth Armor Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -2791,44 +2763,36 @@
             </Tier>
         </Tiers>
     </Armor>
-    <Armor name="Thunder Helm">
-        <Description></Description>
-        <SetName>N/A</SetName>
-        <BaseDefense>3</BaseDefense>
-        <PassiveBonus>Lightning Proof</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
-        <CanBeUpgraded>false</CanBeUpgraded>
-    </Armor>
     <Armor name="Tingle's Hood">
-        <Description></Description>
+        <Description>There was once a man who claimed to be the very reincarnation of a fairy. He treasured this hood, and so will you. After all, it's a rather rare find. Kooloo-Limpah.</Description>
         <SetName>Tingle Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Night Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Tingle's Shirt">
-        <Description></Description>
+        <Description>There was once a man who claimed to be the very reincarnation of a fairy. He treasured this shirt, and so will you. After all, it's a rather rare find. Kooloo-Limpah.</Description>
         <SetName>Tingle Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Night Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Tingle's Tights">
-        <Description></Description>
+        <Description>There was once a man who claimed to be the very reincarnation of a fairy. He treasured these tights, and so will you. After all, they're a rather rare find. Kooloo-Limpah.</Description>
         <SetName>Tingle Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Night Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Topaz Earrings">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>Earrings made with topaz, which harnesses the power of lightning to increase electricity resistance.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Shock Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -2861,7 +2825,7 @@
         <Description>Legend says these trousers were worn by a hero who explored a mysterious island that one could visit but not leave.</Description>
         <SetName>Awakening Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2892,10 +2856,10 @@
         </Tiers>
     </Armor>
     <Armor name="Trousers of Time">
-        <Description>template</Description>
+        <Description>Legends say these trousers were once worn by a hero who traveled through time.</Description>
         <SetName>Armor of Time Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2926,10 +2890,10 @@
         </Tiers>
     </Armor>
     <Armor name="Trousers of Twilight">
-        <Description>template</Description>
+        <Description>Legends say these trousers were once worn by a hero who battled the beasts of twilight.</Description>
         <SetName>Armor of Twilight Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2960,10 +2924,10 @@
         </Tiers>
     </Armor>
     <Armor name="Trousers of the Hero">
-        <Description>template</Description>
+        <Description>Legends say these trousers were favored by a hero from an ancient age.</Description>
         <SetName>Armor of the Hero Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -2994,10 +2958,10 @@
         </Tiers>
     </Armor>
     <Armor name="Trousers of the Sky">
-        <Description>template</Description>
+        <Description>Legends say these trousers were once worn by a hero who appeared from the sky riding a mighty bird.</Description>
         <SetName>Armor of the Sky Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3028,10 +2992,10 @@
         </Tiers>
     </Armor>
     <Armor name="Trousers of the Wild">
-        <Description>template</Description>
+        <Description>Legends say these trousers were tailored for a hero who travels the wilderness.</Description>
         <SetName>Armor of the Wild Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3064,10 +3028,10 @@
         </Tiers>
     </Armor>
     <Armor name="Trousers of the Wind">
-        <Description>template</Description>
+        <Description>Legends say these trousers were once cherished by a hero who sailed the Great Sea.</Description>
         <SetName>Armor of the Wind Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3101,7 +3065,7 @@
         <Description>Legend says this armor was worn by a hero who explored a mysterious area that one could visit but not leave.</Description>
         <SetName>Awakening Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3132,11 +3096,11 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of Memories">
-        <Description></Description>
-        <SetName>N/A</SetName>
+        <Description>In ancient Hyrule, only those respected by the royal family could wear this garment.</Description>
+        <SetName>None</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -3169,10 +3133,10 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of Time">
-        <Description>template</Description>
+        <Description>Legend has it this armor was worn by a hero who traveled through time. It can be worn by a child or an adult.</Description>
         <SetName>Armor of Time Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3203,10 +3167,10 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of Twilight">
-        <Description>template</Description>
+        <Description>Legend has it this armor was worn by a hero who battled monsters of twilight.</Description>
         <SetName>Armor of Twilight Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3237,7 +3201,7 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of the Depths">
-        <Description>template</Description>
+        <Description>A tunic acquired by offering Poes to a strange statue found in the Depths. It offers some resistance to gloom.</Description>
         <SetName>Depths Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Gloom Resistance</PassiveBonus>
@@ -3272,10 +3236,10 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of the Hero">
-        <Description>template</Description>
+        <Description>Legend has it this armor was once cherished by a hero from ancient times.</Description>
         <SetName>Armor of the Hero Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3306,10 +3270,10 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of the Sky">
-        <Description>template</Description>
+        <Description>Legend has it this armor was worn by a hero who rode a mighty bird. It was apparently presented after a ceremonious event.</Description>
         <SetName>Armor of the Sky Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3340,10 +3304,10 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of the Wild">
-        <Description>template</Description>
+        <Description>This armor was apparently crafted for a hero who travels the wilds. Interestingly, it's just your size.</Description>
         <SetName>Armor of the Wild Set</SetName>
         <BaseDefense>4</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3376,10 +3340,10 @@
         </Tiers>
     </Armor>
     <Armor name="Tunic of the Wind">
-        <Description>template</Description>
+        <Description>Legend has it this armor was worn by a hero who sailed the Great Sea. It was woven with love by his grandmother.</Description>
         <SetName>Armor of the Wind Set</SetName>
         <BaseDefense>3</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
+        <PassiveBonus>None</PassiveBonus>
         <SetBonus>Attack Up</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
@@ -3410,11 +3374,11 @@
         </Tiers>
     </Armor>
     <Armor name="Vah Medoh Divine Helm">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A helm said to deepen the bond with the Rito when worn by a Hylian.</Description>
+        <SetName>None</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Cold Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -3446,11 +3410,11 @@
         </Tiers>
     </Armor>
     <Armor name="Vah Naboris Divine Helm">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A helm said to deepen the bond with the Gerudo when worn by a Hylian.</Description>
+        <SetName>None</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Shock Resistance</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -3482,11 +3446,11 @@
         </Tiers>
     </Armor>
     <Armor name="Vah Rudania Divine Helm">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A helm said to deepen the bond with the Gorons when worn by a Hylian.</Description>
+        <SetName>None</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Flame Guard</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -3518,11 +3482,11 @@
         </Tiers>
     </Armor>
     <Armor name="Vah Ruta Divine Helm">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>A helm said to deepen the bond with the Zora when worn by a Hylian.</Description>
+        <SetName>None</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Swim Speed Up</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>true</CanBeUpgraded>
         <Tiers>
             <Tier level="1">
@@ -3554,15 +3518,15 @@
         </Tiers>
     </Armor>
     <Armor name="Well-Worn Hair Band">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>An old, worn, simple hair band. Its color has long faded, but it still has someliife left in it.</Description>
+        <SetName>None</SetName>
         <BaseDefense>0</BaseDefense>
-        <PassiveBonus>N/A</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <PassiveBonus>None</PassiveBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Yiga Armor">
-        <Description>template</Description>
+        <Description>Armor supplied to members of the Yiga Clan. Defensive parts are minimized for silence, so it's lacking in protection.</Description>
         <SetName>Yiga Armor Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -3596,7 +3560,7 @@
         </Tiers>
     </Armor>
     <Armor name="Yiga Mask">
-        <Description>template</Description>
+        <Description>A mask supplied to members of the Yiga Clan. It covers the entire face, keeping even breath sounds to a minimum. Perfect sneaking, but lacks protection due to its light material.</Description>
         <SetName>Yiga Armor Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -3630,7 +3594,7 @@
         </Tiers>
     </Armor>
     <Armor name="Yiga Tights">
-        <Description>template</Description>
+        <Description>Tights supplied to members of the Yiga Clan. The soft material on the soles silences footsteps, but protection is lacking due to the light material.</Description>
         <SetName>Yiga Armor Set</SetName>
         <BaseDefense>2</BaseDefense>
         <PassiveBonus>Stealth Up</PassiveBonus>
@@ -3664,15 +3628,15 @@
         </Tiers>
     </Armor>
     <Armor name="Zant's Helmet">
-        <Description>template</Description>
-        <SetName>N/A</SetName>
+        <Description>The ruthless Usurper King of the Twilight Realm wore a helmet much like this one. It's a rather rare find.</Description>
+        <SetName>None</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Unfreezable</PassiveBonus>
-        <SetBonus>N/A</SetBonus>
+        <SetBonus>None</SetBonus>
         <CanBeUpgraded>false</CanBeUpgraded>
     </Armor>
     <Armor name="Zonaite Helm">
-        <Description>template</Description>
+        <Description>A helmet forged of zonaite. The magic infused into it during its production grants its weare improved energy efficiency for Zonai devices.</Description>
         <SetName>Zonaite Set</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Energy Up</PassiveBonus>
@@ -3708,7 +3672,7 @@
         </Tiers>
     </Armor>
     <Armor name="Zonaite Shin Guards">
-        <Description>template</Description>
+        <Description>Shin guards forged of zonaite. Wearing them awakens the magic of their creators, improving efficiency for Zonai devices.</Description>
         <SetName>Zonaite Set</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Energy Up</PassiveBonus>
@@ -3744,7 +3708,7 @@
         </Tiers>
     </Armor>
     <Armor name="Zonaite Waistguard">
-        <Description>template</Description>
+        <Description>A waistguard made from zonait hile wearing it, you'll reap the benefit of its imbued magic and improve the effieiency of Zonai devices.</Description>
         <SetName>Zonaite Set</SetName>
         <BaseDefense>4</BaseDefense>
         <PassiveBonus>Energy Up</PassiveBonus>
@@ -3780,7 +3744,7 @@
         </Tiers>
     </Armor>
     <Armor name="Zora Armor">
-        <Description>template</Description>
+        <Description>Armor crafted by a past Zora princess for her future husband. Equip it to swim up waterfalls.</Description>
         <SetName>Zora Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Waterfall Climb</PassiveBonus>
@@ -3815,7 +3779,7 @@
         </Tiers>
     </Armor>
     <Armor name="Zora Greaves">
-        <Description>template</Description>
+        <Description>These greaves have been passed down among the Zora for generations. Equip them to swim faster.</Description>
         <SetName>Zora Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Swim Speed Up</PassiveBonus>
@@ -3850,7 +3814,7 @@
         </Tiers>
     </Armor>
     <Armor name="Zora Helm">
-        <Description>template</Description>
+        <Description>Zora headgear made from dragon scales. Increases swimming speed and allows you to spin to attack while swimming.</Description>
         <SetName>Zora Armor Set</SetName>
         <BaseDefense>3</BaseDefense>
         <PassiveBonus>Swim Spin Attack</PassiveBonus>

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Dialog {
     id: newSaveDialog
@@ -30,16 +31,38 @@ Dialog {
     }
 
     onAccepted: {
-        var saveResult = appController.createNewSave(nameTextInput.text);
-        if (saveResult === true)
-        {
-            newSaveDialog.newSaveCreated(nameTextInput.text);
+        // If a save file already exists for the given name, prompt the user to confirm they want to overwrite it.
+        if (appController.saveExists(nameTextInput.text + ".xml")) {
+            confirmOverwriteDialog.open();
+        }
+
+        // Otherwise, save file can be created immediately.
+        else {
+            // If approved, create the new save file.
+            var saveResult = appController.createNewSave(nameTextInput.text);
+            if (saveResult === true)
+            {
+                newSaveDialog.newSaveCreated(nameTextInput.text);
+            }
         }
     }
 
-    SystemPalette {
-        id: systemPalette
-        colorGroup: SystemPalette.Active
+    // CONFIRM OVERWRITE PROMPT.
+    // Displayed if the user is attempting to overwrite a pre-exiting save file.
+    MessageDialog {
+        id: confirmOverwriteDialog
+
+        title: "Overwrite Existing Save"
+        text: "A save named '" + nameTextInput.text + "' already exists. Overwrite?"
+        buttons: MessageDialog.No | MessageDialog.Yes
+        onAccepted: {
+            // If accepted, create and overwrite the save, sending required signals on a success.
+            var overwriteSaveResult = appController.createNewSave(nameTextInput.text);
+            if (overwriteSaveResult === true)
+            {
+                newSaveDialog.newSaveCreated(nameTextInput.text);
+            }
+        }
     }
 
     // SAVE DATA ENTRY FIELDS.
@@ -102,6 +125,32 @@ Dialog {
 
             onTextChanged: appController.newSaveSetSortSearchFilter(text)
         }
+
+        Rectangle {
+            id: clearButtonRect
+
+            Layout.preferredWidth: 40
+            Layout.fillHeight: true
+            radius: 5
+            color: "transparent"
+            border.color: Material.accentColor
+            border.width: 2
+
+            Text {
+                id: clearButtonText
+
+                anchors.fill: parent
+                text: "Clear"
+                color: Material.accentColor
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: armorSortTextField.clear()
+            }
+        }
     }
 
     // ARMOR LIST.
@@ -129,7 +178,7 @@ Dialog {
                 fill: parent
                 margins: 5
             }
-            color: Material.backgroundColor
+            color: Material.dividerColor
             radius: 3
         }
     }
@@ -143,7 +192,7 @@ Dialog {
         }
         clip: true
         cellWidth: 200
-        cellHeight: 80
+        cellHeight: 100
         // Set width up to allow for 3 columns.
         width: cellWidth * 3
 
@@ -166,8 +215,10 @@ Dialog {
                     fill: parent
                     margins: 5
                 }
-                radius: 5
                 color: Material.dialogColor
+                border.color: Material.accentColor
+                border.width: 2
+                radius: 5
 
                 ColumnLayout {
                     id: armorContentColumn
@@ -184,6 +235,7 @@ Dialog {
                         id: armorNameText
 
                         Layout.fillWidth: true
+                        Layout.preferredHeight: 20
                         text: armorRoot.armorName
                         color: Material.primaryTextColor
                         horizontalAlignment: Qt.AlignLeft
@@ -193,10 +245,53 @@ Dialog {
                     }
 
                     RowLayout {
+                        id: armorTextRow
+
+                        Layout.fillWidth: true
+
+                        Repeater {
+                            model: armorRoot.armorLevel
+                            delegate: IconImage {
+                                id: armorLevelFilledIcon
+
+                                Layout.preferredWidth: 10
+                                Layout.preferredHeight: 10
+                                source: "images/star-solid.svg"
+                                color: Material.primaryTextColor
+                                fillMode: IconImage.PreserveAspectFit
+                                visible: armorRoot.armorIsUpgradeable
+                            }
+                        }
+                        Repeater {
+                            model: 4 - armorRoot.armorLevel
+                            delegate: IconImage {
+                                id: armorLevelEmptyIcon
+
+                                Layout.preferredWidth: 10
+                                Layout.preferredHeight: 10
+                                source: "images/star-solid.svg"
+                                color: Material.frameColor
+                                fillMode: IconImage.PreserveAspectFit
+                                visible: armorRoot.armorIsUpgradeable
+                            }
+                        }
+                        Text {
+                            Layout.preferredHeight: 10
+                            text: (armorRoot.armorIsUnlocked) ? "Unlocked" : "Locked"
+                            font.italic: true
+                            font.pointSize: 9
+                            color: Material.secondaryTextColor
+                            horizontalAlignment: Qt.AlignLeft
+                            verticalAlignment: Qt.AlignVCenter
+                            visible: !armorRoot.armorIsUpgradeable
+                        }
+                    }
+
+                    RowLayout {
                         id: armorDetailsRow
 
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
+                        Layout.preferredHeight: 40
 
                         Image {
                             id: armorImage
@@ -229,41 +324,24 @@ Dialog {
                             visible: !armorRoot.armorIsUnlocked
                         }
 
-                        Repeater {
-                            model: armorRoot.armorLevel
-                            delegate: IconImage {
-                                id: armorLevelIcon
-
-                                Layout.preferredWidth: 12
-                                Layout.preferredHeight: 12
-                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                                source: "images/star-solid.svg"
-                                color: Material.primaryTextColor
-                                fillMode: IconImage.PreserveAspectFit
-                                visible: armorRoot.armorIsUnlocked
-                            }
-                        }
-
                         // SPACER.
                         Item {
                             Layout.fillWidth: true
-                            Layout.fillHeight: true
                         }
 
                         // LEVEL MODIFIERS.
                         RowLayout {
                             id: armorLevelColumnLayout
 
-                            Layout.fillHeight: true
-                            Layout.topMargin: 2
-                            Layout.bottomMargin: 2
+                            Layout.preferredHeight: 40
+                            Layout.alignment: Qt.AlignVCenter
                             spacing: 2
 
                             Rectangle {
                                 id: armorLevelDownButton
 
+                                Layout.preferredHeight: parent.height
                                 Layout.preferredWidth: 25
-                                Layout.fillHeight: true
                                 color: (enabled) ? Material.frameColor : Material.backgroundDimColor
                                 radius: 2
                                 visible: armorRoot.armorIsUpgradeable
@@ -300,8 +378,8 @@ Dialog {
                             Rectangle {
                                 id: armorLevelUpButton
 
+                                Layout.preferredHeight: parent.height
                                 Layout.preferredWidth: 25
-                                Layout.fillHeight: true
                                 color: (enabled) ? Material.frameColor : Material.backgroundDimColor
                                 radius: 2
                                 visible: armorRoot.armorIsUpgradeable
@@ -331,6 +409,36 @@ Dialog {
                                                 appController.increaseArmorLevel(armorRoot.armorName, true);
                                             }
                                         }
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                id: armorUnlockButton
+
+                                Layout.preferredHeight: parent.height
+                                Layout.preferredWidth: 25
+                                color: (enabled) ? Material.frameColor : Material.backgroundDimColor
+                                radius: 2
+                                // Always enabled, always visible.
+                                visible: true
+                                enabled: true
+
+                                IconImage {
+                                    id: armorUnlockIcon
+
+                                    anchors.centerIn: parent
+                                    width: 10
+                                    height: 10
+                                    source: (armorRoot.armorIsUnlocked) ? "images/lock-solid.svg" : "images/unlock-solid.svg"
+                                    color: Material.primaryTextColor
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        // Toggle armor unlock state.
+                                        appController.toggleArmorUnlock(armorRoot.armorName, true);
                                     }
                                 }
                             }

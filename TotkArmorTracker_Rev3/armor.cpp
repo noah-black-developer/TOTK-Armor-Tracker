@@ -10,7 +10,8 @@ Armor::Armor(
     QString armorSetBonus,
     bool isUnlocked,
     bool isUpgradeable,
-    int armorLevel)
+    int armorLevel,
+    int armorBaseDefense)
 {
     name = armorName;
     setName = armorSetName;
@@ -20,6 +21,7 @@ Armor::Armor(
     isUnlocked = isUnlocked;
     isUpgradeable = isUpgradeable;
     level = armorLevel;
+    baseDefense = armorBaseDefense;
 }
 
 void Armor::addUpgradeTierByLevel(QString level, Upgrade *upgradeDetails)

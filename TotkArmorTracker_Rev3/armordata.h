@@ -26,6 +26,7 @@ public:
         UnlockedRole,
         UpgradeableRole,
         LevelRole,
+        BaseDefenseRole,
         UpgradeReqsRole
     } ArmorRoles;
 

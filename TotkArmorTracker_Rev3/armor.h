@@ -17,7 +17,8 @@ public:
         QString armorSetBonus,
         bool isUnlocked,
         bool isUpgradeable,
-        int armorLevel
+        int armorLevel,
+        int armorBaseDefense
     );
 
     // CLASS VARIABLES.
@@ -30,6 +31,7 @@ public:
     bool isUnlocked = false;
     bool isUpgradeable = false;
     int level = 0;
+    int baseDefense = 0;
 
     // CLASS METHODS.
     void addUpgradeTierByLevel(QString level, Upgrade *upgradeDetails);

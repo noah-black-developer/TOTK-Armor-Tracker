@@ -257,6 +257,21 @@ bool AppController::saveCurrentSave()
     return true;
 }
 
+bool AppController::saveExists(QString saveName)
+{
+    // Locate the saves folder and assemble the potential path for the given save.
+    QDir saveFileDir = QDir("saves");
+    if (!saveFileDir.exists())
+    {
+        // If the saves folder could not be found, return false.
+        return false;
+    }
+    QString saveFilePath = saveFileDir.filePath(saveName);
+
+    // Return result of checking file existance.
+    return fileExists(saveFilePath.toStdString());
+}
+
 bool AppController::saveIsLoaded()
 {
     // If a save file path has been stored, save is loaded.
@@ -308,6 +323,14 @@ bool AppController::loadAppConfig(QString filePath)
         // If the current node is already listed in the recent save list, mark it to be removed and continue.
         if (recentSaveNames.contains(currentNode->value()))
         {
+            nodesToRemove.append(currentNode);
+            continue;
+        }
+
+        // Check if the save file still exists in the local save folder. If not, mark it to be removed and continue.
+        QDir saveFileDir = QDir("saves");
+        QString saveFilePath = saveFileDir.filePath(currentNode->value());
+        if (!fileExists(saveFilePath.toStdString())) {
             nodesToRemove.append(currentNode);
             continue;
         }
