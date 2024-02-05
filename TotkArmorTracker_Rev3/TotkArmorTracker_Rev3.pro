@@ -41,15 +41,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-# Create any required folders.
-QMAKE_EXTRA_TARGETS += saves
-saves.target = $$OUT_PWD/saves
-saves.commands = $(MKDIR) $$OUT_PWD/saves
-
-# Copy config file to build dir.
+# Copy required config files to build dir.
 CONFIG += file_copies
 COPIES += config
-config.files = appData.xml
+config.files = data/appData.xml data/armorData.xml
 config.path = $$OUT_PWD
 
 DISTFILES += \

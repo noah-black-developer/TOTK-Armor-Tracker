@@ -138,6 +138,15 @@ ApplicationWindow {
         }
     }
 
+    MessageDialog {
+        id: quitAppDialog
+
+        title: "Quit Application"
+        text: "Are you sure you would like to quit? All unsaved changes will be lost."
+        buttons: MessageDialog.Yes | MessageDialog.No
+        onAccepted: Qt.quit()
+    }
+
 
     // MENU OPTIONS.
     menuBar: MenuBar {
@@ -206,7 +215,7 @@ ApplicationWindow {
             MenuSeparator { }
             Action {
                 text: "Quit"
-                onTriggered: Qt.quit()
+                onTriggered: quitAppDialog.open()
             }
         }
     }
@@ -793,7 +802,6 @@ ApplicationWindow {
                                 horizontalAlignment: Qt.AlignLeft
                                 verticalAlignment: Qt.AlignVCenter
                                 font.pointSize: 9
-                                font.bold: true
                                 color: Material.primaryTextColor
                             }
 

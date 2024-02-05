@@ -9,11 +9,7 @@ AppController::AppController(QObject *parent) : QObject{parent}
     _newSaveArmorData = newSaveArmorDataSort;
 
     // Attempt to load in local app configs.
-    loadAppConfig("appData.xml");
-
-    // TEMP: Load in armor data.
-    _armorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));
-    _newSaveArmorData->model()->loadArmorDataFromFile(QString("/home/noah/Documents/GitHub/TOTK-Armor-Tracker/TotkArmorTracker_Rev3/data/armorData.xml"));    
+    loadAppConfig("appData.xml");  
 }
 
 AppController::~AppController()

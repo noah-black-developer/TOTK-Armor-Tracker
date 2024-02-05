@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -26,8 +27,22 @@ int main(int argc, char *argv[])
     QDir savesDir = QDir(".");
     bool savesFolderFound = savesDir.cd("saves");
     if (!savesFolderFound) {
-        qDebug() << "Saves folder could not be located.";
-        return -1;
+        // If the saves file does not yet exists, create it before continuing.
+        qDebug() << "Saves folder could not be located. Creating new folder...";
+        std::filesystem::create_directory(savesDir.absoluteFilePath("saves").toStdString());
+
+        // Verify saves folder was successfully created.
+        bool newSavesFolderFound = savesDir.cd("saves");
+        if (!newSavesFolderFound)
+        {
+            // If, for any reason, the saves folder could not be created, log errors and quit.
+            qDebug() << "Failed to create saves folder.";
+            return 1;
+        }
+        else
+        {
+            qDebug() << "Saves folder initialized.";
+        }
     }
     engine.rootContext()->setContextProperty("savesFolderPath", savesDir.absolutePath());
 

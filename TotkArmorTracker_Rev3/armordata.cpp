@@ -1,8 +1,33 @@
 #include "armordata.h"
 
+#include "QDirIterator" // TEMP.
+
 ArmorData::ArmorData(QObject *parent) : QAbstractListModel(parent)
 {
     _parent = parent;
+
+    // VERIFY REQUIRED FILES.
+    // Verify that the required armorData file can be found locally.
+    QDir currentDir = QDir::current();
+    QString armorDataPath = currentDir.absoluteFilePath("armorData.xml");
+    bool armorDataFound = fileExists(armorDataPath.toStdString());
+    if (!armorDataFound)
+    {
+        // If armorData is not available, no armor data will be loaded.
+        qDebug() << "ArmorData object could not be initialized, armorData.xml file was not found.";
+        return;
+    }
+
+    // INITIALIZE DATA.
+    // Pass path to armorData.xml required files via fill local path.
+    bool armorDataLoaded = loadArmorDataFromFile(armorDataPath);
+    if (!armorDataLoaded)
+    {
+        // If armor data could not be loaded, log errors and keep object unchanges.
+        qDebug() << "Data could not be loaded from local armorData.xml file.";
+    }
+
+    return;
 }
 
 // PUBLIC METHODS.
