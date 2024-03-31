@@ -49,4 +49,5 @@ config.path = $$OUT_PWD
 
 DISTFILES += \
     AppIcon.qml \
-    NewSaveDialog.qml
+    NewSaveDialog.qml \
+    SettingsDialog.qml

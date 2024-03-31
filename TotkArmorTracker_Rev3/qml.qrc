@@ -4,5 +4,6 @@
         <file>AppIcon.qml</file>
         <file>main.qml</file>
         <file>NewSaveDialog.qml</file>
+        <file>SettingsDialog.qml</file>
     </qresource>
 </RCC>

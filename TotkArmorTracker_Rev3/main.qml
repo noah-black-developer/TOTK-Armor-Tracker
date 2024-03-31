@@ -8,6 +8,9 @@ ApplicationWindow {
 
     readonly property int minimumArmorLevel: 0
     readonly property int maximumArmorLevel: 4
+    // Set default theming and set required variables.
+    property int currentTheme: Material.System
+    Material.theme: currentTheme
 
     width: 800
     height: 800
@@ -96,6 +99,25 @@ ApplicationWindow {
         id: createNewSaveDialog
     }
 
+    SettingsDialog {
+        id: settingsDialog
+
+        // SIGNAL HANDLERS.
+        // When user selected a new theme type, apply changes to Material theme accordingly.
+        onThemeChanged: (themeName)=> {
+            if (themeName === "Light") {
+                currentTheme = Material.Light;
+            }
+            else if (themeName === "Dark") {
+                currentTheme = Material.Dark;
+            }
+            else {
+                // "System" theme match is considered the default, in cases of mismatched theme names.
+                currentTheme = Material.System;
+            }
+        }
+    }
+
     FileDialog {
         id: loadSaveDialog
 
@@ -142,18 +164,21 @@ ApplicationWindow {
         id: quitAppDialog
 
         title: "Quit Application"
-        text: "Are you sure you would like to quit? All unsaved changes will be lost."
+        text: "Are you sure you want to quit?\nAll unsaved changes will be lost."
         buttons: MessageDialog.Yes | MessageDialog.No
         onAccepted: Qt.quit()
     }
-
 
     // MENU OPTIONS.
     menuBar: MenuBar {
         id: menuBar
 
+        // FILE MENU.
+        // Includes menu options relating to creating/opening/closing save files.
         Menu {
+            id: fileMenu
             title: "File"
+
             Action {
                 text: "New"
                 onTriggered: createNewSaveDialog.open()
@@ -216,6 +241,24 @@ ApplicationWindow {
             Action {
                 text: "Quit"
                 onTriggered: quitAppDialog.open()
+            }
+        }
+
+        // HELP MENU.
+        // Includes menu options relating to general app configurations.
+        Menu {
+            title: "Help"
+
+            Action {
+                text: "Settings"
+                onTriggered: settingsDialog.open()
+            }
+            Action {
+                text: "How To"
+            }
+            MenuSeparator { }
+            Action {
+                text: "About"
             }
         }
     }
