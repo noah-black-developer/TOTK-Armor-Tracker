@@ -306,12 +306,14 @@ bool AppController::loadAppConfig(QString filePath)
     rapidxml::file<> file(filePath.toStdString().c_str());
     localConfigDoc.parse<0>(file.data());
 
+    // SEARCH APP CONFIG FOR RECENT SAVES.
     // Pull out all listed Recent Saves from respective locations. If required sections are missing, return a failure.
-    rapidxml::xml_node<> *recentSavesNode = localConfigDoc.first_node("RecentSaves");
-    if (recentSavesNode == 0)
-    {
-        return false;
-    }
+    rapidxml::xml_node<> *rootConfigNode = localConfigDoc.first_node("Data");
+    if (rootConfigNode == 0) { return false; }
+    rapidxml::xml_node<> *recentSavesNode = rootConfigNode->first_node("RecentSaves");
+    if (recentSavesNode == 0) { return false; }
+
+    // Clear any previously stored save names and begin parsing the config file for new save file names.
     recentSaveNames.clear();
     QList<rapidxml::xml_node<>*> nodesToRemove = QList<rapidxml::xml_node<>*> ();
     for (rapidxml::xml_node<> *currentNode = recentSavesNode->first_node("Save"); currentNode != 0; currentNode = currentNode->next_sibling())
@@ -342,6 +344,15 @@ bool AppController::loadAppConfig(QString filePath)
         recentSavesNode->remove_node(nodesToRemove[nodeIndex]);
     }
 
+    // SEARCH APP CONFIG FOR DEFAULT THEMING.
+    // Look for root node for application settings in config. If required sections are missing, return a failure.
+    rapidxml::xml_node<> *appSettingsNode = rootConfigNode->first_node("Application");
+    if (appSettingsNode == 0) { return false; }
+
+    // Parse out required theming info and store interally within the class.
+    rapidxml::xml_node<> *defaultThemeNode = appSettingsNode->first_node("Theme");
+    setAppTheme(QString::fromStdString(defaultThemeNode->value()), false);
+
     // Save off any changes that were made to list saves, such as removing duplicates.
     std::ofstream configFileOut;
     configFileOut.open(filePath.toStdString());
@@ -369,7 +380,8 @@ bool AppController::addLocalSaveToAppConfig(QString saveName)
 
     // Allocate and add a new node for the provided save file.
     char *saveNameChar = localConfigDoc.allocate_string(saveName.toStdString().c_str());
-    rapidxml::xml_node<> *recentSavesNode = localConfigDoc.first_node("RecentSaves");
+    rapidxml::xml_node<> *rootConfigNode = localConfigDoc.first_node("Data");
+    rapidxml::xml_node<> *recentSavesNode = rootConfigNode->first_node("RecentSaves");
     rapidxml::xml_node<> *newSaveFileNode = localConfigDoc.allocate_node(rapidxml::node_element, "Save", saveNameChar);
     // Node is added as top element to show it as most recently accessed file.
     recentSavesNode->prepend_node(newSaveFileNode);
@@ -400,7 +412,8 @@ bool AppController::removeLocalSaveFromAppConfig(QString saveName)
     localConfigDoc.parse<0>(file.data());
 
     // Look through the listed recent saves for a matching listing.
-    rapidxml::xml_node<> *recentSavesRoot = localConfigDoc.first_node("RecentSaves");
+    rapidxml::xml_node<> *rootConfigNode = localConfigDoc.first_node("Data");
+    rapidxml::xml_node<> *recentSavesRoot = rootConfigNode->first_node("RecentSaves");
     for (rapidxml::xml_node<> *currentNode = recentSavesRoot->first_node("Save"); currentNode != 0; currentNode = currentNode->next_sibling())
     {
         // If a match is found, remove it from the parent document and save out changes.
@@ -440,7 +453,8 @@ bool AppController::setMostRecentlyAccessedSave(QString saveName)
     localConfigDoc.parse<0>(file.data());
 
     // Iterate over recent save list until a matching node is found.
-    rapidxml::xml_node<> *recentSavesNode = localConfigDoc.first_node("RecentSaves");
+    rapidxml::xml_node<> *rootConfigNode = localConfigDoc.first_node("Data");
+    rapidxml::xml_node<> *recentSavesNode = rootConfigNode->first_node("RecentSaves");
     rapidxml::xml_node<> *matchingNode = 0;
     for (rapidxml::xml_node<> *currentNode = recentSavesNode->first_node("Save"); currentNode != 0; currentNode = currentNode->next_sibling())
     {
@@ -471,6 +485,53 @@ bool AppController::setMostRecentlyAccessedSave(QString saveName)
     configFileOut.close();
 
     // Re-load the app configs as needed to refresh save lists.
+    loadAppConfig(_loadedAppConfigPath);
+    return true;
+}
+
+bool AppController::setAppConfigField(QString fieldName, QString newValue)
+{
+    // If no app config is laoded, return a failure.
+    if (_loadedAppConfigPath == "")
+    {
+        return false;
+    }
+
+    // LOCATE REQUIRED FIELDS.
+    // Parse in the config file as a rapidxml-style object.
+    rapidxml::xml_document<> localConfigDoc = rapidxml::xml_document<>();
+    rapidxml::file<> file(_loadedAppConfigPath.toStdString().c_str());
+    localConfigDoc.parse<0>(file.data());
+
+    // Navigate to the "Application" tag level.
+    rapidxml::xml_node<> *rootConfigNode = localConfigDoc.first_node("Data");
+    rapidxml::xml_node<> *applicationNode = rootConfigNode->first_node("Application");
+
+    // Check if a matching node can be found at the app level. If not, return a failure.
+    if (!applicationNode->first_node(fieldName.toStdString().c_str()))
+    {
+        qDebug() << "No matching config field found for name: " + fieldName;
+        return false;
+    }
+
+    // MODIFY CONFIG.
+    // Remove the original node under the matching name.
+    rapidxml::xml_node<> *oldNode = applicationNode->first_node(fieldName.toStdString().c_str());
+    applicationNode->remove_node(oldNode);
+
+    // Re-create the config field and apply to the config with new values.
+    char *fieldNameAlloc = localConfigDoc.allocate_string(fieldName.toStdString().c_str());
+    char *newValueAlloc = localConfigDoc.allocate_string(newValue.toStdString().c_str());
+    rapidxml::xml_node<> *newNode = localConfigDoc.allocate_node(rapidxml::node_element, fieldNameAlloc, newValueAlloc);
+    applicationNode->append_node(newNode);
+
+    // Save out the modified file at original location.
+    std::ofstream configFileOut;
+    configFileOut.open(_loadedAppConfigPath.toStdString());
+    configFileOut << localConfigDoc;
+    configFileOut.close();
+
+    // If all steps were successful up to this point, refresh the application config and return a success.
     loadAppConfig(_loadedAppConfigPath);
     return true;
 }
@@ -642,4 +703,18 @@ bool AppController::toggleArmorUnlock(QString armorName, bool useNewSaveData)
         emit unsavedChangesStateChanged();
     }
     return true;
+}
+
+bool AppController::setAppTheme(QString themeName, bool setDefaults)
+{
+    // Modify internal variables for new value.
+    theme = themeName;
+    emit themeChanged(themeName);
+
+    // If flags are set, push changes to app configs. Otherwise, return a fixed success.
+    if (setDefaults) {
+        return setAppConfigField("Theme", themeName);
+    } else {
+        return true;
+    }
 }

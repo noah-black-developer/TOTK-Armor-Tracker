@@ -20,6 +20,7 @@ class AppController : public QObject
     Q_PROPERTY(QList<QString> recentSaveNames MEMBER recentSaveNames NOTIFY recentSaveNamesChanged)
     Q_PROPERTY(bool sortIsAsc MEMBER sortIsAsc NOTIFY sortDirectionChanged)
     Q_PROPERTY(bool unsavedChanges MEMBER unsavedChanges NOTIFY unsavedChangesStateChanged)
+    Q_PROPERTY(QString theme MEMBER theme NOTIFY themeChanged)
 
 public:
     explicit AppController(QObject *parent = nullptr);
@@ -46,6 +47,7 @@ public:
     bool addLocalSaveToAppConfig(QString saveName);
     bool removeLocalSaveFromAppConfig(QString saveName);
     bool setMostRecentlyAccessedSave(QString saveName);
+    bool setAppConfigField(QString fieldName, QString newValue);
 
     // SORT METHODS.
     // Main armor list.
@@ -66,11 +68,17 @@ public:
     Q_INVOKABLE bool decreaseArmorLevel(QString armorName, bool useNewSaveData = false);
     Q_INVOKABLE bool toggleArmorUnlock(QString armorName, bool useNewSaveData = false);
 
+    // APPLICATION SETTINGS METHODS.
+    // Designed to be called from the Qt level, handle inputs and config files.
+    Q_INVOKABLE bool setAppTheme(QString themeName, bool setDefaults = false);
+
     // Q_PROPERTY OBJECTS.
     QString saveName = "";
     QList<QString> recentSaveNames = QList<QString>();
     bool sortIsAsc = true;
     bool unsavedChanges = false;
+    // In cases where appconfig cannot be parsed for theming info, default theme details are set here.
+    QString theme = "System";
 
 private:
     QString _loadedSavePath = "";
@@ -84,6 +92,7 @@ signals:
     void recentSaveNamesChanged();
     void sortDirectionChanged();
     void unsavedChangesStateChanged();
+    void themeChanged(QString themeName);
 };
 
 #endif // APPCONTROLLER_H

@@ -8,9 +8,19 @@ ApplicationWindow {
 
     readonly property int minimumArmorLevel: 0
     readonly property int maximumArmorLevel: 4
-    // Set default theming and set required variables.
-    property int currentTheme: Material.System
-    Material.theme: currentTheme
+    // Set default theming based on controller class variables.
+    Material.theme: {
+        if (appController.theme === "Light") {
+            Material.Light;
+        }
+        else if (appController.theme === "Dark") {
+            Material.Dark;
+        }
+        else {
+            // "System" theme match is considered the default, in cases of mismatched theme names.
+            Material.System;
+        }
+    }
 
     width: 800
     height: 800
@@ -102,19 +112,22 @@ ApplicationWindow {
     SettingsDialog {
         id: settingsDialog
 
+        property bool initialized: false
+
+        // Set default selections when menu is first created.
+        Component.onCompleted: {
+            setDefaultTheme(appController.theme);
+        }
+
         // SIGNAL HANDLERS.
-        // When user selected a new theme type, apply changes to Material theme accordingly.
+        // When user selected a new theme type, apply changes to controller accordingly.
         onThemeChanged: (themeName)=> {
-            if (themeName === "Light") {
-                currentTheme = Material.Light;
+            // First call to this method occurs on UI initialization.
+            if (initialized) {
+                // Flags to additionally set the default theme are raised.
+                appController.setAppTheme(themeName, true);
             }
-            else if (themeName === "Dark") {
-                currentTheme = Material.Dark;
-            }
-            else {
-                // "System" theme match is considered the default, in cases of mismatched theme names.
-                currentTheme = Material.System;
-            }
+            initialized = true;
         }
     }
 

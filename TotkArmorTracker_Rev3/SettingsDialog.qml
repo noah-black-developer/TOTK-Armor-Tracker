@@ -14,6 +14,20 @@ Dialog {
     title: "App Settings"
     standardButtons: Dialog.Close
 
+    // Methods to set default values for various fields.
+    function setDefaultTheme(themeName) {
+        if (themeName === "Light") {
+            lightThemeButton.checked = true;
+        }
+        else if (themeName === "Dark") {
+            darkThemeButton.checked = true;
+        }
+        else {
+            // For any non-valid themes, set System as default.
+            systemThemeButton.checked = true;
+        }
+    }
+
     // MAIN SETTINGS.
     ColumnLayout {
         id: mainColumn
