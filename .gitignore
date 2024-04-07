@@ -33,10 +33,4 @@
 
 # Qt Creator Builds
 build-*
-TotkArmorTracker_Rev2/AppController.cpp
-TotkArmorTracker_Rev2/data/userData.xml
-TotkArmorTracker_Rev2/main.cpp
-TotkArmorTracker_Rev2/qml.qrc
-TotkArmorTracker_Rev2/TotkArmorTracker.pro.user
-TotkArmorTracker_Rev2/TotkArmorTracker.pro.user.9d20366
 .vscode/settings.json
