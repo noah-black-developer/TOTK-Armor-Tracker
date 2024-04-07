@@ -137,6 +137,9 @@ ApplicationWindow {
         title: "Load Save File"
         // The save folder needs to be given the "file" schema to allow the path to be read in as url.
         currentFolder: "file://" + savesFolderPath
+        // Limit file selection to only matching file extensions.
+        nameFilters: ["Save Files (*.save)"]
+
         onAccepted: appController.loadSave(selectedFile)
     }
 

@@ -21,6 +21,7 @@ class AppController : public QObject
     Q_PROPERTY(bool sortIsAsc MEMBER sortIsAsc NOTIFY sortDirectionChanged)
     Q_PROPERTY(bool unsavedChanges MEMBER unsavedChanges NOTIFY unsavedChangesStateChanged)
     Q_PROPERTY(QString theme MEMBER theme NOTIFY themeChanged)
+    Q_PROPERTY(QString saveFileExtension MEMBER saveFileExtension CONSTANT)
 
 public:
     explicit AppController(QObject *parent = nullptr);
@@ -79,6 +80,7 @@ public:
     bool unsavedChanges = false;
     // In cases where appconfig cannot be parsed for theming info, default theme details are set here.
     QString theme = "System";
+    QString saveFileExtension = ".save";
 
 private:
     QString _loadedSavePath = "";

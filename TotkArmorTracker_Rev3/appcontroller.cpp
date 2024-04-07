@@ -53,7 +53,7 @@ bool AppController::createNewSave(QString name)
     {
         return false;
     }
-    QString outputPath = savesFolder.absoluteFilePath(name + ".xml");
+    QString outputPath = savesFolder.absoluteFilePath(name + saveFileExtension);
 
     // CREATE DOCUMENT TREE.
     // Create a new document tree for the save file. Initialize any expected tree levels.
@@ -110,6 +110,13 @@ bool AppController::loadSave(QUrl filePath)
     // If the given save file doesn't exist, return a failure.
     if (!fileExists(filePath.toLocalFile().toStdString()))
     {
+        return false;
+    }
+
+    // Verify that the selected file includes the expected file extension.
+    // All save files are stored in .xml formatting, but with varying extension changes.
+    bool fileExtMatches = (filePath.toString().contains(QRegularExpression(saveFileExtension)));
+    if (!fileExtMatches) {
         return false;
     }
 
