@@ -34,3 +34,5 @@
 # Qt Creator Builds
 build-*
 .vscode/settings.json
+bin
+totkArmorTracker.zip
