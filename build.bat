@@ -18,7 +18,7 @@ mingw32-make -j
 
 REM Run windeployqt to give the generated exe all required dll's.
 copy *.xml release
-windeployqt ./release/TotkArmorTracker.exe --qmldir ../project
+windeployqt ./release/TotkArmorTracker.exe --qmldir ../project --release
 
 REM (OPTIONAL) Compress the final project using 7zip and move to the parent directory.
 if "%compress%"=="true" (
