@@ -16,4 +16,4 @@ jobs:
         target: 'desktop'
         arch: 'gcc_64'
     - name: Run build
-      run: ./build.sh --compress
+      run: bash ./build.sh --compress
