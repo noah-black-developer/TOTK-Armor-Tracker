@@ -16,9 +16,9 @@ qmake ../project/TotkArmorTracker.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 mingw32-make -f Makefile qmake_all
 mingw32-make -j
 
-REM Run windeployqt to give the generated exe all required dll's.
+REM Copy required Qt .dll files and other build-specific files
 copy *.xml release
-windeployqt ./release/TotkArmorTracker.exe --qmldir ../project --release
+windeployqt6 ./release/TotkArmorTracker.exe --qmldir ../project
 
 REM (OPTIONAL) Compress the final project using 7zip and move to the parent directory.
 if "%compress%"=="true" (

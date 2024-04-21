@@ -1,8 +1,6 @@
 #ifndef APPCONTROLLER_H
 #define APPCONTROLLER_H
 
-#include <fstream>
-#include <iostream>
 #include <QDebug>
 #include <QDir>
 #include <QObject>
