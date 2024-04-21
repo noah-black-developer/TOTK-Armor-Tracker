@@ -11,10 +11,10 @@ cd bin
 
 REM Clean and run qmake/make build steps.
 echo Building new exe...
-mingw32-make clean
+mingw32-make clean -j
 qmake ../project/TotkArmorTracker.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 mingw32-make -f Makefile qmake_all
-mingw32-make
+mingw32-make -j
 
 REM Run windeployqt to give the generated exe all required dll's.
 copy *.xml release
@@ -22,8 +22,8 @@ windeployqt ./release/TotkArmorTracker.exe --qmldir ../project
 
 REM (OPTIONAL) Compress the final project using 7zip and move to the parent directory.
 if "%compress%"=="true" (
-    "C:\Program Files\7-Zip\7z.exe" a totkArmorTracker.zip .\release\*
-    move /y totkArmorTracker.zip ..
+    "C:\Program Files\7-Zip\7z.exe" a totkArmorTracker_windows.zip .\release\*
+    move /y totkArmorTracker_windows.zip ..
 )
 
 cd ..

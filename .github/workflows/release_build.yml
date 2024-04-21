@@ -3,10 +3,12 @@ name: Release Build
 on: workflow_dispatch
     
 jobs:
-  build:
+  build_linux:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
@@ -16,4 +18,31 @@ jobs:
         target: 'desktop'
         arch: 'gcc_64'
     - name: Run build
-      run: ./build.sh --compress
+      run: bash ./build.sh --compress
+    - name: Archive resulting package
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux
+        path: ./totkArmorTracker_linux.zip
+
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        aqtversion: '==3.1.*'
+        version: '6.5.3'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_mingw'
+    - name: Run build
+      run: ./build.bat --compress
+    - name: Archive resulting package
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows
+        path: ./totkArmorTracker_windows.zip
