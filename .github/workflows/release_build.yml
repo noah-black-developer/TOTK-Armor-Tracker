@@ -17,9 +17,10 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
-    - name: Echo current working dir
-      run: echo $pwd
-    - name: Check current dir for files
-      run: ls
     - name: Run build
       run: bash ./build.sh --compress
+    - name: Archive resulting package
+      uses: actions/upload-artifact@v4
+      with:
+        name: release
+        path: TotkArmorTracker.tar
