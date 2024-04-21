@@ -1,6 +1,10 @@
 name: Release Build
 
-on: workflow_dispatch
+on: 
+  pull_request:
+    branches: 
+      - main
+    types: [closed]
     
 jobs:
   build_linux:
