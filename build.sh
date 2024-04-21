@@ -7,16 +7,16 @@ cd bin
 
 # Clean and run qmake/make build steps.
 echo Building new exe...
-make clean -j4
+make clean -j
 qmake ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
-make -j4
+make -j
 
-# If flags are raised to compress outputs, tar all generated files.
+# If flags are raised to compress outputs, zip all generated files.
 if [ "$1" = "--compress" ]
 then
     echo Compressing outputs...
-    tar -cf totkArmorTracker.tar *.*
-    mv totkArmorTracker.tar ..
+    7z a totkArmorTracker.zip *
+    mv totkArmorTracker.zip ..
 fi
 
 exit 0
