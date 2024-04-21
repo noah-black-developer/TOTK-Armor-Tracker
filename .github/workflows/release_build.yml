@@ -15,5 +15,9 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
+    - name: Echo current working dir
+      run: echo $pwd
+    - name: Check current dir for files
+      run: ls
     - name: Run build
       run: bash ./build.sh --compress
