@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: TotkArmorTracker_Linux
-        path: ./bin/*
+        path: ./bin/**/*
 
   build_windows:
     runs-on: windows-latest
@@ -50,4 +50,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: TotkArmorTracker_Windows
-        path: ./bin/release/*
+        path: ./bin/release/**/*
