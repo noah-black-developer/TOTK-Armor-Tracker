@@ -22,8 +22,8 @@ windeployqt ./release/TotkArmorTracker.exe --qmldir ../project
 
 REM (OPTIONAL) Compress the final project using 7zip and move to the parent directory.
 if "%compress%"=="true" (
-    "C:\Program Files\7-Zip\7z.exe" a totkArmorTracker.zip .\release\*
-    move /y totkArmorTracker.zip ..
+    "C:\Program Files\7-Zip\7z.exe" a totkArmorTracker_windows.zip .\release\*
+    move /y totkArmorTracker_windows.zip ..
 )
 
 cd ..

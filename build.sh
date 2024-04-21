@@ -15,8 +15,8 @@ make -j
 if [ "$1" = "--compress" ]
 then
     echo Compressing outputs...
-    7z a totkArmorTracker.zip *
-    mv totkArmorTracker.zip ..
+    7z a totkArmorTracker_linux.zip *
+    mv totkArmorTracker_linux.zip ..
 fi
 
 exit 0
