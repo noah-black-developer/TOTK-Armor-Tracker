@@ -18,17 +18,17 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         aqtversion: '==3.1.*'
-        version: '6.7.0'
+        version: '6.5.3'
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
     - name: Run build
-      run: bash ./build.sh --compress
-    - name: Archive resulting package
+      run: bash ./build.sh
+    - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
-        name: linux
-        path: ./totkArmorTracker_linux.zip
+        name: TotkArmorTracker_Linux
+        path: ./*
 
   build_windows:
     runs-on: windows-latest
@@ -40,14 +40,14 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         aqtversion: '==3.1.*'
-        version: '6.7.0'
+        version: '6.5.3'
         host: 'windows'
         target: 'desktop'
         arch: 'win64_mingw'
     - name: Run build
-      run: ./build.bat --compress
-    - name: Archive resulting package
+      run: ./build.bat
+    - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
-        name: windows
-        path: ./totkArmorTracker_windows.zip
+        name: TotkArmorTracker_Windows
+        path: ./release/*
