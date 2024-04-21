@@ -4,7 +4,6 @@ on: workflow_dispatch
     
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +15,5 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
-    - name: Test tool paths
-      run: qmake
+    - name: Run build
+      run: ./build.sh --compress

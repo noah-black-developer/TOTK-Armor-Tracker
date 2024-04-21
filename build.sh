@@ -7,9 +7,9 @@ cd bin
 
 # Clean and run qmake/make build steps.
 echo Building new exe...
-"/usr/bin/make" clean -j4
-"/opt/Qt/6.5.2/gcc_64/bin/qmake" ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
-"/usr/bin/make" -j4
+make clean -j4
+qmake ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
+make -j4
 
 # If flags are raised to compress outputs, tar all generated files.
 if [ "$1" = "--compress" ]
