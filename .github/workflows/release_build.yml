@@ -22,7 +22,7 @@ jobs:
     - name: Archive resulting package
       uses: actions/upload-artifact@v4
       with:
-        name: release
+        name: linux
         path: ./totkArmorTracker_linux.zip
 
   build_windows:
@@ -44,5 +44,5 @@ jobs:
     - name: Archive resulting package
       uses: actions/upload-artifact@v4
       with:
-        name: release
+        name: windows
         path: ./totkArmorTracker_windows.zip
