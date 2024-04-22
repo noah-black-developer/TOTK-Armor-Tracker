@@ -12,13 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Fail if branch is not main
-      if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
-      run: |
-        echo "This workflow should not be triggered with workflow_dispatch on a branch other than main"
-        exit 1
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
@@ -27,25 +23,31 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
-    - name: Run build
-      run: bash ./build.sh --compress
-    - name: Archive resulting package
+
+    - name: Create bin dir
+      run: mkdir bin
+      
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
+      working-directory: ./bin
+
+    - name: Build project
+      run: make -j
+      working-directory: ./bin
+
+    - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
-        name: linux
-        path: ./totkArmorTracker_linux.zip
+        name: TotkArmorTracker_Linux
+        path: ./bin/**/*
 
   build_windows:
     runs-on: windows-latest
 
     steps:
-    - name: Fail if branch is not main
-      if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
-      run: |
-        echo "This workflow should not be triggered with workflow_dispatch on a branch other than main"
-        exit 1
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
@@ -53,11 +55,37 @@ jobs:
         version: '6.5.3'
         host: 'windows'
         target: 'desktop'
-        arch: 'win64_mingw'
-    - name: Run build
-      run: ./build.bat --compress
-    - name: Archive resulting package
+        arch: 'win64_msvc2019_64'
+        tools: 'tools_qtcreator,qt.tools.qtcreator'
+
+    - name: Set up MSVC paths
+      uses: TheMrMilchmann/setup-msvc-dev@v3
+      with:
+        arch: x64
+
+    - name: Create bin dir
+      run: mkdir bin
+
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
+      working-directory: ./bin
+
+    - name: Prepare make file
+      run: ${{env.IQTA_TOOLS}}\QtCreator\bin\jom\jom.exe -f Makefile qmake_all
+      working-directory: ./bin
+
+    - name: Build project
+      run: ${{env.IQTA_TOOLS}}\QtCreator\bin\jom\jom.exe
+      working-directory: ./bin
+
+    - name: Bundle required dlls and added files
+      run: |
+        copy ../*.xml .
+        windeployqt ./TotkArmorTracker.exe --qmldir ../../project
+      working-directory: ./bin/release
+
+    - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
-        name: windows
-        path: ./totkArmorTracker_windows.zip
+        name: TotkArmorTracker_Windows
+        path: ./bin/release/**/*
