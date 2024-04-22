@@ -57,6 +57,11 @@ jobs:
         target: 'desktop'
         arch: 'win64_msvc2019_64'
 
+    - name: Set up MSVC paths
+      uses: TheMrMilchmann/setup-msvc-dev@v3
+      with:
+        arch: x64
+
     - name: Create bin dir
       run: mkdir bin
 
