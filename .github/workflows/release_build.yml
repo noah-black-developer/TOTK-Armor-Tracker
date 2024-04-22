@@ -42,7 +42,7 @@ jobs:
         path: ./bin/**/*
 
   build_windows:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
     - name: Checkout
@@ -72,10 +72,14 @@ jobs:
       run: mingw32-make -j
       working-directory: ./bin
 
-    - name: Bundle required dlls and added files
-      run: |
-        copy ../*.xml .
-        windeployqt ./TotkArmorTracker.exe --qmldir ../../project
+    # - name: Bundle required dlls and added files
+    #   run: |
+    #     copy ../*.xml .
+    #     windeployqt ./TotkArmorTracker.exe --qmldir ../../project
+    #   working-directory: ./bin/release
+
+    - name: TEST - Copy all dlls from mingw install
+      run: copy "%Qt6_DIR%/bin/*.dll" .
       working-directory: ./bin/release
 
     - name: Archive resulting executable
