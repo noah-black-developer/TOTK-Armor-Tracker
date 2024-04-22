@@ -56,6 +56,7 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win64_msvc2019_64'
+        tools: 'tools_qtcreator,qt.tools.qtcreator'
 
     - name: Set up MSVC paths
       uses: TheMrMilchmann/setup-msvc-dev@v3
