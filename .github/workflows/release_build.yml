@@ -71,11 +71,11 @@ jobs:
       working-directory: ./bin
 
     - name: Prepare make file
-      run: jom -f Makefile qmake_all
+      run: ../../Qt/Tools/QtCreator/bin/jom.exe -f Makefile qmake_all
       working-directory: ./bin
 
     - name: Build project
-      run: jom
+      run: ../../Qt/Tools/QtCreator/bin/jom.exe
       working-directory: ./bin
 
     - name: Bundle required dlls and added files
