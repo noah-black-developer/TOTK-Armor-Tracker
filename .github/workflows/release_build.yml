@@ -79,7 +79,7 @@ jobs:
     #   working-directory: ./bin/release
 
     - name: TEST - Copy all dlls from mingw install
-      run: copy "$Qt6_DIR/bin/*.dll" .
+      run: copy D:/a/TOTK-Armor-Tracker/Qt/6.5.3/mingw_64/bin/*.dll .
       working-directory: ./bin/release
 
     - name: Archive resulting executable
