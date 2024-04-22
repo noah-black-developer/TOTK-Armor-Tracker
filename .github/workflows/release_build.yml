@@ -79,7 +79,7 @@ jobs:
     #   working-directory: ./bin/release
 
     - name: TEST - Copy all dlls from mingw install
-      run: copy "%Qt6_DIR%/bin/*.dll" .
+      run: copy "$Qt6_DIR/bin/*.dll" .
       working-directory: ./bin/release
 
     - name: Archive resulting executable
