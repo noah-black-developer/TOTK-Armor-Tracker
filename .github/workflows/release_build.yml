@@ -71,11 +71,11 @@ jobs:
       working-directory: ./bin
 
     - name: Prepare make file
-      run: ../../Qt/Tools/QtCreator/bin/jom.exe -f Makefile qmake_all
+      run: ${{env.IQTA_TOOLS}}/QtCreator/bin/jom/jom.exe -f Makefile qmake_all
       working-directory: ./bin
 
     - name: Build project
-      run: ../../Qt/Tools/QtCreator/bin/jom.exe
+      run: ${{env.IQTA_TOOLS}}/Tools/QtCreator/bin/jom/jom.exe
       working-directory: ./bin
 
     - name: Bundle required dlls and added files
