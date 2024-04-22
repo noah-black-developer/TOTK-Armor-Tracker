@@ -72,6 +72,12 @@ jobs:
       run: mingw32-make -j
       working-directory: ./bin
 
+    - name: Bundle required dlls and added files
+      run: |
+        copy ../*.xml .
+        windeployqt ./TotkArmorTracker.exe --qmldir ../../project
+      working-directory: ./bin/release
+
     - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
