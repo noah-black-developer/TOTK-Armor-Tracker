@@ -55,31 +55,27 @@ jobs:
         version: '6.5.3'
         host: 'windows'
         target: 'desktop'
-        arch: 'win64_mingw'
+        arch: 'win64_msvc2019_64'
 
     - name: Create bin dir
       run: mkdir bin
 
     - name: Run qmake
-      run: qmake ../project/TotkArmorTracker.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+      run: qmake ../project/TotkArmorTracker.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
       working-directory: ./bin
 
     - name: Prepare make file
-      run: mingw32-make -f Makefile qmake_all
+      run: jom -f Makefile qmake_all
       working-directory: ./bin
 
     - name: Build project
-      run: mingw32-make -j
+      run: jom
       working-directory: ./bin
 
-    # - name: Bundle required dlls and added files
-    #   run: |
-    #     copy ../*.xml .
-    #     windeployqt ./TotkArmorTracker.exe --qmldir ../../project
-    #   working-directory: ./bin/release
-
-    - name: TEST - Copy all dlls from mingw install
-      run: copy D:/a/TOTK-Armor-Tracker/Qt/6.5.3/mingw_64/bin/*.dll .
+    - name: Bundle required dlls and added files
+      run: |
+        copy ../*.xml .
+        windeployqt ./TotkArmorTracker.exe --qmldir ../../project
       working-directory: ./bin/release
 
     - name: Archive resulting executable
