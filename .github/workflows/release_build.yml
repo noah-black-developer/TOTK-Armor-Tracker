@@ -14,6 +14,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
@@ -22,8 +23,18 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
-    - name: Run build
-      run: bash ./build.sh
+
+    - name: Create bin dir
+      run: mkdir bin
+      
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
+      working-directory: ./bin
+
+    - name: Build project
+      run: make -j
+      working-directory: ./bin
+
     - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
@@ -36,6 +47,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
@@ -44,8 +56,22 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win64_mingw'
-    - name: Run build
-      run: ./build.bat
+
+    - name: Create bin dir
+      run: mkdir bin
+
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+      working-directory: ./bin
+
+    - name: Prepare make file
+      run: mingw32-make -f Makefile qmake_all
+      working-directory: ./bin
+
+    - name: Build project
+      run: mingw32-make -j
+      working-directory: ./bin
+
     - name: Archive resulting executable
       uses: actions/upload-artifact@v4
       with:
