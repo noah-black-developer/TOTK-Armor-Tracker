@@ -111,6 +111,16 @@ jobs:
     needs: ["build_linux", "build_windows"]
 
     steps:
+      - name: Download artifacts from Windows builds
+        uses: actions/download-artifact@v4
+        with:
+          name: TotkArmorTracker_Windows
+        
+      - name: Download artifacts from Linux builds
+        uses: actions/download-artifact@v4
+        with:
+          name: TotkArmorTracker_Linux
+
       - name: Create new release
         id: create_release
         uses: actions/create-release@v1
