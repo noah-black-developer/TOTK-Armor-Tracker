@@ -43,13 +43,16 @@ jobs:
       run: make -j
       working-directory: ./bin
 
+    - name: Zip release package
+      run: 7z a TotkArmorTracker_Linux.zip ./bin/release/**/*
+
     # Build is only archived when creating a new release version (release/** or main).
     - name: Archive resulting executable
       if: startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
       uses: actions/upload-artifact@v4
       with:
         name: TotkArmorTracker_Linux
-        path: ./bin/**/*
+        path: TotkArmorTracker_Linux.zip
 
   # Build steps for Windows executables. Compiles and packages the app as an archived .zip file.
   build_windows:
@@ -95,13 +98,16 @@ jobs:
         windeployqt ./TotkArmorTracker.exe --qmldir ../../project
       working-directory: ./bin/release
 
+    - name: Zip release package
+      run: 7z a TotkArmorTracker_Windows.zip ./bin/release/**/*
+
     # Build is only archived when creating a new release version (release/** or main).
     - name: Archive resulting executable
       if: startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
       uses: actions/upload-artifact@v4
       with:
         name: TotkArmorTracker_Windows
-        path: ./bin/release/**/*
+        path: TotkArmorTracker_Windows.zip
 
   # Steps to create a new Github release. Only runs on specific branches,
   # and only when both windows/linux workflow stages are successfully completed.
@@ -120,9 +126,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: TotkArmorTracker_Linux
-
-      - name: TEST - print dirs
-        run: ls -Ra
 
       - name: Create new release
         id: create_release
