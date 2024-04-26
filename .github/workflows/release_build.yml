@@ -45,7 +45,7 @@ jobs:
 
     # Build is only archived when creating a new release version (release/** or main).
     - name: Archive resulting executable
-      if: github.ref == startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
+      if: startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
       uses: actions/upload-artifact@v4
       with:
         name: TotkArmorTracker_Linux
@@ -97,7 +97,7 @@ jobs:
 
     # Build is only archived when creating a new release version (release/** or main).
     - name: Archive resulting executable
-      if: github.ref == startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
+      if: startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
       uses: actions/upload-artifact@v4
       with:
         name: TotkArmorTracker_Windows
@@ -106,7 +106,7 @@ jobs:
   # Steps to create a new Github release. Only runs on specific branches,
   # and only when both windows/linux workflow stages are successfully completed.
   release:
-    if: github.ref == startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: ["build_linux", "build_windows"]
 
