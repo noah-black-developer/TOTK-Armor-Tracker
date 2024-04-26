@@ -44,7 +44,7 @@ jobs:
       working-directory: ./bin
 
     - name: Zip release package
-      run: 7z a TotkArmorTracker_Linux.zip ./bin/release/**/*
+      run: 7z a TotkArmorTracker_Linux.zip ./bin/**/*
 
     # Build is only archived when creating a new release version (release/** or main).
     - name: Archive resulting executable
