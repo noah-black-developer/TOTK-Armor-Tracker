@@ -1,11 +1,11 @@
 name: Release
 
 on:
-  pull_request:
+  pull_request_target:
     types:
       - closed
     branches:
-      - 'release/**'
+      - 'main'
 
 jobs:
   release:
@@ -20,7 +20,7 @@ jobs:
           branch: ${{ github.event.pull_request.head.repo.name }}
           workflow_search: false
           workflow_conclusion: success
-          name: TotkArmorTracker_Linux.zip
+          name: TotkArmorTracker_Linux
           
       - name: Download artifacts from Windows builds
         uses: dawidd6/action-download-artifact@v3
@@ -30,7 +30,7 @@ jobs:
           branch: ${{ github.event.pull_request.head.repo.name }}
           workflow_search: false
           workflow_conclusion: success
-          name: TotkArmorTracker_Windows.zip
+          name: TotkArmorTracker_Windows
 
       - name: Create new release
         id: create_release
