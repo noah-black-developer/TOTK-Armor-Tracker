@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'release/**'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts from Linux builds
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          workflow_search: false
+          workflow_conclusion: success
+          name: TotkArmorTracker_Linux.zip
+          
+      - name: Download artifacts from Windows builds
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          workflow_search: false
+          workflow_conclusion: success
+          name: TotkArmorTracker_Windows.zip
+
+      - name: Create new release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.pull_request.head.repo}}
+          release_name: Release ${{ github.event.pull_request.head.repo }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows Bundle
+        id: upload-windows-release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_Windows.zip
+          asset_name: TotkArmorTracker_Windows.zip
+          asset_content_type: application/zip
+
+      - name: Upload Linux Bundle
+        id: upload-linux-release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_Linux.zip
+          asset_name: TotkArmorTracker_Linux.zip
+          asset_content_type: application/zip

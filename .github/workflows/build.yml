@@ -1,0 +1,100 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: opened
+    branches:
+      - 'release/**'
+      - 'main'
+    
+jobs:
+  # Build steps for Linux executables. Compiles and packages the app as an archived .zip file.
+  build_linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        aqtversion: '==3.1.*'
+        version: '6.5.3'
+        host: 'linux'
+        target: 'desktop'
+        arch: 'gcc_64'
+
+    - name: Create bin dir
+      run: mkdir bin
+      
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
+      working-directory: ./bin
+
+    - name: Build project
+      run: make -j
+      working-directory: ./bin
+
+    - name: Zip release package
+      run: 7z a TotkArmorTracker_Linux.zip ./bin/* ./bin/**/*
+
+    - name: Archive resulting executableS
+      uses: actions/upload-artifact@v4
+      with:
+        name: TotkArmorTracker_Linux
+        path: TotkArmorTracker_Linux.zip
+
+  # Build steps for Windows executables. Compiles and packages the app as an archived .zip file.
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        aqtversion: '==3.1.*'
+        version: '6.5.3'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        tools: 'tools_qtcreator,qt.tools.qtcreator'
+
+    - name: Set up MSVC paths
+      uses: TheMrMilchmann/setup-msvc-dev@v3
+      with:
+        arch: x64
+
+    - name: Create bin dir
+      run: mkdir bin
+
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
+      working-directory: ./bin
+
+    - name: Prepare make file
+      run: ${{ env.IQTA_TOOLS }}\QtCreator\bin\jom\jom.exe -f Makefile qmake_all
+      working-directory: ./bin
+
+    - name: Build project
+      run: ${{ env.IQTA_TOOLS }}\QtCreator\bin\jom\jom.exe
+      working-directory: ./bin
+
+    - name: Bundle required dlls and added files
+      run: |
+        copy ../*.xml .
+        windeployqt ./TotkArmorTracker.exe --qmldir ../../project
+      working-directory: ./bin/release
+
+    - name: Zip release package
+      run: 7z a TotkArmorTracker_Windows.zip ./bin/release/* ./bin/release/**/*
+
+    - name: Archive resulting executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: TotkArmorTracker_Windows
+        path: TotkArmorTracker_Windows.zip
