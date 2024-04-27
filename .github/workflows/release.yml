@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'release/**'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts from Windows builds
+        uses: actions/download-artifact@v4
+        with:
+          name: TotkArmorTracker_Windows
+        
+      - name: Download artifacts from Linux builds
+        uses: actions/download-artifact@v4
+        with:
+          name: TotkArmorTracker_Linux
+
+      - name: Create new release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.pull_request.head.repo}}
+          release_name: Release ${{ github.event.pull_request.head.repo }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows Release
+        id: upload-windows-release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_Windows.zip
+          asset_name: TotkArmorTracker_Windows.zip
+          asset_content_type: application/zip
+
+      - name: Upload Linux Release
+        id: upload-linux-release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_Linux.zip
+          asset_name: TotkArmorTracker_Linux.zip
+          asset_content_type: application/zip
