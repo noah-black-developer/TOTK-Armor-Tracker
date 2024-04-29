@@ -317,9 +317,6 @@ ApplicationWindow {
                 text: "Settings"
                 onTriggered: settingsDialog.open()
             }
-            Action {
-                text: "How To"
-            }
             MenuSeparator { }
             Action {
                 text: "About"
