@@ -12,9 +12,9 @@ if "%qtdir%"=="" (
     echo Building with PATH qt installation.
 ) else (
     echo Building with custom qt installation.
-    echo         jom path: %qtdir%/TODO
-    echo       qmake path: %qtdir%/TODO
-    echo windeployqt path: %qtdir%/TODO
+    echo         jom path: %qtdir%\Tools\QtCreator\bin\jom\jom.exe
+    echo       qmake path: %qtdir%\6.5.3\msvc2019_64\bin\qmake.exe
+    echo windeployqt path: %qtdir%\6.5.3\msvc2019_64\bin\windeployqt.exe
 )
 
 set "compress=false"
@@ -36,15 +36,19 @@ if "%qtdir%"=="" (
     jom
 ) else (
     call vcvarsall.bat x64
-    jom clean
-    qmake ../project/TotkArmorTracker.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-    jom -f Makefile qmake_all
-    jom
+    "%qtdir%\Tools\QtCreator\bin\jom\jom.exe" clean
+    "%qtdir%\6.5.3\msvc2019_64\bin\qmake.exe" ../project/TotkArmorTracker.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
+    "%qtdir%\Tools\QtCreator\bin\jom\jom.exe" -f Makefile qmake_all
+    "%qtdir%\Tools\QtCreator\bin\jom\jom.exe"
 )
 
 REM Copy required Qt .dll files and other build-specific files
 copy *.xml release
-windeployqt ./release/TotkArmorTracker.exe --qmldir ../project
+if "%qtdir%"=="" (
+    windeployqt ./release/TotkArmorTracker.exe --qmldir ../project
+) else (
+    "%qtdir%\6.5.3\msvc2019_64\bin\windeployqt.exe" ./release/TotkArmorTracker.exe --qmldir ../project
+)
 
 REM (OPTIONAL) Compress the final project using 7zip and move to the parent directory.
 if "%compress%"=="true" (
