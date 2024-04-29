@@ -185,6 +185,54 @@ ApplicationWindow {
         onAccepted: Qt.quit()
     }
 
+    Dialog {
+        id: aboutDialog
+
+        width: 400
+        height: 300
+        anchors.centerIn: parent
+        title: "About"
+        standardButtons: Dialog.Close
+
+        ColumnLayout {
+            id: aboutCentralColumn
+
+            anchors.fill: parent
+
+            // Text fields.
+            Text {
+                id: appNameText
+
+                Layout.fillWidth: true
+                text: appController.appName
+                color: Material.primaryTextColor
+                font.bold: true
+                font.pointSize: 10
+            }
+            Text {
+                id: appVersionText
+
+                Layout.fillWidth: true
+                text: appController.appVersion
+                color: Material.primaryTextColor
+                font.italic: true
+            }
+            Text {
+                id: appDescText
+
+                Layout.fillWidth: true
+                text: appController.appDesc
+                color: Material.primaryTextColor
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            }
+
+            // Spacer.
+            Item {
+                Layout.fillHeight: true
+            }
+        }
+    }
+
     // MENU OPTIONS.
     menuBar: MenuBar {
         id: menuBar
@@ -275,6 +323,7 @@ ApplicationWindow {
             MenuSeparator { }
             Action {
                 text: "About"
+                onTriggered: aboutDialog.open()
             }
         }
     }

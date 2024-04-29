@@ -21,6 +21,10 @@ class AppController : public QObject
     Q_PROPERTY(QString theme MEMBER theme NOTIFY themeChanged)
     Q_PROPERTY(QString saveFileExtension MEMBER saveFileExtension CONSTANT)
 
+    Q_PROPERTY(QString appName MEMBER appName CONSTANT)
+    Q_PROPERTY(QString appVersion MEMBER appVersion CONSTANT)
+    Q_PROPERTY(QString appDesc MEMBER appDesc CONSTANT)
+
 public:
     explicit AppController(QObject *parent = nullptr);
     ~AppController();
@@ -79,6 +83,12 @@ public:
     // In cases where appconfig cannot be parsed for theming info, default theme details are set here.
     QString theme = "System";
     QString saveFileExtension = ".save";
+
+    // Q_PROPERTY APPLICATION DETAILS.
+    QString appName = "TOTK Armor Tracker";
+    QString appVersion = "v1.0.2";
+    QString appDesc = "An application for tracking upgrades \
+and required items for armor sets in The Legend of Zelda: Tears of the Kingdom.";
 
 private:
     QString _loadedSavePath = "";
