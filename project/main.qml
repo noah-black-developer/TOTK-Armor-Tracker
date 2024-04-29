@@ -22,16 +22,12 @@ ApplicationWindow {
         }
     }
 
-    width: 800
+    width: 1200
     height: 800
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
     color: Material.backgroundColor
-
-    // Disable horizontal resizing.
-    minimumWidth: width
-    maximumWidth: width
 
     // KEYBOARD SHORTCUTS.
     // Ctrl + S is used to save the user's current changes.
@@ -379,9 +375,9 @@ ApplicationWindow {
         Item {
             id: gridWrapper
 
-            width: 480
             anchors {
                 left: parent.left
+                right: detailsWrapper.left
                 top: parent.top
                 bottom: armorControlsRow.top
                 margins: 10
@@ -472,13 +468,12 @@ ApplicationWindow {
             Rectangle {
                 id: gridBackground
 
-                width: 500
                 anchors {
                     left: parent.left
                     right: parent.right
                     top: gridHeaderBackground.bottom
                     bottom: parent.bottom
-                    topMargin: 5
+                    topMargin: 10
                 }
                 color: Material.dividerColor
                 radius: 5
@@ -486,7 +481,16 @@ ApplicationWindow {
                 GridView {
                     id: grid
 
-                    width: 450
+                    function calculateWidth() {
+                        // Calculation for the grid width is performed as follows: cellWidth * max # of whole cells
+                        var maxCells = Math.floor(parent.width / (cellWidth));
+                        return cellWidth * maxCells;
+                    }
+
+                    // To keep the grid properly centered, while also expanding to fill the space,
+                    //  the width is calculated manually to scale based on the max # of cells that
+                    //  can be displayed based on current screen width + cell sizing.
+                    width: calculateWidth()
                     anchors {
                         horizontalCenter: parent.horizontalCenter
                         top: parent.top
@@ -644,8 +648,8 @@ ApplicationWindow {
         Item {
             id: detailsWrapper
 
+            width: 320
             anchors {
-                left: gridWrapper.right
                 right: parent.right
                 top: parent.top
                 bottom: armorControlsRow.top
@@ -917,10 +921,10 @@ ApplicationWindow {
                                 id: armorNotUpgradeableText
 
                                 Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                                 visible: (grid.currentItem) ? !grid.currentItem.armorIsUpgradeable : false
                                 text: "Armor is not upgradeable."
-                                horizontalAlignment: Qt.AlignLeft
+                                horizontalAlignment: Qt.AlignHCenter
                                 verticalAlignment: Qt.AlignVCenter
                                 font.pointSize: 9
                                 color: Material.primaryTextColor
