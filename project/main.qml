@@ -112,22 +112,32 @@ ApplicationWindow {
     SettingsDialog {
         id: settingsDialog
 
-        property bool initialized: false
+        property bool themeInit: false
+        property bool autoSaveInit: false
 
         // Set default selections when menu is first created.
         Component.onCompleted: {
             setDefaultTheme(appController.theme);
+            setDefaultAutoSave(appController.autoSaveEnabled);
         }
 
         // SIGNAL HANDLERS.
         // When user selected a new theme type, apply changes to controller accordingly.
         onThemeChanged: (themeName)=> {
             // First call to this method occurs on UI initialization.
-            if (initialized) {
+            if (themeInit) {
                 // Flags to additionally set the default theme are raised.
                 appController.setAppTheme(themeName, true);
             }
-            initialized = true;
+            themeInit = true;
+        }
+        onAutoSaveChanged: (autoSaveOn)=> {
+           // First call to this method occurs on UI initialization.
+           if (autoSaveInit) {
+               // Flags to additionally set the default theme are raised.
+               appController.setAutoSaveSetting(autoSaveOn, true);
+           }
+           autoSaveInit = true;
         }
     }
 
@@ -296,8 +306,8 @@ ApplicationWindow {
                 }
             }
             Action {
-                // Disabled by default. Enabled when user loads save.
-                enabled: appController.saveIsLoaded
+                // Disabled by default. Enabled when user loads save AND when autosaving is disabled.
+                enabled: appController.saveIsLoaded && !appController.autoSaveEnabled
                 text: "Save"
                 onTriggered: appController.saveCurrentSave();
             }
@@ -332,7 +342,13 @@ ApplicationWindow {
             id: userChangesMadeText
 
             padding: 5
-            text: (appController.unsavedChanges) ? "Unsaved changes" : ""
+            text: {
+                if (appController.unsavedChanges) {
+                    "Unsaved changes."
+                } else {
+                    (appController.autoSaveEnabled) ? "Auto-save enabled." : ""
+                }
+            }
             color: Material.secondaryTextColor
         }
 
