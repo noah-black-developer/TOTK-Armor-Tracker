@@ -4,5 +4,6 @@
     </RecentSaves>
     <Application>
         <Theme>System</Theme>
+        <AutoSaveEnabled>1</AutoSaveEnabled>
     </Application>
 </Data>
