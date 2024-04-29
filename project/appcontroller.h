@@ -19,7 +19,12 @@ class AppController : public QObject
     Q_PROPERTY(bool sortIsAsc MEMBER sortIsAsc NOTIFY sortDirectionChanged)
     Q_PROPERTY(bool unsavedChanges MEMBER unsavedChanges NOTIFY unsavedChangesStateChanged)
     Q_PROPERTY(QString theme MEMBER theme NOTIFY themeChanged)
+    Q_PROPERTY(bool autoSaveEnabled MEMBER autoSaveEnabled NOTIFY autoSaveStateChanged)
     Q_PROPERTY(QString saveFileExtension MEMBER saveFileExtension CONSTANT)
+
+    Q_PROPERTY(QString appName MEMBER appName CONSTANT)
+    Q_PROPERTY(QString appVersion MEMBER appVersion CONSTANT)
+    Q_PROPERTY(QString appDesc MEMBER appDesc CONSTANT)
 
 public:
     explicit AppController(QObject *parent = nullptr);
@@ -70,6 +75,7 @@ public:
     // APPLICATION SETTINGS METHODS.
     // Designed to be called from the Qt level, handle inputs and config files.
     Q_INVOKABLE bool setAppTheme(QString themeName, bool setDefaults = false);
+    Q_INVOKABLE bool setAutoSaveSetting(bool autoSaveEnabled, bool setDefaults = false);
 
     // Q_PROPERTY OBJECTS.
     QString saveName = "";
@@ -78,7 +84,14 @@ public:
     bool unsavedChanges = false;
     // In cases where appconfig cannot be parsed for theming info, default theme details are set here.
     QString theme = "System";
+    bool autoSaveEnabled = true;
     QString saveFileExtension = ".save";
+
+    // Q_PROPERTY APPLICATION DETAILS.
+    QString appName = "TOTK Armor Tracker";
+    QString appVersion = "v1.0.2";
+    QString appDesc = "An application for tracking upgrades \
+and required items for armor sets in The Legend of Zelda: Tears of the Kingdom.";
 
 private:
     QString _loadedSavePath = "";
@@ -93,6 +106,7 @@ signals:
     void sortDirectionChanged();
     void unsavedChangesStateChanged();
     void themeChanged(QString themeName);
+    void autoSaveStateChanged(bool autoSave);
 };
 
 #endif // APPCONTROLLER_H

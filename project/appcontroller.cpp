@@ -360,6 +360,13 @@ bool AppController::loadAppConfig(QString filePath)
     rapidxml::xml_node<> *defaultThemeNode = appSettingsNode->first_node("Theme");
     setAppTheme(QString::fromStdString(defaultThemeNode->value()), false);
 
+    // SEARCH APP CONFIG FOR FEATURE SETTINGS.
+    // Parse out whether auto-saving is currently enabled and store.
+    rapidxml::xml_node<> *autoSaveEnabledNode = appSettingsNode->first_node("AutoSaveEnabled");
+    QString autoSaveEnabledValAsStr = QString::fromStdString(autoSaveEnabledNode->value());
+    bool autoSaveEnabledValAsBool = (autoSaveEnabledValAsStr == "1") ? true : false;
+    setAutoSaveSetting(autoSaveEnabledValAsBool, false);
+
     // Save off any changes that were made to list saves, such as removing duplicates.
     std::ofstream configFileOut;
     configFileOut.open(filePath.toStdString());
@@ -626,8 +633,14 @@ bool AppController::increaseArmorLevel(QString armorName, bool useNewSaveData)
     // Bump armor level and return a success. Flag that saveable changes have been made.
     dataSet->setArmorLevel(armorName, armor->level + 1);
     if (!useNewSaveData) {
+        // Mark that changes have been made.
         unsavedChanges = true;
         emit unsavedChangesStateChanged();
+
+        if (autoSaveEnabled) {
+            // If auto-saving is enabled, save changes immediately.
+            saveCurrentSave();
+        }
     }
     return true;
 }
@@ -673,8 +686,14 @@ bool AppController::decreaseArmorLevel(QString armorName, bool useNewSaveData)
     // Decrease armor level and return a success. If needed, flag that saveable changes have been made.
     dataSet->setArmorLevel(armorName, armor->level - 1);
     if (!useNewSaveData) {
+        // Mark that changes have been made.
         unsavedChanges = true;
         emit unsavedChangesStateChanged();
+
+        if (autoSaveEnabled) {
+            // If auto-saving is enabled, save changes immediately.
+            saveCurrentSave();
+        }
     }
     return true;
 }
@@ -706,8 +725,14 @@ bool AppController::toggleArmorUnlock(QString armorName, bool useNewSaveData)
     // Set the unlock to its inverse and return. If needed, flag that saveable changes have been made.
     dataSet->setArmorUnlockStatus(armorName, !armor->isUnlocked);
     if (!useNewSaveData) {
+        // Mark that changes have been made.
         unsavedChanges = true;
         emit unsavedChangesStateChanged();
+
+        if (autoSaveEnabled) {
+            // If auto-saving is enabled, save changes immediately.
+            saveCurrentSave();
+        }
     }
     return true;
 }
@@ -721,6 +746,21 @@ bool AppController::setAppTheme(QString themeName, bool setDefaults)
     // If flags are set, push changes to app configs. Otherwise, return a fixed success.
     if (setDefaults) {
         return setAppConfigField("Theme", themeName);
+    } else {
+        return true;
+    }
+}
+
+bool AppController::setAutoSaveSetting(bool autoSave, bool setDefaults)
+{
+    // Modify internal variables for the new value.
+    autoSaveEnabled = autoSave;
+    emit autoSaveStateChanged(autoSaveEnabled);
+
+    // If flags are set, push changes to app configs. Otherwise, return a fixed success.
+    if (setDefaults) {
+        QString newAutoSaveValueAsStr = (autoSaveEnabled) ? "1" : "0";
+        return setAppConfigField("AutoSaveEnabled", newAutoSaveValueAsStr);
     } else {
         return true;
     }

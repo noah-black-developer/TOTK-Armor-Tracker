@@ -7,6 +7,7 @@ Dialog {
     id: settingsDialogRoot
 
     signal themeChanged(string themeName)
+    signal autoSaveChanged(bool autoSaveOn)
 
     width: 400
     height: 600
@@ -25,6 +26,13 @@ Dialog {
         else {
             // For any non-valid themes, set System as default.
             systemThemeButton.checked = true;
+        }
+    }
+    function setDefaultAutoSave(autoSaveOn) {
+        if (autoSaveOn === true) {
+            autoSaveOnButton.checked = true;
+        } else {
+            autoSaveOffButton.checked = true;
         }
     }
 
@@ -46,10 +54,17 @@ Dialog {
             onCheckedButtonChanged: settingsDialogRoot.themeChanged(checkedButton.text)
         }
 
+        ButtonGroup {
+            id: autoSaveButtonGroup
+            buttons: autoSaveRow.children
+            exclusive: true
+
+            // Emit matching signals when autosave is enabled/disabled.
+            onCheckedButtonChanged: settingsDialogRoot.autoSaveChanged(checkedButton === autoSaveOnButton)
+        }
+
         RowLayout {
             id: themeSettingsRow
-
-            Layout.alignment: Qt.AlignTop
 
             Text {
                 id: themeSettingsLabel
@@ -66,23 +81,59 @@ Dialog {
                 checkable: true
                 checked: true
                 Layout.fillWidth: true
+                Layout.preferredWidth: 100
             }
-
             Button {
                 id: lightThemeButton
 
                 text: "Light"
                 checkable: true
                 Layout.fillWidth: true
+                Layout.preferredWidth: 100
             }
-
             Button {
                 id: darkThemeButton
 
                 text: "Dark"
                 checkable: true
                 Layout.fillWidth: true
+                Layout.preferredWidth: 100
             }
+        }
+
+        RowLayout {
+            id: autoSaveRow
+
+            Text {
+                id: autoSaveLabel
+
+                text: "Auto-save:"
+                color: Material.primaryTextColor
+                Layout.alignment: Qt.AlignLeft
+            }
+
+            Button {
+                id: autoSaveOnButton
+
+                text: "On"
+                checkable: true
+                checked: true
+                Layout.preferredWidth: 100
+                Layout.alignment: Qt.AlignLeft
+            }
+            Button {
+                id: autoSaveOffButton
+
+                text: "Off"
+                checkable: true
+                Layout.preferredWidth: 100
+                Layout.alignment: Qt.AlignLeft
+            }
+        }
+
+        // Spacing.
+        Item {
+            Layout.fillHeight: true
         }
     }
 }
