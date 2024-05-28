@@ -282,6 +282,11 @@ bool ArmorData::getArmorByName(QString armorName, Armor *&armorOut)
 
 int ArmorData::getArmorRowByName(QString armorName)
 {
+    // If a non-valid armor name is found, return early.
+    if (armorName == "") {
+        return -1;
+    }
+
     // Search the list for the correct armor set.
     for (int row = 0; row < armorCount(); row++)
     {

@@ -23,6 +23,11 @@ ArmorSortFilter *AppController::getArmorData() const
     return _armorData;
 }
 
+ArmorData *AppController::getRawArmorData() const
+{
+    return _armorData->model();
+}
+
 ArmorSortFilter *AppController::getNewSaveArmorData() const
 {
     return _newSaveArmorData;

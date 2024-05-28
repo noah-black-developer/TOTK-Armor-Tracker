@@ -45,7 +45,7 @@ public:
     int armorCount();
     Armor getArmorByIndex(int index);
     bool getArmorByName(QString armorName, Armor *&armorOut);
-    int getArmorRowByName(QString armorName);
+    Q_INVOKABLE int getArmorRowByName(QString armorName);
     QList<Armor> getFullArmorList();
     bool setArmorUnlockStatus(QString armorName, bool isUnlocked);
     bool setArmorLevel(QString armorName, int level);

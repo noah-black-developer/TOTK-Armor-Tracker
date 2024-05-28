@@ -32,6 +32,7 @@ public:
 
     // MODEL METHODS.
     Q_INVOKABLE ArmorSortFilter *getArmorData() const;
+    Q_INVOKABLE ArmorData *getRawArmorData() const;
     Q_INVOKABLE ArmorSortFilter *getNewSaveArmorData() const;
     Q_INVOKABLE void clearNewSaveArmorData();
 

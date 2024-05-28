@@ -478,6 +478,73 @@ ApplicationWindow {
                 color: Material.dividerColor
                 radius: 5
 
+                // Pre-rendering for all images in the grid.
+                // These are applied to each element at runtime, removing the need to recreate different images.
+                Repeater {
+                    id: armorIcons
+
+                    function loadImage(index) {
+                        var image = itemAt(index);
+                        if (image) {
+                            return image.source;
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    visible: false
+                    // The unfiltered armor list is used so that elements are never de-rendered.
+                    model: appController.getRawArmorData()
+                    delegate: Image {
+                        property int armorIndex: index
+                        property string armorName: name
+
+                        source: "images/" + armorName + ".png"
+                        visible: false
+
+                        // Armor Level Indicator.
+                        Rectangle {
+                            anchors {
+                                right: parent.right
+                                top: parent.top
+                                rightMargin: 5
+                                topMargin: 5
+                            }
+                            width: 15
+                            height: 15
+                            radius: 5
+                            color: Material.accentColor
+                            visible: isUpgradeable && isUnlocked
+
+                            Text {
+                                anchors.fill: parent
+                                text: level
+                                font.pointSize: 8
+                                horizontalAlignment: Qt.AlignHCenter
+                                color: Material.Grey
+                            }
+                        }
+
+                        // "Locked" overlay.
+                        Rectangle{
+                            anchors.fill: parent
+                            color: "gray"
+                            opacity: 0.5
+                            visible: !isUnlocked
+                        }
+                        IconImage {
+                            anchors {
+                                fill: parent
+                                margins: 15
+                            }
+                            color: "white"
+                            opacity: 0.2
+                            visible: !isUnlocked
+                            source: "images/lock-solid.svg"
+                        }
+                    }
+                }
+
                 GridView {
                     id: grid
 
@@ -519,6 +586,7 @@ ApplicationWindow {
                     delegate: Item {
                         id: armorItem
 
+                        property int armorIndex: index
                         property string armorName: name
                         property string armorSetName: setName
                         property string armorSetDesc: description
@@ -540,50 +608,21 @@ ApplicationWindow {
                             }
 
                             Image {
-                                source: "images/" + armorItem.armorName + ".png"
-                                Layout.preferredWidth: 60
-                                Layout.preferredHeight: 60
+                                Layout.preferredWidth: 60;
+                                Layout.preferredHeight: 60;
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-                                // Armor Level Indicator.
-                                Rectangle {
-                                    anchors {
-                                        right: parent.right
-                                        top: parent.top
-                                        rightMargin: 5
-                                        topMargin: 5
+                                // Icons are attached by sourcing from a separate delegate list.
+                                // Ensures that grid elements do not need to recreate images when filtering.
+                                // See https://forum.qt.io/topic/154178/images-in-gridview-re-caching-on-filtering/2 for more details.
+                                Component.onCompleted: {
+                                    var sourceModelRow = armorIcons.model.getArmorRowByName(armorItem.armorName);
+                                    var imageSource = armorIcons.loadImage(sourceModelRow);
+                                    if (imageSource !== null) {
+                                        source = imageSource;
+                                    } else {
+                                        source = "";
                                     }
-                                    width: 15
-                                    height: 15
-                                    radius: 5
-                                    color: Material.accentColor
-                                    visible: isUpgradeable && isUnlocked
-
-                                    Text {
-                                        anchors.fill: parent
-                                        text: level
-                                        font.pointSize: 8
-                                        horizontalAlignment: Qt.AlignHCenter
-                                        color: Material.Grey
-                                    }
-                                }
-
-                                // "Locked" overlay.
-                                Rectangle{
-                                    anchors.fill: parent
-                                    color: "gray"
-                                    opacity: 0.5
-                                    visible: !isUnlocked
-                                }
-                                IconImage {
-                                    anchors {
-                                        fill: parent
-                                        margins: 15
-                                    }
-                                    color: "white"
-                                    opacity: 0.2
-                                    visible: !isUnlocked
-                                    source: "images/lock-solid.svg"
                                 }
                             }
                         }
