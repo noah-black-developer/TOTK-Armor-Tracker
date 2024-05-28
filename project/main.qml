@@ -1080,9 +1080,9 @@ ApplicationWindow {
                                                 id: upgradeRupeeCostIcon
 
                                                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
-                                                // Icon size is fixed to prevent resizing issues.
+                                                // Icon size + ratio is fixed to prevent resizing issues.
                                                 Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                Layout.preferredWidth: 10
+                                                Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels * 0.8
                                                 Layout.leftMargin: 5
                                                 icon.source: "images/rupee-lightmode.svg"
                                                 icon.color: armorUpgradeRect.textColor
