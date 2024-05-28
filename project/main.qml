@@ -478,6 +478,32 @@ ApplicationWindow {
                 color: Material.dividerColor
                 radius: 5
 
+                // Pre-rendering for all images in the grid.
+                // These are applied to each element at runtime, removing the need to recreate different images.
+                Repeater {
+                    id: armorIcons
+
+                    function loadImage(index) {
+                        var image = itemAt(index);
+                        if (image) {
+                            return image.source;
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    visible: false
+                    // The unfiltered armor list is used so that elements are never de-rendered.
+                    model: appController.getRawArmorData()
+                    delegate: Image {
+                        property int armorIndex: index
+                        property string armorName: name
+
+                        source: "images/" + armorName + ".png"
+                        visible: false
+                    }
+                }
+
                 GridView {
                     id: grid
 
@@ -485,6 +511,14 @@ ApplicationWindow {
                         // Calculation for the grid width is performed as follows: cellWidth * max # of whole cells
                         var maxCells = Math.floor(parent.width / (cellWidth));
                         return cellWidth * maxCells;
+                    }
+
+                    // For whatever reason, the 'hack' used to keep images rendered in the item list
+                    // will NOT render the first list index upon being initialized.
+                    // To get around this, a filter is set and cleared to force a list refresh.
+                    Component.onCompleted: {
+                        appController.setSortSearchFilter("a");
+                        appController.setSortSearchFilter("");
                     }
 
                     // To keep the grid properly centered, while also expanding to fill the space,
@@ -519,6 +553,7 @@ ApplicationWindow {
                     delegate: Item {
                         id: armorItem
 
+                        property int armorIndex: index
                         property string armorName: name
                         property string armorSetName: setName
                         property string armorSetDesc: description
@@ -540,10 +575,24 @@ ApplicationWindow {
                             }
 
                             Image {
-                                source: "images/" + armorItem.armorName + ".png"
-                                Layout.preferredWidth: 60
-                                Layout.preferredHeight: 60
+                                Layout.preferredWidth: 60;
+                                Layout.preferredHeight: 60;
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                                asynchronous: true
+                                cache: true
+
+                                // Icons are attached by sourcing from a separate delegate list.
+                                // Ensures that grid elements do not need to recreate images when filtering.
+                                // See https://forum.qt.io/topic/154178/images-in-gridview-re-caching-on-filtering/2 for more details.
+                                Component.onCompleted: {
+                                    var sourceModelRow = armorIcons.model.getArmorRowByName(armorItem.armorName);
+                                    var imageSource = armorIcons.loadImage(sourceModelRow);
+                                    if (imageSource !== null) {
+                                        source = imageSource;
+                                    } else {
+                                        source = "";
+                                    }
+                                }
 
                                 // Armor Level Indicator.
                                 Rectangle {
@@ -569,21 +618,11 @@ ApplicationWindow {
                                 }
 
                                 // "Locked" overlay.
-                                Rectangle{
+                                Rectangle {
                                     anchors.fill: parent
                                     color: "gray"
                                     opacity: 0.5
                                     visible: !isUnlocked
-                                }
-                                IconImage {
-                                    anchors {
-                                        fill: parent
-                                        margins: 15
-                                    }
-                                    color: "white"
-                                    opacity: 0.2
-                                    visible: !isUnlocked
-                                    source: "images/lock-solid.svg"
                                 }
                             }
                         }
@@ -866,6 +905,7 @@ ApplicationWindow {
                                 Layout.bottomMargin: verticalPadding
                                 Layout.maximumWidth: parent.width - (2 * horizontalPadding)
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                                visible: (grid.currentItem != null)
 
                                 text: {
                                     if (grid.currentItem) {
@@ -1043,10 +1083,9 @@ ApplicationWindow {
                                                 id: upgradeRupeeCostIcon
 
                                                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
-                                                // Icon size is fixed to prevent resizing issues.
+                                                // Icon size + ratio is fixed to prevent resizing issues.
                                                 Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                Layout.preferredWidth: 10
-                                                Layout.leftMargin: 5
+                                                Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                 icon.source: "images/rupee-lightmode.svg"
                                                 icon.color: armorUpgradeRect.textColor
                                             }
