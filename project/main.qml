@@ -578,6 +578,8 @@ ApplicationWindow {
                                 Layout.preferredWidth: 60;
                                 Layout.preferredHeight: 60;
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                                asynchronous: true
+                                cache: true
 
                                 // Icons are attached by sourcing from a separate delegate list.
                                 // Ensures that grid elements do not need to recreate images when filtering.
@@ -903,6 +905,7 @@ ApplicationWindow {
                                 Layout.bottomMargin: verticalPadding
                                 Layout.maximumWidth: parent.width - (2 * horizontalPadding)
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                                visible: (grid.currentItem != null)
 
                                 text: {
                                     if (grid.currentItem) {

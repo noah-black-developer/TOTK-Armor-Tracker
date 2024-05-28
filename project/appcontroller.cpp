@@ -572,7 +572,7 @@ void AppController::setSortDirection(bool ascending)
 
 void AppController::setSortSearchFilter(QString newSortString)
 {
-    _armorData->setFilterRegularExpression(QRegularExpression(newSortString, QRegularExpression::CaseInsensitiveOption));
+    _armorData->setFilterFixedString(newSortString);
     _armorData->setFilterRole(ArmorData::NameRole);
 }
 
@@ -593,7 +593,7 @@ void AppController::newSaveSetSortDirection(bool ascending)
 
 void AppController::newSaveSetSortSearchFilter(QString newSortString)
 {
-    _newSaveArmorData->setFilterRegularExpression(QRegularExpression(newSortString, QRegularExpression::CaseInsensitiveOption));
+    _newSaveArmorData->setFilterFixedString(newSortString);
     _newSaveArmorData->setFilterRole(ArmorData::NameRole);
 }
 
