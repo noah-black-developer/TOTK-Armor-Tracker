@@ -501,47 +501,6 @@ ApplicationWindow {
 
                         source: "images/" + armorName + ".png"
                         visible: false
-
-                        // Armor Level Indicator.
-                        Rectangle {
-                            anchors {
-                                right: parent.right
-                                top: parent.top
-                                rightMargin: 5
-                                topMargin: 5
-                            }
-                            width: 15
-                            height: 15
-                            radius: 5
-                            color: Material.accentColor
-                            visible: isUpgradeable && isUnlocked
-
-                            Text {
-                                anchors.fill: parent
-                                text: level
-                                font.pointSize: 8
-                                horizontalAlignment: Qt.AlignHCenter
-                                color: Material.Grey
-                            }
-                        }
-
-                        // "Locked" overlay.
-                        Rectangle{
-                            anchors.fill: parent
-                            color: "gray"
-                            opacity: 0.5
-                            visible: !isUnlocked
-                        }
-                        IconImage {
-                            anchors {
-                                fill: parent
-                                margins: 15
-                            }
-                            color: "white"
-                            opacity: 0.2
-                            visible: !isUnlocked
-                            source: "images/lock-solid.svg"
-                        }
                     }
                 }
 
@@ -552,6 +511,14 @@ ApplicationWindow {
                         // Calculation for the grid width is performed as follows: cellWidth * max # of whole cells
                         var maxCells = Math.floor(parent.width / (cellWidth));
                         return cellWidth * maxCells;
+                    }
+
+                    // For whatever reason, the 'hack' used to keep images rendered in the item list
+                    // will NOT render the first list index upon being initialized.
+                    // To get around this, a filter is set and cleared to force a list refresh.
+                    Component.onCompleted: {
+                        appController.setSortSearchFilter("a");
+                        appController.setSortSearchFilter("");
                     }
 
                     // To keep the grid properly centered, while also expanding to fill the space,
@@ -623,6 +590,37 @@ ApplicationWindow {
                                     } else {
                                         source = "";
                                     }
+                                }
+
+                                // Armor Level Indicator.
+                                Rectangle {
+                                    anchors {
+                                        right: parent.right
+                                        top: parent.top
+                                        rightMargin: 5
+                                        topMargin: 5
+                                    }
+                                    width: 15
+                                    height: 15
+                                    radius: 5
+                                    color: Material.accentColor
+                                    visible: isUpgradeable && isUnlocked
+
+                                    Text {
+                                        anchors.fill: parent
+                                        text: level
+                                        font.pointSize: 8
+                                        horizontalAlignment: Qt.AlignHCenter
+                                        color: Material.Grey
+                                    }
+                                }
+
+                                // "Locked" overlay.
+                                Rectangle {
+                                    anchors.fill: parent
+                                    color: "gray"
+                                    opacity: 0.5
+                                    visible: !isUnlocked
                                 }
                             }
                         }
