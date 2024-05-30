@@ -14,6 +14,7 @@ class ArmorSortFilter : public QSortFilterProxyModel
 
 public:
     ArmorSortFilter(ArmorData *sourceArmorData);
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const;
 
     // Custom method to get source model as ArmorModel pointer.
     ArmorData *model();
