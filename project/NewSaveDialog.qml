@@ -183,6 +183,52 @@ Dialog {
         }
     }
 
+    // Pre-rendered images for use in grid elements.
+    Image {
+        id: lockedImageIcon
+
+        source: "images/lock-solid.svg"
+        visible: false
+    }
+    Image {
+        id: unlockedImageIcon
+
+        source: "images/unlock-solid.svg"
+        visible: false
+    }
+    Image {
+        id: startImageIcon
+
+        source: "images/star-solid.svg"
+        visible: false
+    }
+
+    // Pre-rendering for all images in the grid.
+    // These are applied to each element at runtime, removing the need to recreate different images.
+    Repeater {
+        id: armorIcons
+
+        function loadImage(index) {
+            var image = itemAt(index);
+            if (image) {
+                return image.source;
+            } else {
+                return null;
+            }
+        }
+
+        visible: false
+        // The unfiltered armor list is used so that elements are never filtered out.
+        model: appController.getRawArmorData()
+        delegate: Image {
+            property int armorIndex: index
+            property string armorName: name
+
+            source: "images/" + armorName + ".png"
+            visible: false
+        }
+    }
+
     GridView {
         id: armorSetupView
 
@@ -193,23 +239,50 @@ Dialog {
         clip: true
         cellWidth: 200
         cellHeight: 100
+        // Impossibly high cache buffer is set to keep all elements existing at all times.
+        cacheBuffer: 100000
         // Set width up to allow for 3 columns.
         width: cellWidth * 3
 
+        // For whatever reason, the 'hack' used to keep images rendered in the item list
+        // will NOT render the first list index upon being initialized.
+        // To get around this, a filter is set and cleared to force a list refresh.
+        Component.onCompleted: {
+            appController.newSaveSetSortSearchFilter("a");
+            appController.newSaveSetSortSearchFilter("");
+        }
+
         model: appController.getNewSaveArmorData();
         delegate: Item {
-            id: armorRoot
+            id: armorItem
 
             property string armorName: name
             property int armorLevel: level
             property bool armorIsUnlocked: isUnlocked
             property bool armorIsUpgradeable: isUpgradeable
 
+            function updateImage() {
+                // Icons are attached by sourcing from a separate delegate list.
+                // Ensures that grid elements do not need to recreate images when filtering.
+                // See https://forum.qt.io/topic/154178/images-in-gridview-re-caching-on-filtering/2 for more details.
+                var sourceModelRow = armorIcons.model.getArmorRowByName(armorItem.armorName);
+                var imageSource = armorIcons.loadImage(sourceModelRow);
+                if (imageSource !== null) {
+                    delegateArmorImage.source = imageSource;
+                } else {
+                    delegateArmorImage.source = "";
+                }
+            }
+
+            // Update the image anytime an icon moves around the grid.
+            Component.onCompleted: updateImage();
+            onArmorNameChanged: updateImage();
+
             width: armorSetupView.cellWidth
             height: armorSetupView.cellHeight
 
             Rectangle {
-                id: armorRootRect
+                id: armorItemRect
 
                 anchors {
                     fill: parent
@@ -236,7 +309,7 @@ Dialog {
 
                         Layout.fillWidth: true
                         Layout.preferredHeight: 20
-                        text: armorRoot.armorName
+                        text: armorItem.armorName
                         color: Material.primaryTextColor
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
@@ -250,40 +323,45 @@ Dialog {
                         Layout.fillWidth: true
 
                         Repeater {
-                            model: armorRoot.armorLevel
+                            model: armorItem.armorLevel
                             delegate: IconImage {
                                 id: armorLevelFilledIcon
 
                                 Layout.preferredWidth: 10
                                 Layout.preferredHeight: 10
-                                source: "images/star-solid.svg"
+                                sourceSize.width: 10
+                                sourceSize.height: 10
+                                source: startImageIcon.source
                                 color: Material.primaryTextColor
                                 fillMode: IconImage.PreserveAspectFit
-                                visible: armorRoot.armorIsUpgradeable
+                                visible: armorItem.armorIsUpgradeable
+                                asynchronous: true
                             }
                         }
                         Repeater {
-                            model: 4 - armorRoot.armorLevel
+                            model: 4 - armorItem.armorLevel
                             delegate: IconImage {
                                 id: armorLevelEmptyIcon
 
                                 Layout.preferredWidth: 10
                                 Layout.preferredHeight: 10
-                                source: "images/star-solid.svg"
+                                sourceSize.width: 10
+                                sourceSize.height: 10
+                                source: startImageIcon.source
                                 color: Material.frameColor
                                 fillMode: IconImage.PreserveAspectFit
-                                visible: armorRoot.armorIsUpgradeable
+                                visible: armorItem.armorIsUpgradeable
                             }
                         }
                         Text {
                             Layout.preferredHeight: 10
-                            text: (armorRoot.armorIsUnlocked) ? "Unlocked" : "Locked"
+                            text: (armorItem.armorIsUnlocked) ? "Unlocked" : "Locked"
                             font.italic: true
                             font.pointSize: 9
                             color: Material.secondaryTextColor
                             horizontalAlignment: Qt.AlignLeft
                             verticalAlignment: Qt.AlignVCenter
-                            visible: !armorRoot.armorIsUpgradeable
+                            visible: !armorItem.armorIsUpgradeable
                         }
                     }
 
@@ -294,20 +372,23 @@ Dialog {
                         Layout.preferredHeight: 40
 
                         Image {
-                            id: armorImage
+                            id: delegateArmorImage
 
-                            Layout.preferredHeight: parent.height
                             Layout.preferredWidth: parent.height
+                            Layout.preferredHeight: parent.height
+                            sourceSize.width: parent.height
+                            sourceSize.height: parent.height
                             Layout.alignment: Qt.AlignLeft
-                            source: "images/" + name + ".png"
                             fillMode: Image.PreserveAspectFit
+                            asynchronous: true
+                            cache: true
 
                             // If armor is unlocked, gray out picture.
                             Rectangle {
                                 anchors.fill: parent
                                 color: "gray"
                                 opacity: 0.5
-                                visible: !armorRoot.armorIsUnlocked
+                                visible: !armorItem.armorIsUnlocked
                             }
                         }
 
@@ -318,10 +399,12 @@ Dialog {
                             Layout.preferredHeight: 12
                             Layout.leftMargin: 3
                             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                            sourceSize.width: 12
+                            sourceSize.height: 12
                             source: "images/lock-solid.svg"
                             color: Material.primaryTextColor
                             fillMode: IconImage.PreserveAspectFit
-                            visible: !armorRoot.armorIsUnlocked
+                            visible: !armorItem.armorIsUnlocked
                         }
 
                         // SPACER.
@@ -344,9 +427,9 @@ Dialog {
                                 Layout.preferredWidth: 25
                                 color: (enabled) ? Material.frameColor : Material.backgroundDimColor
                                 radius: 2
-                                visible: armorRoot.armorIsUpgradeable
+                                visible: armorItem.armorIsUpgradeable
                                 // Enabled as long as the armor is unlocked (since level can be reduced until it locks).
-                                enabled: armorRoot.armorIsUnlocked
+                                enabled: armorItem.armorIsUnlocked
 
                                 Text {
                                     id: armorLevelDownText
@@ -363,12 +446,12 @@ Dialog {
                                         anchors.fill: parent
                                         onClicked: {
                                             // If the armor is being reduced to below 0, lock it instead.
-                                            if (armorRoot.armorLevel === minimumArmorLevel) {
-                                                appController.toggleArmorUnlock(armorRoot.armorName, true);
+                                            if (armorItem.armorLevel === minimumArmorLevel) {
+                                                appController.toggleArmorUnlock(armorItem.armorName, true);
                                             }
                                             // Otherwise, decrease the armor level.
                                             else {
-                                                appController.decreaseArmorLevel(armorRoot.armorName, true);
+                                                appController.decreaseArmorLevel(armorItem.armorName, true);
                                             }
                                         }
                                     }
@@ -382,9 +465,9 @@ Dialog {
                                 Layout.preferredWidth: 25
                                 color: (enabled) ? Material.frameColor : Material.backgroundDimColor
                                 radius: 2
-                                visible: armorRoot.armorIsUpgradeable
+                                visible: armorItem.armorIsUpgradeable
                                 // Enabled as long as the armor is below the maximum level.
-                                enabled: (armorRoot.armorLevel < maximumArmorLevel)
+                                enabled: (armorItem.armorLevel < maximumArmorLevel)
 
                                 Text {
                                     id: armorLevelUpText
@@ -401,12 +484,12 @@ Dialog {
                                         anchors.fill: parent
                                         onClicked: {
                                             // If armor is locked, unlock it.
-                                            if (!armorRoot.armorIsUnlocked) {
-                                                appController.toggleArmorUnlock(armorRoot.armorName, true);
+                                            if (!armorItem.armorIsUnlocked) {
+                                                appController.toggleArmorUnlock(armorItem.armorName, true);
                                             }
                                             // Otherwise, increase the armor level.
                                             else {
-                                                appController.increaseArmorLevel(armorRoot.armorName, true);
+                                                appController.increaseArmorLevel(armorItem.armorName, true);
                                             }
                                         }
                                     }
@@ -430,15 +513,18 @@ Dialog {
                                     anchors.centerIn: parent
                                     width: 10
                                     height: 10
-                                    source: (armorRoot.armorIsUnlocked) ? "images/lock-solid.svg" : "images/unlock-solid.svg"
+                                    sourceSize.width: width
+                                    sourceSize.height: height
+                                    source: (armorItem.armorIsUnlocked) ? lockedImageIcon.source : unlockedImageIcon.source
                                     color: Material.primaryTextColor
+                                    asynchronous: true
                                 }
 
                                 MouseArea {
                                     anchors.fill: parent
                                     onClicked: {
                                         // Toggle armor unlock state.
-                                        appController.toggleArmorUnlock(armorRoot.armorName, true);
+                                        appController.toggleArmorUnlock(armorItem.armorName, true);
                                     }
                                 }
                             }

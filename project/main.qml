@@ -494,7 +494,7 @@ ApplicationWindow {
                     }
 
                     visible: false
-                    // The unfiltered armor list is used so that elements are never de-rendered.
+                    // The unfiltered armor list is used so that elements are never filtered out.
                     model: appController.getRawArmorData()
                     delegate: Image {
                         property int armorIndex: index
@@ -532,14 +532,6 @@ ApplicationWindow {
                         return false;
                     }
 
-                    // For whatever reason, the 'hack' used to keep images rendered in the item list
-                    // will NOT render the first list index upon being initialized.
-                    // To get around this, a filter is set and cleared to force a list refresh.
-                    Component.onCompleted: {
-                        appController.setSortSearchFilter("a");
-                        appController.setSortSearchFilter("");
-                    }
-
                     // To keep the grid properly centered, while also expanding to fill the space,
                     //  the width is calculated manually to scale based on the max # of cells that
                     //  can be displayed based on current screen width + cell sizing.
@@ -568,6 +560,14 @@ ApplicationWindow {
                     Keys.onUpPressed: moveCurrentIndexUp()
                     Keys.onDownPressed: moveCurrentIndexDown()
                     keyNavigationWraps: true
+
+                    // For whatever reason, the 'hack' used to keep images rendered in the item list
+                    // will NOT render the first list index upon being initialized.
+                    // To get around this, a filter is set and cleared to force a list refresh.
+                    Component.onCompleted: {
+                        appController.setSortSearchFilter("a");
+                        appController.setSortSearchFilter("");
+                    }
 
                     // When the user clicks on a set of armor, regain focus.
                     model: appController.getArmorData()
@@ -617,6 +617,8 @@ ApplicationWindow {
 
                                 Layout.preferredWidth: 60;
                                 Layout.preferredHeight: 60;
+                                sourceSize.width: 60
+                                sourceSize.height: 60
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                                 asynchronous: true
                                 cache: true
@@ -785,6 +787,8 @@ ApplicationWindow {
                                     Layout.preferredHeight: 12
                                     Layout.leftMargin: 3
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                    sourceSize.width: 12
+                                    sourceSize.height: 12
                                     source: "images/lock-solid.svg"
                                     color: Material.primaryTextColor
                                     fillMode: IconImage.PreserveAspectFit
@@ -1150,6 +1154,8 @@ ApplicationWindow {
                                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                                     Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                     Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                                    sourceSize.width: detailsArmorUpgradesRepeater.rowHeightsInPixels
+                                                    sourceSize.height: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                     fillMode: Image.PreserveAspectFit
                                                     source: "images/" + modelData.name + ".png"
                                                 }
