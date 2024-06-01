@@ -417,10 +417,11 @@ ApplicationWindow {
                         placeholderText: "Search"
 
                         onTextChanged: {
-                            appController.setSortSearchFilter(text)
-                            // Force the grid back to the starting index.
-                            grid.positionViewAtBeginning();
-                            grid.currentIndex = 0;
+                            var currentArmor = grid.currentItem;
+                            appController.setSortSearchFilter(text);
+                            if (currentArmor) {
+                                grid.setCurrentItemByName(currentArmor.name);
+                            }
                         }
                     }
 
