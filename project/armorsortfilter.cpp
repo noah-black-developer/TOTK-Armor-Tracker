@@ -4,6 +4,9 @@ ArmorSortFilter::ArmorSortFilter(ArmorData *sourceArmorData)
 {
     // Apply given data source.
     setSourceModel(sourceArmorData);
+
+    // Set default settings for the sorting/filtering.
+    setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
 bool ArmorSortFilter::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
