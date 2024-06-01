@@ -50,7 +50,7 @@ ApplicationWindow {
         context: Qt.ApplicationShortcut
         onActivated: {
             if (appController.saveIsLoaded) {
-                appController.toggleArmorUnlock(grid.currentItem.armorName);
+                unlockArmorButton.clicked();
             }
         }
     }
@@ -66,13 +66,13 @@ ApplicationWindow {
             if (grid.currentItem && appController.saveIsLoaded) {
                 // If locked, unlock the armor set first unlock the armor set.
                 if (grid.currentItem.armorIsUnlocked === false) {
-                    appController.toggleArmorUnlock(grid.currentItem.armorName);
+                    unlockArmorButton.clicked();
                 }
 
                 else {
                     // Increase the armor level, if possible.
                     if (grid.currentItem.armorLevel !== "4") {
-                        appController.increaseArmorLevel(grid.currentItem.armorName);
+                        increaseLevelButton.clicked();
                     }
                 }
             }
@@ -87,13 +87,13 @@ ApplicationWindow {
             if (grid.currentItem && appController.saveIsLoaded) {
                 // If armor is already at the minimum level, lock it.
                 if (grid.currentItem.armorLevel === "0" && grid.currentItem.armorIsUnlocked === true) {
-                    appController.toggleArmorUnlock(grid.currentItem.armorName);
+                    unlockArmorButton.clicked();
                 }
 
                 else {
                     // Decrease the armor level, if possible.
                     if (grid.currentItem.armorLevel !== "0") {
-                        appController.decreaseArmorLevel(grid.currentItem.armorName);
+                        decreaseLevelButton.clicked();
                     }
                 }
             }
@@ -417,10 +417,11 @@ ApplicationWindow {
                         placeholderText: "Search"
 
                         onTextChanged: {
-                            appController.setSortSearchFilter(text)
-                            // Force the grid back to the starting index.
-                            grid.positionViewAtBeginning();
-                            grid.currentIndex = 0;
+                            var currentArmor = grid.currentItem;
+                            appController.setSortSearchFilter(text);
+                            if (currentArmor) {
+                                grid.setCurrentItemByName(currentArmor.name);
+                            }
                         }
                     }
 
@@ -478,6 +479,32 @@ ApplicationWindow {
                 color: Material.dividerColor
                 radius: 5
 
+                // Pre-rendering for all images in the grid.
+                // These are applied to each element at runtime, removing the need to recreate different images.
+                Repeater {
+                    id: armorIcons
+
+                    function loadImage(index) {
+                        var image = itemAt(index);
+                        if (image) {
+                            return image.source;
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    visible: false
+                    // The unfiltered armor list is used so that elements are never de-rendered.
+                    model: appController.getRawArmorData()
+                    delegate: Image {
+                        property int armorIndex: index
+                        property string armorName: name
+
+                        source: "images/" + armorName + ".png"
+                        visible: false
+                    }
+                }
+
                 GridView {
                     id: grid
 
@@ -485,6 +512,32 @@ ApplicationWindow {
                         // Calculation for the grid width is performed as follows: cellWidth * max # of whole cells
                         var maxCells = Math.floor(parent.width / (cellWidth));
                         return cellWidth * maxCells;
+                    }
+
+                    function setCurrentItemByName(armorName) {
+                        // Return before checks if the grid has no current elements.
+                        if (grid.count === 0) { return false; }
+
+                        // Iterate over all child elements until a match is found, then set.
+                        // Returns true if a match is found. Otherwise, returns false + skips changes.
+                        for (var gridIndex = 0; gridIndex < grid.count; gridIndex++) {
+                            var currentArmor = grid.itemAtIndex(gridIndex);
+                            if (currentArmor) {
+                                if (armorName === currentArmor.armorName) {
+                                    grid.currentIndex = gridIndex;
+                                    return true;
+                                }
+                            }
+                        }
+                        return false;
+                    }
+
+                    // For whatever reason, the 'hack' used to keep images rendered in the item list
+                    // will NOT render the first list index upon being initialized.
+                    // To get around this, a filter is set and cleared to force a list refresh.
+                    Component.onCompleted: {
+                        appController.setSortSearchFilter("a");
+                        appController.setSortSearchFilter("");
                     }
 
                     // To keep the grid properly centered, while also expanding to fill the space,
@@ -502,6 +555,8 @@ ApplicationWindow {
 
                     cellWidth: 75
                     cellHeight: 75
+                    // Impossibly high cache buffer is set to keep all elements existing at all times.
+                    cacheBuffer: 100000
 
                     // Disabled by default, enabled when user loads a save.
                     interactive: appController.saveIsLoaded
@@ -519,6 +574,7 @@ ApplicationWindow {
                     delegate: Item {
                         id: armorItem
 
+                        property int armorIndex: index
                         property string armorName: name
                         property string armorSetName: setName
                         property string armorSetDesc: description
@@ -530,6 +586,23 @@ ApplicationWindow {
                         property string armorBaseDefense: baseDefense
                         property var armorUpgradeReqMap: upgradeReqs
 
+                        function updateImage() {
+                            // Icons are attached by sourcing from a separate delegate list.
+                            // Ensures that grid elements do not need to recreate images when filtering.
+                            // See https://forum.qt.io/topic/154178/images-in-gridview-re-caching-on-filtering/2 for more details.
+                            var sourceModelRow = armorIcons.model.getArmorRowByName(armorItem.armorName);
+                            var imageSource = armorIcons.loadImage(sourceModelRow);
+                            if (imageSource !== null) {
+                                delegateArmorImage.source = imageSource;
+                            } else {
+                                delegateArmorImage.source = "";
+                            }
+                        }
+
+                        // Update the image anytime an icon moves around the grid.
+                        Component.onCompleted: updateImage();
+                        onArmorNameChanged: updateImage();
+
                         width: grid.cellWidth
                         height: grid.cellHeight
 
@@ -540,10 +613,13 @@ ApplicationWindow {
                             }
 
                             Image {
-                                source: "images/" + armorItem.armorName + ".png"
-                                Layout.preferredWidth: 60
-                                Layout.preferredHeight: 60
+                                id: delegateArmorImage
+
+                                Layout.preferredWidth: 60;
+                                Layout.preferredHeight: 60;
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                                asynchronous: true
+                                cache: true
 
                                 // Armor Level Indicator.
                                 Rectangle {
@@ -569,21 +645,11 @@ ApplicationWindow {
                                 }
 
                                 // "Locked" overlay.
-                                Rectangle{
+                                Rectangle {
                                     anchors.fill: parent
                                     color: "gray"
                                     opacity: 0.5
                                     visible: !isUnlocked
-                                }
-                                IconImage {
-                                    anchors {
-                                        fill: parent
-                                        margins: 15
-                                    }
-                                    color: "white"
-                                    opacity: 0.2
-                                    visible: !isUnlocked
-                                    source: "images/lock-solid.svg"
                                 }
                             }
                         }
@@ -601,7 +667,7 @@ ApplicationWindow {
                         }
                     }
                     highlight: Rectangle { color: Material.accentColor; radius: 5 }
-                    highlightMoveDuration: 50
+                    highlightMoveDuration: 40
 
                     // If user has not yet loaded a save, disable view and display following label.
                     Rectangle {
@@ -866,6 +932,7 @@ ApplicationWindow {
                                 Layout.bottomMargin: verticalPadding
                                 Layout.maximumWidth: parent.width - (2 * horizontalPadding)
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                                visible: (grid.currentItem != null)
 
                                 text: {
                                     if (grid.currentItem) {
@@ -1043,10 +1110,9 @@ ApplicationWindow {
                                                 id: upgradeRupeeCostIcon
 
                                                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
-                                                // Icon size is fixed to prevent resizing issues.
+                                                // Icon size + ratio is fixed to prevent resizing issues.
                                                 Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                Layout.preferredWidth: 10
-                                                Layout.leftMargin: 5
+                                                Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                 icon.source: "images/rupee-lightmode.svg"
                                                 icon.color: armorUpgradeRect.textColor
                                             }
@@ -1187,7 +1253,10 @@ ApplicationWindow {
                 enabled: appController.saveIsLoaded
 
                 onClicked: {
-                    appController.toggleArmorUnlock(grid.currentItem.armorName);
+                    // Reference the current selected armor, make changes, then revert the selection.
+                    var currentArmorName = grid.currentItem.armorName;
+                    appController.toggleArmorUnlock(currentArmorName);
+                    grid.setCurrentItemByName(currentArmorName);
                 }
             }
 
@@ -1216,7 +1285,10 @@ ApplicationWindow {
                 }
 
                 onClicked: {
-                    appController.decreaseArmorLevel(grid.currentItem.armorName);
+                    // Reference the current selected armor, make changes, then revert the selection.
+                    var currentArmorName = grid.currentItem.armorName;
+                    appController.decreaseArmorLevel(currentArmorName);
+                    grid.setCurrentItemByName(currentArmorName);
                 }
             }
 
@@ -1245,7 +1317,10 @@ ApplicationWindow {
                 }
 
                 onClicked: {
-                    appController.increaseArmorLevel(grid.currentItem.armorName);
+                    // Reference the current selected armor, make changes, then revert the selection.
+                    var currentArmorName = grid.currentItem.armorName;
+                    appController.increaseArmorLevel(currentArmorName);
+                    grid.setCurrentItemByName(currentArmorName);
                 }
             }
         }

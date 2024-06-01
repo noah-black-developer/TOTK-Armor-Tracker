@@ -36,3 +36,4 @@ build-*
 .vscode/settings.json
 bin
 totkArmorTracker.zip
+project/build
