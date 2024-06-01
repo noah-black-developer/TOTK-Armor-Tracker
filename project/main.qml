@@ -417,10 +417,11 @@ ApplicationWindow {
                         placeholderText: "Search"
 
                         onTextChanged: {
-                            appController.setSortSearchFilter(text)
-                            // Force the grid back to the starting index.
-                            grid.positionViewAtBeginning();
-                            grid.currentIndex = 0;
+                            var currentArmor = grid.currentItem;
+                            appController.setSortSearchFilter(text);
+                            if (currentArmor) {
+                                grid.setCurrentItemByName(currentArmor.name);
+                            }
                         }
                     }
 
@@ -521,9 +522,11 @@ ApplicationWindow {
                         // Returns true if a match is found. Otherwise, returns false + skips changes.
                         for (var gridIndex = 0; gridIndex < grid.count; gridIndex++) {
                             var currentArmor = grid.itemAtIndex(gridIndex);
-                            if (armorName === currentArmor.armorName) {
-                                grid.currentIndex = gridIndex;
-                                return true;
+                            if (currentArmor) {
+                                if (armorName === currentArmor.armorName) {
+                                    grid.currentIndex = gridIndex;
+                                    return true;
+                                }
                             }
                         }
                         return false;
@@ -600,7 +603,6 @@ ApplicationWindow {
                         Component.onCompleted: updateImage();
                         onArmorNameChanged: updateImage();
 
-
                         width: grid.cellWidth
                         height: grid.cellHeight
 
@@ -665,7 +667,7 @@ ApplicationWindow {
                         }
                     }
                     highlight: Rectangle { color: Material.accentColor; radius: 5 }
-                    highlightMoveDuration: 50
+                    highlightMoveDuration: 40
 
                     // If user has not yet loaded a save, disable view and display following label.
                     Rectangle {
