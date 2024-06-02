@@ -1,11 +1,8 @@
-<!-- Credit to @othneildrew (https://github.com/othneildrew/Best-README-Template) for the implementation of the "Back to Top" labels. See this awesome project for more! -->
-<a name="readme-top"></a>
-
 # TOTK Armor Tracker
 
 **TOTK (Tears of the Kingdom) Armor Tracker** is a standalone GUI program for tracking and researching armor upgrades within *Legend of Zelda: Tears of the Kingdom*.
 
-ADD PIC HERE
+<img src="images/homepage_merged.png" alt="drawing" width="1000"/>
 
 <!-- Table of Contents -->
 <details>
@@ -22,6 +19,14 @@ ADD PIC HERE
         <li><a href="#tips-and-tricks">Tips and Tricks</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#contributing">Contributing</a>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#bug-reports">Bug Reports</a></li>
+        <li><a href="#developer-requirements">Developer Requirements</a></li>
+      </ul>
+    </li>
     <li><a href="#authors">Authors</a></li>
     <li><a href="#version-history">Version History</a></li>
     <li><a href="#license">License</a></li>
@@ -31,16 +36,16 @@ ADD PIC HERE
 
 ## Description
 
-Born out of a need for a convenient source of in-game information, the **TOTK Armor Tracker** app provides an easy, centralized way to track progress for the different armor sets in TOTK.
+Born out of a need for a convenient source of in-game information, the **TOTK Armor Tracker** app provides an easy, centralized way to track progress for the different armor sets in TOTK. It currently boasts releases on both Windows and Linux.
 
-After creating a save file, you can track which armor sets you have collected so far, view their current upgrade progress, and easily research what items are required next. Track your progress at every stage of your TOTK playthrough, without fear of forgetting what items to look for!
+After creating a save file, you can track which armor sets you have collected so far, view their current upgrade progress, and easily research what items are required next. Check your work at every stage of your TOTK playthrough, without fear of forgetting what items to look for!
 
 ## Features
 
 ### Appliation-specific Features
 * Save progress across multiple save files, as needed.
 * View armor details, descriptions, and level-up requirements.
-* Sort and filter armor sets.
+* Sort and filter armor sets, including...
     * Search bar, used to look up specific items/sets
     * Different list orders (sorting by name, level, etc.)
 
@@ -50,7 +55,7 @@ After creating a save file, you can track which armor sets you have collected so
 * Focus on a simple, easy-to-use GUI
 * Multi-platform support
 
-<p align="center">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#totk-armor-tracker">back to top</a>)</p>
 
 ## Getting Started
 
@@ -66,7 +71,7 @@ Supported platforms:
 
 To install the latest version of the program:
 1. Locate the latest app release, either from the [releases](https://github.com/noah-black-developer/TOTK-Armor-Tracker/releases) page or tagged on the project [homepage](https://github.com/noah-black-developer/TOTK-Armor-Tracker).
-2. Click on and download the 'Asset' matching your platform.
+2. Click on and download the 'Asset' matching your platform (e.g. TotkArmorTracker_Linux.zip for Linux)
 3. Once the file has finished downloading, unzip the file to access its contents.
 4. Open the unzipped folder and run the **TotkArmorTracker.exe** file.
 
@@ -74,9 +79,9 @@ The TOTK Armor Tracker will now be running and ready to go!
 
 ### Executing program
 
-To start tracking armor sets, you can create a new save file by navigating to **File >> New**. Enter your new save file name, pre-configure armor as desired, then click "OK" to create the save file and start tracking progress.
+To start tracking armor sets, you can create a new save file by navigating to **File**, then selecting **New**. Enter your new save file name, pre-configure armor as desired, then click "OK" to create the save file and start tracking progress.
 
-ADD PIC HERE
+<img src="images/new_save.png" alt="drawing" width="600"/>
 
 Highlighting an armor set from the central grid will list its details to the right side of the window, including:
 * Name and Description
@@ -86,29 +91,29 @@ Highlighting an armor set from the central grid will list its details to the rig
 
 You can mark progress on leveling up a given armor set using the bottom controls.
 
-ADD PIC HERE
+<img src="images/armor_details.png" alt="drawing" width="600"/>
 
 By default, all changes are saved automatically. Application settings can be changed under the **Help** menu, via the **Settings** option.
 
-ADD PIC HERE
+<img src="images/application_settings.png" alt="drawing" width="600"/>
 
 ### Tips and Tricks
 
 The following keyboard shortcuts are available as of the latest release:
-| Keypresses | Shortcut |
+| Shortcut | Action |
 | --- | --- |
 | Ctrl + Up | Increase selected armor level |
 | Ctrl + Down | Decrease selected armor level |
 | Ctrl + U | Lock/unlock selected armor |
 | Ctrl + S | Save unsaved changes |
 
-<p align="center">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#totk-armor-tracker">back to top</a>)</p>
 
 ## Contributing
 
 ### Overview
 
-This project is Open Source and is designed to grow with the communities' needs. Any contributions you would like to make are welcomed and appreciated!
+This project is Open Source and is designed to grow with the communities' needs. Any contributions you would like to make are welcomed and appreciated! Feel free to leave a star and show your support.
 
 To submit contributions to the project, do the following:
 1. Fork the [project](https://github.com/noah-black-developer/TOTK-Armor-Tracker)
@@ -127,9 +132,14 @@ For bugs and other issues, please create a new [issue](https://github.com/noah-b
 ### Developer Requirements
 
 To load and build the source code, the following requirements must be installed:
-* 
+* Qt 6.5.3 Open-Source
+    * Many of the following tools can be automatically bundled with Qt when using the Online Installer
+* CMake 3.27.7
+* (For Windows development) MSVC2019 x64
 
-<p align="center">(<a href="#readme-top">back to top</a>)</p>
+Included build.bat or build.sh files can be used to build the project using default Qt tool locations, if desired. However, your mileage may vary.
+
+<p align="right">(<a href="#totk-armor-tracker">back to top</a>)</p>
 
 ## Authors
 
@@ -144,13 +154,18 @@ Reach out to the following contacts with questions or concerns:
 
 For more in-depth descriptions of release versions, see the [releases](https://github.com/noah-black-developer/TOTK-Armor-Tracker/releases) for this project.
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+* v1.0.3
+    * Large performance improvements for armor lists
+    * Modified sort orderings to better fix user expectations
+* v1.0.2
+    * Added auto-save functionality, small UI changes
+    * Minor bugfixes
+* v1.0.1
+    * Added Github actions to automate builds and releases
 * v1.0.0
     * Initial Release
 
-<p align="center">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#totk-armor-tracker">back to top</a>)</p>
 
 ## License
 
@@ -159,17 +174,13 @@ This project is licensed under the GNU GPLv3 License - see the LICENSE file for 
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
-* [Qt6 Documentation](https://doc.qt.io/qt.html)
-    * Base documentation for the Qt Platform.
-* [Qt Quick Homepage](https://doc.qt.io/qt-6.5/qmlapplications.html)
-    * Homepage for the "Qt Quick" declarative language, used for UI implementations within.
-* [RapidXML](https://rapidxml.sourceforge.net/)
-    * A fast, intuitive, and all-around awesome XML parser for C++.
-* [Font Awesome](https://fontawesome.com/)
-    * Source for many amazing icons and .svg images.
-* [README Template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
-    * Basis for the project's README file you are viewing here, and a great starting place for any new Github projects.
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
-    * Another awesome README template - used for ideas and inspiration in this projects homepage.
+| Source | Description |
+| --- | --- |
+| [Qt6 Documentation](https://doc.qt.io/qt.html) | Base documentation for the Qt Platform. |
+| [Qt Quick Homepage](https://doc.qt.io/qt-6.5/qmlapplications.html) | Homepage for the "Qt Quick" declarative language, used for UI implementations within. |
+| [RapidXML](https://rapidxml.sourceforge.net/) | A fast, intuitive, and all-around awesome XML parser for C++. |
+| [Font Awesome](https://fontawesome.com/) | Source for many amazing icons and .svg images. |
+| [README Template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc) | Basis for the project's README file you are viewing here, and a great starting place for any new Github projects. |
+| [Best-README-Template](https://github.com/othneildrew/Best-README-Template) | Another awesome README template - used for ideas and inspiration in this projects homepage. |
 
-<p align="center">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#totk-armor-tracker">back to top</a>)</p>
