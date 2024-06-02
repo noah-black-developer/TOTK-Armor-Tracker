@@ -82,6 +82,12 @@ This project is licensed under the GNU GPLv3 License - see the LICENSE file for 
 
 Inspiration, code snippets, etc.
 * [Qt6 Documentation](https://doc.qt.io/qt.html)
+    * Base documentation for the Qt Platform.
 * [Qt Quick Homepage](https://doc.qt.io/qt-6.5/qmlapplications.html)
+    * Homepage for the "Qt Quick" declarative language, used for UI implementation in the project.
+* [RapidXML](https://rapidxml.sourceforge.net/)
+    * A fast, intuitive, and all-around awesome XML parser for C++.
 * [Font Awesome](https://fontawesome.com/)
+    * Source for many amazing icons and .svg images used in the project.
 * [README Template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
+    * Basis for the project's README file you are viewing here, and a great starting place for any new Github projects.
