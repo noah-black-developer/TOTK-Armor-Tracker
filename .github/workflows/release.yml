@@ -24,7 +24,7 @@ jobs:
 
       # TESTING - Print out required outputs and commands.
       - name: TESTING GIT COMMANDS
-        run: git cherry -v ${{ github.event.pull_request.head.ref }} main
+        run: git cherry -v fix/release_desc_not_listing_commits main
 
       # # Use 'git cherry' to print and store a fill log of all commits in this release.
       # - name: Store commit log as env variable
