@@ -154,6 +154,9 @@ Reach out to the following contacts with questions or concerns:
 
 For more in-depth descriptions of release versions, see the [releases](https://github.com/noah-black-developer/TOTK-Armor-Tracker/releases) for this project.
 
+* v1.1.0
+    * Similar performance improvements for "new save" dialogs
+    * README updates, build updates
 * v1.0.3
     * Large performance improvements for armor lists
     * Modified sort orderings to better fix user expectations
