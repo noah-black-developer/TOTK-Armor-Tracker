@@ -25,6 +25,7 @@ jobs:
       # TESTING - Print out required outputs and commands.
       - name: TESTING GIT COMMANDS
         run: |
+          git fetch main
           git status
           git branch -a
           git cherry -v
