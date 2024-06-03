@@ -27,8 +27,8 @@ jobs:
       # TESTING - Print out required outputs and commands.
       - name: TESTING GIT COMMANDS
         run: |
-          git cherry -v remotes/origin/main fix/release_desc_not_listing_commits
-          echo "commit_log=$(git cherry -v remotes/origin/main fix/release_desc_not_listing_commits)" >> "$GITHUB_ENV"
+          git cherry -v remotes/origin/main fix/release_desc_not_listing_commits >> temp.txt
+          echo "commit_log=$(cat temp.txt)" >> "$GITHUB_ENV"
           
       - name: TEST2
         run: |
