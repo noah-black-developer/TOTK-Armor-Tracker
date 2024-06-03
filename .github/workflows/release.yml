@@ -28,7 +28,7 @@ jobs:
       - name: TESTING GIT COMMANDS
         run: |
           echo "commit_log=$(git cherry -v remotes/origin/main fix/release_desc_not_listing_commits)" >> "$GITHUB_ENV"
-          git log --onefile
+          git log --oneline
           git cherry -v
           git cherry -v fix/release_desc_not_listing_commits remotes/origin/main
           git cherry -v remotes/origin/main fix/release_desc_not_listing_commits
