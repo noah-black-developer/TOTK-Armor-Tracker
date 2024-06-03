@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo }}
+          ref: ${{ github.event.pull_request.base.ref }}
 
       # Use 'git log' to print and store a fill log of all commits in this release.
       - name: Store commit history in local file
