@@ -7,11 +7,28 @@ on:
     branches:
       - 'main'
 
+env:
+  # Default value given to the commit log, in cases where issues occur.
+  commit_log: "UNAVAILABLE"
+
 jobs:
   release:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.ref }}
+
+      # Use 'git log' to print and store a fill log of all commits in this release.
+      - name: Store commit history in local file
+        run: git log main.. --oneline >> commit_history.txt
+
+      - name: Store commit log as env variable
+        run: echo "commit_log=$(cat commit_history.txt)" >> "$GITHUB_ENV"
+
+      # Get build artifacts from previous project builds, across all platforms.
       - name: Download artifacts from Linux builds
         uses: dawidd6/action-download-artifact@v3
         with:
@@ -42,6 +59,10 @@ jobs:
           release_name: Release ${{ github.event.pull_request.head.ref }}
           draft: false
           prerelease: false
+          body: |
+            Changes in this release:
+            
+            ${{ env.commit_log }}
 
       - name: Upload Windows Bundle
         id: upload-windows-release
