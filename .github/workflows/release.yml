@@ -22,11 +22,8 @@ jobs:
           ref: ${{ github.event.pull_request.base.ref }}
 
       # Use 'git log' to print and store a fill log of all commits in this release.
-      - name: Store commit history in local file
-        run: git log main.. --oneline >> commit_history.txt
-
       - name: Store commit log as env variable
-        run: echo "commit_log=$(cat commit_history.txt)" >> "$GITHUB_ENV"
+        run: echo "commit_log=$(git log main.. --oneline)" >> "$GITHUB_ENV"
 
       # Get build artifacts from previous project builds, across all platforms.
       - name: Download artifacts from Linux builds
