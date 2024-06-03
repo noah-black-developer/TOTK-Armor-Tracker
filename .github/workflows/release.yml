@@ -27,11 +27,11 @@ jobs:
       # TESTING - Print out required outputs and commands.
       - name: TESTING GIT COMMANDS
         run: |
-          git status
-          git branch -a
-          # git cherry -v
-          # git cherry -v fix/release_desc_not_listing_commits
           git cherry -v fix/release_desc_not_listing_commits remotes/origin/main
+          echo "commit_log=$(git cherry -v fix/release_desc_not_listing_commits remotes/origin/main)" >> "$GITHUB_ENV"
+      - name: TEST2
+        run: |
+          echo ${{ env.commit_log }}
 
       # # Use 'git cherry' to print and store a fill log of all commits in this release.
       # - name: Store commit log as env variable
