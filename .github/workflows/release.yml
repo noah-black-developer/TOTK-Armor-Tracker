@@ -28,11 +28,10 @@ jobs:
       - name: TESTING GIT COMMANDS
         run: |
           git cherry -v remotes/origin/main fix/release_desc_not_listing_commits >> temp.txt
-          echo "$(cat temp.txt)"
-          # echo "commit_log=$(cat temp.txt)" >> "$GITHUB_ENV"
+          # echo "commit_log=$(cat temp.txt | tr + -)" >> "$GITHUB_ENV"
           {
             echo 'commit_log<<EOF'
-            cat temp.txt
+            cat temp.txt | tr + -
             echo EOF
           } >> "$GITHUB_ENV"
           
