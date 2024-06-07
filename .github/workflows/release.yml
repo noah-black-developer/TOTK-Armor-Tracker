@@ -26,7 +26,7 @@ jobs:
       # Use 'git cherry' to print and store a fill log of all commits in this release.
       - name: Store commit log as env variable
         run: |
-          git cherry -v remotes/origin/main ${{ github.event.pull_request.head.ref }}" >> temp.txt
+          git cherry -v remotes/origin/main ${{ github.event.pull_request.head.ref }} >> temp.txt
           {
             echo "commit_log<<EOF"
             cat temp.txt
