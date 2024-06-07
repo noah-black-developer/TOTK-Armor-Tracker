@@ -38,7 +38,7 @@ jobs:
           
       - name: TEST2
         run: |
-          echo ${{ env.commit_log }}
+          echo "${{ env.commit_log }}"
 
       # # Use 'git cherry' to print and store a fill log of all commits in this release.
       # - name: Store commit log as env variable
