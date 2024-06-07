@@ -19,14 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.ref }}
+          ref: ${{ github.event.pull_request.head.ref }}
           # Fetch entire commit history
           fetch-depth: 0
 
       # Use 'git cherry' to print and store a fill log of all commits in this release.
       - name: Store commit log as env variable
         run: |
-          echo "commit_log=$(git cherry -v remotes/origin/main ${{ github.event.pull_request.head.ref }})" >> temp.txt
+          git cherry -v remotes/origin/main ${{ github.event.pull_request.head.ref }}" >> temp.txt
           {
             echo "commit_log<<EOF"
             cat temp.txt
