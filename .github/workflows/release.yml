@@ -24,80 +24,70 @@ jobs:
           # Fetch entire commit history
           fetch-depth: 0
 
-      # TESTING - Print out required outputs and commands.
-      - name: TESTING GIT COMMANDS
+      # Use 'git cherry' to print and store a fill log of all commits in this release.
+      - name: Store commit log as env variable
         run: |
-          git cherry -v remotes/origin/main fix/release_desc_not_listing_commits >> temp.txt
-          echo "$(cat temp.txt)"
-          # echo "commit_log=$(cat temp.txt)" >> "$GITHUB_ENV"
+          echo "commit_log=$(git cherry -v remotes/origin/main ${{ github.event.pull_request.head.ref }})" >> temp.txt
           {
-            echo 'commit_log<<EOF'
+            echo "commit_log<<EOF"
             cat temp.txt
             echo EOF
           } >> "$GITHUB_ENV"
+
+      # Get build artifacts from previous project builds, across all platforms.
+      - name: Download artifacts from Linux builds
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          branch: ${{ github.event.pull_request.head.ref }}
+          workflow_search: false
+          workflow_conclusion: success
+          name: TotkArmorTracker_Linux
           
-      - name: TEST2
-        run: |
-          echo "${{ env.commit_log }}"
+      - name: Download artifacts from Windows builds
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          branch: ${{ github.event.pull_request.head.ref }}
+          workflow_search: false
+          workflow_conclusion: success
+          name: TotkArmorTracker_Windows
 
-      # # Use 'git cherry' to print and store a fill log of all commits in this release.
-      # - name: Store commit log as env variable
-      #   run: echo "commit_log=$(git cherry -v main ${{ github.event.pull_request.head.ref }})" >> "$GITHUB_ENV"
-
-      # # Get build artifacts from previous project builds, across all platforms.
-      # - name: Download artifacts from Linux builds
-      #   uses: dawidd6/action-download-artifact@v3
-      #   with:
-      #     github_token: ${{secrets.GITHUB_TOKEN}}
-      #     workflow: build.yml
-      #     branch: ${{ github.event.pull_request.head.ref }}
-      #     workflow_search: false
-      #     workflow_conclusion: success
-      #     name: TotkArmorTracker_Linux
-          
-      # - name: Download artifacts from Windows builds
-      #   uses: dawidd6/action-download-artifact@v3
-      #   with:
-      #     github_token: ${{secrets.GITHUB_TOKEN}}
-      #     workflow: build.yml
-      #     branch: ${{ github.event.pull_request.head.ref }}
-      #     workflow_search: false
-      #     workflow_conclusion: success
-      #     name: TotkArmorTracker_Windows
-
-      # - name: Create new release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.event.pull_request.head.ref }}
-      #     release_name: Release ${{ github.event.pull_request.head.ref }}
-      #     draft: false
-      #     prerelease: false
-      #     body: |
-      #       Changes in this release:
+      - name: Create new release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.pull_request.head.ref }}
+          release_name: Release ${{ github.event.pull_request.head.ref }}
+          draft: false
+          prerelease: false
+          body: |
+            Changes in this release:
             
-      #       ${{ env.commit_log }}
+            ${{ env.commit_log }}
 
-      # - name: Upload Windows Bundle
-      #   id: upload-windows-release
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: TotkArmorTracker_Windows.zip
-      #     asset_name: TotkArmorTracker_Windows.zip
-      #     asset_content_type: application/zip
+      - name: Upload Windows Bundle
+        id: upload-windows-release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_Windows.zip
+          asset_name: TotkArmorTracker_Windows.zip
+          asset_content_type: application/zip
 
-      # - name: Upload Linux Bundle
-      #   id: upload-linux-release
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: TotkArmorTracker_Linux.zip
-      #     asset_name: TotkArmorTracker_Linux.zip
-      #     asset_content_type: application/zip
+      - name: Upload Linux Bundle
+        id: upload-linux-release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_Linux.zip
+          asset_name: TotkArmorTracker_Linux.zip
+          asset_content_type: application/zip
