@@ -686,17 +686,6 @@ ApplicationWindow {
                                     color: Material.iconDisabledColor
                                     radius: delegateArmorImageBackground.radius
                                     visible: !isUnlocked
-
-                                    IconImage {
-                                        anchors.centerIn: parent
-                                        width: parent.width - 25
-                                        height: parent.height - 25
-                                        sourceSize.width: width
-                                        sourceSize.height: height
-                                        source: lockIconPrerendered.source
-                                        color: Material.dialogColor
-                                        opacity: 0.7
-                                    }
                                 }
                             }
                         }
