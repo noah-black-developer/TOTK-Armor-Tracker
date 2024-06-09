@@ -1338,9 +1338,11 @@ ApplicationWindow {
 
                 onClicked: {
                     // Reference the current selected armor, make changes, then revert the selection.
-                    var currentArmorName = grid.currentItem.armorName;
-                    appController.decreaseArmorLevel(currentArmorName);
-                    grid.setCurrentItemByName(currentArmorName);
+                    var currentArmor = grid.currentItem;
+                    if (currentArmor.armorIsUpgradeable) {
+                        appController.decreaseArmorLevel(currentArmor.armorName);
+                        grid.setCurrentItemByName(currentArmor.armorName);
+                    }
                 }
             }
 
@@ -1370,9 +1372,11 @@ ApplicationWindow {
 
                 onClicked: {
                     // Reference the current selected armor, make changes, then revert the selection.
-                    var currentArmorName = grid.currentItem.armorName;
-                    appController.increaseArmorLevel(currentArmorName);
-                    grid.setCurrentItemByName(currentArmorName);
+                    var currentArmor = grid.currentItem;
+                    if (currentArmor.armorIsUpgradeable) {
+                        appController.increaseArmorLevel(currentArmor.armorName);
+                        grid.setCurrentItemByName(currentArmor.armorName);
+                    }
                 }
             }
         }
