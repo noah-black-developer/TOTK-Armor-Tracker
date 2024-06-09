@@ -24,6 +24,8 @@ ApplicationWindow {
 
     width: 1200
     height: 800
+    minimumWidth: 700
+    minimumHeight: 500
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
@@ -142,7 +144,11 @@ ApplicationWindow {
 
         title: "Load Save File"
         // The save folder needs to be given the "file" schema to allow the path to be read in as url.
-        currentFolder: "file://" + savesFolderPath
+        currentFolder: {
+            // If running on Windows OS, an additional slash is required for the path expression.
+            var filePrefix = (Qt.platform.os === "windows") ? "file:///" : "file://";
+            filePrefix + savesFolderPath;
+        }
         // Limit file selection to only matching file extensions.
         nameFilters: ["Save Files (*.save)"]
 
@@ -505,6 +511,13 @@ ApplicationWindow {
                     }
                 }
 
+                // Pre-rendered lock icon for items in the list.
+                IconImage {
+                    id: lockIconPrerendered
+                    source: "images/lock-solid.svg"
+                    visible: false
+                }
+
                 GridView {
                     id: grid
 
@@ -612,45 +625,66 @@ ApplicationWindow {
                                 verticalCenter: parent.verticalCenter
                             }
 
-                            Image {
-                                id: delegateArmorImage
+                            // Icon Background.
+                            Rectangle {
+                                id: delegateArmorImageBackground
 
-                                Layout.preferredWidth: 60;
-                                Layout.preferredHeight: 60;
-                                sourceSize.width: 60
-                                sourceSize.height: 60
+                                Layout.preferredWidth: 65
+                                Layout.preferredHeight: 65
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                                asynchronous: true
-                                cache: true
+                                color: Material.backgroundColor
+                                radius: 5
 
-                                // Armor Level Indicator.
-                                Rectangle {
-                                    anchors {
-                                        right: parent.right
-                                        top: parent.top
-                                        rightMargin: 5
-                                        topMargin: 5
-                                    }
-                                    width: 15
-                                    height: 15
-                                    radius: 5
-                                    color: Material.accentColor
-                                    visible: isUpgradeable && isUnlocked
+                                // Armor Image + Overlays.
+                                Image {
+                                    id: delegateArmorImage
 
-                                    Text {
-                                        anchors.fill: parent
-                                        text: level
-                                        font.pointSize: 8
-                                        horizontalAlignment: Qt.AlignHCenter
-                                        color: Material.Grey
+                                    anchors.centerIn: parent
+                                    width: 60
+                                    height: 60
+                                    sourceSize.width: width
+                                    sourceSize.height: height
+                                    asynchronous: true
+                                    cache: true
+
+                                    // Armor Level Indicator.
+                                    Item {
+                                        id: delegateLevelIndicator
+
+                                        anchors {
+                                            right: parent.right
+                                            bottom: parent.bottom
+                                            rightMargin: 2
+                                            bottomMargin: 2
+                                        }
+                                        width: 15
+                                        height: 15
+                                        visible: isUpgradeable && isUnlocked
+
+                                        Rectangle {
+                                            anchors.fill: parent
+                                            radius: 5
+                                            color: Material.backgroundColor
+                                            opacity: 0.9
+                                        }
+
+                                        Text {
+                                            anchors.fill: parent
+                                            text: level
+                                            font.pointSize: 10
+                                            font.bold: true
+                                            horizontalAlignment: Qt.AlignHCenter
+                                            verticalAlignment: Qt.AlignVCenter
+                                            color: Material.primaryTextColor
+                                        }
                                     }
                                 }
 
                                 // "Locked" overlay.
                                 Rectangle {
                                     anchors.fill: parent
-                                    color: "gray"
-                                    opacity: 0.5
+                                    color: Material.iconDisabledColor
+                                    radius: delegateArmorImageBackground.radius
                                     visible: !isUnlocked
                                 }
                             }
@@ -668,7 +702,19 @@ ApplicationWindow {
                             }
                         }
                     }
-                    highlight: Rectangle { color: Material.accentColor; radius: 5 }
+                    highlight: Rectangle {
+                        color: Material.accentColor
+                        radius: 8
+
+                        Rectangle {
+                            anchors {
+                                fill: parent
+                                margins: 1
+                            }
+                            color: gridBackground.color
+                            radius: 7
+                        }
+                    }
                     highlightMoveDuration: 40
 
                     // If user has not yet loaded a save, disable view and display following label.
@@ -854,7 +900,7 @@ ApplicationWindow {
                                 text: (grid.currentItem == null) ? "" : grid.currentItem.armorPassiveBonus
                                 font.pointSize: 9
                                 elide: Label.ElideRight
-                                horizontalAlignment: Qt.AlignHCenter
+                                horizontalAlignment: Qt.AlignLeft
                                 verticalAlignment: Qt.AlignVCenter
 
                                 ToolTip.text: text
@@ -1292,9 +1338,11 @@ ApplicationWindow {
 
                 onClicked: {
                     // Reference the current selected armor, make changes, then revert the selection.
-                    var currentArmorName = grid.currentItem.armorName;
-                    appController.decreaseArmorLevel(currentArmorName);
-                    grid.setCurrentItemByName(currentArmorName);
+                    var currentArmor = grid.currentItem;
+                    if (currentArmor.armorIsUpgradeable) {
+                        appController.decreaseArmorLevel(currentArmor.armorName);
+                        grid.setCurrentItemByName(currentArmor.armorName);
+                    }
                 }
             }
 
@@ -1324,9 +1372,11 @@ ApplicationWindow {
 
                 onClicked: {
                     // Reference the current selected armor, make changes, then revert the selection.
-                    var currentArmorName = grid.currentItem.armorName;
-                    appController.increaseArmorLevel(currentArmorName);
-                    grid.setCurrentItemByName(currentArmorName);
+                    var currentArmor = grid.currentItem;
+                    if (currentArmor.armorIsUpgradeable) {
+                        appController.increaseArmorLevel(currentArmor.armorName);
+                        grid.setCurrentItemByName(currentArmor.armorName);
+                    }
                 }
             }
         }
