@@ -29,7 +29,7 @@ ApplicationWindow {
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
-    color: Material.backgroundColor
+    color: Material.backgroundColor.darker(1.05)
 
     // KEYBOARD SHORTCUTS.
     // Ctrl + S is used to save the user's current changes.
@@ -398,7 +398,7 @@ ApplicationWindow {
                     right: parent.right
                     top: parent.top
                 }
-                color: Material.dividerColor
+                color: Material.dividerColor.lighter(1.5)
                 radius: 5
 
                 GridLayout {
@@ -482,7 +482,7 @@ ApplicationWindow {
                     bottom: parent.bottom
                     topMargin: 10
                 }
-                color: Material.dividerColor
+                color: Material.dividerColor.lighter(1.5)
                 radius: 5
 
                 // Pre-rendering for all images in the grid.
@@ -612,6 +612,11 @@ ApplicationWindow {
                             }
                         }
 
+                        function isCompleted() {
+                            // Returns true if the current armor piece is fully upgraded. Otherwise, false.
+                            return (armorItem.armorIsUnlocked && ((armorItem.armorLevel >= appRoot.maximumArmorLevel) || (!armorItem.armorIsUpgradeable)));
+                        }
+
                         // Update the image anytime an icon moves around the grid.
                         Component.onCompleted: updateImage();
                         onArmorNameChanged: updateImage();
@@ -634,6 +639,16 @@ ApplicationWindow {
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                                 color: Material.backgroundColor
                                 radius: 5
+
+                                // Icon drop shadow.
+                                Rectangle {
+                                    anchors.centerIn: parent
+                                    width: parent.width + 6
+                                    height: parent.height + 6
+                                    color: Material.dropShadowColor
+                                    opacity: 0.4
+                                    radius: 6
+                                }
 
                                 // Armor Image + Overlays.
                                 Image {
@@ -664,7 +679,7 @@ ApplicationWindow {
                                         Rectangle {
                                             anchors.fill: parent
                                             radius: 5
-                                            color: Material.backgroundColor
+                                            color: (armorItem.isCompleted()) ? Material.primaryColor : Material.backgroundColor
                                             opacity: 0.9
                                         }
 
@@ -678,6 +693,19 @@ ApplicationWindow {
                                             color: Material.primaryTextColor
                                         }
                                     }
+                                }
+
+                                // Icon frame overlay.
+                                Rectangle {
+                                    anchors {
+                                        fill: parent
+                                        margins: 2
+                                    }
+                                    color: "transparent"
+                                    border.color: (armorItem.isCompleted()) ? Material.primaryColor : Material.dividerColor
+                                    border.width: 3
+                                    radius: 4
+                                    opacity: 0.5
                                 }
 
                                 // "Locked" overlay.
@@ -786,7 +814,7 @@ ApplicationWindow {
                         fill: parent
                         margins: 5
                     }
-                    color: Material.dividerColor
+                    color: Material.dividerColor.lighter(1.5)
                     radius: 3
 
                     ScrollView {
