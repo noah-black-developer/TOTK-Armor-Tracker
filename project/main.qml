@@ -105,6 +105,9 @@ ApplicationWindow {
     // DIALOG WINDOWS.
     NewSaveDialog {
         id: createNewSaveDialog
+
+        width: appRoot.width - 100
+        height: appRoot.height - 100
     }
 
     SettingsDialog {
@@ -112,6 +115,9 @@ ApplicationWindow {
 
         property bool themeInit: false
         property bool autoSaveInit: false
+
+        width: (appRoot.width - 200 < 400) ? appRoot.width - 200 : 400
+        height: (appRoot.height - 200 < 600) ? appRoot.height - 200 : 600
 
         // Set default selections when menu is first created.
         Component.onCompleted: {
@@ -245,6 +251,10 @@ ApplicationWindow {
         }
     }
 
+    UpdateAppDialog {
+        id: updateAppDialog
+    }
+
     // MENU OPTIONS.
     menuBar: MenuBar {
         id: menuBar
@@ -329,6 +339,11 @@ ApplicationWindow {
                 text: "Settings"
                 onTriggered: settingsDialog.open()
             }
+            Action {
+                text: "Update"
+                onTriggered: updateAppDialog.open()
+            }
+
             MenuSeparator { }
             Action {
                 text: "About"
@@ -1156,15 +1171,15 @@ ApplicationWindow {
                                                 }
                                                 color: armorUpgradeRect.textColor
                                             }
-                                            AppIcon {
+                                            IconImage {
                                                 id: upgradeRupeeCostIcon
 
                                                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
                                                 // Icon size + ratio is fixed to prevent resizing issues.
                                                 Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                 Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                icon.source: "images/rupee-lightmode.svg"
-                                                icon.color: armorUpgradeRect.textColor
+                                                source: "images/rupee-lightmode.svg"
+                                                color: armorUpgradeRect.textColor
                                             }
                                         }
 

@@ -11,8 +11,6 @@ Dialog {
 
     signal newSaveCreated(string name)
 
-    width: parent.width - 100
-    height: parent.height - 100
     anchors.centerIn: parent
     title: "Create New Save"
     standardButtons: Dialog.Ok | Dialog.Cancel
