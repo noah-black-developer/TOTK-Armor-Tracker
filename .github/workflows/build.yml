@@ -114,13 +114,13 @@ jobs:
         version: '6.5.3'
         host: 'mac'
         target: 'desktop'
-        arch: 'gcc_64'
+        arch: 'clang_64'
 
     - name: Create bin dir
       run: mkdir bin
       
     - name: Run qmake
-      run: qmake ../project/TotkArmorTracker.pro -spec linux-g++ CONFIG+=qtquickcompiler
+      run: qmake ../project/TotkArmorTracker.pro CONFIG+=qtquickcompiler
       working-directory: ./bin
 
     - name: Build project
