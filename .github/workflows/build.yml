@@ -98,3 +98,43 @@ jobs:
       with:
         name: TotkArmorTracker_Windows
         path: TotkArmorTracker_Windows.zip
+
+  # Build steps for MacOS executables. Compiles and packages the app as an archived .zip file.
+  build_macos:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        aqtversion: '==3.1.*'
+        version: '6.5.3'
+        host: 'mac'
+        target: 'desktop'
+        arch: 'clang_64'
+
+    - name: Create bin dir
+      run: mkdir bin
+      
+    - name: Run qmake
+      run: qmake ../project/TotkArmorTracker.pro CONFIG+=qtquickcompiler
+      working-directory: ./bin
+
+    - name: Build project
+      run: make -j
+      working-directory: ./bin
+
+    - name: Zip release package
+      run: 7z a TotkArmorTracker_MacOS.zip ./bin/* ./bin/**/*
+
+    - name: Archive resulting executableS
+      uses: actions/upload-artifact@v4
+      with:
+        name: TotkArmorTracker_MacOS
+        path: TotkArmorTracker_MacOS.zip
+
+
+
