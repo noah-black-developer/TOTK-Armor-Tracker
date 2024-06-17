@@ -770,3 +770,39 @@ bool AppController::setAutoSaveSetting(bool autoSave, bool setDefaults)
         return true;
     }
 }
+
+bool AppController::isGivenUpdatePackageValid(QString updatePackagePath)
+{
+    // TODO.
+    return false;
+}
+
+bool AppController::isGivenExternalAppValid(QString externalTotkAppPath)
+{
+    // TODO.
+    return false;
+}
+
+bool AppController::updateAppVersion(QString updatePackagePath)
+{
+    // TODO.
+    return false;
+}
+
+QList<QString> AppController::getSaveFileListFromExternalApp(QString externalTotkAppPath)
+{
+    // TODO.
+    return QList<QString>();
+}
+
+bool AppController::importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
+{
+    // TODO.
+    return false;
+}
+
+bool AppController::exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
+{
+    // TODO.
+    return false;
+}

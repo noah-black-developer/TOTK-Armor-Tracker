@@ -78,6 +78,17 @@ public:
     Q_INVOKABLE bool setAppTheme(QString themeName, bool setDefaults = false);
     Q_INVOKABLE bool setAutoSaveSetting(bool autoSaveEnabled, bool setDefaults = false);
 
+    // APP UPDATE/IMPORT/EXPORT SETTINGS.
+    // Methods to validate a given path points to update packages, other app versions, etc.
+    Q_INVOKABLE bool isGivenUpdatePackageValid(QString updatePackagePath);
+    Q_INVOKABLE bool isGivenExternalAppValid(QString externalTotkAppPath);
+    // Methods to modify/update the application version.
+    Q_INVOKABLE bool updateAppVersion(QString updatePackagePath);
+    // Methods to import/export save files from this app to other apps locally.
+    Q_INVOKABLE QList<QString> getSaveFileListFromExternalApp(QString externalTotkAppPath);
+    Q_INVOKABLE bool importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
+    Q_INVOKABLE bool exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
+
     // Q_PROPERTY OBJECTS.
     QString saveName = "";
     QList<QString> recentSaveNames = QList<QString>();
