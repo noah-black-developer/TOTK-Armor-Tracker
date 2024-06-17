@@ -6,10 +6,9 @@ import QtQuick.Dialogs
 Dialog {
     id: updateAppDialog
 
-    width: 400
-    height: 600
+    width: 350
+    height: 500
     anchors.centerIn: parent
-    title: "Update Application"
     standardButtons: Dialog.Close
 
     // Dialog for selecting new update files.
@@ -28,27 +27,30 @@ Dialog {
             fill: parent
             margins: 10
         }
+        spacing: 0
 
-        // Update selection.
-        RowLayout {
-            id: updateSelectRow
+        // Update Visuals. Includes map of potential inputs/outputs.
+        Text {
+            id: currentVersionLabel
 
             Layout.fillWidth: true
-            Layout.preferredHeight: 20
+            Layout.alignment: Qt.AlignHCenter
+            text: "Current Version:"
+            horizontalAlignment: Qt.AlignHCenter
+            color: Material.primaryTextColor
+            font.bold: true
+            font.pointSize: 12
+        }
+        Text {
+            id: currentVersionText
 
-            TextField {
-                id: updateSelectTextEdit
-
-                Layout.fillWidth: true
-                placeholderText: "Update Package"
-            }
-
-            Button {
-                id: updateSelectNewButton
-
-                text: "Select"
-                onClicked: selectUpdateFileDialog.open()
-            }
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 5
+            text: appController.appVersion
+            horizontalAlignment: Qt.AlignHCenter
+            color: Material.primaryTextColor
+            font.pointSize: 12
         }
 
         // Separator.
@@ -56,28 +58,127 @@ Dialog {
             id: updateSelectSeparator
 
             Layout.fillWidth: true
+            Layout.topMargin: 10
+            Layout.bottomMargin: 10
             Layout.preferredHeight: 2
             color: Material.dividerColor
         }
 
-        // Update Visuals. Includes map of potential inputs/outputs.
+        // Version update controls, etc.
         Text {
-            text: "<b>Current Version:</b> " + appController.appVersion
-            color: Material.primaryTextColor
+            id: updateControlsLabel
+
             Layout.fillWidth: true
-        }
-        Text {
-            text: "<b>New Version:</b> ..."
-            color: Material.primaryTextColor
-            Layout.fillWidth: true
+            Layout.preferredHeight: 20
+            Layout.leftMargin: 30
+            Layout.rightMargin: 30
+            Layout.alignment: Qt.AlignLeft
+            text: "Updating the App"
+            horizontalAlignment: Qt.AlignLeft
+            font.italic: true
+            color: Material.secondaryTextColor
+            font.pointSize: 10
         }
 
-        // Control Buttons.
+        Button {
+            id: updateVersionButton
 
+            Layout.fillWidth: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
+            Layout.alignment: Qt.AlignHCenter
+            text: "Update App Version"
+        }
+
+        // Save manipulation controls.
+        Text {
+            id: manipulateSavesLabel
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: 20
+            Layout.leftMargin: 30
+            Layout.rightMargin: 30
+            Layout.alignment: Qt.AlignLeft
+            text: "Move Existing Save Files"
+            horizontalAlignment: Qt.AlignLeft
+            font.italic: true
+            color: Material.secondaryTextColor
+            font.pointSize: 10
+        }
+
+        Button {
+            id: importSavesButton
+
+            Layout.fillWidth: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
+            Layout.bottomMargin: -5
+            Layout.alignment: Qt.AlignHCenter
+            text: "Import Saves"
+        }
+        Button {
+            id: exportSavesButton
+
+            Layout.fillWidth: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
+            Layout.alignment: Qt.AlignHCenter
+            text: "Export Saves"
+        }
+
+        // Backup/loading controls.
+        Text {
+            id: backupsLabel
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: 20
+            Layout.leftMargin: 30
+            Layout.rightMargin: 30
+            Layout.alignment: Qt.AlignLeft
+            text: "Data Backups"
+            horizontalAlignment: Qt.AlignLeft
+            font.italic: true
+            color: Material.secondaryTextColor
+            font.pointSize: 10
+        }
+
+        Button {
+            id: createBackupButton
+
+            Layout.fillWidth: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
+            Layout.bottomMargin: -5
+            Layout.alignment: Qt.AlignHCenter
+            text: "Create Save Backup"
+
+            // CURRENTLY UNSUPPORTED.
+            enabled: false
+        }
+        Button {
+            id: importBackupButton
+
+            Layout.fillWidth: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
+            Layout.alignment: Qt.AlignHCenter
+            text: "Import Save Backup"
+
+            // CURRENTLY UNSUPPORTED.
+            enabled: false
+        }
 
         // Spacing object - pushes up all other elements.
         Item {
             Layout.fillHeight: true
+        }
+
+        // Default tooltip display location.
+        Item {
+            id: tooltipDisplayItem
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: 20
         }
     }
 }
