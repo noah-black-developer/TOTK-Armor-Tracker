@@ -1,6 +1,7 @@
 #include <rapidxml-1.13/rapidxml.hpp>
 #include <rapidxml-1.13/rapidxml_print.hpp>
 
+// HELPER FUNCTIONS.
 // Load in an XML file at given path and convert it to a parse-ready char vector.
 // Inputs:
 //  xmlFilePath - Path to the XML file as a QString.
@@ -48,7 +49,8 @@ inline bool readXmlToParseReadyObj(QString xmlFilePath, std::vector<char> &parse
 
 // Function to check for the existance of a file in the local file system.
 // https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exists-using-standard-c-c11-14-17-c
-inline bool fileExists (const std::string& name) {
+inline bool fileExists (const std::string& name)
+{
     if (FILE *file = fopen(name.c_str(), "r")) {
         fclose(file);
         return true;

@@ -2,6 +2,17 @@
 
 AppController::AppController(QObject *parent) : QObject{parent}
 {
+    // Define internal variables based on compiled version.
+    #ifdef Q_OS_LINUX
+        _platform = "linux";
+    #elif defined(Q_OS_WINDOWS)
+        _platform = "windows";
+    #elif defined(Q_WS_MACX)
+        _platform = "macos";
+    #else
+        _platform = "unknown";
+    #endif
+
     // Initialize data models and sort/filter wrappers.
     ArmorSortFilter *mainArmorDataSort = new ArmorSortFilter(new ArmorData());
     _armorData = mainArmorDataSort;
@@ -9,7 +20,9 @@ AppController::AppController(QObject *parent) : QObject{parent}
     _newSaveArmorData = newSaveArmorDataSort;
 
     // Attempt to load in local app configs.
-    loadAppConfig("appData.xml");  
+    loadAppConfig("appData.xml");
+
+    qDebug() << _platform;
 }
 
 AppController::~AppController()
@@ -771,22 +784,60 @@ bool AppController::setAutoSaveSetting(bool autoSave, bool setDefaults)
     }
 }
 
-bool AppController::isGivenUpdatePackageValid(QString updatePackagePath)
+bool AppController::isGivenUpdatePackageValid(QString updatePackagePath, bool verifyPlatform)
 {
-    // TODO.
-    return false;
+    // Validate that the given file path exists.
+    if (!fileExists(updatePackagePath.toStdString()))
+    {
+        return false;
+    }
+
+    // Assemble a match string to verify that a valid installer was given.
+    // If strict platform validation is enabled, build a fill file name. Otherwise, wildcard-match the update package
+    // without restricting to any specific platform type (ex. Linux, Windows, etc).
+    if (verifyPlatform)
+    {
+        updatePackageMatchStr = APP_PACKAGE_BASE + _platform.toUpper() + ".zip";
+    }
+    else {
+        updatePackageMatchStr = APP_PACKAGE_BASE + "*" + ".zip";
+    }
+
+    // Validate the given update package against expected naming conventions. If no match is found, return a failure.
+    QString updatePackageName = QFileInfo(updatePackagePath).fileName();
+    QRegularExpression updatePackageRegex = QRegularExpression(updatePackageMatchStr);
+    QRegularExpressionMatch updatePackageMatch = updatePackageRegex.match(updatePackageName);
+    if (!updatePackageMatch.hasMatch())
+    {
+        return false;
+    }
+
+    return true;
 }
 
 bool AppController::isGivenExternalAppValid(QString externalTotkAppPath)
 {
-    // TODO.
-    return false;
+    // Validate that the given file path exists, and correctly points to a valid file.
+    if (!fileExists(externalTotkAppPath.toStdString()))
+    {
+        return false;
+    }
+
+    // Validate the given path points to an execurable matching expected naming.
+    QString appName = QFileInfo(externalTotkAppPath).fileName();
+    bool fileIsValidApp = (appName == "TotkArmorTracker.exe");
+    if (!fileIsValidApp)
+    {
+        return false;
+    }
+
+    return true;
 }
 
-bool AppController::updateAppVersion(QString updatePackagePath)
+void AppController::launchUpdateApplication()
 {
     // TODO.
-    return false;
+    return;
 }
 
 QList<QString> AppController::getSaveFileListFromExternalApp(QString externalTotkAppPath)
@@ -795,13 +846,74 @@ QList<QString> AppController::getSaveFileListFromExternalApp(QString externalTot
     return QList<QString>();
 }
 
-bool AppController::importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
+int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
 {
-    // TODO.
-    return false;
+    // VALIDATE INPUTS.
+    // Verify the given application path is valid before continuing.
+    if (!isGivenExternalAppValid(externalTotkAppPath))
+    {
+        // Return 3 to indicate a failure related to invalid inputs.
+        return 3;
+    }
+
+    // Construct a path to the app's save folder. If one does not yet exist, return a failure.
+    QDir appDir = QFileInfo(externalTotkAppPath).absoluteDir();
+    bool savesFolderExists = appDir.cd("saves");
+    if (!savesFolderExists)
+    {
+        // Return 2 to indicate that the given save file, by name, does not exist.
+        return 2;
+    }
+
+    // Validate that the given save file, by name, exists within the remote application. If not, return a failure.
+    appDir.cd(saveFileName);
+    bool givenSaveExists = appDir.exists();
+    if (!givenSaveExists)
+    {
+        // Return 2 to indicate that the given save file, by name, does not exist.
+        return 2;
+    }
+
+    // IMPORT SAVE FILE.
+    // Before copying over files, check if a file of the same name exists within the current app.
+    QDir localSaves = QDir("saves");
+    bool saveExistsLocally = localSaves.cd(saveFileName);
+    if (saveExistsLocally && !forceOverwrite)
+    {
+        // If file overwriting is disabled, return 1 to indicate a failure due to overwrite permissions.
+        return 1;
+    }
+
+    // When overwriting a save file, rename the pre-existing save file to an 'archived' version that can be restored if failures occur.
+    QString localSaveFilePath = localSaves.absolutePath();
+    if (saveExistsLocally && forceOverwrite)
+    {
+        QString  = localSaveFilePath + ".temp";
+        if (!QFile::rename(localSaveFilePath, archivedSaveFilePath))
+        {
+            // If creating an archive file fails, exit with permissions errors. 4 indicates an OS-level error.
+            return 4;
+        }
+    }
+
+    // Copy the save file from external app to internal saves folder.
+    if (!QFile::copy(appDir.absolutePath(), localSaveFilePath))
+    {
+        // If pulling the file fails, restore any archived files and return.
+        if (saveExistsLocally && forceOverwrite)
+        {
+            QFile::rename(archivedSaveFilePath, localSaveFilePath);
+        }
+        return 4;
+    }
+
+    // If needed, remove any archived save files before returning.
+    QFile::remove(archivedSaveFilePath);
+
+    return 0;
 }
 
-bool AppController::exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
+int AppController::exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
 {
     // TODO.
     return false;

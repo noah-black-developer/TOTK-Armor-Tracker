@@ -46,6 +46,19 @@ int main(int argc, char *argv[])
     }
     engine.rootContext()->setContextProperty("savesFolderPath", savesDir.absolutePath());
 
+    // CHECK FOR COMMAND LINE ARGS.
+    // Iterate over all provided command line args, starting from the first arg.
+    for (int argIndex = 1; argIndex < argc; argIndex++)
+    {
+        // If user provided flags to print version information, write out the required info and exit.
+        // AppController and other singletons are initialized so that this info is available.
+        if (std::string(argv[argIndex]) == "--version")
+        {
+            printf("TOTK Armor Tracker %s\n", appController->appVersion.toStdString().c_str());
+            return 0;
+        }
+    }
+
     // Run application.
     engine.load(url);
     int appReturn = app.exec();

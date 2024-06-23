@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QObject>
 #include <QQmlEngine>
+#include <qglobal.h>
 #include <armordata.h>
 #include <armorsortfilter.h>
 
@@ -82,12 +83,12 @@ public:
     // Methods to validate a given path points to update packages, other app versions, etc.
     Q_INVOKABLE bool isGivenUpdatePackageValid(QString updatePackagePath);
     Q_INVOKABLE bool isGivenExternalAppValid(QString externalTotkAppPath);
-    // Methods to modify/update the application version.
-    Q_INVOKABLE bool updateAppVersion(QString updatePackagePath);
+    // Methods to switch over to the Update Application (built and stored locally).
+    Q_INVOKABLE void launchUpdateApplication();
     // Methods to import/export save files from this app to other apps locally.
     Q_INVOKABLE QList<QString> getSaveFileListFromExternalApp(QString externalTotkAppPath);
-    Q_INVOKABLE bool importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
-    Q_INVOKABLE bool exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
+    Q_INVOKABLE int importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
+    Q_INVOKABLE int exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
 
     // Q_PROPERTY OBJECTS.
     QString saveName = "";
@@ -106,6 +107,11 @@ public:
 and required items for armor sets in The Legend of Zelda: Tears of the Kingdom.";
 
 private:
+    // Class constants.
+    QString APP_PACKAGE_BASE = "TotkArmorTracker_";
+
+    // Internal variables.
+    QString _platform = "";
     QString _loadedSavePath = "";
     QString _loadedAppConfigPath = "";
     ArmorSortFilter *_armorData;
