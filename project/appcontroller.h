@@ -81,7 +81,7 @@ public:
 
     // APP UPDATE/IMPORT/EXPORT SETTINGS.
     // Methods to validate a given path points to update packages, other app versions, etc.
-    Q_INVOKABLE bool isGivenUpdatePackageValid(QString updatePackagePath);
+    Q_INVOKABLE bool isGivenUpdatePackageValid(QString updatePackagePath, bool verifyPlatform);
     Q_INVOKABLE bool isGivenExternalAppValid(QString externalTotkAppPath);
     // Methods to switch over to the Update Application (built and stored locally).
     Q_INVOKABLE void launchUpdateApplication();
@@ -107,9 +107,6 @@ public:
 and required items for armor sets in The Legend of Zelda: Tears of the Kingdom.";
 
 private:
-    // Class constants.
-    QString APP_PACKAGE_BASE = "TotkArmorTracker_";
-
     // Internal variables.
     QString _platform = "";
     QString _loadedSavePath = "";

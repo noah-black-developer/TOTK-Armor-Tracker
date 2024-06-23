@@ -22,7 +22,7 @@ AppController::AppController(QObject *parent) : QObject{parent}
     // Attempt to load in local app configs.
     loadAppConfig("appData.xml");
 
-    qDebug() << _platform;
+    qDebug() << _platform; // TEMP: Print the current platform for debugging.
 }
 
 AppController::~AppController()
@@ -795,6 +795,8 @@ bool AppController::isGivenUpdatePackageValid(QString updatePackagePath, bool ve
     // Assemble a match string to verify that a valid installer was given.
     // If strict platform validation is enabled, build a fill file name. Otherwise, wildcard-match the update package
     // without restricting to any specific platform type (ex. Linux, Windows, etc).
+    QString APP_PACKAGE_BASE = "TotkArmorTracker_";
+    QString updatePackageMatchStr = "";
     if (verifyPlatform)
     {
         updatePackageMatchStr = APP_PACKAGE_BASE + _platform.toUpper() + ".zip";
@@ -886,9 +888,9 @@ int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString sa
 
     // When overwriting a save file, rename the pre-existing save file to an 'archived' version that can be restored if failures occur.
     QString localSaveFilePath = localSaves.absolutePath();
+    QString archivedSaveFilePath = localSaveFilePath + ".temp";
     if (saveExistsLocally && forceOverwrite)
     {
-        QString  = localSaveFilePath + ".temp";
         if (!QFile::rename(localSaveFilePath, archivedSaveFilePath))
         {
             // If creating an archive file fails, exit with permissions errors. 4 indicates an OS-level error.
