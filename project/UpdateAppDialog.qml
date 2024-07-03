@@ -11,6 +11,7 @@ Dialog {
     anchors.centerIn: parent
     standardButtons: Dialog.Close
 
+    // DIALOG WINDOWS.
     // Dialog for selecting new update files.
     FileDialog {
         id: selectUpdateFileDialog
@@ -18,6 +19,8 @@ Dialog {
         title: "Select Update File"
         nameFilters: ["Update File (TotkArmorTracker_*.zip)"]
     }
+
+    // Dialog for selecting
 
     // Contents column.
     ColumnLayout {

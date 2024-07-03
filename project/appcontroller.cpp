@@ -23,6 +23,7 @@ AppController::AppController(QObject *parent) : QObject{parent}
     loadAppConfig("appData.xml");
 
     qDebug() << _platform; // TEMP: Print the current platform for debugging.
+    qDebug() << getSaveFileListFromApp("C:\\Users\\Noah\\Documents\\GitHub\\TOTK-Armor-Tracker\\project\\build\\Desktop_Qt_6_5_3_MSVC2019_64bit-Debug\\debug\\TotkArmorTracker.exe"); // TEMP: Print all saves in the current application.
 }
 
 AppController::~AppController()
@@ -807,7 +808,7 @@ bool AppController::isGivenUpdatePackageValid(QString updatePackagePath, bool ve
 
     // Validate the given update package against expected naming conventions. If no match is found, return a failure.
     QString updatePackageName = QFileInfo(updatePackagePath).fileName();
-    QRegularExpression updatePackageRegex = QRegularExpression(updatePackageMatchStr);
+    static QRegularExpression updatePackageRegex(updatePackageMatchStr);
     QRegularExpressionMatch updatePackageMatch = updatePackageRegex.match(updatePackageName);
     if (!updatePackageMatch.hasMatch())
     {
@@ -842,10 +843,42 @@ void AppController::launchUpdateApplication()
     return;
 }
 
-QList<QString> AppController::getSaveFileListFromExternalApp(QString externalTotkAppPath)
+QList<QString> AppController::getSaveFileListFromApp(QString totkAppPath)
 {
-    // TODO.
-    return QList<QString>();
+    // VALIDATE INPUTS.
+    // Verify the given application path is valid before continuing.
+    // This applies even in cases where the application is the currently running app.
+    if (!isGivenExternalAppValid(totkAppPath))
+    {
+        // If the app is not valid, return an empty list.
+        return QList<QString>();
+    }
+
+    // COLLECT SAVES LIST.
+    // Create a directory object to navigate into the saves directory.
+    QDir appDir = QFileInfo(totkAppPath).absoluteDir();
+    bool saveFolderExists = appDir.cd("saves");
+    if (!saveFolderExists)
+    {
+        // If the saves folder doesn't exist at the same level as the app .exe, additionaly check
+        // one directory level higher. Some build environments can cause saves to be generated here.
+        appDir.cdUp();
+        saveFolderExists = appDir.cd("saves");
+        if (!saveFolderExists)
+        {
+            // If no saves folder could be found, return an empty list to indicate no saves are available.
+            return QList<QString>();
+        }
+    }
+
+    // Assemble a wildcard match for any save files in the saves directory.
+    QString saveFileWildcardMatch = "*" + saveFileExtension;
+    QStringList saveMatchStrList = QStringList();
+    saveMatchStrList.append(saveFileWildcardMatch);
+
+    // Parse the saves folder for valid saves and return a full list. Only searches the top level of the directory.
+    QList<QString> savesList = appDir.entryList(saveMatchStrList);
+    return savesList;
 }
 
 int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
@@ -917,6 +950,69 @@ int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString sa
 
 int AppController::exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite)
 {
-    // TODO.
-    return false;
+    // VALIDATE INPUTS.
+    // Validate that the given save file is a valid save inside this application. If not, error out before any other files are modified.
+    QDir localSaves = QDir("saves");
+    bool saveExistsLocally = localSaves.cd(saveFileName);
+    if (!saveExistsLocally)
+    {
+        // Return 2 to indicate that the given save file, by name, does not exist.
+        return 2;
+    }
+
+    // Verify the given application path is valid before continuing.
+    if (!isGivenExternalAppValid(externalTotkAppPath))
+    {
+        // Return 3 to indicate a failure related to invalid inputs.
+        return 3;
+    }
+
+    // Construct a path to the app's save folder. If one does not yet exist, it can be created at this stage.
+    QDir externalAppDir = QFileInfo(externalTotkAppPath).absoluteDir();
+    bool savesFolderExists = externalAppDir.cd("saves");
+    if (!savesFolderExists)
+    {
+        // Create the app's "saves" folder manually, to ensure that the .save file has a proper destination.
+        // A missing saves folder implies that the app has not been run before, but doesn't mean a failure has occurred.
+        externalAppDir.mkdir("saves");
+        externalAppDir.cd("saves");
+    }
+
+    // EXPORT SAVE FILE.
+    // Check if a save file of the same name exists within the external app.
+    // A full path to the save file is stored at this point for reference later, regardless of existance.
+    QString externalSaveFilePath = externalAppDir.filePath(saveFileName);
+    bool externalSaveAlreadyExists = externalAppDir.cd(saveFileName);
+    if (externalSaveAlreadyExists && !forceOverwrite)
+    {
+        // If file overwriting is disabled, return 1 to indicate a failure due to overwrite permissions.
+        return 1;
+    }
+
+    // When overwriting a save file, rename the pre-existing save file to an 'archived' version that can be restored if failures occur.
+    QString archivedExternalSaveFilePath = externalSaveFilePath + ".temp";
+    if (externalSaveAlreadyExists && forceOverwrite)
+    {
+        if (!QFile::rename(externalSaveFilePath, archivedExternalSaveFilePath))
+        {
+            // If creating an archive file fails, exist with permission errors. 4 indicates an OS-level error.
+            return 4;
+        }
+    }
+
+    // Copy the save file from local locations to the external app's save folder.
+    if (!QFile::copy(localSaves.absolutePath(), externalSaveFilePath))
+    {
+        // If pulling the file fails, restore any archived files and return.
+        if (externalSaveAlreadyExists && forceOverwrite)
+        {
+            QFile::rename(archivedExternalSaveFilePath, externalSaveFilePath);
+        }
+        return 4;
+    }
+
+    // If needed, remove any archived save files before returning.
+    QFile::remove(archivedExternalSaveFilePath);
+
+    return 0;
 }

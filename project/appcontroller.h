@@ -86,7 +86,7 @@ public:
     // Methods to switch over to the Update Application (built and stored locally).
     Q_INVOKABLE void launchUpdateApplication();
     // Methods to import/export save files from this app to other apps locally.
-    Q_INVOKABLE QList<QString> getSaveFileListFromExternalApp(QString externalTotkAppPath);
+    Q_INVOKABLE QList<QString> getSaveFileListFromApp(QString totkAppPath);
     Q_INVOKABLE int importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
     Q_INVOKABLE int exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
 
