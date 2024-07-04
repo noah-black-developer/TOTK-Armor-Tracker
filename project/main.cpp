@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
             qDebug() << "Saves folder initialized.";
         }
     }
+    engine.rootContext()->setContextProperty("rootFolder", QDir(".").absolutePath());
     engine.rootContext()->setContextProperty("savesFolderPath", savesDir.absolutePath());
 
     // CHECK FOR COMMAND LINE ARGS.

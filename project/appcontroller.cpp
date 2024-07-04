@@ -828,7 +828,7 @@ bool AppController::isGivenExternalAppValid(QString externalTotkAppPath)
 
     // Validate the given path points to an execurable matching expected naming.
     QString appName = QFileInfo(externalTotkAppPath).fileName();
-    bool fileIsValidApp = (appName == "TotkArmorTracker.exe");
+    bool fileIsValidApp = (appName.contains("TotkArmorTracker"));
     if (!fileIsValidApp)
     {
         return false;

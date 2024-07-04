@@ -12,15 +12,62 @@ Dialog {
     standardButtons: Dialog.Close
 
     // DIALOG WINDOWS.
-    // Dialog for selecting new update files.
+    // Dialog for selecting external update packages.
     FileDialog {
-        id: selectUpdateFileDialog
+        id: selectUpdatePackageDialog
 
         title: "Select Update File"
         nameFilters: ["Update File (TotkArmorTracker_*.zip)"]
     }
 
-    // Dialog for selecting
+    // Dialog for selecting external applications.
+    FileDialog {
+        id: selectExternalAppDialog
+
+        title: "Select External TOTK Armor Tracker App"
+        nameFilters: ["App (TotkArmorTracker.exe)", "App (TotkArmorTracker)"]
+    }
+
+    // Self-contained dialog for exporting save files to an external application.
+    Dialog {
+        id: exportSaveFilesDialog
+
+        standardButtons: Dialog.Close
+        onOpened: {
+            // When opened, clear out any previous selections from all file dialogs.
+            // Prevents previous user selections from carrying over.
+            selectExternalAppDialog.selectedFile = "";
+        }
+
+        ColumnLayout {
+            id: exportSaveFilesMainColumn
+
+            anchors.fill: parent
+
+            // APP SELECTION FIELDS.
+            RowLayout {
+                id: selectAppRow
+
+                Layout.fillWidth: true
+
+                TextEdit {
+                    id: selectedAppPathBox
+
+                    Layout.fillWidth: true
+                    readOnly: true
+                    // Set contents of the box to mirror any selected external apps, except in cases where no selection is made.
+
+                }
+            }
+        }
+    }
+
+    // Self-contained dialog for import save files from an external application.
+    Dialog {
+        id: importSaveFilesDialog
+
+        standardButtons: Dialog.Close
+    }
 
     // Contents column.
     ColumnLayout {
@@ -118,6 +165,9 @@ Dialog {
             Layout.bottomMargin: -5
             Layout.alignment: Qt.AlignHCenter
             text: "Import Saves"
+
+            // When clicked, initialize and open dialogs for user inputs.
+            onClicked: importSaveFilesDialog.open()
         }
         Button {
             id: exportSavesButton
@@ -127,6 +177,9 @@ Dialog {
             Layout.rightMargin: 20
             Layout.alignment: Qt.AlignHCenter
             text: "Export Saves"
+
+            // When clicked, initialize and open dialogs for user inputs.
+            onClicked: exportSaveFilesDialog.open()
         }
 
         // Backup/loading controls.
