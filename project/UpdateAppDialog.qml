@@ -82,10 +82,9 @@ Dialog {
             // Compare the local and external save file lists. If any duplicates are found, raise flags.
             var filesWillOverwrite = false;
             for (var localSaveIndex = 0; localSaveIndex < currentAppSaveNameList.length; localSaveIndex++) {
-                for (var externalSaveIndex = 0; externalSaveIndex < availableSavesListView.count; externalSaveIndex++) {
+                for (var externalSaveIndex = 0; externalSaveIndex < availableSavesListView.selectedSaveNames.length; externalSaveIndex++) {
                     var localSaveName = currentAppSaveNameList[localSaveIndex];
-                    var externalSaveName = availableSavesListView.itemAtIndex(externalSaveIndex).saveName;
-                    console.log("%1 vs. %2".arg(localSaveName).arg(externalSaveName));
+                    var externalSaveName = availableSavesListView.selectedSaveNames[externalSaveIndex];
                     if (localSaveName === externalSaveName) {
                         filesWillOverwrite = true;
                         break;
@@ -96,7 +95,7 @@ Dialog {
             // If overwriting is required, prompt the user to confirm this. Declining will stop transfers before they happen.
             // Otherwise, directly call followup methods to run the actual save file transfers.
             if (filesWillOverwrite) {
-                confirmOverwriteDialog.open();
+                confirmImportOverwriteDialog.open();
             } else {
                 importSaves();
             }
@@ -104,8 +103,85 @@ Dialog {
             return;
         }
 
-        function importSaves() {
+        function importSaves(forceOverwrite) {
+            // VALIDATE INPUTS.
+            // Verify the selected application + saves before continuing.
+            // If any discrepancies are found, log errors and exit early.
+            if (!availableSavesListView.savesAreSelected) {
+                console.error("No saves were selected from external app, no save files could be imported.");
+                return false;
+            }
 
+            // Iterate over all selected files, calling backend methods to transfer files for each one.
+            for (var saveIndex = 0; saveIndex < availableSavesListView.selectedSaveNames.length; saveIndex++) {
+                // Call transfer methods w/ input flags and capture return code.
+                var externalAppPath = importSavesSelectAppText.text;
+                var currentSaveName = availableSavesListView.selectedSaveNames[saveIndex];
+                var importResult = appController.importSaveFileFromApp(externalAppPath, currentSaveName, forceOverwrite);
+
+                // Check results for any required handling before moving to the next file.
+                var continueToNextSave = true;
+                switch (importResult) {
+                case 0:
+                    // If successful, add debug logs and continue.
+                    console.debug("Successfully imported save file %1".arg(currentSaveName));
+                    break;
+
+                case 1:
+                    // Code 1 indicates overwrite errors. Can be ignored if forceOverwrite is lowered; otherwise,
+                    // an error message is displayed to the user to indicate an unexpected failure has occurred.
+                    if (forceOverwrite) {
+                        console.debug("Failed to overwrite save file %1. Cancelling save file import.".arg(currentSaveName));
+                        importErrorDialog.informativeText = "Failed to overwrite files, a fatal error has occurred. Restart app and retry. \
+                            If issues continue, please create a new Github issue with error details.";
+                        importErrorDialog.open();
+                        continueToNextSave = false;
+                    } else {
+                        console.debug("Skipped import for save file %1 due to overwrite protections.".arg(currentSaveName));
+                    }
+                    break;
+
+                case 2:
+                    // If the given save file no longer exists, log the error at debug level and skip to next.
+                    console.debug("Save file under name %1 no longer exists, import was skipped.".arg(currentSaveName));
+                    break;
+
+                case 3:
+                    // If a non-valid application was provided to backend methods, exist early with error logs for the user.
+                    console.debug("External application path %1 is no longer valid. Cancelling save file import.".arg(externalAppPath));
+                    importErrorDialog.informativeText = "External application path is no longer valid - save files could not be imported. \
+                        Select another application and retry."
+                    importErrorDialog.open();
+                    continueToNextSave = false;
+                    break;
+
+                case 4:
+                    // If file permission issues occur preventing files from being written/deleted/etc, raise errors for the user and quit out.
+                    console.debug("Save file import ran into file permission issues on save %1, import has been cancelled.".arg(currentSaveName));
+                    importErrorDialog.informativeText = "File import failed due to file permission issues. Please ensure all save files can be modified and retry.";
+                    importErrorDialog.open();
+                    continueToNextSave = false;
+                    break;
+
+                default:
+                    // In ANY other cases, raise errors for unsupported return codes and quit out.
+                    console.debug("Import methods return an unsupported return code %1".arg(importResult));
+                    importErrorDialog.informativeText = "Unsupported return code (%1) was returned while importing save file %2. \
+                        If issues persist, create a new Github issue and include the contents of this dialog window.";
+                    importErrorDialog.open();
+                    continueToNextSave = false;
+                }
+
+                // Exit out from the loop if flags are set. Otherwise, continue to next save.
+                if (!continueToNextSave) {
+                    return;
+                }
+            }
+
+            // If successfully completed, display a confirmation window and close out of the import dialog.
+            importCompleteDialog.open();
+            importSaveFilesDialog.close();
+            return;
         }
 
         width: updateAppDialog.width - 50
@@ -118,11 +194,41 @@ Dialog {
 
         // POP-UP WINDOWS.
         MessageDialog {
-            id: confirmOverwriteDialog
+            id: confirmImportOverwriteDialog
 
             title: "Confirm Overwrites"
             text: "One or more selected saves already exist locally. Would you like to overwrite them?"
             buttons: MessageDialog.Yes | MessageDialog.No | MessageDialog.Cancel
+
+            onButtonClicked: function (button, role) {
+                // Handle the different buttons by case.
+                switch (button) {
+                case MessageDialog.Yes:
+                    importSaveFilesDialog.importSaves(true);
+                    break;
+                case MessageDialog.No:
+                    importSaveFilesDialog.importSaves(false);
+                    break;
+                default:
+                    // Any other button beyond Yes/No will just close out the dialog window.
+                    break;
+                }
+            }
+        }
+
+        MessageDialog {
+            id: importCompleteDialog
+
+            title: "Import Complete."
+            text: "File import was successfully completed!"
+        }
+
+        MessageDialog {
+            id: importErrorDialog
+
+            // Defaults to a general-purpose error message, can be adjusted at time of opening depending on use cases.
+            title: "Error Message"
+            text: "Fatal errors have occurred."
         }
 
         // CONTENTS.
@@ -235,7 +341,7 @@ Dialog {
                 id: startImportButton
 
                 Layout.alignment: Qt.AlignHCenter
-                text: "Import Saves"
+                text: "Start Import"
                 // Only enabled when valid saves have been selected.
                 enabled: availableSavesListView.savesAreSelected
                 // When clicked, start import process by checking for overwrite conflicts.
@@ -318,6 +424,9 @@ Dialog {
             Layout.rightMargin: 20
             Layout.alignment: Qt.AlignHCenter
             text: "Update App Version"
+
+            // CURRENTLY UNSUPPORTED.
+            enabled: false
         }
 
         // Save manipulation controls.

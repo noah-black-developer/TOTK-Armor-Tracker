@@ -919,8 +919,8 @@ int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString sa
     }
 
     // Validate that the given save file, by name, exists within the remote application. If not, return a failure.
-    appDir.cd(saveFileName);
-    bool givenSaveExists = appDir.exists();
+    QString externalSaveFilePath = appDir.absoluteFilePath(saveFileName);
+    bool givenSaveExists = QFileInfo::exists(externalSaveFilePath);
     if (!givenSaveExists)
     {
         // Return 2 to indicate that the given save file, by name, does not exist.
@@ -930,7 +930,8 @@ int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString sa
     // IMPORT SAVE FILE.
     // Before copying over files, check if a file of the same name exists within the current app.
     QDir localSaves = QDir("saves");
-    bool saveExistsLocally = localSaves.cd(saveFileName);
+    QString localSaveFilePath = localSaves.absoluteFilePath(saveFileName);
+    bool saveExistsLocally = QFileInfo::exists(localSaveFilePath);
     if (saveExistsLocally && !forceOverwrite)
     {
         // If file overwriting is disabled, return 1 to indicate a failure due to overwrite permissions.
@@ -938,7 +939,6 @@ int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString sa
     }
 
     // When overwriting a save file, rename the pre-existing save file to an 'archived' version that can be restored if failures occur.
-    QString localSaveFilePath = localSaves.absolutePath();
     QString archivedSaveFilePath = localSaveFilePath + ".temp";
     if (saveExistsLocally && forceOverwrite)
     {
@@ -950,7 +950,7 @@ int AppController::importSaveFileFromApp(QString externalTotkAppPath, QString sa
     }
 
     // Copy the save file from external app to internal saves folder.
-    if (!QFile::copy(appDir.absolutePath(), localSaveFilePath))
+    if (!QFile::copy(externalSaveFilePath, localSaveFilePath))
     {
         // If pulling the file fails, restore any archived files and return.
         if (saveExistsLocally && forceOverwrite)
