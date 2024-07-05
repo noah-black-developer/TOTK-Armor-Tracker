@@ -21,9 +21,6 @@ AppController::AppController(QObject *parent) : QObject{parent}
 
     // Attempt to load in local app configs.
     loadAppConfig("appData.xml");
-
-    qDebug() << _platform; // TEMP: Print the current platform for debugging.
-    qDebug() << getSaveFileListFromApp("C:\\Users\\Noah\\Documents\\GitHub\\TOTK-Armor-Tracker\\project\\build\\Desktop_Qt_6_5_3_MSVC2019_64bit-Debug\\debug\\TotkArmorTracker.exe"); // TEMP: Print all saves in the current application.
 }
 
 AppController::~AppController()
@@ -878,6 +875,27 @@ QList<QString> AppController::getSaveFileListFromApp(QString totkAppPath)
 
     // Parse the saves folder for valid saves and return a full list. Only searches the top level of the directory.
     QList<QString> savesList = appDir.entryList(saveMatchStrList);
+    return savesList;
+}
+
+QList<QString> AppController::getLocalSaveFileList()
+{
+    // COLLECT LOCAL SAVE LIST.
+    // Create a directory object for the local save folder.
+    QDir localSaves = QDir("saves");
+    if (!localSaves.exists())
+    {
+        // If the save folder has not yet been initialized, return an empty list.
+        return QList<QString>();
+    }
+
+    // Assemble a wildcard match for any save files in the saves directory.
+    QString saveFileWildcardMatch = "*" + saveFileExtension;
+    QStringList saveMatchStrList = QStringList();
+    saveMatchStrList.append(saveFileWildcardMatch);
+
+    // Parse the saves folder for valid saves and return a full list. Only searches the top level of the directory.
+    QList<QString> savesList = localSaves.entryList(saveMatchStrList);
     return savesList;
 }
 

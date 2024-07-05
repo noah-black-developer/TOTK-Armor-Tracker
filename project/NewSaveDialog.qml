@@ -87,11 +87,19 @@ Dialog {
         TextField {
             id: nameTextInput
 
+            readonly property int saveMaxLength: 24
+
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter
             // Valid file names allow characters, dashes, underscores, and spaces.
-            validator: RegularExpressionValidator { regularExpression: /^[\w\- ]+$/ }
+            // Additionally, a maximum character limit is set to prevent file names from growing too long.
+            validator: RegularExpressionValidator {
+                regularExpression: {
+                    var saveNameMatchStr = "^[\\w\\- ]{0,%1}$".arg(nameTextInput.saveMaxLength);
+                    new RegExp(saveNameMatchStr);
+                }
+            }
             placeholderText: "Save Name"
 
             // Update the "OK" button every time the user edits the field.
