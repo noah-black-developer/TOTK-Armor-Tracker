@@ -105,6 +105,9 @@ ApplicationWindow {
     // DIALOG WINDOWS.
     NewSaveDialog {
         id: createNewSaveDialog
+
+        width: appRoot.width - 100
+        height: appRoot.height - 100
     }
 
     SettingsDialog {
@@ -112,6 +115,9 @@ ApplicationWindow {
 
         property bool themeInit: false
         property bool autoSaveInit: false
+
+        width: (appRoot.width - 200 < 400) ? appRoot.width - 200 : 400
+        height: (appRoot.height - 200 < 600) ? appRoot.height - 200 : 600
 
         // Set default selections when menu is first created.
         Component.onCompleted: {
@@ -152,7 +158,13 @@ ApplicationWindow {
         // Limit file selection to only matching file extensions.
         nameFilters: ["Save Files (*.save)"]
 
-        onAccepted: appController.loadSave(selectedFile)
+        onAccepted: {
+            var saveWasLoaded = appController.loadSave(selectedFile);
+            if (!saveWasLoaded) {
+                // If the save file could not be loaded for any reason, display an error message to the user.
+                loadSaveFailed.openWithSaveName(selectedFile);
+            }
+        }
     }
 
     MessageDialog {
@@ -169,7 +181,11 @@ ApplicationWindow {
 
             // If a local save name was set, use it to load a local save.
             if (localSaveName) {
-                appController.loadRecentSave(localSaveName);
+                var saveWasLoaded = appController.loadRecentSave(localSaveName);
+                if (!saveWasLoaded) {
+                    // If the save file could not be loaded for any reason, display an error message to the user.
+                    loadSaveFailed.openWithSaveName(localSaveName);
+                }
             }
             // Otherwise, open the main save loading dialog.
             else {
@@ -179,7 +195,11 @@ ApplicationWindow {
         onRejected: {
             // If a local save name was set, use it to load a local save.
             if (localSaveName) {
-                appController.loadRecentSave(localSaveName);
+                var saveWasLoaded = appController.loadRecentSave(localSaveName);
+                if (!saveWasLoaded) {
+                    // If the save file could not be loaded for any reason, display an error message to the user.
+                    loadSaveFailed.openWithSaveName(localSaveName);
+                }
             }
             // Otherwise, open the main save loading dialog.
             else {
@@ -245,6 +265,24 @@ ApplicationWindow {
         }
     }
 
+    UpdateAppDialog {
+        id: updateAppDialog
+    }
+
+    MessageDialog {
+        id: loadSaveFailed
+
+        property string saveName: "UNKNOWN"
+
+        function openWithSaveName(newSaveName) {
+            saveName = newSaveName;
+            open();
+        }
+
+        title: "Failed to Load Save"
+        text: "Issues occurred while loading save file " + saveName;
+    }
+
     // MENU OPTIONS.
     menuBar: MenuBar {
         id: menuBar
@@ -296,8 +334,11 @@ ApplicationWindow {
                             }
                             // Otherwise, load the recent save directly.
                             else {
-                                appController.loadRecentSave(modelData);
-
+                                var saveWasLoaded = appController.loadRecentSave(modelData);
+                                if (!saveWasLoaded) {
+                                    // If the save file could not be loaded for any reason, display an error message to the user.
+                                    loadSaveFailed.openWithSaveName(modelData);
+                                }
                             }
                         }
                     }
@@ -329,6 +370,11 @@ ApplicationWindow {
                 text: "Settings"
                 onTriggered: settingsDialog.open()
             }
+            Action {
+                text: "Update"
+                onTriggered: updateAppDialog.open()
+            }
+
             MenuSeparator { }
             Action {
                 text: "About"
@@ -1184,15 +1230,15 @@ ApplicationWindow {
                                                 }
                                                 color: armorUpgradeRect.textColor
                                             }
-                                            AppIcon {
+                                            IconImage {
                                                 id: upgradeRupeeCostIcon
 
                                                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
                                                 // Icon size + ratio is fixed to prevent resizing issues.
                                                 Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                 Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                icon.source: "images/rupee-lightmode.svg"
-                                                icon.color: armorUpgradeRect.textColor
+                                                source: "images/rupee-lightmode.svg"
+                                                color: armorUpgradeRect.textColor
                                             }
                                         }
 

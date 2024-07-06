@@ -9,8 +9,6 @@ Dialog {
     signal themeChanged(string themeName)
     signal autoSaveChanged(bool autoSaveOn)
 
-    width: 400
-    height: 600
     anchors.centerIn: parent
     title: "App Settings"
     standardButtons: Dialog.Close

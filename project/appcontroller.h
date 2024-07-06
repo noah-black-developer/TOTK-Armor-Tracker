@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QObject>
 #include <QQmlEngine>
+#include <qglobal.h>
 #include <armordata.h>
 #include <armorsortfilter.h>
 
@@ -78,6 +79,18 @@ public:
     Q_INVOKABLE bool setAppTheme(QString themeName, bool setDefaults = false);
     Q_INVOKABLE bool setAutoSaveSetting(bool autoSaveEnabled, bool setDefaults = false);
 
+    // APP UPDATE/IMPORT/EXPORT SETTINGS.
+    // Methods to validate a given path points to update packages, other app versions, etc.
+    Q_INVOKABLE bool isGivenUpdatePackageValid(QString updatePackagePath, bool verifyPlatform);
+    Q_INVOKABLE bool isGivenExternalAppValid(QString externalTotkAppPath);
+    // Methods to switch over to the Update Application (built and stored locally).
+    Q_INVOKABLE void launchUpdateApplication();
+    // Methods to import/export save files from this app to other apps locally.
+    Q_INVOKABLE QList<QString> getSaveFileListFromApp(QString totkAppPath);
+    Q_INVOKABLE QList<QString> getLocalSaveFileList();
+    Q_INVOKABLE int importSaveFileFromApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
+    Q_INVOKABLE int exportSaveFileToApp(QString externalTotkAppPath, QString saveFileName, bool forceOverwrite);
+
     // Q_PROPERTY OBJECTS.
     QString saveName = "";
     QList<QString> recentSaveNames = QList<QString>();
@@ -95,6 +108,8 @@ public:
 and required items for armor sets in The Legend of Zelda: Tears of the Kingdom.";
 
 private:
+    // Internal variables.
+    QString _platform = "";
     QString _loadedSavePath = "";
     QString _loadedAppConfigPath = "";
     ArmorSortFilter *_armorData;
