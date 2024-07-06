@@ -18,6 +18,9 @@ Dialog {
     function urlToLocalPath(urlInput) {
         var path = urlInput.toString();
         path = path.replace(/^(file:\/{3})/,"");
+        // On platforms without drive letters, this method will strip one of the required slashes.
+        // If the path doesn't include a colon (:), we can replace this before returning.
+        if (!path.includes(":")) { path = "/" + path; }
         return decodeURIComponent(path);
     }
 
@@ -62,7 +65,7 @@ Dialog {
         property bool validAppIsSelected: false
 
         title: "Select App To Export Save Files To"
-        nameFilters: ["App (TotkArmorTracker, TotkArmorTracker.exe)"]
+        nameFilters: ["Application (TotkArmorTracker)"]
         onSelectedFileChanged: {
             // Validate selections as they are made for use externally.
             validAppIsSelected = appController.isGivenExternalAppValid(updateAppDialog.urlToLocalPath(selectedFile));
@@ -74,7 +77,7 @@ Dialog {
         property bool validAppIsSelected: false
 
         title: "Select App To Import Save Files From"
-        nameFilters: ["App (TotkArmorTracker.exe)", "App (TotkArmorTracker)"]
+        nameFilters: ["Application (TotkArmorTracker)"]
         onSelectedFileChanged: {
             // Validate selections as they are made for use externally.
             validAppIsSelected = appController.isGivenExternalAppValid(updateAppDialog.urlToLocalPath(selectedFile));
