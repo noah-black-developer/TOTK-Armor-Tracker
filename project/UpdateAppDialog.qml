@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
+import Qt.labs.qmlmodels
 
 Dialog {
     id: updateAppDialog
@@ -21,6 +22,21 @@ Dialog {
     }
 
     // DIALOG WINDOWS.
+    // Message dialogs for displaying results + errors.
+    MessageDialog {
+        id: completeDialog
+
+        title: "Import Complete."
+        text: "File import was successfully completed!"
+    }
+    MessageDialog {
+        id: errorDialog
+
+        // Defaults to a general-purpose error message, can be adjusted at time of opening depending on use cases.
+        title: "Error Message"
+        text: "Fatal errors have occurred."
+    }
+
     // Dialog for selecting external update packages.
     FileDialog {
         id: selectUpdatePackageDialog
@@ -36,7 +52,7 @@ Dialog {
         property bool validAppIsSelected: false
 
         title: "Select App To Export Save Files To"
-        nameFilters: ["App (TotkArmorTracker.exe)", "App (TotkArmorTracker)"]
+        nameFilters: ["App (TotkArmorTracker, TotkArmorTracker.exe)"]
         onSelectedFileChanged: {
             // Validate selections as they are made for use externally.
             validAppIsSelected = appController.isGivenExternalAppValid(updateAppDialog.urlToLocalPath(selectedFile));
@@ -132,9 +148,9 @@ Dialog {
                     // an error message is displayed to the user to indicate an unexpected failure has occurred.
                     if (forceOverwrite) {
                         console.debug("Failed to overwrite save file %1. Cancelling save file import.".arg(currentSaveName));
-                        importErrorDialog.informativeText = "Failed to overwrite files, a fatal error has occurred. Restart app and retry. \
+                        errorDialog.informativeText = "Failed to overwrite files, a fatal error has occurred. Restart app and retry. \
                             If issues continue, please create a new Github issue with error details.";
-                        importErrorDialog.open();
+                        errorDialog.open();
                         continueToNextSave = false;
                     } else {
                         console.debug("Skipped import for save file %1 due to overwrite protections.".arg(currentSaveName));
@@ -149,26 +165,26 @@ Dialog {
                 case 3:
                     // If a non-valid application was provided to backend methods, exist early with error logs for the user.
                     console.debug("External application path %1 is no longer valid. Cancelling save file import.".arg(externalAppPath));
-                    importErrorDialog.informativeText = "External application path is no longer valid - save files could not be imported. \
+                    errorDialog.informativeText = "External application path is no longer valid - save files could not be imported. \
                         Select another application and retry."
-                    importErrorDialog.open();
+                    errorDialog.open();
                     continueToNextSave = false;
                     break;
 
                 case 4:
                     // If file permission issues occur preventing files from being written/deleted/etc, raise errors for the user and quit out.
                     console.debug("Save file import ran into file permission issues on save %1, import has been cancelled.".arg(currentSaveName));
-                    importErrorDialog.informativeText = "File import failed due to file permission issues. Please ensure all save files can be modified and retry.";
-                    importErrorDialog.open();
+                    errorDialog.informativeText = "File import failed due to file permission issues. Please ensure all save files can be modified and retry.";
+                    errorDialog.open();
                     continueToNextSave = false;
                     break;
 
                 default:
                     // In ANY other cases, raise errors for unsupported return codes and quit out.
                     console.debug("Import methods return an unsupported return code %1".arg(importResult));
-                    importErrorDialog.informativeText = "Unsupported return code (%1) was returned while importing save file %2. \
+                    errorDialog.informativeText = "Unsupported return code (%1) was returned while importing save file %2. \
                         If issues persist, create a new Github issue and include the contents of this dialog window.";
-                    importErrorDialog.open();
+                    errorDialog.open();
                     continueToNextSave = false;
                 }
 
@@ -179,7 +195,7 @@ Dialog {
             }
 
             // If successfully completed, display a confirmation window and close out of the import dialog.
-            importCompleteDialog.open();
+            completeDialog.open();
             importSaveFilesDialog.close();
             return;
         }
@@ -216,21 +232,6 @@ Dialog {
             }
         }
 
-        MessageDialog {
-            id: importCompleteDialog
-
-            title: "Import Complete."
-            text: "File import was successfully completed!"
-        }
-
-        MessageDialog {
-            id: importErrorDialog
-
-            // Defaults to a general-purpose error message, can be adjusted at time of opening depending on use cases.
-            title: "Error Message"
-            text: "Fatal errors have occurred."
-        }
-
         // CONTENTS.
         ColumnLayout {
             id: importSaveFilesMainColumn
@@ -238,6 +239,16 @@ Dialog {
             anchors.fill: parent
 
             // APP SELECTION FIELDS.
+            Text {
+                id: selectAppLabel
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft
+                text: "Select Application"
+                font.bold: true
+                font.pointSize: 10
+                color: Material.primaryTextColor
+            }
             RowLayout {
                 id: selectAppRow
 
@@ -267,6 +278,26 @@ Dialog {
             }
 
             // AVAILABLE SAVES LIST + MODEL.
+            Text {
+                id: availableSavesLabel
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft
+                text: "Saves to Import"
+                font.bold: true
+                font.pointSize: 10
+                color: Material.primaryTextColor
+            }
+            Text {
+                id: availableSavesDesc
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft
+                Layout.bottomMargin: 5
+                text: "Click on rows to select saves for import."
+                font.pointSize: 8
+                color: Material.secondaryTextColor
+            }
             Rectangle {
                 id: availableSavesListRectangle
 
@@ -300,38 +331,114 @@ Dialog {
                         margins: 10
                     }
                     spacing: 2
+                    clip: true
 
                     // List of available saves syncs with selected applications.
                     model: appController.getSaveFileListFromApp(importSavesSelectAppText.text)
-                    delegate: Text {
+                    delegate: Rectangle {
+                        id: saveListingRoot
+
                         required property string modelData
                         property string saveName: modelData
                         property bool isSelected: false
 
-                        padding: 5
-                        text: saveName.replace(".save", "")
-                        color: Material.primaryTextColor
-                        font.pointSize: 10
-                        font.bold: isSelected
-                        horizontalAlignment: Qt.AlignLeft
-                        elide: Text.ElideLeft
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        height: 25
+                        radius: 4
+                        color: Material.dividerColor
 
-                        // Update required elements everytime a selection is changed.
                         onIsSelectedChanged: availableSavesListView.updateSelectedSaveNames()
 
-                        // When clicked, toggle selection state.
-                        Rectangle {
-                            anchors.fill: parent
-                            z: -1
-                            radius: 5
-                            color: Material.dividerColor
-                            visible: parent.isSelected
+                        // LISTING CONTENTS.
+                        RowLayout {
+                            id: saveListingRow
+
+                            anchors {
+                                fill: parent
+                                margins: 2
+                            }
+
+                            Rectangle {
+                                id: saveListingCheckbox
+
+                                Layout.preferredWidth: 15
+                                Layout.preferredHeight: 15
+                                Layout.leftMargin: 5
+                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                color: "transparent"
+                                border.color: Material.primaryTextColor
+                                border.width: 1
+
+                                Rectangle {
+                                    id: saveListingCheckboxSelected
+
+                                    anchors {
+                                        fill: parent
+                                        margins: 3
+                                    }
+                                    color: Material.primaryTextColor
+                                    visible: saveListingRoot.isSelected
+                                }
+                            }
+
+                            Text {
+                                id: saveListingName
+
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.leftMargin: 5
+                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                                text: saveListingRoot.saveName.replace(".save", "")
+                                color: (saveListingRoot.isSelected) ? Material.primaryTextColor : Material.secondaryTextColor
+                                font.bold: true
+                                minimumPixelSize: 10
+                                fontSizeMode: Text.Fit
+                                horizontalAlignment: Qt.AlignLeft
+                                verticalAlignment: Qt.AlignVCenter
+                            }
                         }
 
+                        // SELECTION FIELDS.
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: isSelected = !isSelected
+                            onClicked: saveListingRoot.isSelected = !saveListingRoot.isSelected
                         }
+                    }
+
+                    // TOOLTIPS.
+                    // Displayed when no saves are selected, no saves are available, etc...
+                    Text {
+                        id: noAppSelectedTooltip
+
+                        anchors {
+                            fill: parent
+                            margins: 50
+                        }
+                        text: "No application selected"
+                        color: Material.secondaryTextColor
+                        font.italic: true
+                        // Visible when no application is currently selected.
+                        visible: importSavesSelectAppText.text === ""
+                        horizontalAlignment: Qt.AlignHCenter
+                        verticalAlignment: Qt.AlignVCenter
+                    }
+                    Text {
+                        id: noSavesAvailableTooltip
+
+                        anchors {
+                            fill: parent
+                            margins: 50
+                        }
+                        text: "Selected application has no available saves to import"
+                        color: Material.secondaryTextColor
+                        font.italic: true
+                        // Visible when an app is selected, but no saves are availble.
+                        visible: (importSavesSelectAppText.text !== "") && (availableSavesListView.count === 0)
+                        horizontalAlignment: Qt.AlignHCenter
+                        verticalAlignment: Qt.AlignVCenter
                     }
                 }
             }
