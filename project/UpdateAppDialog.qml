@@ -21,6 +21,16 @@ Dialog {
         return decodeURIComponent(path);
     }
 
+    // Function to check if a list contains a given element.
+    function listContainsElement(list, element) {
+        for (var listIndex = 0; listIndex < list.length; listIndex++) {
+            if (list[listIndex] === element) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // DIALOG WINDOWS.
     // Message dialogs for displaying results + errors.
     MessageDialog {
@@ -394,10 +404,30 @@ Dialog {
                                 text: saveListingRoot.saveName.replace(".save", "")
                                 color: (saveListingRoot.isSelected) ? Material.primaryTextColor : Material.secondaryTextColor
                                 font.bold: true
-                                minimumPixelSize: 10
-                                fontSizeMode: Text.Fit
+                                font.pointSize: 10
+                                elide: Text.ElideMiddle
                                 horizontalAlignment: Qt.AlignLeft
                                 verticalAlignment: Qt.AlignVCenter
+                            }
+
+                            Text {
+                                id: saveListingOverwriteCheck
+
+                                width: 50
+                                Layout.fillHeight: true
+                                Layout.rightMargin: 5
+                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                text: "Will Overwrite"
+                                color: Material.accentColor
+                                font.bold: true
+                                font.pointSize: 10
+                                horizontalAlignment: Qt.AlignRight
+                                verticalAlignment: Qt.AlignVCenter
+
+                                // Visible when the current save listing already exists locally.
+                                visible: {
+                                    updateAppDialog.listContainsElement(importSaveFilesDialog.currentAppSaveNameList, saveListingRoot.saveName);
+                                }
                             }
                         }
 
