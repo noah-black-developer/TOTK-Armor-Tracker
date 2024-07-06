@@ -119,11 +119,11 @@ Dialog {
             }
 
             // If overwriting is required, prompt the user to confirm this. Declining will stop transfers before they happen.
-            // Otherwise, directly call followup methods to run the actual save file transfers.
+            // Otherwise, call simpler dialog menus that only prompt the user to confirm their choices.
             if (filesWillOverwrite) {
                 confirmImportOverwriteDialog.open();
             } else {
-                importSaves();
+                confirmImportNoOverwriteDialog.open();
             }
 
             return;
@@ -224,7 +224,7 @@ Dialog {
 
             title: "Confirm Overwrites"
             text: "One or more selected saves already exist locally. Would you like to overwrite them?"
-            buttons: MessageDialog.Yes | MessageDialog.No | MessageDialog.Cancel
+            buttons: MessageDialog.Cancel | MessageDialog.No | MessageDialog.Yes
 
             onButtonClicked: function (button, role) {
                 // Handle the different buttons by case.
@@ -234,6 +234,28 @@ Dialog {
                     break;
                 case MessageDialog.No:
                     importSaveFilesDialog.importSaves(false);
+                    break;
+                default:
+                    // Any other button beyond Yes/No will just close out the dialog window.
+                    break;
+                }
+            }
+        }
+
+        MessageDialog {
+            id: confirmImportNoOverwriteDialog
+
+            title: "Confirm Import"
+            text: "Would you like to import all selected save files?"
+            buttons: MessageDialog.No | MessageDialog.Yes
+
+            onButtonClicked: function (button, role) {
+                // Handle the different buttons by case.
+                switch (button) {
+                case MessageDialog.Yes:
+                    importSaveFilesDialog.importSaves(true);
+                    break;
+                case MessageDialog.No:
                     break;
                 default:
                     // Any other button beyond Yes/No will just close out the dialog window.
