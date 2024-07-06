@@ -60,18 +60,6 @@ Dialog {
 
     // Dialogs for selecting external applications.
     FileDialog {
-        id: selectExternalAppForExportDialog
-
-        property bool validAppIsSelected: false
-
-        title: "Select App To Export Save Files To"
-        nameFilters: ["Application (TotkArmorTracker)"]
-        onSelectedFileChanged: {
-            // Validate selections as they are made for use externally.
-            validAppIsSelected = appController.isGivenExternalAppValid(updateAppDialog.urlToLocalPath(selectedFile));
-        }
-    }
-    FileDialog {
         id: selectExternalAppForImportDialog
 
         property bool validAppIsSelected: false
@@ -84,15 +72,7 @@ Dialog {
         }
     }
 
-    // Self-contained dialog for exporting save files from an external application.
-    Dialog {
-        id: exportSaveFilesDialog
-
-        width: updateAppDialog.width - 50
-        standardButtons: Dialog.Close
-    }
-
-    // Self-contained dialog for exporting save files to an external application.
+    // Self-contained dialog for importing save files from an external application.
     Dialog {
         id: importSaveFilesDialog
 
@@ -300,7 +280,7 @@ Dialog {
                     activeFocusOnTab: false
                     color: Material.primaryTextColor
                     // Set contents of the box to mirror any selected external apps, except in cases where no selection is made.
-                    text: (selectExternalAppForExportDialog.validAppIsSelected) ? updateAppDialog.urlToLocalPath(selectExternalAppForExportDialog.selectedFile) : ""
+                    text: (selectExternalAppForImportDialog.validAppIsSelected) ? updateAppDialog.urlToLocalPath(selectExternalAppForImportDialog.selectedFile) : ""
                 }
 
                 Button {
@@ -308,7 +288,7 @@ Dialog {
 
                     Layout.preferredHeight: 40
                     text: "Select"
-                    onClicked: selectExternalAppForExportDialog.open()
+                    onClicked: selectExternalAppForImportDialog.open()
                 }
             }
 
@@ -619,18 +599,6 @@ Dialog {
 
             // When clicked, initialize and open dialogs for user inputs.
             onClicked: importSaveFilesDialog.open()
-        }
-        Button {
-            id: exportSavesButton
-
-            Layout.fillWidth: true
-            Layout.leftMargin: 20
-            Layout.rightMargin: 20
-            Layout.alignment: Qt.AlignHCenter
-            text: "Export Saves"
-
-            // When clicked, initialize and open dialogs for user inputs.
-            onClicked: exportSaveFilesDialog.open()
         }
 
         // Backup/loading controls.
