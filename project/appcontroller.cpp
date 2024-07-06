@@ -145,7 +145,7 @@ bool AppController::loadSave(QUrl filePath)
     // Iterate over the full list of armor entries and update the presented UI elements.
     rapidxml::xml_node<> *saveNode = saveDocument.first_node("Save");
     if (saveNode == 0) {
-        std::cerr << "Given save file was incorrectly formatted and was not loaded: " + filePath.toString().toStdString();
+        std::cerr << "Given save file was incorrectly formatted and was not loaded: " + filePath.toString().toStdString() + "\n";
         return false;
     }
     for (rapidxml::xml_node<> *currentArmor = saveNode->first_node(); currentArmor != 0; currentArmor = currentArmor->next_sibling())
@@ -202,6 +202,10 @@ bool AppController::loadRecentSave(QString saveName)
     // UPDATE ARMOR DATA.
     // Iterate over the full list of armor entries and update the presented UI elements.
     rapidxml::xml_node<> *saveNode = saveDocument.first_node("Save");
+    if (saveNode == 0) {
+        std::cerr << "Given recent save file was incorrectly formatted and was not loaded: " + saveFilePath.toStdString() + "\n";
+        return false;
+    }
     for (rapidxml::xml_node<> *currentArmor = saveNode->first_node(); currentArmor != 0; currentArmor = currentArmor->next_sibling())
     {
         // Get the name of the current armor set.
