@@ -38,7 +38,7 @@ jobs:
           workflow_conclusion: success
           name: TotkArmorTracker_Linux
           
-      - name: Download artifacts from Windows builds
+      - name: Download artifacts from MacOS builds
         uses: dawidd6/action-download-artifact@v3
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
@@ -46,7 +46,7 @@ jobs:
           branch: ${{ github.event.pull_request.head.ref }}
           workflow_search: false
           workflow_conclusion: success
-          name: TotkArmorTracker_Windows
+          name: TotkArmorTracker_MacOS
 
       # GENERATE NEW GITHUB RELEASE.
       - name: Create new release
