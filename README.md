@@ -36,7 +36,7 @@
 
 ## Description
 
-Born out of a need for a convenient source of in-game information, the **TOTK Armor Tracker** app provides an easy, centralized way to track progress for the different armor sets in TOTK. It currently boasts releases on both Windows and Linux.
+Born out of a need for a convenient source of in-game information, the **TOTK Armor Tracker** app provides an easy, centralized way to track progress for the different armor sets in TOTK. It currently boasts releases on Windows, Linux, and MacOS.
 
 After creating a save file, you can track which armor sets you have collected so far, view their current upgrade progress, and easily research what items are required next. Check your work at every stage of your TOTK playthrough, without fear of forgetting what items to look for!
 
@@ -66,6 +66,7 @@ No additional downloads are required to run the program - simply download the la
 Supported platforms:
 * Windows (10 or newer)
 * Linux
+* MacOS
 
 ### Installing
 
@@ -154,10 +155,11 @@ Reach out to the following contacts with questions or concerns:
 
 For more in-depth descriptions of release versions, see the [releases](https://github.com/noah-black-developer/TOTK-Armor-Tracker/releases) for this project.
 
-* v1.2.0
+* v1.2.0/v1.2.1/v1.2.2
     * Added MacOS release version
     * Added menu options to import saves from other version of the app
-    * Updated UI elements to highlight completed armor sets
+    * Updated UI elements to highlight completed armor set
+    * Minor formatting fixes
 * v1.1.3
     * Improved armor images + icon styling
     * Minor fixes for performance on Windows platforms
