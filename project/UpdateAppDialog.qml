@@ -65,7 +65,7 @@ Dialog {
         property bool validAppIsSelected: false
 
         title: "Select App To Import Save Files From"
-        nameFilters: ["Application (TotkArmorTracker)"]
+        nameFilters: ["Application (TotkArmorTracker*)"]
         onSelectedFileChanged: {
             // Validate selections as they are made for use externally.
             validAppIsSelected = appController.isGivenExternalAppValid(updateAppDialog.urlToLocalPath(selectedFile));

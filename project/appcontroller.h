@@ -103,7 +103,7 @@ public:
 
     // Q_PROPERTY APPLICATION DETAILS.
     QString appName = "TOTK Armor Tracker";
-    QString appVersion = "v1.1.3";
+    QString appVersion = "v1.2.0";
     QString appDesc = "An application for tracking upgrades \
 and required items for armor sets in The Legend of Zelda: Tears of the Kingdom.";
 
