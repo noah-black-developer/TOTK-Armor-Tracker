@@ -42,7 +42,7 @@ After creating a save file, you can track which armor sets you have collected so
 
 ## Features
 
-### Appliation-specific Features
+### Application-specific Features
 * Save progress across multiple save files, as needed.
 * View armor details, descriptions, and level-up requirements.
 * Sort and filter armor sets, including...
