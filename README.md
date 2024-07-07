@@ -154,6 +154,10 @@ Reach out to the following contacts with questions or concerns:
 
 For more in-depth descriptions of release versions, see the [releases](https://github.com/noah-black-developer/TOTK-Armor-Tracker/releases) for this project.
 
+* v1.2.0
+    * Added MacOS release version
+    * Added menu options to import saves from other version of the app
+    * Updated UI elements to highlight completed armor sets
 * v1.1.3
     * Improved armor images + icon styling
     * Minor fixes for performance on Windows platforms

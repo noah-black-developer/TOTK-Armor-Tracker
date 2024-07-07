@@ -14,12 +14,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        if: github.event.pull_request.merged == true
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           
       # DOWNLOAD BUILD ARTIFACTS.
       - name: Download artifacts from Windows builds
         uses: dawidd6/action-download-artifact@v3
+        if: github.event.pull_request.merged == true
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: build.yml
@@ -30,6 +32,7 @@ jobs:
 
       - name: Download artifacts from Linux builds
         uses: dawidd6/action-download-artifact@v3
+        if: github.event.pull_request.merged == true
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: build.yml
@@ -38,20 +41,22 @@ jobs:
           workflow_conclusion: success
           name: TotkArmorTracker_Linux
           
-      - name: Download artifacts from Windows builds
+      - name: Download artifacts from MacOS builds
         uses: dawidd6/action-download-artifact@v3
+        if: github.event.pull_request.merged == true
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: build.yml
           branch: ${{ github.event.pull_request.head.ref }}
           workflow_search: false
           workflow_conclusion: success
-          name: TotkArmorTracker_Windows
+          name: TotkArmorTracker_MacOS
 
       # GENERATE NEW GITHUB RELEASE.
       - name: Create new release
         id: create_release
         uses: actions/create-release@v1
+        if: github.event.pull_request.merged == true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -64,6 +69,7 @@ jobs:
       - name: Upload Windows Bundle
         id: upload_windows_release
         uses: actions/upload-release-asset@v1
+        if: github.event.pull_request.merged == true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -75,6 +81,7 @@ jobs:
       - name: Upload Linux Bundle
         id: upload_linux_release
         uses: actions/upload-release-asset@v1
+        if: github.event.pull_request.merged == true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -86,6 +93,7 @@ jobs:
       - name: Upload MacOS Bundle
         id: upload_macos_release
         uses: actions/upload-release-asset@v1
+        if: github.event.pull_request.merged == true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
