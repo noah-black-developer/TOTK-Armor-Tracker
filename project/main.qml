@@ -29,7 +29,7 @@ ApplicationWindow {
     visible: true
     title: qsTr("TOTK Armor Tracker")
 
-    color: Material.backgroundColor
+    color: Material.backgroundColor.darker(1.05)
 
     // KEYBOARD SHORTCUTS.
     // Ctrl + S is used to save the user's current changes.
@@ -105,6 +105,9 @@ ApplicationWindow {
     // DIALOG WINDOWS.
     NewSaveDialog {
         id: createNewSaveDialog
+
+        width: appRoot.width - 100
+        height: appRoot.height - 100
     }
 
     SettingsDialog {
@@ -112,6 +115,9 @@ ApplicationWindow {
 
         property bool themeInit: false
         property bool autoSaveInit: false
+
+        width: (appRoot.width - 200 < 400) ? appRoot.width - 200 : 400
+        height: (appRoot.height - 200 < 600) ? appRoot.height - 200 : 600
 
         // Set default selections when menu is first created.
         Component.onCompleted: {
@@ -152,7 +158,13 @@ ApplicationWindow {
         // Limit file selection to only matching file extensions.
         nameFilters: ["Save Files (*.save)"]
 
-        onAccepted: appController.loadSave(selectedFile)
+        onAccepted: {
+            var saveWasLoaded = appController.loadSave(selectedFile);
+            if (!saveWasLoaded) {
+                // If the save file could not be loaded for any reason, display an error message to the user.
+                loadSaveFailed.openWithSaveName(selectedFile);
+            }
+        }
     }
 
     MessageDialog {
@@ -169,7 +181,11 @@ ApplicationWindow {
 
             // If a local save name was set, use it to load a local save.
             if (localSaveName) {
-                appController.loadRecentSave(localSaveName);
+                var saveWasLoaded = appController.loadRecentSave(localSaveName);
+                if (!saveWasLoaded) {
+                    // If the save file could not be loaded for any reason, display an error message to the user.
+                    loadSaveFailed.openWithSaveName(localSaveName);
+                }
             }
             // Otherwise, open the main save loading dialog.
             else {
@@ -179,7 +195,11 @@ ApplicationWindow {
         onRejected: {
             // If a local save name was set, use it to load a local save.
             if (localSaveName) {
-                appController.loadRecentSave(localSaveName);
+                var saveWasLoaded = appController.loadRecentSave(localSaveName);
+                if (!saveWasLoaded) {
+                    // If the save file could not be loaded for any reason, display an error message to the user.
+                    loadSaveFailed.openWithSaveName(localSaveName);
+                }
             }
             // Otherwise, open the main save loading dialog.
             else {
@@ -245,6 +265,24 @@ ApplicationWindow {
         }
     }
 
+    UpdateAppDialog {
+        id: updateAppDialog
+    }
+
+    MessageDialog {
+        id: loadSaveFailed
+
+        property string saveName: "UNKNOWN"
+
+        function openWithSaveName(newSaveName) {
+            saveName = newSaveName;
+            open();
+        }
+
+        title: "Failed to Load Save"
+        text: "Issues occurred while loading save file " + saveName;
+    }
+
     // MENU OPTIONS.
     menuBar: MenuBar {
         id: menuBar
@@ -296,8 +334,11 @@ ApplicationWindow {
                             }
                             // Otherwise, load the recent save directly.
                             else {
-                                appController.loadRecentSave(modelData);
-
+                                var saveWasLoaded = appController.loadRecentSave(modelData);
+                                if (!saveWasLoaded) {
+                                    // If the save file could not be loaded for any reason, display an error message to the user.
+                                    loadSaveFailed.openWithSaveName(modelData);
+                                }
                             }
                         }
                     }
@@ -329,6 +370,11 @@ ApplicationWindow {
                 text: "Settings"
                 onTriggered: settingsDialog.open()
             }
+            Action {
+                text: "Update"
+                onTriggered: updateAppDialog.open()
+            }
+
             MenuSeparator { }
             Action {
                 text: "About"
@@ -398,7 +444,7 @@ ApplicationWindow {
                     right: parent.right
                     top: parent.top
                 }
-                color: Material.dividerColor
+                color: Material.dividerColor.lighter(1.5)
                 radius: 5
 
                 GridLayout {
@@ -482,7 +528,7 @@ ApplicationWindow {
                     bottom: parent.bottom
                     topMargin: 10
                 }
-                color: Material.dividerColor
+                color: Material.dividerColor.lighter(1.5)
                 radius: 5
 
                 // Pre-rendering for all images in the grid.
@@ -612,6 +658,11 @@ ApplicationWindow {
                             }
                         }
 
+                        function isCompleted() {
+                            // Returns true if the current armor piece is fully upgraded. Otherwise, false.
+                            return (armorItem.armorIsUnlocked && ((armorItem.armorLevel >= appRoot.maximumArmorLevel) || (!armorItem.armorIsUpgradeable)));
+                        }
+
                         // Update the image anytime an icon moves around the grid.
                         Component.onCompleted: updateImage();
                         onArmorNameChanged: updateImage();
@@ -634,6 +685,16 @@ ApplicationWindow {
                                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                                 color: Material.backgroundColor
                                 radius: 5
+
+                                // Icon drop shadow.
+                                Rectangle {
+                                    anchors.centerIn: parent
+                                    width: parent.width + 6
+                                    height: parent.height + 6
+                                    color: Material.dropShadowColor
+                                    opacity: 0.4
+                                    radius: 6
+                                }
 
                                 // Armor Image + Overlays.
                                 Image {
@@ -664,7 +725,7 @@ ApplicationWindow {
                                         Rectangle {
                                             anchors.fill: parent
                                             radius: 5
-                                            color: Material.backgroundColor
+                                            color: (armorItem.isCompleted()) ? Material.primaryColor : Material.backgroundColor
                                             opacity: 0.9
                                         }
 
@@ -678,6 +739,19 @@ ApplicationWindow {
                                             color: Material.primaryTextColor
                                         }
                                     }
+                                }
+
+                                // Icon frame overlay.
+                                Rectangle {
+                                    anchors {
+                                        fill: parent
+                                        margins: 2
+                                    }
+                                    color: "transparent"
+                                    border.color: (armorItem.isCompleted()) ? Material.primaryColor : Material.dividerColor
+                                    border.width: 3
+                                    radius: 4
+                                    opacity: 0.5
                                 }
 
                                 // "Locked" overlay.
@@ -786,7 +860,7 @@ ApplicationWindow {
                         fill: parent
                         margins: 5
                     }
-                    color: Material.dividerColor
+                    color: Material.dividerColor.lighter(1.5)
                     radius: 3
 
                     ScrollView {
@@ -1156,15 +1230,15 @@ ApplicationWindow {
                                                 }
                                                 color: armorUpgradeRect.textColor
                                             }
-                                            AppIcon {
+                                            IconImage {
                                                 id: upgradeRupeeCostIcon
 
                                                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
                                                 // Icon size + ratio is fixed to prevent resizing issues.
                                                 Layout.preferredHeight: detailsArmorUpgradesRepeater.rowHeightsInPixels
                                                 Layout.preferredWidth: detailsArmorUpgradesRepeater.rowHeightsInPixels
-                                                icon.source: "images/rupee-lightmode.svg"
-                                                icon.color: armorUpgradeRect.textColor
+                                                source: "images/rupee-lightmode.svg"
+                                                color: armorUpgradeRect.textColor
                                             }
                                         }
 

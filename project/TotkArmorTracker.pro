@@ -46,8 +46,3 @@ CONFIG += file_copies
 COPIES += config
 config.files = data/appData.xml data/armorData.xml
 config.path = $$OUT_PWD
-
-DISTFILES += \
-    AppIcon.qml \
-    NewSaveDialog.qml \
-    SettingsDialog.qml

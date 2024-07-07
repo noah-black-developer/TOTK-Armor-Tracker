@@ -7,10 +7,6 @@ on:
     branches:
       - 'main'
 
-env:
-  # Default value given to the commit log, in cases where issues occur.
-  commit_log: "UNAVAILABLE"
-
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -20,8 +16,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
+          
+      # DOWNLOAD BUILD ARTIFACTS.
+      - name: Download artifacts from Windows builds
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          branch: ${{ github.event.pull_request.head.ref }}
+          workflow_search: false
+          workflow_conclusion: success
+          name: TotkArmorTracker_Windows
 
-      # Get build artifacts from previous project builds, across all platforms.
       - name: Download artifacts from Linux builds
         uses: dawidd6/action-download-artifact@v3
         with:
@@ -42,6 +48,7 @@ jobs:
           workflow_conclusion: success
           name: TotkArmorTracker_Windows
 
+      # GENERATE NEW GITHUB RELEASE.
       - name: Create new release
         id: create_release
         uses: actions/create-release@v1
@@ -53,8 +60,9 @@ jobs:
           draft: false
           prerelease: false
 
+      # ATTACH APPLICATION BUNDLES TO NEW RELEASE.
       - name: Upload Windows Bundle
-        id: upload-windows-release
+        id: upload_windows_release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,7 +73,7 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload Linux Bundle
-        id: upload-linux-release
+        id: upload_linux_release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,4 +81,15 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: TotkArmorTracker_Linux.zip
           asset_name: TotkArmorTracker_Linux.zip
+          asset_content_type: application/zip
+
+      - name: Upload MacOS Bundle
+        id: upload_macos_release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TotkArmorTracker_MacOS.zip
+          asset_name: TotkArmorTracker_MacOS.zip
           asset_content_type: application/zip
